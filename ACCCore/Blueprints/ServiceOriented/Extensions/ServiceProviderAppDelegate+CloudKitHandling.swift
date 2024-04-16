@@ -18,7 +18,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS 10.0, *)
     open func application(_ application: UIApplication, userDidAcceptCloudKitShareWith cloudKitShareMetadata: CKShare.Metadata) {
         for service in services {
-            service.appDelegate?.application?(application, userDidAcceptCloudKitShareWith: cloudKitShareMetadata)
+            service.application?(application, userDidAcceptCloudKitShareWith: cloudKitShareMetadata)
         }
     }
 }

@@ -25,7 +25,6 @@
 		F0FB21842BA9887000ECEB56 /* ServiceProviderAppDelegate+WatchKitInteracting.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21762BA9887000ECEB56 /* ServiceProviderAppDelegate+WatchKitInteracting.swift */; };
 		F0FB21852BA9887000ECEB56 /* ServiceProviderAppDelegate+DownloadingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21772BA9887000ECEB56 /* ServiceProviderAppDelegate+DownloadingData.swift */; };
 		F0FB21872BA988A100ECEB56 /* ServiceProviderAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21862BA988A100ECEB56 /* ServiceProviderAppDelegate.swift */; };
-		F0FB21892BA98B5300ECEB56 /* ServiceDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21882BA98B5300ECEB56 /* ServiceDelegateProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,7 +47,6 @@
 		F0FB21762BA9887000ECEB56 /* ServiceProviderAppDelegate+WatchKitInteracting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ServiceProviderAppDelegate+WatchKitInteracting.swift"; sourceTree = "<group>"; };
 		F0FB21772BA9887000ECEB56 /* ServiceProviderAppDelegate+DownloadingData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ServiceProviderAppDelegate+DownloadingData.swift"; sourceTree = "<group>"; };
 		F0FB21862BA988A100ECEB56 /* ServiceProviderAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderAppDelegate.swift; sourceTree = "<group>"; };
-		F0FB21882BA98B5300ECEB56 /* ServiceDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDelegateProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +98,6 @@
 			children = (
 				F0FB21692BA9887000ECEB56 /* Extensions */,
 				F0FB21652BA9853300ECEB56 /* ServiceProviderProtocol.swift */,
-				F0FB21882BA98B5300ECEB56 /* ServiceDelegateProtocol.swift */,
 				F0FB21672BA986BF00ECEB56 /* ServiceProtocol.swift */,
 				F0FB21862BA988A100ECEB56 /* ServiceProviderAppDelegate.swift */,
 			);
@@ -168,7 +165,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 1510;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					F0FB210C2BA9689700ECEB56 = {
 						CreatedOnToolsVersion = 15.1;
@@ -219,7 +216,6 @@
 				F0FB21792BA9887000ECEB56 /* ServiceProviderAppDelegate+SceneStateHandling.swift in Sources */,
 				F0FB217B2BA9887000ECEB56 /* ServiceProviderAppDelegate+HealthKitInteracting.swift in Sources */,
 				F0FB217D2BA9887000ECEB56 /* ServiceProviderAppDelegate+AppStateAndSystemEvents.swift in Sources */,
-				F0FB21892BA98B5300ECEB56 /* ServiceDelegateProtocol.swift in Sources */,
 				F0FB21662BA9853300ECEB56 /* ServiceProviderProtocol.swift in Sources */,
 				F0FB21812BA9887000ECEB56 /* ServiceProviderAppDelegate+AppInitializing.swift in Sources */,
 				F0FB21832BA9887000ECEB56 /* ServiceProviderAppDelegate+SiriKitHandling.swift in Sources */,
@@ -364,6 +360,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -398,6 +395,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public protocol ServiceProviderProtocol {
-    var services: [ServiceProtocol] { set get }
-    func getService<S>(_ type: S.Type) -> S? where S: ServiceProtocol
+@MainActor public protocol ServiceProviderProtocol {
+    var services: [ServiceProtocol] { get }
+    func getService<S>(_ type: S.Type) -> S?
 }

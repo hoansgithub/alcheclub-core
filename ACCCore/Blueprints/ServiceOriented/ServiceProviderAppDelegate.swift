@@ -8,19 +8,21 @@
 import UIKit
 
 open class ServiceProviderAppDelegate: UIResponder, UIApplicationDelegate, UIWindowSceneDelegate, ServiceProviderProtocol {
-    open var services: [ServiceProtocol] = []
-    
-    public func getService<S>(_ type: S.Type) -> S? where S : ServiceProtocol {
-        <#code#>
+    open var services: [ServiceProtocol] {
+        return []
     }
     
+    public func getService<S>(_ type: S.Type) -> S? {
+        services.first(where: {$0 is S }) as? S
+    }
     
+    // MARK: UIApplicationDelegate conformation
+    open var window: UIWindow?
 }
-
 
 public extension ServiceProviderAppDelegate {
     @discardableResult
-    func apply<T, S>(_ work: (ServiceDelegateProtocol, @escaping (T) -> Void) -> S?, completionHandler: @escaping ([T]) -> Void) -> [S] {
+    func apply<T, S>(_ work: (ServiceProtocol, @escaping (T) -> Void) -> S?, completionHandler: @escaping ([T]) -> Void) -> [S] {
         let dispatchGroup = DispatchGroup()
         var results: [T] = []
         var returns: [S] = []

@@ -21,7 +21,7 @@ extension ServiceProviderAppDelegate {
 
     open func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         services.forEach {
-            $0.appDelegate?.application?(application, didDiscardSceneSessions: sceneSessions)
+            $0.application?(application, didDiscardSceneSessions: sceneSessions)
         }
     }
     
@@ -31,7 +31,7 @@ extension ServiceProviderAppDelegate {
     // Always called when a UIWindowScene moves between screens
     open func windowScene(_ windowScene: UIWindowScene, didUpdate previousCoordinateSpace: UICoordinateSpace, interfaceOrientation previousInterfaceOrientation: UIInterfaceOrientation, traitCollection previousTraitCollection: UITraitCollection) {
         services.forEach {
-            $0.sceneDelegate?.windowScene?(windowScene, didUpdate: previousCoordinateSpace, interfaceOrientation: previousInterfaceOrientation, traitCollection: previousTraitCollection)
+            $0.windowScene?(windowScene, didUpdate: previousCoordinateSpace, interfaceOrientation: previousInterfaceOrientation, traitCollection: previousTraitCollection)
         }
     }
     
@@ -39,7 +39,7 @@ extension ServiceProviderAppDelegate {
     // and the window scene is already connected.
     open func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         apply({ (service, completionHandler) -> Void? in
-            service.sceneDelegate?.windowScene?(windowScene, performActionFor: shortcutItem, completionHandler: completionHandler)
+            service.windowScene?(windowScene, performActionFor: shortcutItem, completionHandler: completionHandler)
         }, completionHandler: { results in
             // if any service handled the shortcut, return true
             let result = results.reduce(false, { $0 || $1 })
@@ -54,7 +54,7 @@ extension ServiceProviderAppDelegate {
     open func windowScene(_ windowScene: UIWindowScene, userDidAcceptCloudKitShareWith cloudKitShareMetadata: CKShare.Metadata) {
         
         services.forEach {
-            $0.sceneDelegate?.windowScene?(windowScene, userDidAcceptCloudKitShareWith: cloudKitShareMetadata)
+            $0.windowScene?(windowScene, userDidAcceptCloudKitShareWith: cloudKitShareMetadata)
         }
     }
     
@@ -62,73 +62,73 @@ extension ServiceProviderAppDelegate {
     
     open func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         services.forEach {
-            $0.sceneDelegate?.scene?(scene, willConnectTo: session, options: connectionOptions)
+            $0.scene?(scene, willConnectTo: session, options: connectionOptions)
         }
     }
     
     open func sceneDidDisconnect(_ scene: UIScene) {
         services.forEach {
-            $0.sceneDelegate?.sceneDidDisconnect?(scene)
+            $0.sceneDidDisconnect?(scene)
         }
     }
     
     open func sceneDidBecomeActive(_ scene: UIScene) {
         services.forEach {
-            $0.sceneDelegate?.sceneDidBecomeActive?(scene)
+            $0.sceneDidBecomeActive?(scene)
         }
     }
     
     open func sceneWillResignActive(_ scene: UIScene) {
         services.forEach {
-            $0.sceneDelegate?.sceneWillResignActive?(scene)
+            $0.sceneWillResignActive?(scene)
         }
     }
     
     open func sceneWillEnterForeground(_ scene: UIScene) {
         services.forEach {
-            $0.sceneDelegate?.sceneWillEnterForeground?(scene)
+            $0.sceneWillEnterForeground?(scene)
         }
     }
     
     open func sceneDidEnterBackground(_ scene: UIScene) {
         services.forEach {
-            $0.sceneDelegate?.sceneDidEnterBackground?(scene)
+            $0.sceneDidEnterBackground?(scene)
         }
     }
     
     open func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         services.forEach {
-            $0.sceneDelegate?.scene?(scene, openURLContexts: URLContexts)
+            $0.scene?(scene, openURLContexts: URLContexts)
         }
     }
     
     open func scene(_ scene: UIScene, restoreInteractionStateWith stateRestorationActivity: NSUserActivity) {
         services.forEach {
-            $0.sceneDelegate?.scene?(scene, restoreInteractionStateWith: stateRestorationActivity)
+            $0.scene?(scene, restoreInteractionStateWith: stateRestorationActivity)
         }
     }
     
     open func scene(_ scene: UIScene, willContinueUserActivityWithType userActivityType: String) {
         services.forEach {
-            $0.sceneDelegate?.scene?(scene, willContinueUserActivityWithType: userActivityType)
+            $0.scene?(scene, willContinueUserActivityWithType: userActivityType)
         }
     }
     
     open func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         services.forEach {
-            $0.sceneDelegate?.scene?(scene, continue: userActivity)
+            $0.scene?(scene, continue: userActivity)
         }
     }
     
     open func scene(_ scene: UIScene, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
         services.forEach {
-            $0.sceneDelegate?.scene?(scene, didFailToContinueUserActivityWithType: userActivityType, error: error)
+            $0.scene?(scene, didFailToContinueUserActivityWithType: userActivityType, error: error)
         }
     }
     
     open func scene(_ scene: UIScene, didUpdate userActivity: NSUserActivity) {
         services.forEach {
-            $0.sceneDelegate?.scene?(scene, didUpdate: userActivity)
+            $0.scene?(scene, didUpdate: userActivity)
         }
     }
 }

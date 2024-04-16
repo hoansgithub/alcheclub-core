@@ -13,7 +13,7 @@ extension ServiceProviderAppDelegate {
     open func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         var result = false
         for service in services {
-            if service.appDelegate?.application?(app, open: url, options: options) ?? false {
+            if service.application?(app, open: url, options: options) ?? false {
                 result = true
             }
         }

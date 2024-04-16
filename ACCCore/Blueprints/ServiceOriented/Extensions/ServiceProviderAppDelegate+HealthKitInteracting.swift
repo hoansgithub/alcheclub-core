@@ -12,7 +12,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS 9.0, *)
     open func applicationShouldRequestHealthAuthorization(_ application: UIApplication) {
         for service in services {
-            service.appDelegate?.applicationShouldRequestHealthAuthorization?(application)
+            service.applicationShouldRequestHealthAuthorization?(application)
         }
     }
 }

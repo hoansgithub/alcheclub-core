@@ -12,63 +12,63 @@ extension ServiceProviderAppDelegate {
     @available(iOS 2.0, *)
     open func applicationDidBecomeActive(_ application: UIApplication) {
         for service in services {
-            service.appDelegate?.applicationDidBecomeActive?(application)
+            service.applicationDidBecomeActive?(application)
         }
     }
 
     @available(iOS 2.0, *)
     open func applicationWillResignActive(_ application: UIApplication) {
         for service in services {
-            service.appDelegate?.applicationWillResignActive?(application)
+            service.applicationWillResignActive?(application)
         }
     }
 
     @available(iOS 4.0, *)
     open func applicationDidEnterBackground(_ application: UIApplication) {
         for service in services {
-            service.appDelegate?.applicationDidEnterBackground?(application)
+            service.applicationDidEnterBackground?(application)
         }
     }
 
     @available(iOS 4.0, *)
     open func applicationWillEnterForeground(_ application: UIApplication) {
         for service in services {
-            service.appDelegate?.applicationWillEnterForeground?(application)
+            service.applicationWillEnterForeground?(application)
         }
     }
 
     @available(iOS 2.0, *)
     open func applicationWillTerminate(_ application: UIApplication) {
         for service in services {
-            service.appDelegate?.applicationWillTerminate?(application)
+            service.applicationWillTerminate?(application)
         }
     }
 
     @available(iOS 4.0, *)
     open func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
         for service in services {
-            service.appDelegate?.applicationProtectedDataWillBecomeUnavailable?(application)
+            service.applicationProtectedDataWillBecomeUnavailable?(application)
         }
     }
 
     @available(iOS 4.0, *)
     open func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
         for service in services {
-            service.appDelegate?.applicationProtectedDataDidBecomeAvailable?(application)
+            service.applicationProtectedDataDidBecomeAvailable?(application)
         }
     }
 
     @available(iOS 2.0, *)
     open func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
         for service in services {
-            service.appDelegate?.applicationDidReceiveMemoryWarning?(application)
+            service.applicationDidReceiveMemoryWarning?(application)
         }
     }
 
     @available(iOS 2.0, *)
     open func applicationSignificantTimeChange(_ application: UIApplication) {
         for service in services {
-            service.appDelegate?.applicationSignificantTimeChange?(application)
+            service.applicationSignificantTimeChange?(application)
         }
     }
 }

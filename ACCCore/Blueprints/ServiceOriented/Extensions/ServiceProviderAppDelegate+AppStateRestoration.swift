@@ -34,7 +34,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS 6.0, *)
     open func application(_ application: UIApplication, viewControllerWithRestorationIdentifierPath identifierComponents: [String], coder: NSCoder) -> UIViewController? {
         for service in services {
-            if let viewController = service.appDelegate?.application?(application, viewControllerWithRestorationIdentifierPath: identifierComponents, coder: coder) {
+            if let viewController = service.application?(application, viewControllerWithRestorationIdentifierPath: identifierComponents, coder: coder) {
                 return viewController
             }
         }
@@ -45,14 +45,14 @@ extension ServiceProviderAppDelegate {
     @available(iOS 6.0, *)
     open func application(_ application: UIApplication, willEncodeRestorableStateWith coder: NSCoder) {
         for service in services {
-            service.appDelegate?.application?(application, willEncodeRestorableStateWith: coder)
+            service.application?(application, willEncodeRestorableStateWith: coder)
         }
     }
 
     @available(iOS 6.0, *)
     open func application(_ application: UIApplication, didDecodeRestorableStateWith coder: NSCoder) {
         for service in services {
-            service.appDelegate?.application?(application, didDecodeRestorableStateWith: coder)
+            service.application?(application, didDecodeRestorableStateWith: coder)
         }
     }
 }

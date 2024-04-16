@@ -17,7 +17,7 @@ extension ServiceProviderAppDelegate {
     open func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
         var result = false
         for service in services {
-            if service.appDelegate?.application?(application, willContinueUserActivityWithType: userActivityType) ?? false {
+            if service.application?(application, willContinueUserActivityWithType: userActivityType) ?? false {
                 result = true
             }
         }
@@ -31,7 +31,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS 8.0, *)
     open func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         let returns = apply({ (service, restorationHandler) -> Bool? in
-            service.appDelegate?.application?(application, continue: userActivity, restorationHandler: restorationHandler)
+            service.application?(application, continue: userActivity, restorationHandler: restorationHandler)
         }, completionHandler: { results in
             let result = results.reduce([], { $0 + ($1 ?? []) }) 
             restorationHandler(result)
@@ -44,7 +44,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS 8.0, *)
     open func application(_ application: UIApplication, didUpdate userActivity: NSUserActivity) {
         for service in services {
-            service.appDelegate?.application?(application, didUpdate: userActivity)
+            service.application?(application, didUpdate: userActivity)
         }
     }
 
@@ -52,7 +52,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS 8.0, *)
     open func application(_ application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
         for service in services {
-            service.appDelegate?.application?(application, didFailToContinueUserActivityWithType: userActivityType, error: error)
+            service.application?(application, didFailToContinueUserActivityWithType: userActivityType, error: error)
         }
     }
 }
