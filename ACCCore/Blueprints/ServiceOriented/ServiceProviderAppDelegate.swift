@@ -8,11 +8,11 @@
 import UIKit
 
 open class ServiceProviderAppDelegate: UIResponder, UIApplicationDelegate, UIWindowSceneDelegate, ServiceProviderProtocol {
-    open var services: [ServiceProtocol] {
+    nonisolated open var services: [ServiceProtocol] {
         return []
     }
     
-    public func getService<S>(_ type: S.Type) -> S? {
+    nonisolated open func getService<S>(_ type: S.Type) -> S? {
         services.first(where: {$0 is S }) as? S
     }
     

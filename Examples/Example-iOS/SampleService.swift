@@ -7,26 +7,37 @@
 
 import Foundation
 import UIKit
-class SampleService: NSObject, SampleServiceProtocol {
-    var defaultValue = "ABC"
+import Combine
+
+final class SampleService: NSObject, Sendable, SampleServiceProtocol {
+    
+    private let contentSubject = CurrentValueSubject<String, Never>("ABC")
+    let contentPublisher: AnyPublisher<String, Never>
+    
     override init() {
+        contentPublisher = contentSubject.eraseToAnyPublisher()
         super.init()
-        
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        self.defaultValue = "DEF"
+        contentSubject.send("DEF")
+        Task {
+            try await getContent()
+        }
         return true
     }
     
-    @MainActor func getContent() async throws -> String {
+    func getContent() async throws {
         guard let myURL = URL(string: "https://google.com") else {
-            return "unknown"
+            contentSubject.send("unknown")
+            return
         }
-        
-        let (data, _) = try await URLSession.shared.data(from: myURL)
-        let str = data.base64EncodedString()
+        let (data, _) = try await URLSession.shared.getData(for: myURL)
+        _ = data.base64EncodedString()
         try await Task.sleep(nanoseconds: 3_000_000_000)
-        return str
+        contentSubject.send(UUID().uuidString)
     }
 }
+
+
+

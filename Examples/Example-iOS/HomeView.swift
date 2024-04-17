@@ -11,15 +11,13 @@ protocol HomeViewProtocol: BaseViewProtocol {
     
 }
 
-struct HomeView<VM: HomeViewModel>: HomeViewProtocol {
+struct HomeView<VM: HomeViewModelProtocol>: HomeViewProtocol {
     @ObservedObject var vm: VM
     
     var body: some View {
         Text(vm.content)
             .onAppear {
-                Task {
-                    try? await vm.getContent()
-                }
+                vm.onViewAppear()
             }
     }
     

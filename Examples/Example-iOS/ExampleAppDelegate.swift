@@ -8,9 +8,9 @@
 import Foundation
 import ACCCore
 class ExampleAppDelegate: ServiceProviderAppDelegate {
-    
+    let sampleService = SampleService()
     override var services: [ServiceProtocol] {
-        return [SampleService()]
+        return [sampleService]
     }
     
 }

@@ -19,18 +19,7 @@
 		F0FB215F2BA977E900ECEB56 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0FB215E2BA977E900ECEB56 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		F0B2E7902BCE79DB004BA72A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F0B2E78C2BCE79DB004BA72A /* ACCCore.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F0FB210D2BA9689700ECEB56;
-			remoteInfo = ACCCore;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		F0B2E78C2BCE79DB004BA72A /* ACCCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ACCCore.xcodeproj; path = ../ACCCore.xcodeproj; sourceTree = "<group>"; };
 		F0B2E7922BCE7A32004BA72A /* ExampleAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAppDelegate.swift; sourceTree = "<group>"; };
 		F0B2E7942BCE7A8F004BA72A /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		F0B2E7962BCE7A9C004BA72A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -55,18 +44,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F0B2E78D2BCE79DB004BA72A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F0B2E7912BCE79DB004BA72A /* ACCCore.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		F0FB212B2BA9767300ECEB56 = {
 			isa = PBXGroup;
 			children = (
-				F0B2E78C2BCE79DB004BA72A /* ACCCore.xcodeproj */,
 				F0FB21562BA977E700ECEB56 /* Example-iOS */,
 				F0FB21352BA9767300ECEB56 /* Products */,
 			);
@@ -151,28 +131,12 @@
 			mainGroup = F0FB212B2BA9767300ECEB56;
 			productRefGroup = F0FB21352BA9767300ECEB56 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = F0B2E78D2BCE79DB004BA72A /* Products */;
-					ProjectRef = F0B2E78C2BCE79DB004BA72A /* ACCCore.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				F0FB21542BA977E700ECEB56 /* Example-iOS */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		F0B2E7912BCE79DB004BA72A /* ACCCore.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ACCCore.framework;
-			remoteRef = F0B2E7902BCE79DB004BA72A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F0FB21532BA977E700ECEB56 /* Resources */ = {
@@ -332,6 +296,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Example-iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = JJZU6K3W3U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -362,6 +327,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Example-iOS/Preview Content\"";
+				DEVELOPMENT_TEAM = JJZU6K3W3U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

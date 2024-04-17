@@ -1,6 +1,6 @@
 //
 //  ServiceProviderAppDelegate+ExtensionTypes.swift
-//  VCLCore
+//  ACCCore
 //
 //  Created by HoanNL on 15/09/2023.
 //
