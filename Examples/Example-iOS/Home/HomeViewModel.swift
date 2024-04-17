@@ -9,11 +9,14 @@ import ACCCore
 import Combine
 protocol HomeViewModelProtocol: BaseViewModelProtocol {
     var content: String { get }
+    var loading: Bool { get }
     func onViewAppear()
 }
 
 class HomeViewModel: @unchecked Sendable, HomeViewModelProtocol {
     @Published var content: String = "ABC"
+    @Published var loading = false
+    
     
     var serviceProvider: ServiceProviderProtocol
     var sampleService: SampleServiceProtocol?
@@ -26,13 +29,14 @@ class HomeViewModel: @unchecked Sendable, HomeViewModelProtocol {
     }
     
     func registerObservers() {
-        sampleService?.contentPublisher.sink(receiveValue: { [weak self] aaa in
+        sampleService?.contentPublisher.receive(on: DispatchSerialQueue.main).sink(receiveValue: { [weak self] aaa in
             self?.content = aaa
+            ACCLogger.print("RECEIVED \(aaa)" , level: .fault)
         }).store(in: &cancellables)
     }
     
     func onViewAppear() {
-        
+        ACCLogger.print(self , level: .fault)
     }
     
     deinit {

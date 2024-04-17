@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F066D9162BCF9125003F5690 /* AnyPublisher+Sendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9152BCF9125003F5690 /* AnyPublisher+Sendable.swift */; };
-		F066D91A2BCF937D003F5690 /* URLSession+nonisolated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9192BCF937D003F5690 /* URLSession+nonisolated.swift */; };
+		F066D91D2BCFA5E1003F5690 /* ServiceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D91C2BCFA5E1003F5690 /* ServiceState.swift */; };
+		F066D9222BCFAE8B003F5690 /* URLSession+nonisolated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9202BCFAE8B003F5690 /* URLSession+nonisolated.swift */; };
+		F066D9232BCFAE8B003F5690 /* AnyPublisher+Sendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9212BCFAE8B003F5690 /* AnyPublisher+Sendable.swift */; };
+		F066D9252BCFAEC6003F5690 /* ACCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9242BCFAEC6003F5690 /* ACCLogger.swift */; };
+		F066D9282BCFBB85003F5690 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9272BCFBB85003F5690 /* AnalyticsEvent.swift */; };
+		F066D92A2BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9292BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift */; };
+		F066D92C2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D92B2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift */; };
 		F0FB21112BA9689700ECEB56 /* ACCCore.h in Headers */ = {isa = PBXBuildFile; fileRef = F0FB21102BA9689700ECEB56 /* ACCCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F0FB21662BA9853300ECEB56 /* ServiceProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21652BA9853300ECEB56 /* ServiceProviderProtocol.swift */; };
 		F0FB21682BA986BF00ECEB56 /* ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21672BA986BF00ECEB56 /* ServiceProtocol.swift */; };
@@ -30,8 +35,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F066D9152BCF9125003F5690 /* AnyPublisher+Sendable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnyPublisher+Sendable.swift"; sourceTree = "<group>"; };
-		F066D9192BCF937D003F5690 /* URLSession+nonisolated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+nonisolated.swift"; sourceTree = "<group>"; };
+		F066D91C2BCFA5E1003F5690 /* ServiceState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceState.swift; sourceTree = "<group>"; };
+		F066D9202BCFAE8B003F5690 /* URLSession+nonisolated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+nonisolated.swift"; sourceTree = "<group>"; };
+		F066D9212BCFAE8B003F5690 /* AnyPublisher+Sendable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnyPublisher+Sendable.swift"; sourceTree = "<group>"; };
+		F066D9242BCFAEC6003F5690 /* ACCLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCLogger.swift; sourceTree = "<group>"; };
+		F066D9272BCFBB85003F5690 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
+		F066D9292BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPlatformProtocol.swift; sourceTree = "<group>"; };
+		F066D92B2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventTrackerProtocol.swift; sourceTree = "<group>"; };
 		F0FB210D2BA9689700ECEB56 /* ACCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0FB21102BA9689700ECEB56 /* ACCCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCore.h; sourceTree = "<group>"; };
 		F0FB21652BA9853300ECEB56 /* ServiceProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderProtocol.swift; sourceTree = "<group>"; };
@@ -64,13 +74,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F066D9142BCF9106003F5690 /* CommonExtensions */ = {
+		F066D91E2BCFAE5F003F5690 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				F066D9152BCF9125003F5690 /* AnyPublisher+Sendable.swift */,
-				F066D9192BCF937D003F5690 /* URLSession+nonisolated.swift */,
+				F066D9242BCFAEC6003F5690 /* ACCLogger.swift */,
 			);
-			name = CommonExtensions;
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		F066D91F2BCFAE8B003F5690 /* CommonExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				F066D9202BCFAE8B003F5690 /* URLSession+nonisolated.swift */,
+				F066D9212BCFAE8B003F5690 /* AnyPublisher+Sendable.swift */,
+			);
+			path = CommonExtensions;
+			sourceTree = "<group>";
+		};
+		F066D9262BCFBA6D003F5690 /* EventOriented */ = {
+			isa = PBXGroup;
+			children = (
+				F066D9272BCFBB85003F5690 /* AnalyticsEvent.swift */,
+				F066D9292BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift */,
+				F066D92B2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift */,
+			);
+			path = EventOriented;
 			sourceTree = "<group>";
 		};
 		F0FB21032BA9689700ECEB56 = {
@@ -92,7 +120,8 @@
 		F0FB210F2BA9689700ECEB56 /* ACCCore */ = {
 			isa = PBXGroup;
 			children = (
-				F066D9142BCF9106003F5690 /* CommonExtensions */,
+				F066D91F2BCFAE8B003F5690 /* CommonExtensions */,
+				F066D91E2BCFAE5F003F5690 /* Utilities */,
 				F0FB21632BA9850500ECEB56 /* Blueprints */,
 				F0FB21102BA9689700ECEB56 /* ACCCore.h */,
 			);
@@ -102,6 +131,7 @@
 		F0FB21632BA9850500ECEB56 /* Blueprints */ = {
 			isa = PBXGroup;
 			children = (
+				F066D9262BCFBA6D003F5690 /* EventOriented */,
 				F0FB21642BA9851200ECEB56 /* ServiceOriented */,
 			);
 			path = Blueprints;
@@ -114,6 +144,7 @@
 				F0FB21652BA9853300ECEB56 /* ServiceProviderProtocol.swift */,
 				F0FB21672BA986BF00ECEB56 /* ServiceProtocol.swift */,
 				F0FB21862BA988A100ECEB56 /* ServiceProviderAppDelegate.swift */,
+				F066D91C2BCFA5E1003F5690 /* ServiceState.swift */,
 			);
 			path = ServiceOriented;
 			sourceTree = "<group>";
@@ -221,7 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0FB21802BA9887000ECEB56 /* ServiceProviderAppDelegate+URLOpening.swift in Sources */,
-				F066D9162BCF9125003F5690 /* AnyPublisher+Sendable.swift in Sources */,
+				F066D9252BCFAEC6003F5690 /* ACCLogger.swift in Sources */,
 				F0FB217E2BA9887000ECEB56 /* ServiceProviderAppDelegate+Continuing.swift in Sources */,
 				F0FB21822BA9887000ECEB56 /* ServiceProviderAppDelegate+CloudKitHandling.swift in Sources */,
 				F0FB217F2BA9887000ECEB56 /* ServiceProviderAppDelegate+ExtensionTypes.swift in Sources */,
@@ -230,14 +261,19 @@
 				F0FB217A2BA9887000ECEB56 /* ServiceProviderAppDelegate+RemoteNotification.swift in Sources */,
 				F0FB21792BA9887000ECEB56 /* ServiceProviderAppDelegate+SceneStateHandling.swift in Sources */,
 				F0FB217B2BA9887000ECEB56 /* ServiceProviderAppDelegate+HealthKitInteracting.swift in Sources */,
+				F066D92A2BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift in Sources */,
 				F0FB217D2BA9887000ECEB56 /* ServiceProviderAppDelegate+AppStateAndSystemEvents.swift in Sources */,
+				F066D91D2BCFA5E1003F5690 /* ServiceState.swift in Sources */,
 				F0FB21662BA9853300ECEB56 /* ServiceProviderProtocol.swift in Sources */,
+				F066D9282BCFBB85003F5690 /* AnalyticsEvent.swift in Sources */,
 				F0FB21812BA9887000ECEB56 /* ServiceProviderAppDelegate+AppInitializing.swift in Sources */,
+				F066D9232BCFAE8B003F5690 /* AnyPublisher+Sendable.swift in Sources */,
 				F0FB21832BA9887000ECEB56 /* ServiceProviderAppDelegate+SiriKitHandling.swift in Sources */,
 				F0FB21682BA986BF00ECEB56 /* ServiceProtocol.swift in Sources */,
 				F0FB21852BA9887000ECEB56 /* ServiceProviderAppDelegate+DownloadingData.swift in Sources */,
 				F0FB21842BA9887000ECEB56 /* ServiceProviderAppDelegate+WatchKitInteracting.swift in Sources */,
-				F066D91A2BCF937D003F5690 /* URLSession+nonisolated.swift in Sources */,
+				F066D9222BCFAE8B003F5690 /* URLSession+nonisolated.swift in Sources */,
+				F066D92C2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift in Sources */,
 				F0FB21872BA988A100ECEB56 /* ServiceProviderAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,7 +432,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = co.alcheclub.ACCCore;
+				PRODUCT_BUNDLE_IDENTIFIER = co.alcheclub.lib.ACCCore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -431,7 +467,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = co.alcheclub.ACCCore;
+				PRODUCT_BUNDLE_IDENTIFIER = co.alcheclub.lib.ACCCore;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;

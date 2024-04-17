@@ -9,5 +9,5 @@ import Combine
 
 /*  Generic struct 'AnyPublisher'
  does not conform to the 'Sendable'
- protocol (Combine.AnyPublisher) by default */
+ protocol by default */
 extension AnyPublisher: @unchecked Sendable {}

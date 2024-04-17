@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F066D92F2BCFBED7003F5690 /* ACCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F066D92E2BCFBED7003F5690 /* ACCCore.framework */; };
+		F066D9352BCFC050003F5690 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9342BCFC050003F5690 /* MainViewModel.swift */; };
+		F066D9372BCFC05C003F5690 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9362BCFC05C003F5690 /* MainView.swift */; };
 		F0B2E7932BCE7A32004BA72A /* ExampleAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B2E7922BCE7A32004BA72A /* ExampleAppDelegate.swift */; };
 		F0B2E7952BCE7A8F004BA72A /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B2E7942BCE7A8F004BA72A /* BaseViewModel.swift */; };
 		F0B2E7972BCE7A9C004BA72A /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B2E7962BCE7A9C004BA72A /* HomeViewModel.swift */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F066D92E2BCFBED7003F5690 /* ACCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F066D9342BCFC050003F5690 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		F066D9362BCFC05C003F5690 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		F0B2E7922BCE7A32004BA72A /* ExampleAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAppDelegate.swift; sourceTree = "<group>"; };
 		F0B2E7942BCE7A8F004BA72A /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		F0B2E7962BCE7A9C004BA72A /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -38,17 +44,45 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F066D92F2BCFBED7003F5690 /* ACCCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F066D92D2BCFBED7003F5690 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F066D92E2BCFBED7003F5690 /* ACCCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F066D9322BCFC014003F5690 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F0B2E7962BCE7A9C004BA72A /* HomeViewModel.swift */,
+				F0B2E7982BCE7AAA004BA72A /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		F066D9332BCFC03D003F5690 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				F066D9342BCFC050003F5690 /* MainViewModel.swift */,
+				F066D9362BCFC05C003F5690 /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		F0FB212B2BA9767300ECEB56 = {
 			isa = PBXGroup;
 			children = (
 				F0FB21562BA977E700ECEB56 /* Example-iOS */,
 				F0FB21352BA9767300ECEB56 /* Products */,
+				F066D92D2BCFBED7003F5690 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,14 +97,14 @@
 		F0FB21562BA977E700ECEB56 /* Example-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				F066D9332BCFC03D003F5690 /* Main */,
+				F066D9322BCFC014003F5690 /* Home */,
 				F0FB21572BA977E700ECEB56 /* Example_iOSApp.swift */,
 				F0FB215B2BA977E900ECEB56 /* Assets.xcassets */,
 				F0FB215D2BA977E900ECEB56 /* Preview Content */,
 				F0B2E7922BCE7A32004BA72A /* ExampleAppDelegate.swift */,
 				F0B2E7942BCE7A8F004BA72A /* BaseViewModel.swift */,
-				F0B2E7962BCE7A9C004BA72A /* HomeViewModel.swift */,
 				F0B2E79A2BCE7BB6004BA72A /* BaseView.swift */,
-				F0B2E7982BCE7AAA004BA72A /* HomeView.swift */,
 				F0B2E79C2BCE7E41004BA72A /* SampleServiceProtocol.swift */,
 				F0B2E79E2BCE7E4A004BA72A /* SampleService.swift */,
 			);
@@ -158,11 +192,13 @@
 				F0B2E7932BCE7A32004BA72A /* ExampleAppDelegate.swift in Sources */,
 				F0B2E79F2BCE7E4A004BA72A /* SampleService.swift in Sources */,
 				F0FB21582BA977E700ECEB56 /* Example_iOSApp.swift in Sources */,
+				F066D9372BCFC05C003F5690 /* MainView.swift in Sources */,
 				F0B2E79D2BCE7E41004BA72A /* SampleServiceProtocol.swift in Sources */,
 				F0B2E7952BCE7A8F004BA72A /* BaseViewModel.swift in Sources */,
 				F0B2E79B2BCE7BB6004BA72A /* BaseView.swift in Sources */,
 				F0B2E7992BCE7AAA004BA72A /* HomeView.swift in Sources */,
 				F0B2E7972BCE7A9C004BA72A /* HomeViewModel.swift in Sources */,
+				F066D9352BCFC050003F5690 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
