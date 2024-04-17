@@ -14,6 +14,8 @@
 		F066D9282BCFBB85003F5690 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9272BCFBB85003F5690 /* AnalyticsEvent.swift */; };
 		F066D92A2BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9292BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift */; };
 		F066D92C2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D92B2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift */; };
+		F066D9402BCFE253003F5690 /* ACCCoreFirebase.h in Headers */ = {isa = PBXBuildFile; fileRef = F066D93F2BCFE253003F5690 /* ACCCoreFirebase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F066D9452BCFE260003F5690 /* ACCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0FB210D2BA9689700ECEB56 /* ACCCore.framework */; };
 		F0FB21112BA9689700ECEB56 /* ACCCore.h in Headers */ = {isa = PBXBuildFile; fileRef = F0FB21102BA9689700ECEB56 /* ACCCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F0FB21662BA9853300ECEB56 /* ServiceProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21652BA9853300ECEB56 /* ServiceProviderProtocol.swift */; };
 		F0FB21682BA986BF00ECEB56 /* ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21672BA986BF00ECEB56 /* ServiceProtocol.swift */; };
@@ -34,6 +36,16 @@
 		F0FB21872BA988A100ECEB56 /* ServiceProviderAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21862BA988A100ECEB56 /* ServiceProviderAppDelegate.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		F066D9472BCFE260003F5690 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F0FB21042BA9689700ECEB56 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F0FB210C2BA9689700ECEB56;
+			remoteInfo = ACCCore;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		F066D91C2BCFA5E1003F5690 /* ServiceState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceState.swift; sourceTree = "<group>"; };
 		F066D9202BCFAE8B003F5690 /* URLSession+nonisolated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+nonisolated.swift"; sourceTree = "<group>"; };
@@ -42,6 +54,9 @@
 		F066D9272BCFBB85003F5690 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		F066D9292BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPlatformProtocol.swift; sourceTree = "<group>"; };
 		F066D92B2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventTrackerProtocol.swift; sourceTree = "<group>"; };
+		F066D93D2BCFE253003F5690 /* ACCCoreFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCoreFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F066D93F2BCFE253003F5690 /* ACCCoreFirebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCoreFirebase.h; sourceTree = "<group>"; };
+		F066D94B2BCFE3CF003F5690 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		F0FB210D2BA9689700ECEB56 /* ACCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0FB21102BA9689700ECEB56 /* ACCCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCore.h; sourceTree = "<group>"; };
 		F0FB21652BA9853300ECEB56 /* ServiceProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderProtocol.swift; sourceTree = "<group>"; };
@@ -64,6 +79,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		F066D93A2BCFE253003F5690 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F066D9452BCFE260003F5690 /* ACCCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F0FB210A2BA9689700ECEB56 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -101,11 +124,36 @@
 			path = EventOriented;
 			sourceTree = "<group>";
 		};
+		F066D93E2BCFE253003F5690 /* ACCCoreFirebase */ = {
+			isa = PBXGroup;
+			children = (
+				F066D94A2BCFE2B9003F5690 /* Core */,
+				F066D93F2BCFE253003F5690 /* ACCCoreFirebase.h */,
+			);
+			path = ACCCoreFirebase;
+			sourceTree = "<group>";
+		};
+		F066D9442BCFE260003F5690 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F066D94A2BCFE2B9003F5690 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		F0FB21032BA9689700ECEB56 = {
 			isa = PBXGroup;
 			children = (
 				F0FB210F2BA9689700ECEB56 /* ACCCore */,
+				F066D93E2BCFE253003F5690 /* ACCCoreFirebase */,
 				F0FB210E2BA9689700ECEB56 /* Products */,
+				F066D9442BCFE260003F5690 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				F0FB210D2BA9689700ECEB56 /* ACCCore.framework */,
+				F066D93D2BCFE253003F5690 /* ACCCoreFirebase.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,6 +169,7 @@
 		F0FB210F2BA9689700ECEB56 /* ACCCore */ = {
 			isa = PBXGroup;
 			children = (
+				F066D94B2BCFE3CF003F5690 /* Cartfile */,
 				F066D91F2BCFAE8B003F5690 /* CommonExtensions */,
 				F066D91E2BCFAE5F003F5690 /* Utilities */,
 				F0FB21632BA9850500ECEB56 /* Blueprints */,
@@ -173,6 +223,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		F066D9382BCFE253003F5690 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F066D9402BCFE253003F5690 /* ACCCoreFirebase.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F0FB21082BA9689700ECEB56 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -184,6 +242,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		F066D93C2BCFE253003F5690 /* ACCCoreFirebase */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F066D9412BCFE253003F5690 /* Build configuration list for PBXNativeTarget "ACCCoreFirebase" */;
+			buildPhases = (
+				F066D9382BCFE253003F5690 /* Headers */,
+				F066D9392BCFE253003F5690 /* Sources */,
+				F066D93A2BCFE253003F5690 /* Frameworks */,
+				F066D93B2BCFE253003F5690 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F066D9482BCFE260003F5690 /* PBXTargetDependency */,
+			);
+			name = ACCCoreFirebase;
+			productName = ACCCoreFirebase;
+			productReference = F066D93D2BCFE253003F5690 /* ACCCoreFirebase.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		F0FB210C2BA9689700ECEB56 /* ACCCore */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F0FB21142BA9689700ECEB56 /* Build configuration list for PBXNativeTarget "ACCCore" */;
@@ -212,6 +289,9 @@
 				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
+					F066D93C2BCFE253003F5690 = {
+						CreatedOnToolsVersion = 15.1;
+					};
 					F0FB210C2BA9689700ECEB56 = {
 						CreatedOnToolsVersion = 15.1;
 						LastSwiftMigration = 1510;
@@ -232,11 +312,19 @@
 			projectRoot = "";
 			targets = (
 				F0FB210C2BA9689700ECEB56 /* ACCCore */,
+				F066D93C2BCFE253003F5690 /* ACCCoreFirebase */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		F066D93B2BCFE253003F5690 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F0FB210B2BA9689700ECEB56 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -247,6 +335,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		F066D9392BCFE253003F5690 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F0FB21092BA9689700ECEB56 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -280,7 +375,77 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		F066D9482BCFE260003F5690 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F0FB210C2BA9689700ECEB56 /* ACCCore */;
+			targetProxy = F066D9472BCFE260003F5690 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		F066D9422BCFE253003F5690 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = co.alcheclub.lib.ACCCoreFirebase;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F066D9432BCFE253003F5690 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = co.alcheclub.lib.ACCCoreFirebase;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		F0FB21122BA9689700ECEB56 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -480,6 +645,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		F066D9412BCFE253003F5690 /* Build configuration list for PBXNativeTarget "ACCCoreFirebase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F066D9422BCFE253003F5690 /* Debug */,
+				F066D9432BCFE253003F5690 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F0FB21072BA9689700ECEB56 /* Build configuration list for PBXProject "ACCCore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
