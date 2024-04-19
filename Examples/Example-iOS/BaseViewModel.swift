@@ -8,5 +8,5 @@
 import Foundation
 import ACCCore
 protocol BaseViewModelProtocol: ObservableObject {
-    var serviceProvider: ServiceProviderProtocol { get }
+    var serviceProvider: ServiceProviderAppDelegate { get }
 }

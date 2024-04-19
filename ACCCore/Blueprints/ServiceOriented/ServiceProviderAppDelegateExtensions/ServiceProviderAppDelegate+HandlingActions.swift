@@ -14,7 +14,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS 9.0, *)
     open func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
         apply({ (service, completionHandler) -> Void? in
-            service.application?(application, performActionFor: shortcutItem, completionHandler: completionHandler)
+            (service as? UIApplicationDelegate)?.application?(application, performActionFor: shortcutItem, completionHandler: completionHandler)
         }, completionHandler: { results in
             // if any service handled the shortcut, return true
             let result = results.reduce(false, { $0 || $1 })

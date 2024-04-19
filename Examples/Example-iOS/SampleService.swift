@@ -10,7 +10,7 @@ import UIKit
 import Combine
 import ACCCore
 
-final class SampleService: NSObject, Sendable, SampleServiceProtocol {
+final class SampleService: NSObject,@unchecked Sendable, SampleServiceProtocol {
     
     private let contentSubject = CurrentValueSubject<String, Never>("ABC")
     let contentPublisher: AnyPublisher<String, Never>
@@ -25,25 +25,7 @@ final class SampleService: NSObject, Sendable, SampleServiceProtocol {
         super.init()
     }
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        contentSubject.send("DEF")
-        stateSubject.send(.launching)
-        Task {
-            try await getContent()
-            async let backgroundString1 = doStOnBackground()
-            async let backgroundString2 = doStOnBackground()
-            let res = try await [backgroundString1, backgroundString2]
-            ACCLogger.print("Result from BG \(res)")
-            contentSubject.send(res.joined(separator: ","))
-            startTimer()
-            stateSubject.send(.ready)
-            try await Task.sleep(nanoseconds: 10_000_000_000)
-            timerCancellable = nil
-        }
-        
-        
-        return true
-    }
+    
     
     func getContent() async throws {
         guard let myURL = URL(string: "https://google.com") else {
@@ -63,6 +45,28 @@ final class SampleService: NSObject, Sendable, SampleServiceProtocol {
                     .sink(receiveValue: { [weak self] _ in
                         self?.contentSubject.send(UUID().uuidString)
                     })
+    }
+}
+
+extension SampleService: UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        contentSubject.send("DEF")
+        stateSubject.send(.launching)
+        Task {
+            try await getContent()
+            async let backgroundString1 = doStOnBackground()
+            async let backgroundString2 = doStOnBackground()
+            let res = try await [backgroundString1, backgroundString2]
+            ACCLogger.print("Result from BG \(res)")
+            contentSubject.send(res.joined(separator: ","))
+            startTimer()
+            stateSubject.send(.ready)
+            try await Task.sleep(nanoseconds: 10_000_000_000)
+            timerCancellable = nil
+        }
+        
+        
+        return true
     }
 }
 

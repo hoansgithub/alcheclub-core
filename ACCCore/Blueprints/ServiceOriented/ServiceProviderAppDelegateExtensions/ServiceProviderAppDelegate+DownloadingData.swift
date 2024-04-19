@@ -18,7 +18,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS 7.0, *)
     open func application(_ application: UIApplication, handleEventsForBackgroundURLSession identifier: String, completionHandler: @escaping () -> Void) {
         apply({ (service, completionHandler) -> Void? in
-            service.application?(
+            (service as? UIApplicationDelegate)?.application?(
                 application,
                 handleEventsForBackgroundURLSession: identifier,
                 completionHandler: {

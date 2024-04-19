@@ -16,7 +16,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS 8.0, *)
     open func application(_ application: UIApplication, willContinueUserActivityWithType userActivityType: String) -> Bool {
         var result = false
-        for service in services {
+        services.compactMap({$0 as? UIApplicationDelegate}).forEach { service in
             if service.application?(application, willContinueUserActivityWithType: userActivityType) ?? false {
                 result = true
             }
@@ -31,7 +31,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS 8.0, *)
     open func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         let returns = apply({ (service, restorationHandler) -> Bool? in
-            service.application?(application, continue: userActivity, restorationHandler: restorationHandler)
+            (service as? UIApplicationDelegate)?.application?(application, continue: userActivity, restorationHandler: restorationHandler)
         }, completionHandler: { results in
             let result = results.reduce([], { $0 + ($1 ?? []) }) 
             restorationHandler(result)
@@ -43,7 +43,7 @@ extension ServiceProviderAppDelegate {
     // This is called on the main thread when a user activity managed by UIKit has been updated. You can use this as a last chance to add additional data to the userActivity.
     @available(iOS 8.0, *)
     open func application(_ application: UIApplication, didUpdate userActivity: NSUserActivity) {
-        for service in services {
+        services.compactMap({$0 as? UIApplicationDelegate}).forEach { service in
             service.application?(application, didUpdate: userActivity)
         }
     }
@@ -51,7 +51,7 @@ extension ServiceProviderAppDelegate {
     // If the user activity cannot be fetched after willContinueUserActivityWithType is called, this will be called on the main thread when implemented.
     @available(iOS 8.0, *)
     open func application(_ application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
-        for service in services {
+        services.compactMap({$0 as? UIApplicationDelegate}).forEach { service in
             service.application?(application, didFailToContinueUserActivityWithType: userActivityType, error: error)
         }
     }

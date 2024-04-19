@@ -17,7 +17,7 @@ extension ServiceProviderAppDelegate {
     // the resulting CKShare and its associated record(s), which will appear in the CKContainer's shared database in a zone matching that of the record's owner.
     @available(iOS 10.0, *)
     open func application(_ application: UIApplication, userDidAcceptCloudKitShareWith cloudKitShareMetadata: CKShare.Metadata) {
-        for service in services {
+        services.compactMap({$0 as? UIApplicationDelegate}).forEach { service in
             service.application?(application, userDidAcceptCloudKitShareWith: cloudKitShareMetadata)
         }
     }

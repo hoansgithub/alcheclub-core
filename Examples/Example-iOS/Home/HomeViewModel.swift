@@ -18,11 +18,11 @@ class HomeViewModel: @unchecked Sendable, HomeViewModelProtocol {
     @Published var loading = false
     
     
-    var serviceProvider: ServiceProviderProtocol
+    var serviceProvider: ServiceProviderAppDelegate
     var sampleService: SampleServiceProtocol?
     private var cancellables = Set<AnyCancellable>()
     
-    init(serviceProvider: ServiceProviderProtocol) {
+    init(serviceProvider: ServiceProviderAppDelegate) {
         self.serviceProvider = serviceProvider
         self.sampleService =  serviceProvider.getService(SampleServiceProtocol.self)
         registerObservers()

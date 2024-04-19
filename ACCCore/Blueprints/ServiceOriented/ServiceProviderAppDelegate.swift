@@ -7,7 +7,11 @@
 
 import UIKit
 
-open class ServiceProviderAppDelegate: UIResponder, UIApplicationDelegate, UIWindowSceneDelegate, ServiceProviderProtocol {
+open class ServiceProviderAppDelegate: UIResponder, UIApplicationDelegate, UIWindowSceneDelegate, ServiceProviderProtocol, AnalyticsEventTrackerProtocol {
+    nonisolated open var analyticsPlatforms: [AnalyticsPlatformProtocol] {
+        return []
+    }
+    
     nonisolated open var services: [ServiceProtocol] {
         return []
     }

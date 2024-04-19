@@ -7,11 +7,17 @@
 
 import Foundation
 import ACCCore
-protocol MainViewModelProtocol: BaseViewModelProtocol {}
+protocol MainViewModelProtocol: BaseViewModelProtocol {
+    func track(event: AnalyticsEvent)
+}
 
 class MainViewModel: MainViewModelProtocol {
-    var serviceProvider: ServiceProviderProtocol
-    init(serviceProvider: ServiceProviderProtocol) {
+    var serviceProvider: ServiceProviderAppDelegate
+    init(serviceProvider: ServiceProviderAppDelegate) {
         self.serviceProvider = serviceProvider
+    }
+    
+    func track(event: AnalyticsEvent) {
+        serviceProvider.track(event: event)
     }
 }

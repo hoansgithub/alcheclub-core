@@ -7,7 +7,7 @@
 
 import UIKit
 import Combine
-public protocol ServiceProtocol: UIApplicationDelegate, UIWindowSceneDelegate {
+public protocol ServiceProtocol {
     var statePublisher: AnyPublisher<ServiceState, Never> { get }
 }
 

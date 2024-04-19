@@ -7,13 +7,18 @@
 
 import Foundation
 public protocol AnalyticsEventTrackerProtocol: AnyObject {
-    var platforms: [AnalyticsPlatformProtocol] { get }
+    var analyticsPlatforms: [AnalyticsPlatformProtocol] { get }
 }
 
 public extension AnalyticsEventTrackerProtocol {
     func track(event: AnalyticsEvent) {
-        platforms.forEach { platform in
+        analyticsPlatforms.forEach { platform in
+            guard platform.canTrack else { return }
+            #if !DEBUG
             platform.track(event: event)
+            #else
+            ACCLogger.print(event, level: .info)
+            #endif
         }
     }
 }

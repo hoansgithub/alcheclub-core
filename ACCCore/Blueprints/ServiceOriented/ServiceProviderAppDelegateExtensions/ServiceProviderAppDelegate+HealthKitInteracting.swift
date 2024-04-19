@@ -11,7 +11,7 @@ extension ServiceProviderAppDelegate {
 
     @available(iOS 9.0, *)
     open func applicationShouldRequestHealthAuthorization(_ application: UIApplication) {
-        for service in services {
+        services.compactMap({$0 as? UIApplicationDelegate}).forEach { service in
             service.applicationShouldRequestHealthAuthorization?(application)
         }
     }

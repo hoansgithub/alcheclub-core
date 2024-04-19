@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ACCCore
 
 protocol MainViewProtocol: BaseViewProtocol {}
 
@@ -16,6 +17,14 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
             List {
                 NavigationLink(destination: HomeView(vm: HomeViewModel(serviceProvider: vm.serviceProvider))) {
                     Text("HOME")
+                }
+                Divider()
+                Button("Event track") {
+                    vm.track(event: AnalyticsEvent("test_event_name", params: ["test_param_key" : "test_param_value"]))
+                }
+                Divider()
+                Button("CRASH") {
+                    fatalError("Crash was triggered")
                 }
             }
         })

@@ -8,4 +8,5 @@
 import Foundation
 public protocol AnalyticsPlatformProtocol: AnyObject {
     func track(event: AnalyticsEvent)
+    var canTrack: Bool { get }
 }

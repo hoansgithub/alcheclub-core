@@ -12,7 +12,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS 9.0, *)
     open func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         var result = false
-        for service in services {
+        services.compactMap({$0 as? UIApplicationDelegate}).forEach { service in
             if service.application?(app, open: url, options: options) ?? false {
                 result = true
             }

@@ -14,35 +14,35 @@ extension ServiceProviderAppDelegate {
     // This callback will be made upon calling -[UIApplication registerUserNotificationSettings:]. The settings the user has granted to the application will be passed in as the second argument.
     @available(iOS, introduced: 8.0, deprecated: 10.0, message: "Use UserNotification UNNotification Settings instead")
     open func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
-        for service in services {
+        services.compactMap({$0 as? UIApplicationDelegate}).forEach { service in
             service.application?(application, didRegister: notificationSettings)
         }
     }
 
     @available(iOS 3.0, *)
     open func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        for service in services {
+        services.compactMap({$0 as? UIApplicationDelegate}).forEach { service in
             service.application?(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
         }
     }
 
     @available(iOS 3.0, *)
     open func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        for service in services {
+        services.compactMap({$0 as? UIApplicationDelegate}).forEach { service in
             service.application?(application, didFailToRegisterForRemoteNotificationsWithError: error)
         }
     }
 
     @available(iOS, introduced: 3.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate willPresentNotification:withCompletionHandler:] or -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:] for user visible notifications and -[UIApplicationDelegate application:didReceiveRemoteNotification:fetchCompletionHandler:] for silent remote notifications")
     open func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        for service in services {
+        services.compactMap({$0 as? UIApplicationDelegate}).forEach { service in
             service.application?(application, didReceiveRemoteNotification: userInfo)
         }
     }
 
     @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate willPresentNotification:withCompletionHandler:] or -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]")
     open func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        for service in services {
+        services.compactMap({$0 as? UIApplicationDelegate}).forEach { service in
             service.application?(application, didReceive: notification)
         }
     }
@@ -53,7 +53,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS, introduced: 8.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]")
     open func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
         apply({ (service, completion) -> Void? in
-            service.application?(
+            (service as? UIApplicationDelegate)?.application?(
                 application,
                 handleActionWithIdentifier: identifier,
                 for: notification,
@@ -68,7 +68,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS, introduced: 9.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]")
     open func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable: Any], withResponseInfo responseInfo: [AnyHashable: Any], completionHandler: @escaping () -> Void) {
         apply({ (service, completionHandler) -> Void? in
-            service.application?(
+            (service as? UIApplicationDelegate)?.application?(
                 application,
                 handleActionWithIdentifier: identifier,
                 forRemoteNotification: userInfo,
@@ -87,7 +87,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS, introduced: 8.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]")
     open func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable: Any], completionHandler: @escaping () -> Void) {
         apply({ (service, completionHandler) -> Void? in
-            service.application?(
+            (service as? UIApplicationDelegate)?.application?(
                 application,
                 handleActionWithIdentifier: identifier,
                 forRemoteNotification: userInfo,
@@ -102,7 +102,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS, introduced: 9.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]")
     open func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, withResponseInfo responseInfo: [AnyHashable: Any], completionHandler: @escaping () -> Void) {
         apply({ (service, completionHandler) -> Void? in
-            service.application?(
+            (service as? UIApplicationDelegate)?.application?(
                 application,
                 handleActionWithIdentifier: identifier,
                 for: notification,
@@ -121,7 +121,7 @@ extension ServiceProviderAppDelegate {
     @available(iOS 7.0, *)
     open func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         apply({ (service, completionHandler) -> Void? in
-            service.application?(
+            (service as? UIApplicationDelegate)?.application?(
                 application,
                 didReceiveRemoteNotification: userInfo,
                 fetchCompletionHandler: completionHandler
