@@ -18,12 +18,14 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
     nonisolated lazy var firebaseAnalyticsService = FirebaseAnalyticsService(coreService: firebaseCoreService)
     
     
-    override var analyticsPlatforms: [AnalyticsPlatformProtocol] {
+    override var analyticsPlatforms: [any AnalyticsPlatformProtocol] {
         return [firebaseAnalyticsService]
     }
     
     override var services: [ServiceProtocol] {
-        return [sampleService, firebaseCoreService, firebaseAnalyticsService]
+        return [sampleService,
+                firebaseCoreService,
+                firebaseAnalyticsService]
     }
     
 }

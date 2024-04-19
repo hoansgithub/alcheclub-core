@@ -8,5 +8,5 @@
 import Foundation
 import ACCCore
 public protocol FirebaseAnalyticsServiceProtocol: ServiceProtocol, AnalyticsPlatformProtocol {
-    init(coreService: FirebaseCoreServiceProtocol)
+    
 }

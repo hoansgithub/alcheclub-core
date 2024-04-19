@@ -45,7 +45,6 @@
 		F066D92E2BCFBED7003F5690 /* ACCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F066D9342BCFC050003F5690 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		F066D9362BCFC05C003F5690 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		F08BCE132BD011D00067DFC5 /* ACCCoreFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCoreFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F08BCE232BD0173A0067DFC5 /* ACCCoreFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCoreFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F08BCE272BD020EB0067DFC5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F0B2E7922BCE7A32004BA72A /* ExampleAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAppDelegate.swift; sourceTree = "<group>"; };
@@ -78,7 +77,6 @@
 			isa = PBXGroup;
 			children = (
 				F08BCE232BD0173A0067DFC5 /* ACCCoreFirebase.framework */,
-				F08BCE132BD011D00067DFC5 /* ACCCoreFirebase.framework */,
 				F066D92E2BCFBED7003F5690 /* ACCCore.framework */,
 			);
 			name = Frameworks;

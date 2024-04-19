@@ -8,7 +8,7 @@
 import UIKit
 
 open class ServiceProviderAppDelegate: UIResponder, UIApplicationDelegate, UIWindowSceneDelegate, ServiceProviderProtocol, AnalyticsEventTrackerProtocol {
-    nonisolated open var analyticsPlatforms: [AnalyticsPlatformProtocol] {
+    nonisolated open var analyticsPlatforms: [any AnalyticsPlatformProtocol] {
         return []
     }
     
@@ -22,6 +22,10 @@ open class ServiceProviderAppDelegate: UIResponder, UIApplicationDelegate, UIWin
     
     // MARK: UIApplicationDelegate conformation
     open var window: UIWindow?
+    
+    public override init() {
+        super.init()
+    }
 }
 
 public extension ServiceProviderAppDelegate {

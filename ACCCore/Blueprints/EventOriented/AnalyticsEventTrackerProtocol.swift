@@ -7,7 +7,7 @@
 
 import Foundation
 public protocol AnalyticsEventTrackerProtocol: AnyObject {
-    var analyticsPlatforms: [AnalyticsPlatformProtocol] { get }
+    var analyticsPlatforms: [any AnalyticsPlatformProtocol] { get }
 }
 
 public extension AnalyticsEventTrackerProtocol {
@@ -17,7 +17,7 @@ public extension AnalyticsEventTrackerProtocol {
             #if !DEBUG
             platform.track(event: event)
             #else
-            ACCLogger.print(event, level: .info)
+            ACCLogger.print("\(platform.id) \(event)", level: .info)
             #endif
         }
     }

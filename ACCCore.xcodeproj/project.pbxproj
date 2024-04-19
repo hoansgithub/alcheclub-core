@@ -38,6 +38,10 @@
 		F08BCE6B2BD2197C0067DFC5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F08BCE6A2BD2197C0067DFC5 /* AdSupport.framework */; };
 		F08BCE6E2BD21D970067DFC5 /* FirebaseAnalyticsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE6D2BD21D970067DFC5 /* FirebaseAnalyticsServiceProtocol.swift */; };
 		F08BCE702BD21DA30067DFC5 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE6F2BD21DA30067DFC5 /* FirebaseAnalyticsService.swift */; };
+		F08BCE742BD2408C0067DFC5 /* ConfigCenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE732BD2408C0067DFC5 /* ConfigCenterProtocol.swift */; };
+		F08BCE782BD241090067DFC5 /* ConfigurableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE772BD241090067DFC5 /* ConfigurableProtocol.swift */; };
+		F08BCE7B2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE7A2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift */; };
+		F08BCE7D2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE7C2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift */; };
 		F0FB21112BA9689700ECEB56 /* ACCCore.h in Headers */ = {isa = PBXBuildFile; fileRef = F0FB21102BA9689700ECEB56 /* ACCCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F0FB21662BA9853300ECEB56 /* ServiceProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21652BA9853300ECEB56 /* ServiceProviderProtocol.swift */; };
 		F0FB21682BA986BF00ECEB56 /* ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21672BA986BF00ECEB56 /* ServiceProtocol.swift */; };
@@ -101,6 +105,10 @@
 		F08BCE6A2BD2197C0067DFC5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/System/Library/Frameworks/AdSupport.framework; sourceTree = DEVELOPER_DIR; };
 		F08BCE6D2BD21D970067DFC5 /* FirebaseAnalyticsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsServiceProtocol.swift; sourceTree = "<group>"; };
 		F08BCE6F2BD21DA30067DFC5 /* FirebaseAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsService.swift; sourceTree = "<group>"; };
+		F08BCE732BD2408C0067DFC5 /* ConfigCenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCenterProtocol.swift; sourceTree = "<group>"; };
+		F08BCE772BD241090067DFC5 /* ConfigurableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableProtocol.swift; sourceTree = "<group>"; };
+		F08BCE7A2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRemoteConfigServiceProtocol.swift; sourceTree = "<group>"; };
+		F08BCE7C2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRemoteConfigService.swift; sourceTree = "<group>"; };
 		F0FB210D2BA9689700ECEB56 /* ACCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0FB21102BA9689700ECEB56 /* ACCCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCore.h; sourceTree = "<group>"; };
 		F0FB21652BA9853300ECEB56 /* ServiceProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderProtocol.swift; sourceTree = "<group>"; };
@@ -189,6 +197,7 @@
 		F066D93E2BCFE253003F5690 /* ACCCoreFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				F08BCE792BD268070067DFC5 /* RemoteConfig */,
 				F08BCE6C2BD21ADE0067DFC5 /* Analytics */,
 				F08BCE0E2BD010E60067DFC5 /* Core */,
 				F066D93F2BCFE253003F5690 /* ACCCoreFirebase.h */,
@@ -239,6 +248,24 @@
 			path = Analytics;
 			sourceTree = "<group>";
 		};
+		F08BCE722BD23F920067DFC5 /* RemoteConfigurable */ = {
+			isa = PBXGroup;
+			children = (
+				F08BCE732BD2408C0067DFC5 /* ConfigCenterProtocol.swift */,
+				F08BCE772BD241090067DFC5 /* ConfigurableProtocol.swift */,
+			);
+			path = RemoteConfigurable;
+			sourceTree = "<group>";
+		};
+		F08BCE792BD268070067DFC5 /* RemoteConfig */ = {
+			isa = PBXGroup;
+			children = (
+				F08BCE7A2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift */,
+				F08BCE7C2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift */,
+			);
+			path = RemoteConfig;
+			sourceTree = "<group>";
+		};
 		F0FB21032BA9689700ECEB56 = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +300,7 @@
 		F0FB21632BA9850500ECEB56 /* Blueprints */ = {
 			isa = PBXGroup;
 			children = (
+				F08BCE722BD23F920067DFC5 /* RemoteConfigurable */,
 				F066D9262BCFBA6D003F5690 /* EventOriented */,
 				F0FB21642BA9851200ECEB56 /* ServiceOriented */,
 			);
@@ -432,7 +460,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F08BCE7B2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift in Sources */,
 				F08BCE6E2BD21D970067DFC5 /* FirebaseAnalyticsServiceProtocol.swift in Sources */,
+				F08BCE7D2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift in Sources */,
 				F08BCE102BD011040067DFC5 /* FirebaseCoreServiceProtocol.swift in Sources */,
 				F08BCE122BD0111E0067DFC5 /* FirebaseCoreService.swift in Sources */,
 				F08BCE702BD21DA30067DFC5 /* FirebaseAnalyticsService.swift in Sources */,
@@ -464,8 +494,10 @@
 				F0FB21682BA986BF00ECEB56 /* ServiceProtocol.swift in Sources */,
 				F0FB21852BA9887000ECEB56 /* ServiceProviderAppDelegate+DownloadingData.swift in Sources */,
 				F0FB21842BA9887000ECEB56 /* ServiceProviderAppDelegate+WatchKitInteracting.swift in Sources */,
+				F08BCE742BD2408C0067DFC5 /* ConfigCenterProtocol.swift in Sources */,
 				F066D9222BCFAE8B003F5690 /* URLSession+nonisolated.swift in Sources */,
 				F066D92C2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift in Sources */,
+				F08BCE782BD241090067DFC5 /* ConfigurableProtocol.swift in Sources */,
 				F0FB21872BA988A100ECEB56 /* ServiceProviderAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

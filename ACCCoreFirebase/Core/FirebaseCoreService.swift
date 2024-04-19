@@ -17,7 +17,7 @@ public final class FirebaseCoreService: NSObject, @unchecked Sendable, FirebaseC
     private var options: FirebaseOptions?
     nonisolated required public init(options: FirebaseOptions?) {
         self.options = options
-        self.statePublisher = stateSubject.eraseToAnyPublisher()
+        self.statePublisher = stateSubject.removeDuplicates().eraseToAnyPublisher()
         super.init()
     }
     

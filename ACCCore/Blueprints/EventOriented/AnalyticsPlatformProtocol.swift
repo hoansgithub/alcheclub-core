@@ -6,7 +6,8 @@
 //
 
 import Foundation
-public protocol AnalyticsPlatformProtocol: AnyObject {
+public protocol AnalyticsPlatformProtocol: AnyObject, Identifiable {
+    var id: String { get }
     func track(event: AnalyticsEvent)
     var canTrack: Bool { get }
 }

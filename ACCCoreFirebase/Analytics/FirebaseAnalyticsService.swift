@@ -11,6 +11,8 @@ import Combine
 import UIKit
 import FirebaseAnalytics
 public final class FirebaseAnalyticsService: NSObject, @unchecked Sendable, FirebaseAnalyticsServiceProtocol {
+    public var id: String = "FirebaseAnalytics"
+    
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
     public let statePublisher: AnyPublisher<ServiceState, Never>
     
@@ -19,7 +21,7 @@ public final class FirebaseAnalyticsService: NSObject, @unchecked Sendable, Fire
     private var cancellables: Set<AnyCancellable> = []
     private var _canTrack = false
     nonisolated required public init(coreService: FirebaseCoreServiceProtocol) {
-        self.statePublisher = stateSubject.eraseToAnyPublisher()
+        self.statePublisher = stateSubject.removeDuplicates().eraseToAnyPublisher()
         self.firebaseCoreService = coreService
         super.init()
     }

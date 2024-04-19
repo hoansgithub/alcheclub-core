@@ -18,11 +18,11 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
                 NavigationLink(destination: HomeView(vm: HomeViewModel(serviceProvider: vm.serviceProvider))) {
                     Text("HOME")
                 }
-                Divider()
-                Button("Event track") {
+                
+                Button("Track Event") {
                     vm.track(event: AnalyticsEvent("test_event_name", params: ["test_param_key" : "test_param_value"]))
                 }
-                Divider()
+                
                 Button("CRASH") {
                     fatalError("Crash was triggered")
                 }
