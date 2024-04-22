@@ -88,7 +88,7 @@ struct SampleCodableStruct: Codable {
 
 ///conforming configurable protocol
 extension SampleService {
-    func update(with config: RemoteConfigObject) {
+    func update(with config: ConfigObject) {
         /*
          test_key_bool
          true

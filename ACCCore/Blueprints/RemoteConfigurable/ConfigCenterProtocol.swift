@@ -8,9 +8,9 @@
 import Foundation
 import Combine
 public protocol ConfigCenterProtocol: AnyObject {
-    var configPublisher: AnyPublisher<RemoteConfigObject?, Never> { get }
+    var configPublisher: AnyPublisher<ConfigObject?, Never> { get }
 }
 
-public protocol RemoteConfigObject {
+public protocol ConfigObject {
     subscript<T: Codable>(rcKey: String) -> T? { get }
 }

@@ -30,8 +30,8 @@ public enum FirebaseRemoteConfigServiceError: Error {
 
 public final class FirebaseRemoteConfigService: NSObject, @unchecked Sendable, FirebaseRemoteConfigServiceProtocol, ConfigCenterProtocol {
     
-    public var configSubject = CurrentValueSubject<RemoteConfigObject?, Never>(nil)
-    public var configPublisher: AnyPublisher<RemoteConfigObject?, Never>
+    public var configSubject = CurrentValueSubject<ConfigObject?, Never>(nil)
+    public var configPublisher: AnyPublisher<ConfigObject?, Never>
     
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
     public let statePublisher: AnyPublisher<ServiceState, Never>
@@ -148,7 +148,7 @@ extension FirebaseRemoteConfigService: UIApplicationDelegate {
     }
 }
 
-extension RemoteConfig: RemoteConfigObject {
+extension RemoteConfig: ConfigObject {
     
     /**
      The currently supported types are:
