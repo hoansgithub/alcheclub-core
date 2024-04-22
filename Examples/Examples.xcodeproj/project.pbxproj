@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		F066D9352BCFC050003F5690 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9342BCFC050003F5690 /* MainViewModel.swift */; };
 		F066D9372BCFC05C003F5690 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9362BCFC05C003F5690 /* MainView.swift */; };
-		F08BCE282BD020EB0067DFC5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F08BCE272BD020EB0067DFC5 /* GoogleService-Info.plist */; };
+		F0704C772BD67BBB0069F3CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F08BCE272BD020EB0067DFC5 /* GoogleService-Info.plist */; };
 		F08BCE652BD02E410067DFC5 /* ACCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F066D92E2BCFBED7003F5690 /* ACCCore.framework */; };
 		F08BCE662BD02E410067DFC5 /* ACCCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F066D92E2BCFBED7003F5690 /* ACCCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F08BCE682BD02E430067DFC5 /* ACCCoreFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F08BCE232BD0173A0067DFC5 /* ACCCoreFirebase.framework */; };
@@ -205,7 +205,7 @@
 			files = (
 				F0FB215F2BA977E900ECEB56 /* Preview Assets.xcassets in Resources */,
 				F0FB215C2BA977E900ECEB56 /* Assets.xcassets in Resources */,
-				F08BCE282BD020EB0067DFC5 /* GoogleService-Info.plist in Resources */,
+				F0704C772BD67BBB0069F3CA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

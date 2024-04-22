@@ -57,7 +57,6 @@ extension SampleService: UIApplicationDelegate {
             async let backgroundString1 = doStOnBackground()
             async let backgroundString2 = doStOnBackground()
             let res = try await [backgroundString1, backgroundString2]
-            ACCLogger.print("Result from BG \(res)")
             contentSubject.send(res.joined(separator: ","))
             startTimer()
             stateSubject.send(.ready)
@@ -75,7 +74,6 @@ private extension SampleService {
         let task = Task.detached(priority: .background) {() -> String in
             let randomSec: UInt64 = (1...5).randomElement() ?? 1
             try await Task.sleep(nanoseconds: randomSec * 3_000_000_000)
-            ACCLogger.print("doStOnBackground in \(randomSec)")
             return UUID().uuidString
         }
         
@@ -83,3 +81,46 @@ private extension SampleService {
     }
 }
 
+struct SampleCodableStruct: Codable {
+    var name: String
+    var rating: Float
+}
+
+///conforming configurable protocol
+extension SampleService {
+    func update(with config: RemoteConfigObject) {
+        /*
+         test_key_bool
+         true
+
+         test_key_float
+         3.5
+
+         test_key_int
+         3
+
+         test_key_json
+         {"name":"Hoan","rating":3.5}
+
+         test_key_string
+         test_key_string
+         
+         test_key_uint
+         -33
+         
+         */
+        let boolVal: Bool? = config["test_key_bool"]
+        let floatVal: Float? = config["test_key_float"]
+        let intVal: Int? = config["test_key_int"]
+        let jsonVal: SampleCodableStruct? = config["test_key_json"]
+        let uintVal: UInt? = config["test_key_uint"]
+        let stringVal: String? = config["test_key_string"]
+        
+        ACCLogger.print(boolVal, level: .info)
+        ACCLogger.print(floatVal, level: .info)
+        ACCLogger.print(intVal, level: .info)
+        ACCLogger.print(jsonVal, level: .info)
+        ACCLogger.print(uintVal, level: .info)
+        ACCLogger.print(stringVal, level: .info)
+    }
+}

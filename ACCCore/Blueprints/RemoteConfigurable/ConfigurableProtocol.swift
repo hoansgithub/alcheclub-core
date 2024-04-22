@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 public protocol ConfigurableProtocol: AnyObject {
-    
+    func update(with config: RemoteConfigObject)
 }

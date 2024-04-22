@@ -31,12 +31,11 @@ class HomeViewModel: @unchecked Sendable, HomeViewModelProtocol {
     func registerObservers() {
         sampleService?.contentPublisher.receive(on: DispatchSerialQueue.main).sink(receiveValue: { [weak self] aaa in
             self?.content = aaa
-            ACCLogger.print("RECEIVED \(aaa)" , level: .fault)
         }).store(in: &cancellables)
     }
     
     func onViewAppear() {
-        ACCLogger.print(self , level: .fault)
+       
     }
     
     deinit {

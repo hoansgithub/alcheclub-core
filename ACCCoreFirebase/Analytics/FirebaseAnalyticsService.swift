@@ -17,12 +17,12 @@ public final class FirebaseAnalyticsService: NSObject, @unchecked Sendable, Fire
     public let statePublisher: AnyPublisher<ServiceState, Never>
     
     
-    private var firebaseCoreService: FirebaseCoreServiceProtocol
+    private var coreService: FirebaseCoreServiceProtocol
     private var cancellables: Set<AnyCancellable> = []
     private var _canTrack = false
     nonisolated required public init(coreService: FirebaseCoreServiceProtocol) {
         self.statePublisher = stateSubject.removeDuplicates().eraseToAnyPublisher()
-        self.firebaseCoreService = coreService
+        self.coreService = coreService
         super.init()
     }
     
@@ -33,7 +33,7 @@ public final class FirebaseAnalyticsService: NSObject, @unchecked Sendable, Fire
 
 extension FirebaseAnalyticsService: UIApplicationDelegate {
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        firebaseCoreService.statePublisher.sink { [weak self] state in
+        coreService.statePublisher.sink { [weak self] state in
             self?.stateSubject.send(state)
             self?._canTrack = state == .ready
         }.store(in: &cancellables)

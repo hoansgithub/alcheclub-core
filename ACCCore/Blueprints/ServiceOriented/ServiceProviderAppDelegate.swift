@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Combine
 open class ServiceProviderAppDelegate: UIResponder, UIApplicationDelegate, UIWindowSceneDelegate, ServiceProviderProtocol, AnalyticsEventTrackerProtocol {
     nonisolated open var analyticsPlatforms: [any AnalyticsPlatformProtocol] {
         return []
@@ -20,11 +20,34 @@ open class ServiceProviderAppDelegate: UIResponder, UIApplicationDelegate, UIWin
         services.first(where: {$0 is S }) as? S
     }
     
+    
+    //config center
+    nonisolated open var configCenter: ConfigCenterProtocol? {
+        return nil
+    }
+    
+    private var cancellables: Set<AnyCancellable> = []
+    
     // MARK: UIApplicationDelegate conformation
     open var window: UIWindow?
     
+    
     public override init() {
         super.init()
+        registerConfigCenter(configCenter)
+    }
+    
+    open func registerConfigCenter(_ center: ConfigCenterProtocol?) {
+        guard let configCenter = configCenter else {
+            ACCLogger.print("To have remote config observers behave as expected, you must override property `nonisolated open var configCenter: ConfigCenterProtocol?`", level: .fault)
+            return
+        }
+        configCenter.configPublisher.sink(receiveValue: { [weak self] rcObj in
+            guard let self, let rcObj = rcObj else { return }
+            self.services.compactMap({$0 as? ConfigurableProtocol}).forEach { configurable in
+                configurable.update(with: rcObj)
+            }
+        }).store(in: &cancellables)
     }
 }
 
