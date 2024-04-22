@@ -39,7 +39,7 @@ open class ServiceProviderAppDelegate: UIResponder, UIApplicationDelegate, UIWin
     
     open func registerConfigCenter(_ center: ConfigCenterProtocol?) {
         guard let configCenter = configCenter else {
-            ACCLogger.print("To have remote config observers behave as expected, you must override property `nonisolated open var configCenter: ConfigCenterProtocol?`", level: .fault)
+            ACCLogger.print("To have the remote config observers behave as expected, you must override the property `nonisolated open var configCenter: ConfigCenterProtocol?` from ServiceProviderAppDelegate", level: .error)
             return
         }
         configCenter.configPublisher.sink(receiveValue: { [weak self] rcObj in

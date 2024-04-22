@@ -14,13 +14,20 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
     override init() {
         super.init()
     }
+    
+    nonisolated var rcSettings: RemoteConfigSettings {
+        let rc = RemoteConfigSettings()
+        rc.fetchTimeout = 5
+        return rc
+    }
+    
     let sampleService = SampleService()
-    let firebaseCoreService = FirebaseCoreService(options: FirebaseOptions(contentsOfFile: "GoogleService-Info"))
+    let firebaseCoreService = FirebaseCoreService(options: FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") ?? ""))
     nonisolated lazy var firebaseAnalyticsService = FirebaseAnalyticsService(coreService: firebaseCoreService)
     nonisolated lazy var firebaseRCService = FirebaseRemoteConfigService(
         coreService: firebaseCoreService,
-        settings: RemoteConfigSettings(),
-        defaultPlist: "",
+        settings: rcSettings,
+        defaultPlist: "rc_defaults",
         realTimeEnabled: true)
     
     

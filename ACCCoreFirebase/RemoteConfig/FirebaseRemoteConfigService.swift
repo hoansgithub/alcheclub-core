@@ -37,7 +37,6 @@ public final class FirebaseRemoteConfigService: NSObject, @unchecked Sendable, F
     public let statePublisher: AnyPublisher<ServiceState, Never>
     
     private var coreService: FirebaseCoreServiceProtocol
-    private var remoteConfig: RemoteConfig?
     private var cancellables: Set<AnyCancellable> = []
     
     
@@ -65,9 +64,8 @@ public final class FirebaseRemoteConfigService: NSObject, @unchecked Sendable, F
 
 private extension FirebaseRemoteConfigService {
     func fetchRC() async throws {
-        let task = Task.detached(priority: .background) { [weak self] () in
-            guard let self ,let remoteConfig = self.remoteConfig else { throw FirebaseRemoteConfigServiceError.unknown }
-            let status = try await remoteConfig.fetch()
+        let task = Task.detached(priority: .background) { () in
+            let status = try await RemoteConfig.remoteConfig().fetch()
             switch status {
             case .success:
                 return ()
@@ -83,11 +81,12 @@ private extension FirebaseRemoteConfigService {
      */
     func activateRC() async throws -> Bool {
         let task = Task.detached(priority: .background) { [weak self] () in
-            guard let self, let remoteConfig = self.remoteConfig else { throw FirebaseRemoteConfigServiceError.unknown }
-            let changed = try await remoteConfig.activate()
-            self.configSubject.send(self.remoteConfig)
+            guard let self else { throw FirebaseRemoteConfigServiceError.unknown }
+            let rm = RemoteConfig.remoteConfig()
+            let changed = try await rm.activate()
+            self.configSubject.send(rm)
             self.stateSubject.send(.ready)
-            ACCLogger.print(self.remoteConfig?.allKeys(from: .default))
+            ACCLogger.print(rm.allKeys(from: .remote))
             return changed
         }
         
@@ -101,7 +100,7 @@ private extension FirebaseRemoteConfigService {
             configUpdateListenerRegistration?.remove()
         }
         
-        configUpdateListenerRegistration = remoteConfig?.addOnConfigUpdateListener(remoteConfigUpdateCompletion: { [weak self] configUpdate, error in
+        configUpdateListenerRegistration = RemoteConfig.remoteConfig().addOnConfigUpdateListener(remoteConfigUpdateCompletion: { [weak self] configUpdate, error in
             guard configUpdate != nil, error == nil else {
                 ACCLogger.print(error?.localizedDescription, level: .error)
                 return
@@ -120,16 +119,16 @@ private extension FirebaseRemoteConfigService {
 
 extension FirebaseRemoteConfigService: UIApplicationDelegate {
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        //RC must be initialized after FirebaseApp initiation
         coreService.statePublisher
             .filter({$0 == .ready}).prefix(1)
             .sink { [weak self] _ in
                 guard let self else { return }
                 Task.detached(priority: .background) {
+                    let rm = RemoteConfig.remoteConfig()
                     do {
-                        //Should not initiate RC before FirebaseApp
-                        self.remoteConfig = RemoteConfig.remoteConfig()
-                        if let settings = self.settings { self.remoteConfig?.configSettings = settings }
-                        if !self.defaultPlist.isEmpty { self.remoteConfig?.setDefaults(fromPlist: self.defaultPlist)
+                        if let settings = self.settings { rm.configSettings = settings }
+                        if !self.defaultPlist.isEmpty { rm.setDefaults(fromPlist: self.defaultPlist)
                         }
                         
                         try await self.fetchRC()
@@ -138,6 +137,8 @@ extension FirebaseRemoteConfigService: UIApplicationDelegate {
                     }
                     catch {
                         ACCLogger.print(error.localizedDescription, level: .error)
+                        self.configSubject.send(rm)
+                        self.stateSubject.send(.ready)
                     }
                 }
                 
@@ -158,17 +159,16 @@ extension RemoteConfig: RemoteConfigObject {
      JSON
      */
     public subscript<T: Codable>(rcKey: String) -> T? {
-        guard !allKeys(from: .default).isEmpty else { return nil }
-        let value = self.configValue(forKey: rcKey)
+        let value = self[rcKey]
         switch T.self {
         case is String.Type:
             return value.stringValue as? T
         case is Bool.Type:
             return value.boolValue as? T
         case is any SignedInteger.Type:
-            return value.numberValue.int64Value as? T
+            return value.numberValue.intValue as? T
         case is any UnsignedInteger.Type:
-            return value.numberValue.uint64Value as? T
+            return value.numberValue.uintValue as? T
         case is Float.Type:
             return value.numberValue.floatValue as? T
         case is Double.Type:

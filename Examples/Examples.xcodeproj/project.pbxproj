@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F036DFDE2BD6A95800EDC0D9 /* rc_defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = F036DFDD2BD6A95800EDC0D9 /* rc_defaults.plist */; };
 		F066D9352BCFC050003F5690 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9342BCFC050003F5690 /* MainViewModel.swift */; };
 		F066D9372BCFC05C003F5690 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9362BCFC05C003F5690 /* MainView.swift */; };
 		F0704C772BD67BBB0069F3CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F08BCE272BD020EB0067DFC5 /* GoogleService-Info.plist */; };
@@ -42,6 +43,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F036DFDD2BD6A95800EDC0D9 /* rc_defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = rc_defaults.plist; path = ../../../../../Downloads/rc_defaults.plist; sourceTree = "<group>"; };
 		F066D92E2BCFBED7003F5690 /* ACCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F066D9342BCFC050003F5690 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		F066D9362BCFC05C003F5690 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		F0FB21562BA977E700ECEB56 /* Example-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				F036DFDD2BD6A95800EDC0D9 /* rc_defaults.plist */,
 				F08BCE272BD020EB0067DFC5 /* GoogleService-Info.plist */,
 				F066D9332BCFC03D003F5690 /* Main */,
 				F066D9322BCFC014003F5690 /* Home */,
@@ -206,6 +209,7 @@
 				F0FB215F2BA977E900ECEB56 /* Preview Assets.xcassets in Resources */,
 				F0FB215C2BA977E900ECEB56 /* Assets.xcassets in Resources */,
 				F0704C772BD67BBB0069F3CA /* GoogleService-Info.plist in Resources */,
+				F036DFDE2BD6A95800EDC0D9 /* rc_defaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

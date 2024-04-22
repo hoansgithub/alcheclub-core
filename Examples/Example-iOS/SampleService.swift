@@ -97,7 +97,7 @@ extension SampleService {
          3.5
 
          test_key_int
-         3
+         -3
 
          test_key_json
          {"name":"Hoan","rating":3.5}
@@ -106,7 +106,7 @@ extension SampleService {
          test_key_string
          
          test_key_uint
-         -33
+         33
          
          */
         let boolVal: Bool? = config["test_key_bool"]
