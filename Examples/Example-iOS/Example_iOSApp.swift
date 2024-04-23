@@ -12,7 +12,7 @@ struct Example_iOSApp: App {
     @UIApplicationDelegateAdaptor(ExampleAppDelegate.self) var delegate
     var body: some Scene {
         WindowGroup {
-            MainView(vm: MainViewModel(serviceProvider: delegate))
+            ContainerView(vm: ContainerViewModel(serviceProvider: delegate))
         }
     }
 }

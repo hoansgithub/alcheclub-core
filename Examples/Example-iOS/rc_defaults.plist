@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>test_key_int</key>
+  <string>-3</string>
+  <key>test_key_uint</key>
+  <string>33</string>
+  <key>test_key_float</key>
+  <string>3.5</string>
+  <key>test_key_json</key>
+  <string>{"name":"Hoan","rating":3.5}</string>
+  <key>test_key_bool</key>
+  <string>true</string>
+  <key>test_key_string</key>
+  <string>test_key_string</string>
+</dict>
+</plist>

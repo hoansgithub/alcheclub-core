@@ -86,7 +86,6 @@ private extension FirebaseRemoteConfigService {
             let changed = try await rm.activate()
             self.configSubject.send(rm)
             self.stateSubject.send(.ready)
-            ACCLogger.print(rm.allKeys(from: .remote))
             return changed
         }
         

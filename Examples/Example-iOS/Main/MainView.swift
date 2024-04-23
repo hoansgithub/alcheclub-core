@@ -15,17 +15,24 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
     var body: some View {
         NavigationView(content: {
             List {
-                NavigationLink(destination: HomeView(vm: HomeViewModel(serviceProvider: vm.serviceProvider))) {
-                    Text("HOME")
+                Button("Login") {
+                    vm.login()
                 }
                 
                 Button("Track Event") {
                     vm.track(event: AnalyticsEvent("test_event_name", params: ["test_param_key" : "test_param_value"]))
                 }
                 
+                Button("Onboarding") {
+                    vm.goToOnboarding()
+                }
+                
+                Spacer()
                 Button("CRASH") {
                     fatalError("Crash was triggered")
                 }
+                
+                
             }
         })
     }

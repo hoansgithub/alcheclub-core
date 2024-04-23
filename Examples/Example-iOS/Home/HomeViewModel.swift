@@ -11,6 +11,7 @@ protocol HomeViewModelProtocol: BaseViewModelProtocol {
     var content: String { get }
     var loading: Bool { get }
     func onViewAppear()
+    func logOut()
 }
 
 class HomeViewModel: @unchecked Sendable, HomeViewModelProtocol {
@@ -38,7 +39,11 @@ class HomeViewModel: @unchecked Sendable, HomeViewModelProtocol {
        
     }
     
+    func logOut() {
+        AppSession.shared.logout()
+    }
+    
     deinit {
-        debugPrint("\(self) deinit")
+        ACCLogger.print(self)
     }
 }

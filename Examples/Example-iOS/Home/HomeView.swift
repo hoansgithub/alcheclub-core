@@ -15,16 +15,24 @@ struct HomeView<VM: HomeViewModelProtocol>: HomeViewProtocol {
     @StateObject var vm: VM
     @State var num: Int = 1
     var body: some View {
-        Button {
-            num += 1
-        } label: {
-            Text("num \(num)")
-        }
-
-        Text(vm.content)
-            .onAppear {
-                vm.onViewAppear()
+        VStack(content: {
+            Button {
+                num += 1
+            } label: {
+                Text("num \(num)")
             }
+
+            Text(vm.content)
+                .onAppear {
+                    vm.onViewAppear()
+                }
+            
+            Button {
+                vm.logOut()
+            } label: {
+                Text("Log out")
+            }
+        })
     }
     
     
