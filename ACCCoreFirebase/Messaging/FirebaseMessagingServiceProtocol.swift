@@ -11,4 +11,5 @@ import Combine
 import UserNotifications
 public protocol FirebaseMessagingServiceProtocol:  ServiceProtocol {
     var authStatusPublisher: AnyPublisher<UNAuthorizationStatus, Never> { get }
+    func startService() async throws -> UNAuthorizationStatus
 }
