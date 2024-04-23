@@ -31,7 +31,7 @@ public enum FirebaseRemoteConfigServiceError: Error {
 public final class FirebaseRemoteConfigService: NSObject, @unchecked Sendable, FirebaseRemoteConfigServiceProtocol, ConfigCenterProtocol {
     
     public var configSubject = CurrentValueSubject<ConfigObject?, Never>(nil)
-    public var configPublisher: AnyPublisher<ConfigObject?, Never>
+    public var configPublisher: AnyPublisher<ConfigObject, Never>
     
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
     public let statePublisher: AnyPublisher<ServiceState, Never>
@@ -54,7 +54,9 @@ public final class FirebaseRemoteConfigService: NSObject, @unchecked Sendable, F
                                      realTimeEnabled: Bool) {
         self.coreService = coreService
         self.statePublisher = stateSubject.removeDuplicates().eraseToAnyPublisher()
-        self.configPublisher = configSubject.eraseToAnyPublisher()
+        self.configPublisher = configSubject
+            .compactMap({$0})
+            .eraseToAnyPublisher()
         self.defaultPlist = defaultPlist
         self.realTimeEnabled = realTimeEnabled
         

@@ -42,8 +42,8 @@ open class ServiceProviderAppDelegate: UIResponder, UIApplicationDelegate, UIWin
             ACCLogger.print("To have the remote config observers behave as expected, you must override the property `nonisolated open var configCenter: ConfigCenterProtocol?` from ServiceProviderAppDelegate", level: .fault)
             return
         }
-        configCenter.configPublisher.sink(receiveValue: { [weak self] cfObj in
-            guard let self, let rcObj = cfObj else { return }
+        configCenter.configPublisher.sink(receiveValue: { [weak self] rcObj in
+            guard let self else { return }
             self.services.compactMap({$0 as? ConfigurableProtocol}).forEach { configurable in
                 configurable.update(with: rcObj)
             }
@@ -57,24 +57,24 @@ public extension ServiceProviderAppDelegate {
         let dispatchGroup = DispatchGroup()
         var results: [T] = []
         var returns: [S] = []
-
+        
         for service in services {
             dispatchGroup.enter()
-
+            
             let returned = work(service) { result in
                 results.append(result)
                 dispatchGroup.leave()
             }
-
+            
             if let returned = returned {
                 returns.append(returned)
             } else {
                 dispatchGroup.leave()
             }
-
+            
             if returned == nil {}
         }
-
+        
         dispatchGroup.notify(queue: .main) {
             completionHandler(results)
         }

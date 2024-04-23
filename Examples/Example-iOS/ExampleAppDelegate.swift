@@ -29,6 +29,7 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
         settings: rcSettings,
         defaultPlist: "rc_defaults",
         realTimeEnabled: true)
+    nonisolated lazy var firebaseMessagingService = FirebaseMessagingService(coreService: firebaseCoreService, authOptions: [.alert, .badge, .sound], presentationOptions: [.banner, .list, .sound, .badge])
     
     
     //overriding parent's method
@@ -44,7 +45,8 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
         return [sampleService,
                 firebaseCoreService,
                 firebaseAnalyticsService,
-                firebaseRCService]
+                firebaseRCService,
+                firebaseMessagingService]
     }
     
 }

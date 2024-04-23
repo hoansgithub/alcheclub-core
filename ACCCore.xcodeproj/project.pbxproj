@@ -16,6 +16,9 @@
 		F066D92C2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D92B2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift */; };
 		F066D9402BCFE253003F5690 /* ACCCoreFirebase.h in Headers */ = {isa = PBXBuildFile; fileRef = F066D93F2BCFE253003F5690 /* ACCCoreFirebase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F066D9452BCFE260003F5690 /* ACCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0FB210D2BA9689700ECEB56 /* ACCCore.framework */; };
+		F0704D5F2BD7B7690069F3CA /* FirebaseMessagingServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0704D5E2BD7B7690069F3CA /* FirebaseMessagingServiceProtocol.swift */; };
+		F0704D612BD7B78C0069F3CA /* FirebaseMessagingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0704D602BD7B78C0069F3CA /* FirebaseMessagingService.swift */; };
+		F0704D632BD7BA3E0069F3CA /* FirebaseMessaging.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0704D622BD7BA3E0069F3CA /* FirebaseMessaging.xcframework */; };
 		F08BCE102BD011040067DFC5 /* FirebaseCoreServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE0F2BD011040067DFC5 /* FirebaseCoreServiceProtocol.swift */; };
 		F08BCE122BD0111E0067DFC5 /* FirebaseCoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE112BD0111E0067DFC5 /* FirebaseCoreService.swift */; };
 		F08BCE182BD013110067DFC5 /* FirebaseCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F08BCE172BD013110067DFC5 /* FirebaseCore.xcframework */; };
@@ -83,6 +86,9 @@
 		F066D93D2BCFE253003F5690 /* ACCCoreFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCoreFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F066D93F2BCFE253003F5690 /* ACCCoreFirebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCoreFirebase.h; sourceTree = "<group>"; };
 		F066D94B2BCFE3CF003F5690 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
+		F0704D5E2BD7B7690069F3CA /* FirebaseMessagingServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMessagingServiceProtocol.swift; sourceTree = "<group>"; };
+		F0704D602BD7B78C0069F3CA /* FirebaseMessagingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMessagingService.swift; sourceTree = "<group>"; };
+		F0704D622BD7BA3E0069F3CA /* FirebaseMessaging.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:EQHXZ8M8AV:Google LLC"; lastKnownFileType = wrapper.xcframework; name = FirebaseMessaging.xcframework; path = Carthage/Build/FirebaseMessaging.xcframework; sourceTree = "<group>"; };
 		F08BCE0F2BD011040067DFC5 /* FirebaseCoreServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCoreServiceProtocol.swift; sourceTree = "<group>"; };
 		F08BCE112BD0111E0067DFC5 /* FirebaseCoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCoreService.swift; sourceTree = "<group>"; };
 		F08BCE172BD013110067DFC5 /* FirebaseCore.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:EQHXZ8M8AV:Google LLC"; lastKnownFileType = wrapper.xcframework; name = FirebaseCore.xcframework; path = Carthage/Build/FirebaseCore.xcframework; sourceTree = "<group>"; };
@@ -154,6 +160,7 @@
 				F08BCE5D2BD0276F0067DFC5 /* nanopb.xcframework in Frameworks */,
 				F08BCE182BD013110067DFC5 /* FirebaseCore.xcframework in Frameworks */,
 				F08BCE1C2BD015160067DFC5 /* GoogleUtilities.xcframework in Frameworks */,
+				F0704D632BD7BA3E0069F3CA /* FirebaseMessaging.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +204,7 @@
 		F066D93E2BCFE253003F5690 /* ACCCoreFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				F0704D5D2BD7B7040069F3CA /* Messaging */,
 				F08BCE792BD268070067DFC5 /* RemoteConfig */,
 				F08BCE6C2BD21ADE0067DFC5 /* Analytics */,
 				F08BCE0E2BD010E60067DFC5 /* Core */,
@@ -208,6 +216,7 @@
 		F066D9442BCFE260003F5690 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F0704D622BD7BA3E0069F3CA /* FirebaseMessaging.xcframework */,
 				F08BCE6A2BD2197C0067DFC5 /* AdSupport.framework */,
 				F08BCE5C2BD0276F0067DFC5 /* nanopb.xcframework */,
 				F08BCE582BD0274D0067DFC5 /* GoogleDataTransport.xcframework */,
@@ -228,6 +237,15 @@
 				F08BCE172BD013110067DFC5 /* FirebaseCore.xcframework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F0704D5D2BD7B7040069F3CA /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				F0704D5E2BD7B7690069F3CA /* FirebaseMessagingServiceProtocol.swift */,
+				F0704D602BD7B78C0069F3CA /* FirebaseMessagingService.swift */,
+			);
+			path = Messaging;
 			sourceTree = "<group>";
 		};
 		F08BCE0E2BD010E60067DFC5 /* Core */ = {
@@ -461,6 +479,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F08BCE7B2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift in Sources */,
+				F0704D612BD7B78C0069F3CA /* FirebaseMessagingService.swift in Sources */,
+				F0704D5F2BD7B7690069F3CA /* FirebaseMessagingServiceProtocol.swift in Sources */,
 				F08BCE6E2BD21D970067DFC5 /* FirebaseAnalyticsServiceProtocol.swift in Sources */,
 				F08BCE7D2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift in Sources */,
 				F08BCE102BD011040067DFC5 /* FirebaseCoreServiceProtocol.swift in Sources */,
