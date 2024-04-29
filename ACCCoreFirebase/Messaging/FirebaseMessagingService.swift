@@ -15,8 +15,11 @@ public enum FirebaseMessagingServiceError: Error {
 
 public final class FirebaseMessagingService: NSObject, @unchecked Sendable, FirebaseMessagingServiceProtocol {
     
+    //publishers
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
     public let statePublisher: AnyPublisher<ServiceState, Never>
+    private let tokenSubject = CurrentValueSubject<String?, Never>(nil)
+    public let tokenPublisher: AnyPublisher<String, Never>
     private let authStatusSubject = CurrentValueSubject<UNAuthorizationStatus?, Never>(nil)
     public let authStatusPublisher: AnyPublisher<UNAuthorizationStatus, Never>
     
@@ -37,28 +40,51 @@ public final class FirebaseMessagingService: NSObject, @unchecked Sendable, Fire
             .compactMap({$0})
             .removeDuplicates()
             .eraseToAnyPublisher()
+        self.tokenPublisher = tokenSubject
+            .compactMap({$0})
+            .removeDuplicates()
+            .eraseToAnyPublisher()
         super.init()
     }
     
-    public func startService() async throws -> UNAuthorizationStatus {
+    public func registerForRemoteNotifications() async throws -> Bool {
         guard let application = self.application else {
             throw FirebaseMessagingServiceError.applicationNotFound
         }
-        _ = await waitForCoreServiceAvailability()
-        _ = try await registerForRemoteNotifications(application: application)
-        return await getPermissionStatus()
+        
+        await application.registerForRemoteNotifications()
+        
+        return try await UNUserNotificationCenter.current().requestAuthorization(options: authOptions)
+    }
+    
+    public func getPermissionStatus() async -> UNAuthorizationStatus {
+        return await withCheckedContinuation { cont in
+            let current = UNUserNotificationCenter.current()
+            current.getNotificationSettings { settings in
+                cont.resume(returning: settings.authorizationStatus)
+            }
+        }
     }
 }
 
 extension FirebaseMessagingService: UIApplicationDelegate {
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         self.application = application
-        
+        Task {
+            try await startService()
+        }
         return true
     }
 }
 
 private extension FirebaseMessagingService {
+    
+    func startService() async throws {
+        UNUserNotificationCenter.current().delegate = self
+        Messaging.messaging().delegate = self
+        _ = await waitForCoreServiceAvailability()
+        stateSubject.send(.ready)
+    }
     
     func waitForCoreServiceAvailability() async {
         return await withCheckedContinuation { cont in
@@ -68,23 +94,6 @@ private extension FirebaseMessagingService {
                 .sink(receiveValue: { _ in
                     cont.resume(returning: ())
                 })
-        }
-    }
-    
-    func registerForRemoteNotifications(application: UIApplication) async throws -> Bool {
-        UNUserNotificationCenter.current().delegate = self
-        await application.registerForRemoteNotifications()
-        Messaging.messaging().delegate = self
-        return try await UNUserNotificationCenter.current().requestAuthorization(options: authOptions)
-    }
-    
-    
-    func getPermissionStatus() async -> UNAuthorizationStatus {
-        return await withCheckedContinuation { cont in
-            let current = UNUserNotificationCenter.current()
-            current.getNotificationSettings { settings in
-                cont.resume(returning: settings.authorizationStatus)
-            }
         }
     }
     
@@ -115,9 +124,10 @@ extension FirebaseMessagingService: UNUserNotificationCenterDelegate {
 extension FirebaseMessagingService: MessagingDelegate {
     
     public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        ACCLogger.print("Firebase registration token: \(String(describing: fcmToken))")
-        // TODO: If necessary send token to application server.
+        ACCLogger.print("FirebaseMessaging registration token: \(String(describing: fcmToken))")
         // Note: This callback is fired at each app startup and whenever a new token is generated.
+        // If necessary, send token to application server.
+        tokenSubject.send(fcmToken)
         broadcastPermissionStatus()
     }
     

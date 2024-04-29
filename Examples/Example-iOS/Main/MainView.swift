@@ -15,6 +15,10 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
     var body: some View {
         NavigationView(content: {
             List {
+                Button("Firebase Messaging") {
+                    vm.requestNotiPermission()
+                }.disabled(!vm.notificationPermissionNeeded)
+                
                 Button("Login") {
                     vm.login()
                 }

@@ -15,9 +15,7 @@ struct OnboardingView<VM: OnboardingViewModelProtocol>: OnboardingViewProtocol {
     var body: some View {
         TabView {
             ForEach(obManager.items) { item in
-                OnboardingItemView(item: item, lastItem: obManager.items.last == item) {
-                    vm.closeOnboarding()
-                }
+                OnboardingItemView(item: item, lastItem: obManager.items.last == item, vm: vm)
             }
         }
         .tabViewStyle(.page)
@@ -26,22 +24,19 @@ struct OnboardingView<VM: OnboardingViewModelProtocol>: OnboardingViewProtocol {
 }
 
 struct OnboardingItemView: View {
-    var item: OnboardingItem
-    var lastItem: Bool
-    var handler: (() -> Void)?
+    let item: OnboardingItem
+    let lastItem: Bool
+    let vm: any OnboardingViewModelProtocol
     var body: some View {
         VStack(content: {
             Text(item.text)
             if lastItem {
                 Button {
-                      handler?()
+                    vm.closeOnboarding()
                 } label: {
                     Text("GO ->>>")
                 }
             }
         })
-        
-        
-
     }
 }
