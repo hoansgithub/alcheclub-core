@@ -14,7 +14,6 @@ public enum FirebaseMessagingServiceError: Error {
 }
 
 public final class FirebaseMessagingService: NSObject, @unchecked Sendable, FirebaseMessagingServiceProtocol {
-    
     //publishers
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
     public let statePublisher: AnyPublisher<ServiceState, Never>
@@ -22,7 +21,10 @@ public final class FirebaseMessagingService: NSObject, @unchecked Sendable, Fire
     public let tokenPublisher: AnyPublisher<String, Never>
     private let authStatusSubject = CurrentValueSubject<UNAuthorizationStatus?, Never>(nil)
     public let authStatusPublisher: AnyPublisher<UNAuthorizationStatus, Never>
+    private let responseUserInfoSubject = CurrentValueSubject<[AnyHashable : Any]?, Never>(nil)
+    public let responseUserInfoPublisher: AnyPublisher<[AnyHashable : Any], Never>
     
+    //private properties
     private weak var application: UIApplication?
     private var coreService: FirebaseCoreServiceProtocol
     private var cancellables: Set<AnyCancellable> = []
@@ -43,6 +45,9 @@ public final class FirebaseMessagingService: NSObject, @unchecked Sendable, Fire
         self.tokenPublisher = tokenSubject
             .compactMap({$0})
             .removeDuplicates()
+            .eraseToAnyPublisher()
+        self.responseUserInfoPublisher = responseUserInfoSubject
+            .compactMap({$0})
             .eraseToAnyPublisher()
         super.init()
     }
@@ -74,6 +79,10 @@ extension FirebaseMessagingService: UIApplicationDelegate {
             try await startService()
         }
         return true
+    }
+    
+    public func applicationDidBecomeActive(_ application: UIApplication) {
+        
     }
 }
 
@@ -112,6 +121,7 @@ extension FirebaseMessagingService: UNUserNotificationCenterDelegate {
     }
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        ACCLogger.print(response.notification.request.content.userInfo)
         completionHandler()
     }
     

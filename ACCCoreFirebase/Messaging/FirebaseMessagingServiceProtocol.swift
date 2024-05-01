@@ -13,6 +13,8 @@ import UIKit
 public protocol FirebaseMessagingServiceProtocol:  ServiceProtocol {
     var authStatusPublisher: AnyPublisher<UNAuthorizationStatus, Never> { get }
     var tokenPublisher: AnyPublisher<String, Never> { get }
+    var responseUserInfoPublisher: AnyPublisher<[AnyHashable: Any], Never> { get }
     func registerForRemoteNotifications() async throws -> Bool
     func getPermissionStatus() async -> UNAuthorizationStatus
+    
 }
