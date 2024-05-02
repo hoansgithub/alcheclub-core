@@ -15,6 +15,14 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
     var body: some View {
         NavigationView(content: {
             List {
+                NavigationLink(destination: NavigationLinkPresenter({
+                    AdsView(vm: AdsViewModel(serviceProvider: vm.serviceProvider))
+                        .navigationTitle("Ads")
+                        .navigationBarTitleDisplayMode(.large)
+                })) {
+                    Text("ADS")
+                }
+                
                 Button("Firebase Messaging") {
                     vm.requestNotiPermission()
                 }.disabled(!vm.notificationPermissionNeeded)
@@ -41,5 +49,6 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
                 
             }
         })
+        
     }
 }

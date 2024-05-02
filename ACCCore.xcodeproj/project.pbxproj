@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F01573852BE3AE7400FDA7D0 /* ATTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573842BE3AE7400FDA7D0 /* ATTServiceProtocol.swift */; };
+		F01573872BE3AE7E00FDA7D0 /* ATTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573862BE3AE7E00FDA7D0 /* ATTService.swift */; };
 		F05C23102BE20257003DEC6D /* ACCCoreUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = F05C230F2BE20257003DEC6D /* ACCCoreUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F05C23142BE202EC003DEC6D /* URLSession+nonisolated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9202BCFAE8B003F5690 /* URLSession+nonisolated.swift */; };
 		F05C23152BE202EC003DEC6D /* AnyPublisher+Sendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9212BCFAE8B003F5690 /* AnyPublisher+Sendable.swift */; };
@@ -86,6 +88,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F01573842BE3AE7400FDA7D0 /* ATTServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTServiceProtocol.swift; sourceTree = "<group>"; };
+		F01573862BE3AE7E00FDA7D0 /* ATTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTService.swift; sourceTree = "<group>"; };
 		F05C230D2BE20257003DEC6D /* ACCCoreUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCoreUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F05C230F2BE20257003DEC6D /* ACCCoreUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCoreUtilities.h; sourceTree = "<group>"; };
 		F05C23212BE20660003DEC6D /* UserDefaults+DefaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+DefaultValue.swift"; sourceTree = "<group>"; };
@@ -195,6 +199,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F01573832BE3AE4300FDA7D0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F01573842BE3AE7400FDA7D0 /* ATTServiceProtocol.swift */,
+				F01573862BE3AE7E00FDA7D0 /* ATTService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		F05C230E2BE20257003DEC6D /* ACCCoreUtilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,6 +363,7 @@
 				F066D94B2BCFE3CF003F5690 /* Cartfile */,
 				F066D91E2BCFAE5F003F5690 /* Utilities */,
 				F0FB21632BA9850500ECEB56 /* Blueprints */,
+				F01573832BE3AE4300FDA7D0 /* Services */,
 				F0FB21102BA9689700ECEB56 /* ACCCore.h */,
 			);
 			path = ACCCore;
@@ -590,11 +604,13 @@
 				F0FB217C2BA9887000ECEB56 /* ServiceProviderAppDelegate+AppStateRestoration.swift in Sources */,
 				F0FB217A2BA9887000ECEB56 /* ServiceProviderAppDelegate+RemoteNotification.swift in Sources */,
 				F0FB21792BA9887000ECEB56 /* ServiceProviderAppDelegate+SceneStateHandling.swift in Sources */,
+				F01573872BE3AE7E00FDA7D0 /* ATTService.swift in Sources */,
 				F0FB217B2BA9887000ECEB56 /* ServiceProviderAppDelegate+HealthKitInteracting.swift in Sources */,
 				F066D92A2BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift in Sources */,
 				F0FB217D2BA9887000ECEB56 /* ServiceProviderAppDelegate+AppStateAndSystemEvents.swift in Sources */,
 				F066D91D2BCFA5E1003F5690 /* ServiceState.swift in Sources */,
 				F0FB21662BA9853300ECEB56 /* ServiceProviderProtocol.swift in Sources */,
+				F01573852BE3AE7400FDA7D0 /* ATTServiceProtocol.swift in Sources */,
 				F066D9282BCFBB85003F5690 /* AnalyticsEvent.swift in Sources */,
 				F0FB21812BA9887000ECEB56 /* ServiceProviderAppDelegate+AppInitializing.swift in Sources */,
 				F0FB21832BA9887000ECEB56 /* ServiceProviderAppDelegate+SiriKitHandling.swift in Sources */,

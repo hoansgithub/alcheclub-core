@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F015737D2BE3A09800FDA7D0 /* AdsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015737C2BE3A09800FDA7D0 /* AdsViewModel.swift */; };
+		F015737F2BE3A0A400FDA7D0 /* AdsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015737E2BE3A0A400FDA7D0 /* AdsView.swift */; };
+		F01573822BE3A82500FDA7D0 /* NavigationLinkPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573812BE3A82500FDA7D0 /* NavigationLinkPresenter.swift */; };
 		F05C231E2BE20548003DEC6D /* ACCCoreUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */; };
 		F05C231F2BE20548003DEC6D /* ACCCoreUtilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F066D9352BCFC050003F5690 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9342BCFC050003F5690 /* MainViewModel.swift */; };
@@ -54,6 +57,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F015737C2BE3A09800FDA7D0 /* AdsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsViewModel.swift; sourceTree = "<group>"; };
+		F015737E2BE3A0A400FDA7D0 /* AdsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsView.swift; sourceTree = "<group>"; };
+		F01573812BE3A82500FDA7D0 /* NavigationLinkPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLinkPresenter.swift; sourceTree = "<group>"; };
 		F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCoreUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F066D92E2BCFBED7003F5690 /* ACCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F066D9342BCFC050003F5690 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -98,6 +104,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F015737B2BE3A08700FDA7D0 /* Ads */ = {
+			isa = PBXGroup;
+			children = (
+				F015737C2BE3A09800FDA7D0 /* AdsViewModel.swift */,
+				F015737E2BE3A0A400FDA7D0 /* AdsView.swift */,
+			);
+			path = Ads;
+			sourceTree = "<group>";
+		};
+		F01573802BE3A7FC00FDA7D0 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				F01573812BE3A82500FDA7D0 /* NavigationLinkPresenter.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		F066D92D2BCFBED7003F5690 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +197,8 @@
 		F0FB21562BA977E700ECEB56 /* Example-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				F01573802BE3A7FC00FDA7D0 /* Utilities */,
+				F015737B2BE3A08700FDA7D0 /* Ads */,
 				F0704D662BD7C8540069F3CA /* Example-iOSDebug.entitlements */,
 				F0704D5A2BD79BCE0069F3CA /* Info.plist */,
 				F0704D552BD78B7A0069F3CA /* Flash */,
@@ -305,12 +330,15 @@
 				F0B2E7932BCE7A32004BA72A /* ExampleAppDelegate.swift in Sources */,
 				F0B2E79F2BCE7E4A004BA72A /* SampleService.swift in Sources */,
 				F0704D4E2BD78B310069F3CA /* ContainerViewModel.swift in Sources */,
+				F015737F2BE3A0A400FDA7D0 /* AdsView.swift in Sources */,
 				F0704D542BD78B5B0069F3CA /* OnboardingView.swift in Sources */,
 				F0FB21582BA977E700ECEB56 /* Example_iOSApp.swift in Sources */,
 				F066D9372BCFC05C003F5690 /* MainView.swift in Sources */,
+				F015737D2BE3A09800FDA7D0 /* AdsViewModel.swift in Sources */,
 				F0704D5C2BD7A0DE0069F3CA /* OnboardingManager.swift in Sources */,
 				F0704D522BD78B510069F3CA /* OnboardingViewModel.swift in Sources */,
 				F0B2E79D2BCE7E41004BA72A /* SampleServiceProtocol.swift in Sources */,
+				F01573822BE3A82500FDA7D0 /* NavigationLinkPresenter.swift in Sources */,
 				F0704D4A2BD7769C0069F3CA /* AppSession.swift in Sources */,
 				F0704D572BD78B8A0069F3CA /* SplashViewModel.swift in Sources */,
 				F0B2E7952BCE7A8F004BA72A /* BaseViewModel.swift in Sources */,
