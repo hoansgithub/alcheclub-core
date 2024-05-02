@@ -35,7 +35,9 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
                 Button("CRASH") {
                     fatalError("Crash was triggered")
                 }
-                
+                Spacer()
+                Text(vm.notiUserInfo["test_data"] as? String ?? "")
+                Text("APN Token " + vm.notiToken)
                 
             }
         })

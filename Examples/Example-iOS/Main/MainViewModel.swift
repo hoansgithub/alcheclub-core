@@ -16,12 +16,16 @@ protocol MainViewModelProtocol: BaseViewModelProtocol {
     func goToOnboarding()
     
     var notificationPermissionNeeded: Bool { get set }
+    var notiUserInfo: [AnyHashable: Any] { get }
+    var notiToken: String { get }
     func requestNotiPermission()
 }
 
 class MainViewModel: @unchecked Sendable, MainViewModelProtocol {
     var serviceProvider: ServiceProviderAppDelegate
     @Published var notificationPermissionNeeded: Bool = true
+    @Published var notiUserInfo: [AnyHashable: Any] = [:]
+    @Published var notiToken: String = ""
     
     private var cancellables = Set<AnyCancellable>()
     private var firebaseMessageService: FirebaseMessagingServiceProtocol?
@@ -74,9 +78,19 @@ class MainViewModel: @unchecked Sendable, MainViewModelProtocol {
 extension MainViewModel {
     func registerObservers() {
         firebaseMessageService?.authStatusPublisher
-            .receive(on: DispatchQueue.main)
+            .receive(on: RunLoop.main)
             .sink(receiveValue: {[weak self] status in
                 self?.notificationPermissionNeeded = status != .authorized
+            }).store(in: &cancellables)
+        
+        firebaseMessageService?.responseUserInfoPublisher
+            .sink(receiveValue: {[weak self] val in
+                self?.notiUserInfo = val
+            }).store(in: &cancellables)
+        
+        firebaseMessageService?.tokenPublisher
+            .sink(receiveValue: {[weak self] val in
+                self?.notiToken = val
             }).store(in: &cancellables)
     }
 }

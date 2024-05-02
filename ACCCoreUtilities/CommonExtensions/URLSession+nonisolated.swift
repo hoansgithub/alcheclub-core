@@ -1,6 +1,6 @@
 //
 //  URLSession+nonisolated.swift
-//  ACCCore
+//  ACCCoreUtilities
 //
 //  Created by HoanNL on 17/04/2024.
 //

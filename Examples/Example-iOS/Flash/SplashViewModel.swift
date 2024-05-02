@@ -34,8 +34,13 @@ class SplashViewModel: SplashViewModelProtocol {
 
 private extension SplashViewModel {
     func registerEventObserver() {
-        firRCService?.statePublisher.filter({$0 == .ready}).prefix(1).timeout(.seconds(5), scheduler: DispatchQueue.main).sink(receiveValue: { state in
-            AppSession.shared.configurateState()
+        firRCService?.statePublisher
+            .filter({$0 == .ready})
+            .prefix(1)
+            .timeout(.seconds(10), scheduler: RunLoop.main)
+            .replaceError(with: .ready)
+            .sink(receiveValue: { state in
+                AppSession.shared.configurateState()
         }).store(in: &cancellables)
     }
 }

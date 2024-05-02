@@ -13,7 +13,6 @@
 		F05C231C2BE204C8003DEC6D /* ACCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9242BCFAEC6003F5690 /* ACCLogger.swift */; };
 		F05C23222BE20660003DEC6D /* UserDefaults+DefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C23212BE20660003DEC6D /* UserDefaults+DefaultValue.swift */; };
 		F05C23232BE20AE7003DEC6D /* ACCCoreUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05C230D2BE20257003DEC6D /* ACCCoreUtilities.framework */; };
-		F05C23242BE20AE7003DEC6D /* ACCCoreUtilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F05C230D2BE20257003DEC6D /* ACCCoreUtilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F066D91D2BCFA5E1003F5690 /* ServiceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D91C2BCFA5E1003F5690 /* ServiceState.swift */; };
 		F066D9282BCFBB85003F5690 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9272BCFBB85003F5690 /* AnalyticsEvent.swift */; };
 		F066D92A2BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9292BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift */; };
@@ -85,20 +84,6 @@
 			remoteInfo = ACCCore;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		F05C23272BE20AE7003DEC6D /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				F05C23242BE20AE7003DEC6D /* ACCCoreUtilities.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F05C230D2BE20257003DEC6D /* ACCCoreUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCoreUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -469,7 +454,6 @@
 				F066D9392BCFE253003F5690 /* Sources */,
 				F066D93A2BCFE253003F5690 /* Frameworks */,
 				F066D93B2BCFE253003F5690 /* Resources */,
-				F05C23272BE20AE7003DEC6D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

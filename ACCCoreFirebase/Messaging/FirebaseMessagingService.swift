@@ -8,6 +8,7 @@
 import ACCCore
 import Combine
 import FirebaseMessaging
+import ACCCoreUtilities
 
 public enum FirebaseMessagingServiceError: Error {
     case applicationNotFound
@@ -24,7 +25,11 @@ public final class FirebaseMessagingService: NSObject, @unchecked Sendable, Fire
     private let responseUserInfoSubject = CurrentValueSubject<[AnyHashable : Any]?, Never>(nil)
     public let responseUserInfoPublisher: AnyPublisher<[AnyHashable : Any], Never>
     
+    
     //private properties
+    @UserDefaultProp(key: (Bundle.main.bundleIdentifier ?? "") + "FirebaseMessagingService.userInfo",
+                     defaultValue: nil)
+    var userInfo: [AnyHashable : Any]?
     private weak var application: UIApplication?
     private var coreService: FirebaseCoreServiceProtocol
     private var cancellables: Set<AnyCancellable> = []
@@ -80,13 +85,17 @@ extension FirebaseMessagingService: UIApplicationDelegate {
         }
         return true
     }
-    
-    public func applicationDidBecomeActive(_ application: UIApplication) {
-        
-    }
+
 }
 
 private extension FirebaseMessagingService {
+    
+    func broadcastUserInfo() {
+        if let info = userInfo {
+            responseUserInfoSubject.send(info)
+            userInfo = nil
+        }
+    }
     
     func startService() async throws {
         UNUserNotificationCenter.current().delegate = self
@@ -121,7 +130,8 @@ extension FirebaseMessagingService: UNUserNotificationCenterDelegate {
     }
     
     public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        ACCLogger.print(response.notification.request.content.userInfo)
+        userInfo = response.notification.request.content.userInfo
+        broadcastUserInfo()
         completionHandler()
     }
     

@@ -22,7 +22,7 @@ struct ContainerView<VM: ContainerViewModelProtocol>: ContainerViewProtocol {
             case .authenticated:
                 HomeView(vm: HomeViewModel(serviceProvider: vm.serviceProvider)).transition(.move(edge: .leading))
             case .unauthenticated:
-                MainView(vm: MainViewModel(serviceProvider: vm.serviceProvider)).transition(.move(edge: .bottom))
+                MainView(vm: MainViewModel(serviceProvider: vm.serviceProvider)).transition(.move(edge: .leading))
             default:
                 SplashView(vm: SplashViewModel(serviceProvider: vm.serviceProvider)).transition(.move(edge: .bottom))
             }
