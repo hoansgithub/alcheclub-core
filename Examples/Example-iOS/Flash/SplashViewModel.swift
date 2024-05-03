@@ -17,7 +17,7 @@ class SplashViewModel: SplashViewModelProtocol {
     var serviceProvider: ServiceProviderAppDelegate
     var firRCService: FirebaseRemoteConfigServiceProtocol?
     
-    private var cancellables = Set<AnyCancellable>()
+    private var stateCancellable: AnyCancellable?
     init(serviceProvider: ServiceProviderAppDelegate) {
         self.serviceProvider = serviceProvider
         self.firRCService = serviceProvider.getService(FirebaseRemoteConfigServiceProtocol.self)
@@ -25,6 +25,9 @@ class SplashViewModel: SplashViewModelProtocol {
     
     func onViewAppear() {
         registerEventObserver()
+        Task {
+            await ATTService.shared.requestTrackingAuthorization()
+        }
     }
     
     deinit {
@@ -34,13 +37,21 @@ class SplashViewModel: SplashViewModelProtocol {
 
 private extension SplashViewModel {
     func registerEventObserver() {
-        firRCService?.statePublisher
+        stateCancellable?.cancel()
+        let attStatePublisher = ATTService.shared.statePublisher
             .filter({$0 == .ready})
             .prefix(1)
-            .timeout(.seconds(10), scheduler: RunLoop.main)
-            .replaceError(with: .ready)
-            .sink(receiveValue: { state in
-                AppSession.shared.configurateState()
-        }).store(in: &cancellables)
+        if let rcStatePublisher = firRCService?.statePublisher
+            .filter({$0 == .ready})
+            .prefix(1) {
+            stateCancellable = Publishers.CombineLatest(attStatePublisher, rcStatePublisher)
+                .receive(on: RunLoop.main)
+                .sink { (stt) in
+                    AppSession.shared.configurateState()
+                }
+        } else {
+            AppSession.shared.configurateState()
+        }
+        
     }
 }

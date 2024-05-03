@@ -42,7 +42,8 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
     }
     
     override var services: [ServiceProtocol] {
-        return [sampleService,
+        return [ATTService.shared,
+                sampleService,
                 firebaseCoreService,
                 firebaseAnalyticsService,
                 firebaseRCService,

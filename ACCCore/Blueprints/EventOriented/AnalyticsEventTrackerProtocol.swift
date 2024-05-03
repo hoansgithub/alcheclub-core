@@ -14,11 +14,13 @@ public extension AnalyticsEventTrackerProtocol {
     func track(event: AnalyticsEvent) {
         analyticsPlatforms.forEach { platform in
             guard platform.canTrack else { return }
-#if !DEBUG
-            platform.track(event: event)
-#else
-            ACCLogger.print("\(platform.id) \(event)", level: .info)
-#endif
+            
+            if !AppEnvironment.shared.isSimulator() {
+                platform.track(event: event)
+            } else {
+                ACCLogger.print("\(platform.id) \(event)", level: .info)
+            }
+            
         }
     }
 }
