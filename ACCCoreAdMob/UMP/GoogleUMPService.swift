@@ -53,6 +53,9 @@ public final class GoogleUMPService: NSObject,@unchecked Sendable , GoogleUMPSer
     public var isPrivacyOptionsRequired: Bool {
         UMPConsentInformation.sharedInstance.privacyOptionsRequirementStatus == .required
     }
+    
+    
+    private var serviceStateCancellable: AnyCancellable?
     public required init(parameters: UMPRequestParameters = GoogleUMPService.defaultRequestParams,
                          debugSettings: UMPDebugSettings = GoogleUMPService.defaultDebugSettings) {
         self.isPrivacyOptionsRequiredPublisher = isPrivacyOptionsRequiredSubject
@@ -73,22 +76,53 @@ public final class GoogleUMPService: NSObject,@unchecked Sendable , GoogleUMPSer
 
 extension GoogleUMPService {
     public func presentConsentFormIfRequired(from controller: UIViewController) async throws {
-        switch UMPConsentInformation.sharedInstance.consentStatus {
-        case .required, .unknown:
-            break
-        case .notRequired: throw GoogleUMPServiceError.consentNotRequired
-        case .obtained: throw GoogleUMPServiceError.consentObtained
-        default: throw GoogleUMPServiceError.consentStatusUnknown
+        
+        serviceStateCancellable?.cancel()
+        
+        
+        
+        @MainActor @Sendable func asyncCheck() async throws {
+            switch UMPConsentInformation.sharedInstance.consentStatus {
+            case .required, .unknown:
+                break
+            case .notRequired: throw GoogleUMPServiceError.consentNotRequired
+            case .obtained: throw GoogleUMPServiceError.consentObtained
+            default: throw GoogleUMPServiceError.consentStatusUnknown
+            }
+            try await UMPConsentForm.loadAndPresentIfRequired(from: controller)
+            isPrivacyOptionsRequiredSubject.send(isPrivacyOptionsRequired)
+            canRequestAdsSubject.send(canRequestAds)
         }
-        try await UMPConsentForm.loadAndPresentIfRequired(from: controller)
-        isPrivacyOptionsRequiredSubject.send(isPrivacyOptionsRequired)
-        canRequestAdsSubject.send(canRequestAds)
+        
+        return try await withCheckedThrowingContinuation { cont in
+            serviceStateCancellable = stateSubject
+                .filter({$0 == .ready})
+                .prefix(1)
+                .sink { _ in
+                    Task {
+                        do {
+                            try await asyncCheck()
+                            cont.resume()
+                        } catch {
+                            cont.resume(throwing: error)
+                        }
+                    }
+                }
+        }
     }
     
-    public func presentPrivacyOptionsForm(from controller: UIViewController) async throws {
+    @MainActor public func presentPrivacyOptionsForm(from controller: UIViewController) async throws {
         try await UMPConsentForm.presentPrivacyOptionsForm(from: controller)
         canRequestAdsSubject.send(canRequestAds)
     }
+    
+    #if DEBUG
+    public func reset() {
+        UMPConsentInformation.sharedInstance.reset()
+        isPrivacyOptionsRequiredSubject.send(isPrivacyOptionsRequired)
+        canRequestAdsSubject.send(canRequestAds)
+    }
+    #endif
 }
 
 
@@ -104,17 +138,13 @@ private extension GoogleUMPService {
     func startPlugin() {
         Task {
             do {
-                try await requestConsentInfoUpdate(with: requestParams)
+                try await UMPConsentInformation.sharedInstance.requestConsentInfoUpdate(with: requestParams)
             } catch {
                 ACCLogger.print(error.localizedDescription, level: .error)
             }
             isPrivacyOptionsRequiredSubject.send(isPrivacyOptionsRequired)
             canRequestAdsSubject.send(canRequestAds)
+            stateSubject.send(.ready)
         }
-    }
-    
-    func requestConsentInfoUpdate(with params: UMPRequestParameters) async throws {
-        // Request an update for the consent information.
-        try await UMPConsentInformation.sharedInstance.requestConsentInfoUpdate(with: params)
     }
 }

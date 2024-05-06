@@ -15,4 +15,7 @@ public protocol GoogleUMPServiceProtocol: ServiceProtocol {
     var canRequestAdsPublisher: AnyPublisher<Bool, Never> { get }
     func presentConsentFormIfRequired(from controller: UIViewController) async throws
     func presentPrivacyOptionsForm(from controller: UIViewController) async throws
+    #if DEBUG
+    func reset()
+    #endif
 }

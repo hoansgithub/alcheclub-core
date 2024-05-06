@@ -8,26 +8,39 @@
 import Foundation
 import ACCCore
 import ACCCoreFirebase
+import ACCCoreAdMob
 import Combine
+import UIKit
 protocol SplashViewModelProtocol: BaseViewModelProtocol {
-    func onViewAppear()
+    func onViewAppear() async
+    func presentConsentFormIfRequired(vc: UIViewController) async
 }
 
-class SplashViewModel: SplashViewModelProtocol {
+class SplashViewModel: @unchecked Sendable, SplashViewModelProtocol {
     var serviceProvider: ServiceProviderAppDelegate
     var firRCService: FirebaseRemoteConfigServiceProtocol?
+    var umpService: GoogleUMPServiceProtocol?
+    @MainActor var fullScreenController = UIViewController()
     
     private var stateCancellable: AnyCancellable?
     init(serviceProvider: ServiceProviderAppDelegate) {
         self.serviceProvider = serviceProvider
         self.firRCService = serviceProvider.getService(FirebaseRemoteConfigServiceProtocol.self)
+        self.umpService = serviceProvider.getService(GoogleUMPServiceProtocol.self)
     }
     
-    func onViewAppear() {
-        registerEventObserver()
-        Task {
-            await ATTService.shared.requestTrackingAuthorization()
+    func presentConsentFormIfRequired(vc: UIViewController) async {
+        do {
+            try await umpService?.presentConsentFormIfRequired(from: vc)
+        } catch {
+            ACCLogger.print(error.localizedDescription, level: .error)
         }
+        
+    }
+    
+    func onViewAppear() async {
+        registerEventObserver()
+        _ = await ATTService.shared.requestTrackingAuthorization()
     }
     
     deinit {

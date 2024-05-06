@@ -10,6 +10,8 @@ import ACCCore
 import ACCCoreFirebase
 import FirebaseCore
 import FirebaseRemoteConfig
+import ACCCoreAdMob
+import UserMessagingPlatform
 class ExampleAppDelegate: ServiceProviderAppDelegate {
     override init() {
         super.init()
@@ -31,6 +33,15 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
         realTimeEnabled: true)
     nonisolated lazy var firebaseMessagingService = FirebaseMessagingService(coreService: firebaseCoreService, authOptions: [.alert, .badge, .sound], presentationOptions: [.banner, .list, .sound, .badge])
     
+    //ads
+    nonisolated lazy var umpDebugSettings = {
+        let debugSettings = UMPDebugSettings()
+        debugSettings.geography = UMPDebugGeography.EEA
+        debugSettings.testDeviceIdentifiers = ["C42F63AF-6086-4631-910B-B4AB8BB32DC0"]
+        return debugSettings
+    }()
+    nonisolated lazy var umpService = GoogleUMPService(debugSettings: umpDebugSettings)
+    
     
     //overriding parent's method
     override var analyticsPlatforms: [any AnalyticsPlatformProtocol] {
@@ -47,7 +58,8 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
                 firebaseCoreService,
                 firebaseAnalyticsService,
                 firebaseRCService,
-                firebaseMessagingService]
+                firebaseMessagingService,
+                umpService]
     }
     
 }
