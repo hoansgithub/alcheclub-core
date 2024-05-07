@@ -24,13 +24,11 @@ class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
     @Published var isPrivacyOptionsRequired = false
     @Published var canRequestAds: Bool = false
     
-    var serviceProvider: ServiceProviderAppDelegate
     var umpService: GoogleUMPServiceProtocol?
     var cancellables = Set<AnyCancellable>()
-    init(serviceProvider: ServiceProviderAppDelegate) {
-        self.serviceProvider = serviceProvider
-        self.umpService = serviceProvider.getService(GoogleUMPServiceProtocol.self)
-        registerPublishers()
+    init() {
+        self.umpService = ACCApp.getService(GoogleUMPServiceProtocol.self)
+        self.registerPublishers()
     }
     
     deinit {

@@ -17,16 +17,14 @@ protocol SplashViewModelProtocol: BaseViewModelProtocol {
 }
 
 class SplashViewModel: @unchecked Sendable, SplashViewModelProtocol {
-    var serviceProvider: ServiceProviderAppDelegate
     var firRCService: FirebaseRemoteConfigServiceProtocol?
     var umpService: GoogleUMPServiceProtocol?
     @MainActor var fullScreenController = UIViewController()
     
     private var stateCancellable: AnyCancellable?
-    init(serviceProvider: ServiceProviderAppDelegate) {
-        self.serviceProvider = serviceProvider
-        self.firRCService = serviceProvider.getService(FirebaseRemoteConfigServiceProtocol.self)
-        self.umpService = serviceProvider.getService(GoogleUMPServiceProtocol.self)
+    init() {
+        self.firRCService = ACCApp.getService(FirebaseRemoteConfigServiceProtocol.self)
+        self.umpService = ACCApp.getService(GoogleUMPServiceProtocol.self)
     }
     
     func presentConsentFormIfRequired(vc: UIViewController) async {

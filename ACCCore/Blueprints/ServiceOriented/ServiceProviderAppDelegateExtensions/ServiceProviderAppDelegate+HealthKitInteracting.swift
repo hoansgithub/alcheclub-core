@@ -8,10 +8,10 @@
 import UIKit
 
 extension ServiceProviderAppDelegate {
-
+    
     @available(iOS 9.0, *)
     open func applicationShouldRequestHealthAuthorization(_ application: UIApplication) {
-        services.compactMap({$0 as? UIApplicationDelegate}).forEach { service in
+        ACCApp.mapServices({$0 as? UIApplicationDelegate}).forEach { service in
             service.applicationShouldRequestHealthAuthorization?(application)
         }
     }

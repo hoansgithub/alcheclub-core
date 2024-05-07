@@ -17,9 +17,10 @@ public extension AnalyticsEventTrackerProtocol {
             
             if !AppEnvironment.shared.isSimulator() {
                 platform.track(event: event)
-            } else {
-                ACCLogger.print("\(platform.id) \(event)", level: .info)
             }
+#if DEBUG
+            ACCLogger.print("\(platform.id) \(event)", level: .info)
+#endif
             
         }
     }

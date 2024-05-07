@@ -7,5 +7,6 @@
 
 import Foundation
 public protocol ServiceProviderProtocol: AnyObject {
-    //func getService<S>(_ type: S.Type) -> S?
+    static func getService<S>(_ type: S.Type) -> S?
+    static func mapServices<E>(_ transform: (ServiceProtocol) -> E?) -> [E]
 }

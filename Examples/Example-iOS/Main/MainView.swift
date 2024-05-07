@@ -16,7 +16,7 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
         NavigationView(content: {
             List {
                 NavigationLink(destination: NavigationLinkPresenter({
-                    AdsView(vm: AdsViewModel(serviceProvider: vm.serviceProvider))
+                    AdsView(vm: AdsViewModel())
                         .navigationTitle("Ads")
                         .navigationBarTitleDisplayMode(.large)
                 })) {
@@ -32,7 +32,7 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
                 }
                 
                 Button("Track Event") {
-                    vm.track(event: AnalyticsEvent("test_event_name", params: ["test_param_key" : "test_param_value"]))
+                    vm.track(event: AnalyticsEvent("test_event_name", params: ["value" : "test_param_value"]))
                 }
                 
                 Button("Onboarding") {

@@ -22,21 +22,19 @@ protocol MainViewModelProtocol: BaseViewModelProtocol {
 }
 
 class MainViewModel: @unchecked Sendable, MainViewModelProtocol {
-    var serviceProvider: ServiceProviderAppDelegate
     @Published var notificationPermissionNeeded: Bool = true
     @Published var notiUserInfo: [AnyHashable: Any] = [:]
     @Published var notiToken: String = ""
     
     private var cancellables = Set<AnyCancellable>()
     private var firebaseMessageService: FirebaseMessagingServiceProtocol?
-    init(serviceProvider: ServiceProviderAppDelegate) {
-        self.serviceProvider = serviceProvider
-        self.firebaseMessageService = serviceProvider.getService(FirebaseMessagingServiceProtocol.self)
+    init() {
+        self.firebaseMessageService = ACCApp.getService(FirebaseMessagingServiceProtocol.self)
         registerObservers()
     }
     
     func track(event: AnalyticsEvent) {
-        serviceProvider.track(event: event)
+        ACCApp.track(event: event)
     }
     
     func login() {

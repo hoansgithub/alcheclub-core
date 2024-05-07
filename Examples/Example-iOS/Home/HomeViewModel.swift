@@ -19,14 +19,12 @@ class HomeViewModel: @unchecked Sendable, HomeViewModelProtocol {
     @Published var loading = false
     
     
-    var serviceProvider: ServiceProviderAppDelegate
     var sampleService: SampleServiceProtocol?
     private var cancellables = Set<AnyCancellable>()
     
-    init(serviceProvider: ServiceProviderAppDelegate) {
-        self.serviceProvider = serviceProvider
-        self.sampleService =  serviceProvider.getService(SampleServiceProtocol.self)
-        registerObservers()
+    init() {
+        self.sampleService =  ACCApp.getService(SampleServiceProtocol.self)
+        self.registerObservers()
     }
     
     func registerObservers() {
@@ -36,7 +34,7 @@ class HomeViewModel: @unchecked Sendable, HomeViewModelProtocol {
     }
     
     func onViewAppear() {
-       
+        
     }
     
     func logOut() {

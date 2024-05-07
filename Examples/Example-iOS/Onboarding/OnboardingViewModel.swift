@@ -11,9 +11,7 @@ protocol OnboardingViewModelProtocol: BaseViewModelProtocol {
 }
 
 class OnboardingViewModel: OnboardingViewModelProtocol {
-    var serviceProvider: ServiceProviderAppDelegate
-    init(serviceProvider: ServiceProviderAppDelegate) {
-        self.serviceProvider = serviceProvider
+    init() {
     }
     
     func closeOnboarding() {

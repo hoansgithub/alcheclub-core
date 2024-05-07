@@ -18,13 +18,13 @@ struct ContainerView<VM: ContainerViewModelProtocol>: ContainerViewProtocol {
         ZStack(content: {
             switch appSession.appState {
             case .onboarding:
-                OnboardingView(vm: OnboardingViewModel(serviceProvider: vm.serviceProvider)).transition(.move(edge: .leading))
+                OnboardingView(vm: OnboardingViewModel()).transition(.move(edge: .leading))
             case .authenticated:
-                HomeView(vm: HomeViewModel(serviceProvider: vm.serviceProvider)).transition(.move(edge: .leading))
+                HomeView(vm: HomeViewModel()).transition(.move(edge: .leading))
             case .unauthenticated:
-                MainView(vm: MainViewModel(serviceProvider: vm.serviceProvider)).transition(.move(edge: .leading))
+                MainView(vm: MainViewModel()).transition(.move(edge: .leading))
             default:
-                SplashView(vm: SplashViewModel(serviceProvider: vm.serviceProvider)).transition(.move(edge: .bottom))
+                SplashView(vm: SplashViewModel()).transition(.move(edge: .bottom))
             }
         }).animation(.default, value: appSession.appState)
     }
