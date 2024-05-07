@@ -34,7 +34,6 @@ open class ServiceProviderAppDelegate: UIResponder, UIApplicationDelegate, UIWin
     
     public override init() {
         super.init()
-        registerConfigCenter(configCenter)
     }
     
     open func registerConfigCenter(_ center: ConfigCenterProtocol?) {
@@ -48,6 +47,18 @@ open class ServiceProviderAppDelegate: UIResponder, UIApplicationDelegate, UIWin
                 configurable.update(with: rcObj)
             }
         }).store(in: &cancellables)
+    }
+    
+    open func registerServiceEventListener() {
+        self.services.compactMap({$0 as? TrackableServiceProtocol}).forEach { [weak self] service in
+            service.eventDelegate = self
+        }
+    }
+}
+
+extension ServiceProviderAppDelegate: TrackableServiceDelegate {
+    nonisolated public func trackableService(_ service: ServiceProtocol, didSend event: AnalyticsEvent) {
+        track(event: event)
     }
 }
 

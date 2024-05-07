@@ -17,6 +17,10 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
         super.init()
     }
     
+    deinit {
+        ACCLogger.print(self)
+    }
+    
     nonisolated var rcSettings: RemoteConfigSettings {
         let rc = RemoteConfigSettings()
         rc.fetchTimeout = 5

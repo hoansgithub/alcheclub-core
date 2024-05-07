@@ -7,5 +7,5 @@
 
 import Foundation
 public protocol ServiceProviderProtocol: AnyObject {
-    func getService<S>(_ type: S.Type) -> S?
+    //func getService<S>(_ type: S.Type) -> S?
 }

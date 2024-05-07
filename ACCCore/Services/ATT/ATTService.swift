@@ -9,7 +9,9 @@ import Foundation
 import Combine
 import AppTrackingTransparency
 import UIKit
-public final class ATTService: NSObject, ATTServiceProtocol {
+public final class ATTService: NSObject, ATTServiceProtocol, TrackableServiceProtocol {
+    public weak var eventDelegate: TrackableServiceDelegate?
+    
     
     public static let shared = ATTService()
     //publishers
@@ -51,10 +53,27 @@ public extension ATTService {
                     Task {
                         let stt = await ATTrackingManager.requestTrackingAuthorization()
                         self?.stateSubject.send(.ready)
+                        self?.trackATTAuthorization(status: stt)
                         cont.resume(returning: stt)
                     }
                 }
         }
+    }
+}
+
+private extension ATTService {
+    func trackATTAuthorization(status: ATTrackingManager.AuthorizationStatus) {
+        let userDefaults = UserDefaults.standard
+        let flag = "ATTService.trackATTAuthorization"
+        if !userDefaults.bool(forKey: flag) {
+            let paramValue: String = status == .authorized ? "yes" : "no"
+            let param = ["value": paramValue]
+            let event = AnalyticsEvent("attprompt_action", params: param)
+            track(event: event)
+            userDefaults.set(true, forKey: flag)
+            userDefaults.synchronize()
+        }
+        
     }
 }
 

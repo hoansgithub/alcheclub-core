@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		F01573852BE3AE7400FDA7D0 /* ATTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573842BE3AE7400FDA7D0 /* ATTServiceProtocol.swift */; };
 		F01573872BE3AE7E00FDA7D0 /* ATTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573862BE3AE7E00FDA7D0 /* ATTService.swift */; };
+		F015739B2BEA10CD00FDA7D0 /* AdServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015739A2BEA10CD00FDA7D0 /* AdServiceProtocol.swift */; };
+		F015739D2BEA10DA00FDA7D0 /* AdmobService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015739C2BEA10DA00FDA7D0 /* AdmobService.swift */; };
+		F015739F2BEA147300FDA7D0 /* AdFormatProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015739E2BEA147300FDA7D0 /* AdFormatProtocol.swift */; };
+		F01573A12BEA2D8000FDA7D0 /* TrackableServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573A02BEA2D8000FDA7D0 /* TrackableServiceProtocol.swift */; };
 		F02C32A22BE68A3B006F5F75 /* ACCCoreAdMob.h in Headers */ = {isa = PBXBuildFile; fileRef = F02C32A12BE68A3B006F5F75 /* ACCCoreAdMob.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F02C32A62BE68A93006F5F75 /* ACCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0FB210D2BA9689700ECEB56 /* ACCCore.framework */; };
 		F02C32AD2BE696BC006F5F75 /* GoogleUMPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C32AC2BE696BC006F5F75 /* GoogleUMPService.swift */; };
@@ -106,6 +110,10 @@
 /* Begin PBXFileReference section */
 		F01573842BE3AE7400FDA7D0 /* ATTServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTServiceProtocol.swift; sourceTree = "<group>"; };
 		F01573862BE3AE7E00FDA7D0 /* ATTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTService.swift; sourceTree = "<group>"; };
+		F015739A2BEA10CD00FDA7D0 /* AdServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdServiceProtocol.swift; sourceTree = "<group>"; };
+		F015739C2BEA10DA00FDA7D0 /* AdmobService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmobService.swift; sourceTree = "<group>"; };
+		F015739E2BEA147300FDA7D0 /* AdFormatProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdFormatProtocol.swift; sourceTree = "<group>"; };
+		F01573A02BEA2D8000FDA7D0 /* TrackableServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackableServiceProtocol.swift; sourceTree = "<group>"; };
 		F02C329F2BE68A3B006F5F75 /* ACCCoreAdMob.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCoreAdMob.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02C32A12BE68A3B006F5F75 /* ACCCoreAdMob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCoreAdMob.h; sourceTree = "<group>"; };
 		F02C32AC2BE696BC006F5F75 /* GoogleUMPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleUMPService.swift; sourceTree = "<group>"; };
@@ -243,9 +251,20 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		F01573972BE9E31000FDA7D0 /* AdService */ = {
+			isa = PBXGroup;
+			children = (
+				F015739A2BEA10CD00FDA7D0 /* AdServiceProtocol.swift */,
+				F015739C2BEA10DA00FDA7D0 /* AdmobService.swift */,
+				F015739E2BEA147300FDA7D0 /* AdFormatProtocol.swift */,
+			);
+			path = AdService;
+			sourceTree = "<group>";
+		};
 		F02C32A02BE68A3B006F5F75 /* ACCCoreAdMob */ = {
 			isa = PBXGroup;
 			children = (
+				F01573972BE9E31000FDA7D0 /* AdService */,
 				F02C32AB2BE69682006F5F75 /* UMP */,
 				F02C32A12BE68A3B006F5F75 /* ACCCoreAdMob.h */,
 			);
@@ -312,6 +331,7 @@
 				F066D9272BCFBB85003F5690 /* AnalyticsEvent.swift */,
 				F066D9292BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift */,
 				F066D92B2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift */,
+				F01573A02BEA2D8000FDA7D0 /* TrackableServiceProtocol.swift */,
 			);
 			path = EventOriented;
 			sourceTree = "<group>";
@@ -677,6 +697,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F015739F2BEA147300FDA7D0 /* AdFormatProtocol.swift in Sources */,
+				F015739D2BEA10DA00FDA7D0 /* AdmobService.swift in Sources */,
+				F015739B2BEA10CD00FDA7D0 /* AdServiceProtocol.swift in Sources */,
 				F02C32AD2BE696BC006F5F75 /* GoogleUMPService.swift in Sources */,
 				F02C32AF2BE69704006F5F75 /* GoogleUMPServiceProtocol.swift in Sources */,
 			);
@@ -720,6 +743,7 @@
 				F0FB217C2BA9887000ECEB56 /* ServiceProviderAppDelegate+AppStateRestoration.swift in Sources */,
 				F0FB217A2BA9887000ECEB56 /* ServiceProviderAppDelegate+RemoteNotification.swift in Sources */,
 				F0FB21792BA9887000ECEB56 /* ServiceProviderAppDelegate+SceneStateHandling.swift in Sources */,
+				F01573A12BEA2D8000FDA7D0 /* TrackableServiceProtocol.swift in Sources */,
 				F01573872BE3AE7E00FDA7D0 /* ATTService.swift in Sources */,
 				F0FB217B2BA9887000ECEB56 /* ServiceProviderAppDelegate+HealthKitInteracting.swift in Sources */,
 				F066D92A2BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift in Sources */,

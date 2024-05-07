@@ -7,7 +7,7 @@
 
 import UIKit
 import Combine
-public protocol ServiceProtocol {
+public protocol ServiceProtocol: AnyObject {
     var statePublisher: AnyPublisher<ServiceState, Never> { get }
 }
 

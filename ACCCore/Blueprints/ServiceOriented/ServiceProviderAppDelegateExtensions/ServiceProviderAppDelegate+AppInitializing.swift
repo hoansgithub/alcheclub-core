@@ -23,6 +23,8 @@ extension ServiceProviderAppDelegate {
 
     @available(iOS 3.0, *)
     open func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        registerServiceEventListener()
+        registerConfigCenter(configCenter)
         var result = false
         services.compactMap({$0 as? UIApplicationDelegate}).forEach { service in
             if service.application?(application, didFinishLaunchingWithOptions: launchOptions) ?? false {
