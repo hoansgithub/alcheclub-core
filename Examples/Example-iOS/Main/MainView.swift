@@ -17,7 +17,6 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
             List {
                 NavigationLink(destination: NavigationLinkPresenter({
                     AdsView(vm: AdsViewModel())
-                        .navigationTitle("Ads")
                         .navigationBarTitleDisplayMode(.large)
                 })) {
                     Text("ADS")

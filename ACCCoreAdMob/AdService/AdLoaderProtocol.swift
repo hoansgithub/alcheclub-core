@@ -16,5 +16,5 @@ public protocol AdLoaderProtocol: ConfigurableProtocol {
 }
 
 public protocol BannerAdLoaderProtocol: AdLoaderProtocol, TrackableServiceProtocol {
-    func getBanner(for key: String, size: ACCAdSize?, root: UIViewController?) async throws -> UIView
+
 }

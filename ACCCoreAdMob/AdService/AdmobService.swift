@@ -9,6 +9,12 @@ import ACCCore
 import Combine
 import UIKit
 import GoogleMobileAds
+
+public enum AdmobServiceError: Error {
+    case canNotRequestAd
+    case bannerAdLoaderNotSet
+}
+
 public final class AdmobService: NSObject, AdServiceProtocol, TrackableServiceProtocol {
     public weak var eventDelegate: TrackableServiceDelegate?
     
@@ -17,13 +23,14 @@ public final class AdmobService: NSObject, AdServiceProtocol, TrackableServicePr
     public let statePublisher: AnyPublisher<ServiceState, Never>
     
     //supported ad formats
-    public private(set) var bannerAdLoader: BannerAdLoaderProtocol?
+    private var canRequestAd = false
+    private var bannerAdLoader: AdMobBannerAdLoader?
     
     //dependencies
     private var umpService: GoogleUMPServiceProtocol
     private var umpServiceCancellable: AnyCancellable?
     required public init(umpService: GoogleUMPServiceProtocol,
-                         bannerAdLoader : BannerAdLoaderProtocol? = nil) {
+                         bannerAdLoader : AdMobBannerAdLoader? = nil) {
         self.umpService = umpService
         self.statePublisher = stateSubject.removeDuplicates().eraseToAnyPublisher()
         self.bannerAdLoader = bannerAdLoader
@@ -32,11 +39,23 @@ public final class AdmobService: NSObject, AdServiceProtocol, TrackableServicePr
     
 }
 
+extension AdmobService {
+    public func getBanner(for key: String, size: ACCAdSize, root: UIViewController?) async throws -> UIView {
+        guard canRequestAd else {
+            throw AdmobServiceError.canNotRequestAd
+        }
+        guard let bannerAdLoader = bannerAdLoader else {
+            throw AdmobServiceError.bannerAdLoaderNotSet
+        }
+        return try await bannerAdLoader.getBanner(for: key, size: size, root: root)
+    }
+}
+
 extension AdmobService: UIApplicationDelegate {
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         registerObservers { [weak self] stt in
             self?.stateSubject.send(.ready)
-            
+            self?.canRequestAd = true
         }
         
         return true

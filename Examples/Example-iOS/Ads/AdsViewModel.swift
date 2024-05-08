@@ -16,7 +16,7 @@ protocol AdsViewModelProtocol: BaseViewModelProtocol {
     var canRequestAds: Bool { get }
     var adMobReady: Bool { get }
     func presentPrivacyOptions(from view: UIViewController)
-    
+    func getBannerAd(controller: UIViewController) async
     func reset()
 }
 
@@ -29,7 +29,7 @@ class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
     var umpService: GoogleUMPServiceProtocol?
     var admobService: AdServiceProtocol?
     var cancellables = Set<AnyCancellable>()
-    init() {
+    public init() {
         self.umpService = ACCApp.getService(GoogleUMPServiceProtocol.self)
         self.admobService = ACCApp.getService(AdServiceProtocol.self)
         self.registerPublishers()
@@ -42,6 +42,23 @@ class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
 }
 
 extension AdsViewModel {
+    @MainActor func getBannerAd(controller: UIViewController) {
+        Task {
+            do {
+                let scenes = UIApplication.shared.connectedScenes
+                let windowScene = scenes.first(where: {$0 is UIWindowScene}) as? UIWindowScene
+                let window = windowScene?.windows.first
+                let sceneWidth = window?.frame.width ?? 0
+                
+                let banner = try await admobService?.getBanner(for: "AdsViewModel", size: .currentAnchoredAdaptiveBanner(width: sceneWidth), root: controller)
+                recentBannerAdView = banner
+            }
+            catch {
+                ACCLogger.print(error.localizedDescription)
+            }
+        }
+    }
+    
     func presentPrivacyOptions(from view: UIViewController) {
         Task {
             do {

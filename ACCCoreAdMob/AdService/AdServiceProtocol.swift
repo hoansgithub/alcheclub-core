@@ -6,7 +6,7 @@
 //
 
 import ACCCore
-
+import UIKit
 public protocol AdServiceProtocol: ServiceProtocol {
-    var bannerAdLoader: BannerAdLoaderProtocol? { get }
+    func getBanner(for key: String, size: ACCAdSize, root: UIViewController?) async throws -> UIView
 }

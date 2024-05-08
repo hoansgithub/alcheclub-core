@@ -12,31 +12,41 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
     @StateObject var vm: VM
     private let formViewControllerRepresentable = FormViewControllerRepresentable()
     var body: some View {
-        NavigationView(content: {
-            List {
-                Text("Can request ads: \(vm.canRequestAds ? "✅" : ".")")
-                Text("Admob ready: \(vm.adMobReady ? "✅" : ".")")
-                Button {
-                    vm.presentPrivacyOptions(from: formViewControllerRepresentable.viewController)
-                } label: {
-                    Text("Present privacy options").foregroundStyle(.blue)
+        List {
+            Text("Can request ads: \(vm.canRequestAds ? "✅" : ".")")
+            Text("Admob ready: \(vm.adMobReady ? "✅" : ".")")
+            Button {
+                vm.presentPrivacyOptions(from: formViewControllerRepresentable.viewController)
+            } label: {
+                Text("Present privacy options").foregroundStyle(.blue)
+            }
+            .disabled(!vm.isPrivacyOptionsRequired)
+            
+            Button {
+                Task {
+                    await vm.getBannerAd(controller: formViewControllerRepresentable.viewController)
                 }
-                .disabled(!vm.isPrivacyOptionsRequired)
-                
-                Button("RESET") {
-                    vm.reset()
-                }.foregroundStyle(.blue)
+            } label: {
+                Text("Get Banner").foregroundStyle(.blue)
             }
-            VStack {
-                BaseUIViewRepresentable(inputUIView: $vm.recentBannerAdView)
-                    .frame(maxWidth: .infinity,
-                           maxHeight: vm.recentBannerAdView?.frame.height ?? 1 ,
-                           alignment: .bottom)
-                    .background(Color.blue)
-            }
-        }).background {
+            .disabled(!vm.adMobReady)
+            
+            Button("RESET") {
+                vm.reset()
+            }.foregroundStyle(.blue)
+        }
+        .navigationTitle("Ads Demo")
+        .background {
             formViewControllerRepresentable
                 .frame(width: .zero, height: .zero)
         }
+        
+        BaseUIViewRepresentable(inputUIView: $vm.recentBannerAdView)
+            .frame(maxWidth: .infinity,
+                   maxHeight: vm.recentBannerAdView?.frame.height ?? 1 ,
+                   alignment: .bottom)
+            .background(Color.blue)
+            .animation(.linear, value: vm.recentBannerAdView?.frame.height)
+        
     }
 }

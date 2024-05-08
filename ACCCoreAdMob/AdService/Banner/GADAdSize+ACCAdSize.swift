@@ -11,6 +11,8 @@ import GoogleMobileAds
 public extension GADAdSize {
     static func from(size: ACCAdSize) -> Self {
         switch size {
+        case .currentAnchoredAdaptiveBanner(let width):
+            return GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(width)
         case .currentInlineAdaptiveBanner(let width):
             return GADCurrentOrientationInlineAdaptiveBannerAdSizeWithWidth(width)
         case .portraitInlineAdaptiveBanner(let width):

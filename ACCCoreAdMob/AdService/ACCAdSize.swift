@@ -7,6 +7,7 @@
 
 import Foundation
 public enum ACCAdSize: Sendable {
+    case currentAnchoredAdaptiveBanner(width: CGFloat)
     case currentInlineAdaptiveBanner(width: CGFloat)
     case portraitInlineAdaptiveBanner(width: CGFloat)
     case landscapeInlineAdaptiveBanner(width: CGFloat)
