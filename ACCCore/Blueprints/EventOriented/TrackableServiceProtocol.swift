@@ -7,10 +7,10 @@
 
 import Foundation
 public protocol TrackableServiceDelegate: AnyObject {
-    func trackableService(_ service: any ServiceProtocol, didSend event: AnalyticsEvent)
+    func trackableService(_ service: any TrackableServiceProtocol, didSend event: AnalyticsEvent)
 }
 
-public protocol TrackableServiceProtocol where Self: ServiceProtocol {
+public protocol TrackableServiceProtocol where Self: AnyObject {
     var eventDelegate: TrackableServiceDelegate? { get set }
 }
 

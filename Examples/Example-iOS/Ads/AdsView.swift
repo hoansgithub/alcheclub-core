@@ -14,17 +14,18 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
     var body: some View {
         NavigationView(content: {
             List {
-                Text("Can request ads: \(vm.canRequestAds ? "TRUE" : "FALSE")")
+                Text("Can request ads: \(vm.canRequestAds ? "✅" : ".")")
+                Text("Admob ready: \(vm.adMobReady ? "✅" : ".")")
                 Button {
                     vm.presentPrivacyOptions(from: formViewControllerRepresentable.viewController)
                 } label: {
-                    Text("Present privacy options")
+                    Text("Present privacy options").foregroundStyle(.blue)
                 }
                 .disabled(!vm.isPrivacyOptionsRequired)
                 
                 Button("RESET") {
                     vm.reset()
-                }
+                }.foregroundStyle(.blue)
             }
             VStack {
                 BaseUIViewRepresentable(inputUIView: $vm.recentBannerAdView)

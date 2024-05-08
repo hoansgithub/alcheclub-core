@@ -8,4 +8,5 @@
 import ACCCore
 
 public protocol AdServiceProtocol: ServiceProtocol {
+    var bannerAdLoader: BannerAdLoaderProtocol? { get }
 }

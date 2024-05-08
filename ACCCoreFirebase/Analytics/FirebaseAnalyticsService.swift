@@ -10,7 +10,7 @@ import ACCCore
 import Combine
 import UIKit
 import FirebaseAnalytics
-public final class FirebaseAnalyticsService: NSObject, @unchecked Sendable, FirebaseAnalyticsServiceProtocol {
+public final class FirebaseAnalyticsService: NSObject, FirebaseAnalyticsServiceProtocol {
     public var id: String = "FirebaseAnalytics"
     
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
@@ -20,7 +20,7 @@ public final class FirebaseAnalyticsService: NSObject, @unchecked Sendable, Fire
     private var coreService: FirebaseCoreServiceProtocol
     private var cancellables: Set<AnyCancellable> = []
     private var _canTrack = false
-    nonisolated required public init(coreService: FirebaseCoreServiceProtocol) {
+    required public init(coreService: FirebaseCoreServiceProtocol) {
         self.statePublisher = stateSubject.removeDuplicates().eraseToAnyPublisher()
         self.coreService = coreService
         super.init()
@@ -33,7 +33,9 @@ public final class FirebaseAnalyticsService: NSObject, @unchecked Sendable, Fire
 
 extension FirebaseAnalyticsService: UIApplicationDelegate {
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        coreService.statePublisher.sink { [weak self] state in
+        coreService.statePublisher
+            .filter({$0 == .ready})
+            .prefix(1).sink { [weak self] state in
             self?.stateSubject.send(state)
             self?._canTrack = state == .ready
         }.store(in: &cancellables)
@@ -44,9 +46,9 @@ extension FirebaseAnalyticsService: UIApplicationDelegate {
 ///AnalyticsPlatformProtocol
 public extension FirebaseAnalyticsService {
     
-    nonisolated var canTrack: Bool { _canTrack }
+    var canTrack: Bool { _canTrack }
     
-    nonisolated func track(event: AnalyticsEvent) {
+    func track(event: AnalyticsEvent) {
         Analytics.logEvent(event.name, parameters: event.params)
     }
 }

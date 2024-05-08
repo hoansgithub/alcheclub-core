@@ -36,7 +36,7 @@ public final class FirebaseMessagingService: NSObject, @unchecked Sendable, Fire
     private var registrationCancellable: AnyCancellable?
     private var authOptions: UNAuthorizationOptions
     private var presentationOptions: UNNotificationPresentationOptions
-    nonisolated required public init(coreService: FirebaseCoreServiceProtocol,
+    required public init(coreService: FirebaseCoreServiceProtocol,
                                      authOptions: UNAuthorizationOptions,
                                      presentationOptions: UNNotificationPresentationOptions) {
         self.coreService = coreService

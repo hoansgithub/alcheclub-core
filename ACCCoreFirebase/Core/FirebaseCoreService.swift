@@ -10,12 +10,12 @@ import ACCCore
 import Combine
 import UIKit
 import FirebaseCore
-public final class FirebaseCoreService: NSObject, @unchecked Sendable, FirebaseCoreServiceProtocol {
+public final class FirebaseCoreService: NSObject, FirebaseCoreServiceProtocol {
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
     public let statePublisher: AnyPublisher<ServiceState, Never>
     
     private var options: FirebaseOptions?
-    nonisolated required public init(options: FirebaseOptions?) {
+    required public init(options: FirebaseOptions?) {
         self.options = options
         self.statePublisher = stateSubject.removeDuplicates().eraseToAnyPublisher()
         super.init()

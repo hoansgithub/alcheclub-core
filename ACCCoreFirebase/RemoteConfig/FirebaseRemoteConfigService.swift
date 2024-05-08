@@ -48,7 +48,7 @@ public final class FirebaseRemoteConfigService: NSObject, @unchecked Sendable, F
     //real-time
     private var configUpdateListenerRegistration: ConfigUpdateListenerRegistration?
     
-    nonisolated required public init(coreService: FirebaseCoreServiceProtocol,
+    required public init(coreService: FirebaseCoreServiceProtocol,
                                      settings: RemoteConfigSettings,
                                      defaultPlist: String,
                                      realTimeEnabled: Bool) {

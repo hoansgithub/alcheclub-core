@@ -103,7 +103,7 @@ public extension ACCApp {
 }
 
 extension ACCApp: TrackableServiceDelegate {
-    public func trackableService(_ service: ServiceProtocol, didSend event: AnalyticsEvent) {
+    public func trackableService(_ service: TrackableServiceProtocol, didSend event: AnalyticsEvent) {
         track(event: event)
     }
 }

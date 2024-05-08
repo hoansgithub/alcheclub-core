@@ -39,13 +39,18 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
             return debugSettings
         }()
         lazy var umpService = GoogleUMPService(debugSettings: umpDebugSettings)
+        
+        let screenWidth =  (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.screen.bounds.width ?? 0
+        lazy var admobService = AdmobService(umpService: umpService,
+                                             bannerAdLoader: AdMobBannerAdLoader(adUnitID: "ca-app-pub-3940256099942544/2435281174", defaultSize: .currentInlineAdaptiveBanner(width: screenWidth)))
         ACCApp.configure(services: [ATTService.shared,
                                     sampleService,
                                     firebaseCoreService,
                                     firebaseAnalyticsService,
                                     firebaseRCService,
                                     firebaseMessagingService,
-                                    umpService], analyticsPlatforms: [firebaseAnalyticsService],
+                                    umpService,
+                                   admobService], analyticsPlatforms: [firebaseAnalyticsService],
                          configCenter: firebaseRCService)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }

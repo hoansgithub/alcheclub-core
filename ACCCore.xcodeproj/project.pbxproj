@@ -11,7 +11,7 @@
 		F01573872BE3AE7E00FDA7D0 /* ATTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573862BE3AE7E00FDA7D0 /* ATTService.swift */; };
 		F015739B2BEA10CD00FDA7D0 /* AdServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015739A2BEA10CD00FDA7D0 /* AdServiceProtocol.swift */; };
 		F015739D2BEA10DA00FDA7D0 /* AdmobService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015739C2BEA10DA00FDA7D0 /* AdmobService.swift */; };
-		F015739F2BEA147300FDA7D0 /* AdFormatProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015739E2BEA147300FDA7D0 /* AdFormatProtocol.swift */; };
+		F015739F2BEA147300FDA7D0 /* AdLoaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015739E2BEA147300FDA7D0 /* AdLoaderProtocol.swift */; };
 		F01573A12BEA2D8000FDA7D0 /* TrackableServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573A02BEA2D8000FDA7D0 /* TrackableServiceProtocol.swift */; };
 		F02C32A22BE68A3B006F5F75 /* ACCCoreAdMob.h in Headers */ = {isa = PBXBuildFile; fileRef = F02C32A12BE68A3B006F5F75 /* ACCCoreAdMob.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F02C32A62BE68A93006F5F75 /* ACCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0FB210D2BA9689700ECEB56 /* ACCCore.framework */; };
@@ -23,6 +23,9 @@
 		F02C32BA2BE79B2F006F5F75 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02C32B92BE79B2F006F5F75 /* JavaScriptCore.framework */; };
 		F02C32BB2BE79B51006F5F75 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F08BCE6A2BD2197C0067DFC5 /* AdSupport.framework */; };
 		F02C32BF2BEA6A92006F5F75 /* ACCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C32BE2BEA6A92006F5F75 /* ACCApp.swift */; };
+		F02C32C22BEB3794006F5F75 /* AdMobBannerAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C32C12BEB3794006F5F75 /* AdMobBannerAdLoader.swift */; };
+		F02C32C42BEB4A29006F5F75 /* ACCAdSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C32C32BEB4A29006F5F75 /* ACCAdSize.swift */; };
+		F02C32C62BEB5026006F5F75 /* GADAdSize+ACCAdSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C32C52BEB5026006F5F75 /* GADAdSize+ACCAdSize.swift */; };
 		F05C23102BE20257003DEC6D /* ACCCoreUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = F05C230F2BE20257003DEC6D /* ACCCoreUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F05C23142BE202EC003DEC6D /* URLSession+nonisolated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9202BCFAE8B003F5690 /* URLSession+nonisolated.swift */; };
 		F05C23152BE202EC003DEC6D /* AnyPublisher+Sendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9212BCFAE8B003F5690 /* AnyPublisher+Sendable.swift */; };
@@ -113,7 +116,7 @@
 		F01573862BE3AE7E00FDA7D0 /* ATTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTService.swift; sourceTree = "<group>"; };
 		F015739A2BEA10CD00FDA7D0 /* AdServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdServiceProtocol.swift; sourceTree = "<group>"; };
 		F015739C2BEA10DA00FDA7D0 /* AdmobService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmobService.swift; sourceTree = "<group>"; };
-		F015739E2BEA147300FDA7D0 /* AdFormatProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdFormatProtocol.swift; sourceTree = "<group>"; };
+		F015739E2BEA147300FDA7D0 /* AdLoaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdLoaderProtocol.swift; sourceTree = "<group>"; };
 		F01573A02BEA2D8000FDA7D0 /* TrackableServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackableServiceProtocol.swift; sourceTree = "<group>"; };
 		F02C329F2BE68A3B006F5F75 /* ACCCoreAdMob.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCoreAdMob.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02C32A12BE68A3B006F5F75 /* ACCCoreAdMob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCoreAdMob.h; sourceTree = "<group>"; };
@@ -123,6 +126,9 @@
 		F02C32B12BE6977F006F5F75 /* UserMessagingPlatform.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:EQHXZ8M8AV:Google LLC"; lastKnownFileType = wrapper.xcframework; name = UserMessagingPlatform.xcframework; path = Carthage/Build/UserMessagingPlatform.xcframework; sourceTree = "<group>"; };
 		F02C32B92BE79B2F006F5F75 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/System/iOSSupport/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F02C32BE2BEA6A92006F5F75 /* ACCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCApp.swift; sourceTree = "<group>"; };
+		F02C32C12BEB3794006F5F75 /* AdMobBannerAdLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobBannerAdLoader.swift; sourceTree = "<group>"; };
+		F02C32C32BEB4A29006F5F75 /* ACCAdSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCAdSize.swift; sourceTree = "<group>"; };
+		F02C32C52BEB5026006F5F75 /* GADAdSize+ACCAdSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GADAdSize+ACCAdSize.swift"; sourceTree = "<group>"; };
 		F05C230D2BE20257003DEC6D /* ACCCoreUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCoreUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F05C230F2BE20257003DEC6D /* ACCCoreUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCoreUtilities.h; sourceTree = "<group>"; };
 		F05C23212BE20660003DEC6D /* UserDefaults+DefaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+DefaultValue.swift"; sourceTree = "<group>"; };
@@ -256,9 +262,11 @@
 		F01573972BE9E31000FDA7D0 /* AdService */ = {
 			isa = PBXGroup;
 			children = (
+				F02C32C02BEB2E6C006F5F75 /* Banner */,
 				F015739A2BEA10CD00FDA7D0 /* AdServiceProtocol.swift */,
+				F015739E2BEA147300FDA7D0 /* AdLoaderProtocol.swift */,
 				F015739C2BEA10DA00FDA7D0 /* AdmobService.swift */,
-				F015739E2BEA147300FDA7D0 /* AdFormatProtocol.swift */,
+				F02C32C32BEB4A29006F5F75 /* ACCAdSize.swift */,
 			);
 			path = AdService;
 			sourceTree = "<group>";
@@ -280,6 +288,15 @@
 				F02C32AC2BE696BC006F5F75 /* GoogleUMPService.swift */,
 			);
 			path = UMP;
+			sourceTree = "<group>";
+		};
+		F02C32C02BEB2E6C006F5F75 /* Banner */ = {
+			isa = PBXGroup;
+			children = (
+				F02C32C12BEB3794006F5F75 /* AdMobBannerAdLoader.swift */,
+				F02C32C52BEB5026006F5F75 /* GADAdSize+ACCAdSize.swift */,
+			);
+			path = Banner;
 			sourceTree = "<group>";
 		};
 		F05C230E2BE20257003DEC6D /* ACCCoreUtilities */ = {
@@ -700,9 +717,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F015739F2BEA147300FDA7D0 /* AdFormatProtocol.swift in Sources */,
+				F015739F2BEA147300FDA7D0 /* AdLoaderProtocol.swift in Sources */,
 				F015739D2BEA10DA00FDA7D0 /* AdmobService.swift in Sources */,
+				F02C32C62BEB5026006F5F75 /* GADAdSize+ACCAdSize.swift in Sources */,
+				F02C32C42BEB4A29006F5F75 /* ACCAdSize.swift in Sources */,
 				F015739B2BEA10CD00FDA7D0 /* AdServiceProtocol.swift in Sources */,
+				F02C32C22BEB3794006F5F75 /* AdMobBannerAdLoader.swift in Sources */,
 				F02C32AD2BE696BC006F5F75 /* GoogleUMPService.swift in Sources */,
 				F02C32AF2BE69704006F5F75 /* GoogleUMPServiceProtocol.swift in Sources */,
 			);

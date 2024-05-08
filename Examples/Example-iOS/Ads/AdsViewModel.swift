@@ -14,6 +14,7 @@ protocol AdsViewModelProtocol: BaseViewModelProtocol {
     var recentBannerAdView: UIView? { get set }
     var isPrivacyOptionsRequired: Bool { get }
     var canRequestAds: Bool { get }
+    var adMobReady: Bool { get }
     func presentPrivacyOptions(from view: UIViewController)
     
     func reset()
@@ -23,11 +24,14 @@ class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
     @Published var recentBannerAdView: UIView?
     @Published var isPrivacyOptionsRequired = false
     @Published var canRequestAds: Bool = false
+    @Published var adMobReady: Bool = false
     
     var umpService: GoogleUMPServiceProtocol?
+    var admobService: AdServiceProtocol?
     var cancellables = Set<AnyCancellable>()
     init() {
         self.umpService = ACCApp.getService(GoogleUMPServiceProtocol.self)
+        self.admobService = ACCApp.getService(AdServiceProtocol.self)
         self.registerPublishers()
     }
     
@@ -58,6 +62,11 @@ extension AdsViewModel {
             .sink(receiveValue: {[weak self] can in
                 self?.canRequestAds = can
                 ACCLogger.print(can)
+            }).store(in: &cancellables)
+        
+        admobService?.statePublisher.filter({$0 == .ready})
+            .sink(receiveValue: { [weak self] _ in
+                self?.adMobReady = true
             }).store(in: &cancellables)
     }
     
