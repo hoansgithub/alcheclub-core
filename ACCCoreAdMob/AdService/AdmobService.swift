@@ -16,7 +16,11 @@ public enum AdmobServiceError: Error {
 }
 
 public final class AdmobService: NSObject, AdServiceProtocol, TrackableServiceProtocol {
-    public weak var eventDelegate: TrackableServiceDelegate?
+    public weak var eventDelegate: TrackableServiceDelegate? {
+        didSet {
+            self.bannerAdLoader?.eventDelegate = eventDelegate
+        }
+    }
     
     //publishers
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
@@ -40,6 +44,7 @@ public final class AdmobService: NSObject, AdServiceProtocol, TrackableServicePr
 }
 
 extension AdmobService {
+    //Banner
     public func getBanner(for key: String, size: ACCAdSize, root: UIViewController?) async throws -> UIView {
         guard canRequestAd else {
             throw AdmobServiceError.canNotRequestAd
@@ -48,6 +53,10 @@ extension AdmobService {
             throw AdmobServiceError.bannerAdLoaderNotSet
         }
         return try await bannerAdLoader.getBanner(for: key, size: size, root: root)
+    }
+    
+    public func removeBanner(for key: String) -> Bool {
+        return bannerAdLoader?.removeBanner(for: key) ?? false
     }
 }
 

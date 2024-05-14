@@ -18,7 +18,7 @@ public final class AdMobBannerAdLoader: NSObject, BannerAdLoaderProtocol {
     }
     
     public func update(with config: ConfigObject) {
-        
+        //TODO: -Update banner ad config here
     }
     
     @MainActor internal func getBanner(for key: String, size: ACCAdSize, root: UIViewController?) throws -> UIView {
@@ -36,11 +36,16 @@ public final class AdMobBannerAdLoader: NSObject, BannerAdLoaderProtocol {
         bannersCollection[key] = gadBannerView
         return gadBannerView
     }
+    
+    internal func removeBanner(for key: String) -> Bool {
+        return bannersCollection.removeValue(forKey: key) != nil
+    }
 }
 
 extension AdMobBannerAdLoader: GADBannerViewDelegate {
     public func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        ACCLogger.print(bannerView)
+        //TODO: -Track banner related events
+        //ACCLogger.print(bannerView)
     }
     
     public func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
@@ -51,23 +56,24 @@ extension AdMobBannerAdLoader: GADBannerViewDelegate {
     }
     
     public func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
-        ACCLogger.print(bannerView)
+        //ACCLogger.print(bannerView)
+        //track(event: AnalyticsEvent("banner_impression"))
     }
     
     public func bannerViewDidRecordClick(_ bannerView: GADBannerView) {
-        ACCLogger.print(bannerView)
+        //ACCLogger.print(bannerView)
     }
     
     public func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
-        ACCLogger.print(bannerView)
+        //ACCLogger.print(bannerView)
     }
     
     public func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
-        ACCLogger.print(bannerView)
+        //ACCLogger.print(bannerView)
     }
     
     public func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
-        ACCLogger.print(bannerView)
+        //ACCLogger.print(bannerView)
     }
     
 }

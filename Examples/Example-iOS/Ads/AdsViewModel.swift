@@ -17,6 +17,7 @@ protocol AdsViewModelProtocol: BaseViewModelProtocol {
     var adMobReady: Bool { get }
     func presentPrivacyOptions(from view: UIViewController)
     func getBannerAd(controller: UIViewController) async
+    func removeBannerAd()
     func reset()
 }
 
@@ -42,6 +43,12 @@ class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
 }
 
 extension AdsViewModel {
+    func removeBannerAd() {
+        if admobService?.removeBanner(for: "AdsViewModel") == true {
+            recentBannerAdView = nil
+        }
+    }
+    
     @MainActor func getBannerAd(controller: UIViewController) {
         Task {
             do {

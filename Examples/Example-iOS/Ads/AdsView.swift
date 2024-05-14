@@ -31,6 +31,10 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
             }
             .disabled(!vm.adMobReady)
             
+            Button("Remove banner") {
+                vm.removeBannerAd()
+            }.disabled(vm.recentBannerAdView == nil)
+            
             Button("RESET") {
                 vm.reset()
             }.foregroundStyle(.blue)
