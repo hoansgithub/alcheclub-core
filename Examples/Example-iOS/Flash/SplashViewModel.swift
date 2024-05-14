@@ -19,12 +19,15 @@ protocol SplashViewModelProtocol: BaseViewModelProtocol {
 class SplashViewModel: @unchecked Sendable, SplashViewModelProtocol {
     var firRCService: FirebaseRemoteConfigServiceProtocol?
     var umpService: GoogleUMPServiceProtocol?
+    var adPreloaderService: AdPreloaderServiceProtocol?
     @MainActor var fullScreenController = UIViewController()
     
     private var stateCancellable: AnyCancellable?
+    private var adCancellable: AnyCancellable?
     init() {
         self.firRCService = ACCApp.getService(FirebaseRemoteConfigServiceProtocol.self)
         self.umpService = ACCApp.getService(GoogleUMPServiceProtocol.self)
+        self.adPreloaderService = ACCApp.getService(AdPreloaderServiceProtocol.self)
     }
     
     func presentConsentFormIfRequired(vc: UIViewController) async {
@@ -54,8 +57,9 @@ private extension SplashViewModel {
             .prefix(1)
         if let rcStatePublisher = firRCService?.statePublisher
             .filter({$0 == .ready})
-            .prefix(1) {
-            stateCancellable = Publishers.CombineLatest(attStatePublisher, rcStatePublisher)
+            .prefix(1),
+           let appOpenClosed = adPreloaderService?.appOpenClosedPublisher.filter({$0}).prefix(1) {
+            stateCancellable = Publishers.CombineLatest3(attStatePublisher, rcStatePublisher, appOpenClosed)
                 .receive(on: RunLoop.main)
                 .sink { (stt) in
                     AppSession.shared.configurateState()

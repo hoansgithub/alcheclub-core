@@ -14,6 +14,8 @@
 		F015738A2BE87BF300FDA7D0 /* ACCCoreAdMob.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F01573882BE87BF300FDA7D0 /* ACCCoreAdMob.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F01573942BE8D14F00FDA7D0 /* BaseUIViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573932BE8D14F00FDA7D0 /* BaseUIViewRepresentable.swift */; };
 		F01573962BE8DD6100FDA7D0 /* FormViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573952BE8DD6100FDA7D0 /* FormViewControllerRepresentable.swift */; };
+		F01573A62BF3651E00FDA7D0 /* AdPreloaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573A52BF3651E00FDA7D0 /* AdPreloaderService.swift */; };
+		F01573A82BF3664000FDA7D0 /* AdPreloaderServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573A72BF3664000FDA7D0 /* AdPreloaderServiceProtocol.swift */; };
 		F05C231E2BE20548003DEC6D /* ACCCoreUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */; };
 		F05C231F2BE20548003DEC6D /* ACCCoreUtilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F066D9352BCFC050003F5690 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9342BCFC050003F5690 /* MainViewModel.swift */; };
@@ -68,6 +70,8 @@
 		F01573882BE87BF300FDA7D0 /* ACCCoreAdMob.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCoreAdMob.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F01573932BE8D14F00FDA7D0 /* BaseUIViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIViewRepresentable.swift; sourceTree = "<group>"; };
 		F01573952BE8DD6100FDA7D0 /* FormViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewControllerRepresentable.swift; sourceTree = "<group>"; };
+		F01573A52BF3651E00FDA7D0 /* AdPreloaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdPreloaderService.swift; sourceTree = "<group>"; };
+		F01573A72BF3664000FDA7D0 /* AdPreloaderServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdPreloaderServiceProtocol.swift; sourceTree = "<group>"; };
 		F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCoreUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F066D92E2BCFBED7003F5690 /* ACCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F066D9342BCFC050003F5690 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -229,6 +233,8 @@
 				F0B2E79C2BCE7E41004BA72A /* SampleServiceProtocol.swift */,
 				F0B2E79E2BCE7E4A004BA72A /* SampleService.swift */,
 				F0704D492BD7769C0069F3CA /* AppSession.swift */,
+				F01573A52BF3651E00FDA7D0 /* AdPreloaderService.swift */,
+				F01573A72BF3664000FDA7D0 /* AdPreloaderServiceProtocol.swift */,
 			);
 			path = "Example-iOS";
 			sourceTree = "<group>";
@@ -339,6 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F01573A82BF3664000FDA7D0 /* AdPreloaderServiceProtocol.swift in Sources */,
 				F0B2E7932BCE7A32004BA72A /* ExampleAppDelegate.swift in Sources */,
 				F0B2E79F2BCE7E4A004BA72A /* SampleService.swift in Sources */,
 				F0704D4E2BD78B310069F3CA /* ContainerViewModel.swift in Sources */,
@@ -346,6 +353,7 @@
 				F0704D542BD78B5B0069F3CA /* OnboardingView.swift in Sources */,
 				F0FB21582BA977E700ECEB56 /* Example_iOSApp.swift in Sources */,
 				F066D9372BCFC05C003F5690 /* MainView.swift in Sources */,
+				F01573A62BF3651E00FDA7D0 /* AdPreloaderService.swift in Sources */,
 				F015737D2BE3A09800FDA7D0 /* AdsViewModel.swift in Sources */,
 				F0704D5C2BD7A0DE0069F3CA /* OnboardingManager.swift in Sources */,
 				F01573942BE8D14F00FDA7D0 /* BaseUIViewRepresentable.swift in Sources */,

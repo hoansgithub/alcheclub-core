@@ -7,14 +7,41 @@
 
 import ACCCore
 import UIKit
-public protocol AdPreloadable: AnyObject {
-    func preload()
-}
 
-public protocol AdLoaderProtocol: ConfigurableProtocol {
+
+public protocol AdLoaderProtocol: ConfigurableProtocol, TrackableServiceProtocol {
     var adUnitID: String { get set }
 }
 
-public protocol BannerAdLoaderProtocol: AdLoaderProtocol, TrackableServiceProtocol {
+//Banner
+public protocol BannerAdLoaderProtocol: AdLoaderProtocol {
 
+}
+
+
+//FullScreen
+public enum FullScreenAdPresentationState {
+    case failedToPresent(error: Error)
+    case willPresent
+    case willDismiss
+    case didDismiss
+}
+
+public enum FullScreenAdLoaderError: Error {
+    case adIsAlreadyLoaded
+    case adIsBeingLoaded
+    case adIsBeingShown
+    case adIsNotAvailable
+    case adFailedToLoad(projectedError: Error)
+}
+
+public typealias FullScreenAdPresentationStateListener = (_ state: FullScreenAdPresentationState) -> ()
+
+public protocol FullScreenAdLoaderProtocol: AdLoaderProtocol {
+    func showAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
+}
+
+///AppOpen
+public protocol AppOpenAdLoaderProtocol: FullScreenAdLoaderProtocol {
+    
 }

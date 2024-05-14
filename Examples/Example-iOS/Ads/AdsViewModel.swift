@@ -44,7 +44,7 @@ class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
 
 extension AdsViewModel {
     func removeBannerAd() {
-        if admobService?.removeBanner(for: "AdsViewModel") == true {
+        if admobService?.removeBannerAd(for: "AdsViewModel") == true {
             recentBannerAdView = nil
         }
     }
@@ -57,7 +57,7 @@ extension AdsViewModel {
                 let window = windowScene?.windows.first
                 let sceneWidth = window?.frame.width ?? 0
                 
-                let banner = try await admobService?.getBanner(for: "AdsViewModel", size: .currentAnchoredAdaptiveBanner(width: sceneWidth), root: controller)
+                let banner = try await admobService?.getBannerAd(for: "AdsViewModel", size: .currentAnchoredAdaptiveBanner(width: sceneWidth), root: controller)
                 recentBannerAdView = banner
             }
             catch {

@@ -21,29 +21,34 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
             return rc
         }
         
-        let sampleService = SampleService()
+        
         let firebaseCoreService = FirebaseCoreService(options: FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") ?? ""))
-        var firebaseAnalyticsService = FirebaseAnalyticsService(coreService: firebaseCoreService)
-        var firebaseRCService = FirebaseRemoteConfigService(
+        let firebaseAnalyticsService = FirebaseAnalyticsService(coreService: firebaseCoreService)
+        let firebaseRCService = FirebaseRemoteConfigService(
             coreService: firebaseCoreService,
             settings: rcSettings,
             defaultPlist: "rc_defaults",
             realTimeEnabled: true)
-        var firebaseMessagingService = FirebaseMessagingService(coreService: firebaseCoreService, authOptions: [.alert, .badge, .sound], presentationOptions: [.banner, .list, .sound, .badge])
+        let firebaseMessagingService = FirebaseMessagingService(coreService: firebaseCoreService, authOptions: [.alert, .badge, .sound], presentationOptions: [.banner, .list, .sound, .badge])
         
         //ads
-        var umpDebugSettings = {
+        let umpDebugSettings = {
             let debugSettings = UMPDebugSettings()
             debugSettings.geography = UMPDebugGeography.EEA
             debugSettings.testDeviceIdentifiers = ["C42F63AF-6086-4631-910B-B4AB8BB32DC0"]
             return debugSettings
         }()
-        var umpService = GoogleUMPService(debugSettings: umpDebugSettings)
+        let umpService = GoogleUMPService(debugSettings: umpDebugSettings)
         
-        var bannerAdLoader = AdMobBannerAdLoader(adUnitID: "ca-app-pub-3940256099942544/2435281174")
+        let bannerAdLoader = AdMobBannerAdLoader(adUnitID: "ca-app-pub-3940256099942544/2435281174")
+        let appOpenAdLoader = AdmobAppOpenAdLoader(adUnitID: "ca-app-pub-3940256099942544/5575463023")
         
-        var admobService = AdmobService(umpService: umpService,
-                                             bannerAdLoader: bannerAdLoader)
+        let admobService = AdmobService(umpService: umpService,
+                                             bannerAdLoader: bannerAdLoader,
+        appOpenAdLoader: appOpenAdLoader)
+        
+        let sampleService = SampleService()
+        let adPreloaderService = AdPreloaderService(adService: admobService)
         ACCApp.configure(services: [ATTService.shared,
                                     sampleService,
                                     firebaseCoreService,
@@ -51,7 +56,8 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
                                     firebaseRCService,
                                     firebaseMessagingService,
                                     umpService,
-                                    admobService],
+                                    admobService,
+                                    adPreloaderService],
                          analyticsPlatforms: [firebaseAnalyticsService],
                          configCenter: firebaseRCService)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)

@@ -8,6 +8,11 @@
 import ACCCore
 import UIKit
 public protocol AdServiceProtocol: ServiceProtocol {
-    func getBanner(for key: String, size: ACCAdSize, root: UIViewController?) async throws -> UIView
-    func removeBanner(for key: String) -> Bool
+    //Banner
+    func getBannerAd(for key: String, size: ACCAdSize, root: UIViewController?) async throws -> UIView
+    func removeBannerAd(for key: String) -> Bool
+    
+    //App Open
+    func loadAppOpenAd() async throws
+    @MainActor func showAppOpenAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
 }

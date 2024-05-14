@@ -13,6 +13,7 @@ import GoogleMobileAds
 public enum AdmobServiceError: Error {
     case canNotRequestAd
     case bannerAdLoaderNotSet
+    case appOpenAdLoaderNotSet
 }
 
 public final class AdmobService: NSObject, AdServiceProtocol, TrackableServiceProtocol {
@@ -29,15 +30,18 @@ public final class AdmobService: NSObject, AdServiceProtocol, TrackableServicePr
     //supported ad formats
     private var canRequestAd = false
     private var bannerAdLoader: AdMobBannerAdLoader?
+    private var appOpenAdLoader: AdmobAppOpenAdLoader?
     
     //dependencies
     private var umpService: GoogleUMPServiceProtocol
     private var umpServiceCancellable: AnyCancellable?
     required public init(umpService: GoogleUMPServiceProtocol,
-                         bannerAdLoader : AdMobBannerAdLoader? = nil) {
+                         bannerAdLoader : AdMobBannerAdLoader? = nil,
+                         appOpenAdLoader: AdmobAppOpenAdLoader? = nil) {
         self.umpService = umpService
         self.statePublisher = stateSubject.removeDuplicates().eraseToAnyPublisher()
         self.bannerAdLoader = bannerAdLoader
+        self.appOpenAdLoader = appOpenAdLoader
         super.init()
     }
     
@@ -45,7 +49,7 @@ public final class AdmobService: NSObject, AdServiceProtocol, TrackableServicePr
 
 extension AdmobService {
     //Banner
-    public func getBanner(for key: String, size: ACCAdSize, root: UIViewController?) async throws -> UIView {
+    public func getBannerAd(for key: String, size: ACCAdSize, root: UIViewController?) async throws -> UIView {
         guard canRequestAd else {
             throw AdmobServiceError.canNotRequestAd
         }
@@ -55,8 +59,27 @@ extension AdmobService {
         return try await bannerAdLoader.getBanner(for: key, size: size, root: root)
     }
     
-    public func removeBanner(for key: String) -> Bool {
+    public func removeBannerAd(for key: String) -> Bool {
         return bannerAdLoader?.removeBanner(for: key) ?? false
+    }
+    
+    //AppOpen
+    public func loadAppOpenAd() async throws {
+        guard canRequestAd else {
+            throw AdmobServiceError.canNotRequestAd
+        }
+        guard let appOpenAdLoader = appOpenAdLoader else {
+            throw AdmobServiceError.appOpenAdLoaderNotSet
+        }
+        
+        try await appOpenAdLoader.loadAd()
+    }
+    
+    public func showAppOpenAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
+        guard let appOpenAdLoader = appOpenAdLoader else {
+            throw AdmobServiceError.appOpenAdLoaderNotSet
+        }
+        try appOpenAdLoader.showAdIfAvailable(controller: controller, listener: listener)
     }
 }
 
@@ -76,6 +99,7 @@ extension AdmobService: ConfigurableProtocol {
         
         //TODO: - UPDATE CONFIG HERE
         bannerAdLoader?.update(with: config)
+        appOpenAdLoader?.update(with: config)
     }
 }
 

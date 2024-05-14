@@ -10,6 +10,7 @@ import UIKit
 import Combine
 import ACCCore
 import ACCCoreUtilities
+import ACCCoreAdMob
 
 
 final class SampleService: NSObject,@unchecked Sendable, SampleServiceProtocol {
@@ -20,6 +21,8 @@ final class SampleService: NSObject,@unchecked Sendable, SampleServiceProtocol {
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
     let statePublisher: AnyPublisher<ServiceState, Never>
     private var timerCancellable: AnyCancellable?
+    private var adService: AdServiceProtocol?
+    private var initCancellables: Set<AnyCancellable> = []
     
     override init() {
         contentPublisher = contentSubject.eraseToAnyPublisher()
@@ -50,6 +53,12 @@ final class SampleService: NSObject,@unchecked Sendable, SampleServiceProtocol {
     }
 }
 
+extension SampleService: UIWindowSceneDelegate {
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        
+    }
+}
+
 extension SampleService: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         contentSubject.send("DEF")
@@ -69,6 +78,11 @@ extension SampleService: UIApplicationDelegate {
         
         return true
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        
+    }
+    
 }
 
 private extension SampleService {
