@@ -58,7 +58,7 @@ private extension SplashViewModel {
         if let rcStatePublisher = firRCService?.statePublisher
             .filter({$0 == .ready})
             .prefix(1),
-           let appOpenClosed = adPreloaderService?.appOpenClosedPublisher.filter({$0}).prefix(1) {
+           let appOpenClosed = adPreloaderService?.firstAppOpenClosedPublisher.filter({$0}).prefix(1) {
             stateCancellable = Publishers.CombineLatest3(attStatePublisher, rcStatePublisher, appOpenClosed)
                 .receive(on: RunLoop.main)
                 .sink { (stt) in

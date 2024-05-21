@@ -15,4 +15,8 @@ public protocol AdServiceProtocol: ServiceProtocol {
     //App Open
     func loadAppOpenAd() async throws
     @MainActor func showAppOpenAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
+    
+    //Interstitial
+    func loadInterstitialAd() async throws
+    @MainActor func showInterstitialAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
 }

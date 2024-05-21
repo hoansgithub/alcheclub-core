@@ -35,6 +35,16 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
                 vm.removeBannerAd()
             }.disabled(vm.recentBannerAdView == nil)
             
+            Button("Show Interstitial") {
+                do {
+                    try vm.showInterstitial(from: nil) { state in
+                        debugPrint(state)
+                    }
+                } catch {
+                    debugPrint(error.localizedDescription)
+                }
+            }
+            
             Button("RESET") {
                 vm.reset()
             }.foregroundStyle(.blue)

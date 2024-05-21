@@ -45,3 +45,8 @@ public protocol FullScreenAdLoaderProtocol: AdLoaderProtocol {
 public protocol AppOpenAdLoaderProtocol: FullScreenAdLoaderProtocol {
     
 }
+
+///Interstitial
+public protocol InterstitialAdLoaderProtocol: FullScreenAdLoaderProtocol {
+
+}

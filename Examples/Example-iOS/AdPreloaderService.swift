@@ -11,18 +11,19 @@ import ACCCoreAdMob
 import Combine
 import UIKit
 class AdPreloaderService: NSObject, @unchecked Sendable, AdPreloaderServiceProtocol {
-    private let appOpenClosedSubject = CurrentValueSubject<Bool, Never>(false)
-    let appOpenClosedPublisher: AnyPublisher<Bool, Never>
+    private let firstAppOpenClosedSubject = CurrentValueSubject<Bool, Never>(false)
+    let firstAppOpenClosedPublisher: AnyPublisher<Bool, Never>
     
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
     let statePublisher: AnyPublisher<ServiceState, Never>
     private var adService: AdServiceProtocol?
     private var appOpenCancellable: AnyCancellable?
+    private var interstitialCancellable: AnyCancellable?
     required init(adService: AdServiceProtocol?) {
         statePublisher = stateSubject
             .removeDuplicates()
             .eraseToAnyPublisher()
-        appOpenClosedPublisher = appOpenClosedSubject
+        firstAppOpenClosedPublisher = firstAppOpenClosedSubject
             .removeDuplicates()
             .eraseToAnyPublisher()
         self.adService = adService
@@ -37,10 +38,32 @@ extension AdPreloaderService: UIApplicationDelegate {
 extension AdPreloaderService: UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         waitAppOpen()
+        fetchInterstital()
     }
 }
 
 extension AdPreloaderService {
+    
+    func fetchInterstital() {
+        interstitialCancellable?.cancel()
+        interstitialCancellable = adService?.statePublisher
+            .filter({$0 == .ready})
+            .prefix(1)
+            .sink(receiveValue: { [weak self] _ in
+                self?.awaitFetchInterstitial()
+            })
+    }
+    
+    func awaitFetchInterstitial(){
+        Task {
+            do {
+                try await adService?.loadInterstitialAd()
+            } catch {
+                ACCLogger.print(error, level: .error)
+            }
+        }
+    }
+    
     func waitAppOpen() {
         appOpenCancellable?.cancel()
         appOpenCancellable = adService?.statePublisher
@@ -58,7 +81,7 @@ extension AdPreloaderService {
                 await showAppOpen()
             } catch {
                 ACCLogger.print(error, level: .error)
-                appOpenClosedSubject.send(true)
+                firstAppOpenClosedSubject.send(true)
             }
         }
     }
@@ -68,10 +91,10 @@ extension AdPreloaderService {
             try adService?.showAppOpenAdIfAvailable(controller: nil, listener: { [weak self] state in
                 switch state {
                 case .didDismiss:
-                    self?.appOpenClosedSubject.send(true)
+                    self?.firstAppOpenClosedSubject.send(true)
                 case.failedToPresent(let err):
                     ACCLogger.print(err, level: .error)
-                    self?.appOpenClosedSubject.send(true)
+                    self?.firstAppOpenClosedSubject.send(true)
                 default:
                     break
                 }

@@ -14,6 +14,7 @@ public enum AdmobServiceError: Error {
     case canNotRequestAd
     case bannerAdLoaderNotSet
     case appOpenAdLoaderNotSet
+    case interstitialAdLoaderNotSet
 }
 
 public final class AdmobService: NSObject, AdServiceProtocol, TrackableServiceProtocol {
@@ -31,17 +32,20 @@ public final class AdmobService: NSObject, AdServiceProtocol, TrackableServicePr
     private var canRequestAd = false
     private var bannerAdLoader: AdMobBannerAdLoader?
     private var appOpenAdLoader: AdmobAppOpenAdLoader?
+    private var interstitialAdLoader: AdmobInterstitialAdLoader?
     
     //dependencies
     private var umpService: GoogleUMPServiceProtocol
     private var umpServiceCancellable: AnyCancellable?
     required public init(umpService: GoogleUMPServiceProtocol,
                          bannerAdLoader : AdMobBannerAdLoader? = nil,
-                         appOpenAdLoader: AdmobAppOpenAdLoader? = nil) {
+                         appOpenAdLoader: AdmobAppOpenAdLoader? = nil,
+                         interstitialAdLoader: AdmobInterstitialAdLoader? = nil) {
         self.umpService = umpService
         self.statePublisher = stateSubject.removeDuplicates().eraseToAnyPublisher()
         self.bannerAdLoader = bannerAdLoader
         self.appOpenAdLoader = appOpenAdLoader
+        self.interstitialAdLoader = interstitialAdLoader
         super.init()
     }
     
@@ -81,13 +85,33 @@ extension AdmobService {
         }
         try appOpenAdLoader.showAdIfAvailable(controller: controller, listener: listener)
     }
+    
+    //Interstitial
+    public func loadInterstitialAd() async throws {
+        guard canRequestAd else {
+            throw AdmobServiceError.canNotRequestAd
+        }
+        guard let interstitialAdLoader = interstitialAdLoader else {
+            throw AdmobServiceError.interstitialAdLoaderNotSet
+        }
+        
+        try await interstitialAdLoader.loadAd()
+    }
+    
+    public func showInterstitialAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
+        guard let interstitialAdLoader = interstitialAdLoader else {
+            throw AdmobServiceError.interstitialAdLoaderNotSet
+        }
+        
+        try interstitialAdLoader.showAdIfAvailable(controller: controller, listener: listener)
+    }
 }
 
 extension AdmobService: UIApplicationDelegate {
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         registerObservers { [weak self] stt in
-            self?.stateSubject.send(.ready)
             self?.canRequestAd = true
+            self?.stateSubject.send(.ready)
         }
         
         return true

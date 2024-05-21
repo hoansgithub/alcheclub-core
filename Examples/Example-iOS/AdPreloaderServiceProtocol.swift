@@ -7,6 +7,8 @@
 
 import ACCCore
 import Combine
+import UIKit
+import ACCCoreAdMob
 public protocol AdPreloaderServiceProtocol: ServiceProtocol {
-    var appOpenClosedPublisher: AnyPublisher<Bool, Never> { get }
+    var firstAppOpenClosedPublisher: AnyPublisher<Bool, Never> { get }
 }

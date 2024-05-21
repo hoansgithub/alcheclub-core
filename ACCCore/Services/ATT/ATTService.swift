@@ -68,7 +68,7 @@ private extension ATTService {
         if !userDefaults.bool(forKey: flag) {
             let paramValue: String = status == .authorized ? "yes" : "no"
             let param = ["value": paramValue]
-            let event = AnalyticsEvent("attprompt_action", params: param)
+            let event = AnalyticsEvent("acc_att_action", params: param)
             track(event: event)
             userDefaults.set(true, forKey: flag)
             userDefaults.synchronize()

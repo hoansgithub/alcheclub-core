@@ -18,6 +18,7 @@ protocol AdsViewModelProtocol: BaseViewModelProtocol {
     func presentPrivacyOptions(from view: UIViewController)
     func getBannerAd(controller: UIViewController) async
     func removeBannerAd()
+    @MainActor func showInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
     func reset()
 }
 
@@ -43,6 +44,21 @@ class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
 }
 
 extension AdsViewModel {
+    @MainActor func showInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
+        
+        try admobService?.showInterstitialAdIfAvailable(controller: view, listener: { [weak self] state in
+            switch state {
+            case .didDismiss:
+                Task {
+                    try? await self?.admobService?.loadInterstitialAd()
+                }
+            default: break
+            }
+            
+            listener?(state)
+        })
+    }
+    
     func removeBannerAd() {
         if admobService?.removeBannerAd(for: "AdsViewModel") == true {
             recentBannerAdView = nil
