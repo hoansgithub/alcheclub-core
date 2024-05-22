@@ -10,7 +10,7 @@ import UIKit
 
 
 public protocol AdLoaderProtocol: ConfigurableProtocol, TrackableServiceProtocol {
-    var adUnitID: String { get set }
+    var adUnitID: String { get }
 }
 
 //Banner
@@ -49,4 +49,9 @@ public protocol AppOpenAdLoaderProtocol: FullScreenAdLoaderProtocol {
 ///Interstitial
 public protocol InterstitialAdLoaderProtocol: FullScreenAdLoaderProtocol {
 
+}
+
+//Rewarded
+public protocol RewardedAdLoaderProtocol: FullScreenAdLoaderProtocol {
+    
 }

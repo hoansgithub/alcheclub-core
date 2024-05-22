@@ -88,6 +88,9 @@
 		F0FB21872BA988A100ECEB56 /* ServiceProviderAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21862BA988A100ECEB56 /* ServiceProviderAppDelegate.swift */; };
 		FC32A9A72BFD7A0900108084 /* ACCCore+SendableObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32A9A62BFD7A0900108084 /* ACCCore+SendableObjects.swift */; };
 		FC32A9A92BFD8D6900108084 /* ACCCoreAdmob+SendableObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32A9A82BFD8D6900108084 /* ACCCoreAdmob+SendableObjects.swift */; };
+		FC32A9AC2BFE36FF00108084 /* AdmobRewardedAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32A9AB2BFE36FF00108084 /* AdmobRewardedAdLoader.swift */; };
+		FC32A9AE2BFE3DA200108084 /* AdVerificationOptionsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32A9AD2BFE3DA200108084 /* AdVerificationOptionsCollection.swift */; };
+		FC32A9B02BFE459F00108084 /* FullScreenAdLoadeProtocol+GADFullScreenContentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32A9AF2BFE459F00108084 /* FullScreenAdLoadeProtocol+GADFullScreenContentDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +200,9 @@
 		F0FB21862BA988A100ECEB56 /* ServiceProviderAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderAppDelegate.swift; sourceTree = "<group>"; };
 		FC32A9A62BFD7A0900108084 /* ACCCore+SendableObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ACCCore+SendableObjects.swift"; sourceTree = "<group>"; };
 		FC32A9A82BFD8D6900108084 /* ACCCoreAdmob+SendableObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ACCCoreAdmob+SendableObjects.swift"; sourceTree = "<group>"; };
+		FC32A9AB2BFE36FF00108084 /* AdmobRewardedAdLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmobRewardedAdLoader.swift; sourceTree = "<group>"; };
+		FC32A9AD2BFE3DA200108084 /* AdVerificationOptionsCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdVerificationOptionsCollection.swift; sourceTree = "<group>"; };
+		FC32A9AF2BFE459F00108084 /* FullScreenAdLoadeProtocol+GADFullScreenContentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FullScreenAdLoadeProtocol+GADFullScreenContentDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +274,7 @@
 		F01573972BE9E31000FDA7D0 /* AdService */ = {
 			isa = PBXGroup;
 			children = (
+				FC32A9AA2BFE356000108084 /* Rewarded */,
 				F015740D2BFC536800FDA7D0 /* Interstitial */,
 				F01573A22BF3236400FDA7D0 /* AppOpen */,
 				F02C32C02BEB2E6C006F5F75 /* Banner */,
@@ -275,6 +282,8 @@
 				F015739E2BEA147300FDA7D0 /* AdLoaderProtocol.swift */,
 				F015739C2BEA10DA00FDA7D0 /* AdmobService.swift */,
 				F02C32C32BEB4A29006F5F75 /* ACCAdSize.swift */,
+				FC32A9AD2BFE3DA200108084 /* AdVerificationOptionsCollection.swift */,
+				FC32A9AF2BFE459F00108084 /* FullScreenAdLoadeProtocol+GADFullScreenContentDelegate.swift */,
 			);
 			path = AdService;
 			sourceTree = "<group>";
@@ -545,6 +554,14 @@
 			path = ServiceProviderAppDelegateExtensions;
 			sourceTree = "<group>";
 		};
+		FC32A9AA2BFE356000108084 /* Rewarded */ = {
+			isa = PBXGroup;
+			children = (
+				FC32A9AB2BFE36FF00108084 /* AdmobRewardedAdLoader.swift */,
+			);
+			path = Rewarded;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -745,12 +762,15 @@
 				F015739F2BEA147300FDA7D0 /* AdLoaderProtocol.swift in Sources */,
 				F015740F2BFC53AF00FDA7D0 /* AdmobInterstitialAdLoader.swift in Sources */,
 				F015739D2BEA10DA00FDA7D0 /* AdmobService.swift in Sources */,
+				FC32A9AC2BFE36FF00108084 /* AdmobRewardedAdLoader.swift in Sources */,
 				F01573A42BF3238400FDA7D0 /* AdmobAppOpenAdLoader.swift in Sources */,
 				F02C32C62BEB5026006F5F75 /* GADAdSize+ACCAdSize.swift in Sources */,
+				FC32A9AE2BFE3DA200108084 /* AdVerificationOptionsCollection.swift in Sources */,
 				F02C32C42BEB4A29006F5F75 /* ACCAdSize.swift in Sources */,
 				F015739B2BEA10CD00FDA7D0 /* AdServiceProtocol.swift in Sources */,
 				FC32A9A92BFD8D6900108084 /* ACCCoreAdmob+SendableObjects.swift in Sources */,
 				F02C32C22BEB3794006F5F75 /* AdMobBannerAdLoader.swift in Sources */,
+				FC32A9B02BFE459F00108084 /* FullScreenAdLoadeProtocol+GADFullScreenContentDelegate.swift in Sources */,
 				F02C32AD2BE696BC006F5F75 /* GoogleUMPService.swift in Sources */,
 				F02C32AF2BE69704006F5F75 /* GoogleUMPServiceProtocol.swift in Sources */,
 			);
