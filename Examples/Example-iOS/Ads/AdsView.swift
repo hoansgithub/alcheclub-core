@@ -13,7 +13,7 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
     @State var interstitialDesPresented: Bool = false
     private let formViewControllerRepresentable = BaseViewControllerRepresentable()
     private let interStitialPresentable = BaseViewControllerRepresentable()
-
+    
     var body: some View {
         List {
             Text("Can request ads: \(vm.canRequestAds ? "✅" : ".")")
@@ -52,9 +52,11 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
                 vm.reset()
             }.foregroundStyle(.blue)
             
-            NavigationLink("SSS", destination:  HomeView(vm: HomeViewModel()), isActive: $interstitialDesPresented)
+            NavigationLink(destination:
+                            HomeView(vm: HomeViewModel()), isActive: $interstitialDesPresented) {
+                EmptyView()
+            }
         }
-        .navigationTitle("Ads Demo")
         .background {
             formViewControllerRepresentable
             interStitialPresentable

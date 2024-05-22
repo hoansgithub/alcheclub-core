@@ -106,7 +106,6 @@ extension AdsViewModel {
         umpService?.canRequestAdsPublisher
             .sink(receiveValue: {[weak self] can in
                 self?.canRequestAds = can
-                ACCLogger.print(can)
             }).store(in: &cancellables)
         
         admobService?.statePublisher.filter({$0 == .ready})

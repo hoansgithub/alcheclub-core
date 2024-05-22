@@ -13,7 +13,7 @@ import ACCCoreUtilities
 import ACCCoreAdMob
 
 
-final class SampleService: NSObject,@unchecked Sendable, SampleServiceProtocol {
+final class SampleService: NSObject, @unchecked Sendable, SampleServiceProtocol {
     
     private let contentSubject = CurrentValueSubject<String, Never>("ABC")
     let contentPublisher: AnyPublisher<String, Never>

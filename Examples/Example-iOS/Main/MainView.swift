@@ -15,15 +15,7 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
     var body: some View {
         NavigationView(content: {
             List {
-                NavigationLink(destination: NavigationLinkPresenter({
-                    AdsView(vm: AdsViewModel())
-                })) {
-                    Text("ADS")
-                }
-                
-                NavigationLink {
-                    AdsView(vm: AdsViewModel())
-                } label: {
+                NavigationLink(destination: AdsView(vm: AdsViewModel())) {
                     Text("ADS")
                 }
 

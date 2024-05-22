@@ -11,23 +11,23 @@ import SwiftUI
 struct NavigationLinkPresenter<Content: View>: View {
     let content: () -> Content
 
-    @State private var invalidated = false
+    @State private var invalid = false
     init(@ViewBuilder _ content: @escaping () -> Content) {
         self.content = content
     }
     var body: some View {
         Group {
-            if self.invalidated {
+            if self.invalid {
                 EmptyView()
             } else {
                 content()
             }
         }
         .onDisappear {
-            self.invalidated = true
+            self.invalid = true
         }
         .onAppear  {
-            self.invalidated = false
+            self.invalid = false
         }
     }
 }
