@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class AppEnvironment {
+public final class AppEnvironment: Sendable {
     // MARK: Public
     public static let shared = AppEnvironment()
     

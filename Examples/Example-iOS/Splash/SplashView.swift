@@ -11,7 +11,7 @@ protocol SplashViewProtocol: BaseViewProtocol {}
 
 struct SplashView<VM: SplashViewModelProtocol>: SplashViewProtocol {
     var vm: VM
-    private let formViewControllerRepresentable = FormViewControllerRepresentable()
+    private let formViewControllerRepresentable = BaseViewControllerRepresentable()
     @State private var hasViewAppeared = false
     
     var body: some View {

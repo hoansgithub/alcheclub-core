@@ -7,7 +7,7 @@
 
 import UIKit
 import Combine
-public protocol ServiceProtocol: AnyObject {
+public protocol ServiceProtocol:Sendable, AnyObject {
     var statePublisher: AnyPublisher<ServiceState, Never> { get }
 }
 

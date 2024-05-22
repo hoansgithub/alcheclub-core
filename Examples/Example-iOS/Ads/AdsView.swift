@@ -10,7 +10,10 @@ protocol AdsViewProtocol: BaseViewProtocol {}
 
 struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
     @StateObject var vm: VM
-    private let formViewControllerRepresentable = FormViewControllerRepresentable()
+    @State var interstitialDesPresented: Bool = false
+    private let formViewControllerRepresentable = BaseViewControllerRepresentable()
+    private let interStitialPresentable = BaseViewControllerRepresentable()
+
     var body: some View {
         List {
             Text("Can request ads: \(vm.canRequestAds ? "✅" : ".")")
@@ -37,8 +40,8 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
             
             Button("Show Interstitial") {
                 do {
-                    try vm.showInterstitial(from: nil) { state in
-                        debugPrint(state)
+                    try vm.presentInterstitial(from: interStitialPresentable.viewController) { state in
+                        interstitialDesPresented = true
                     }
                 } catch {
                     debugPrint(error.localizedDescription)
@@ -48,12 +51,15 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
             Button("RESET") {
                 vm.reset()
             }.foregroundStyle(.blue)
+            
+            NavigationLink("SSS", destination:  HomeView(vm: HomeViewModel()), isActive: $interstitialDesPresented)
         }
         .navigationTitle("Ads Demo")
         .background {
             formViewControllerRepresentable
-                .frame(width: .zero, height: .zero)
+            interStitialPresentable
         }
+        
         
         BaseUIViewRepresentable(inputUIView: $vm.recentBannerAdView)
             .frame(maxWidth: .infinity,

@@ -13,7 +13,7 @@
 		F01573892BE87BF300FDA7D0 /* ACCCoreAdMob.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01573882BE87BF300FDA7D0 /* ACCCoreAdMob.framework */; };
 		F015738A2BE87BF300FDA7D0 /* ACCCoreAdMob.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F01573882BE87BF300FDA7D0 /* ACCCoreAdMob.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F01573942BE8D14F00FDA7D0 /* BaseUIViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573932BE8D14F00FDA7D0 /* BaseUIViewRepresentable.swift */; };
-		F01573962BE8DD6100FDA7D0 /* FormViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573952BE8DD6100FDA7D0 /* FormViewControllerRepresentable.swift */; };
+		F01573962BE8DD6100FDA7D0 /* BaseViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573952BE8DD6100FDA7D0 /* BaseViewControllerRepresentable.swift */; };
 		F01573A62BF3651E00FDA7D0 /* AdPreloaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573A52BF3651E00FDA7D0 /* AdPreloaderService.swift */; };
 		F01573A82BF3664000FDA7D0 /* AdPreloaderServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573A72BF3664000FDA7D0 /* AdPreloaderServiceProtocol.swift */; };
 		F05C231E2BE20548003DEC6D /* ACCCoreUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */; };
@@ -69,7 +69,7 @@
 		F01573812BE3A82500FDA7D0 /* NavigationLinkPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLinkPresenter.swift; sourceTree = "<group>"; };
 		F01573882BE87BF300FDA7D0 /* ACCCoreAdMob.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCoreAdMob.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F01573932BE8D14F00FDA7D0 /* BaseUIViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIViewRepresentable.swift; sourceTree = "<group>"; };
-		F01573952BE8DD6100FDA7D0 /* FormViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormViewControllerRepresentable.swift; sourceTree = "<group>"; };
+		F01573952BE8DD6100FDA7D0 /* BaseViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerRepresentable.swift; sourceTree = "<group>"; };
 		F01573A52BF3651E00FDA7D0 /* AdPreloaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdPreloaderService.swift; sourceTree = "<group>"; };
 		F01573A72BF3664000FDA7D0 /* AdPreloaderServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdPreloaderServiceProtocol.swift; sourceTree = "<group>"; };
 		F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCoreUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,7 +131,7 @@
 			children = (
 				F01573812BE3A82500FDA7D0 /* NavigationLinkPresenter.swift */,
 				F01573932BE8D14F00FDA7D0 /* BaseUIViewRepresentable.swift */,
-				F01573952BE8DD6100FDA7D0 /* FormViewControllerRepresentable.swift */,
+				F01573952BE8DD6100FDA7D0 /* BaseViewControllerRepresentable.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -184,13 +184,13 @@
 			path = Container;
 			sourceTree = "<group>";
 		};
-		F0704D552BD78B7A0069F3CA /* Flash */ = {
+		F0704D552BD78B7A0069F3CA /* Splash */ = {
 			isa = PBXGroup;
 			children = (
 				F0704D562BD78B8A0069F3CA /* SplashViewModel.swift */,
 				F0704D582BD78B920069F3CA /* SplashView.swift */,
 			);
-			path = Flash;
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		F0FB212B2BA9767300ECEB56 = {
@@ -217,7 +217,7 @@
 				F015737B2BE3A08700FDA7D0 /* Ads */,
 				F0704D662BD7C8540069F3CA /* Example-iOSDebug.entitlements */,
 				F0704D5A2BD79BCE0069F3CA /* Info.plist */,
-				F0704D552BD78B7A0069F3CA /* Flash */,
+				F0704D552BD78B7A0069F3CA /* Splash */,
 				F0704D4C2BD78B0A0069F3CA /* Container */,
 				F0704D4B2BD78ADA0069F3CA /* Onboarding */,
 				F066D9332BCFC03D003F5690 /* Main */,
@@ -364,7 +364,7 @@
 				F0704D572BD78B8A0069F3CA /* SplashViewModel.swift in Sources */,
 				F0B2E7952BCE7A8F004BA72A /* BaseViewModel.swift in Sources */,
 				F0704D592BD78B920069F3CA /* SplashView.swift in Sources */,
-				F01573962BE8DD6100FDA7D0 /* FormViewControllerRepresentable.swift in Sources */,
+				F01573962BE8DD6100FDA7D0 /* BaseViewControllerRepresentable.swift in Sources */,
 				F0B2E79B2BCE7BB6004BA72A /* BaseView.swift in Sources */,
 				F0B2E7992BCE7AAA004BA72A /* HomeView.swift in Sources */,
 				F0704D502BD78B3C0069F3CA /* ContainerView.swift in Sources */,

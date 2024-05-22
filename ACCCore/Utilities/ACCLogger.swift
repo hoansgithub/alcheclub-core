@@ -7,6 +7,7 @@
 
 import Foundation
 import OSLog
+
 public class ACCLogger {
     private static let subsystem = "co.alcheclub.lib.ACCCore.ACCLogger"
     public static let defaultLogger = Logger(subsystem: subsystem, category: "VCLCoreDefaultLog")

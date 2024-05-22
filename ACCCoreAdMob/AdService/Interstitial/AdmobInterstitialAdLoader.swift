@@ -65,11 +65,9 @@ public extension AdmobInterstitialAdLoader {
             throw FullScreenAdLoaderError.adIsNotAvailable
         }
         
-        if let ad = interstitialAd {
-            presentationStateListener = listener
-            isShowingAd = true
-            ad.present(fromRootViewController: controller)
-        }
+        presentationStateListener = listener
+        isShowingAd = true
+        interstitialAd?.present(fromRootViewController: controller)
     }
 }
 

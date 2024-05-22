@@ -10,7 +10,7 @@ import ACCCore
 import Combine
 import UIKit
 import FirebaseCore
-public final class FirebaseCoreService: NSObject, FirebaseCoreServiceProtocol {
+public final class FirebaseCoreService: NSObject, @unchecked Sendable, FirebaseCoreServiceProtocol {
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
     public let statePublisher: AnyPublisher<ServiceState, Never>
     

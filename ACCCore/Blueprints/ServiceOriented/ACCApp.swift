@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-public final class ACCApp: ServiceProviderProtocol, AnalyticsEventTrackerProtocol {
+public final class ACCApp: @unchecked Sendable, ServiceProviderProtocol, AnalyticsEventTrackerProtocol {
     
     
     private var services: [ServiceProtocol] = []
@@ -32,6 +32,9 @@ public final class ACCApp: ServiceProviderProtocol, AnalyticsEventTrackerProtoco
             app.analyticsPlatforms = analyticsPlatforms
             app.registerConfigCenter(configCenter)
             app.registerServiceEventListener()
+            ACCLogger.print("ACCApp is ready!", level: .info)
+        } else {
+            ACCLogger.print("ACCApp is already set up!", level: .fault)
         }
     }
 }

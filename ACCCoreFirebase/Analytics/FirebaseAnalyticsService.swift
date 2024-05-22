@@ -10,14 +10,14 @@ import ACCCore
 import Combine
 import UIKit
 import FirebaseAnalytics
-public final class FirebaseAnalyticsService: NSObject, FirebaseAnalyticsServiceProtocol {
-    public var id: String = "FirebaseAnalytics"
+public final class FirebaseAnalyticsService: NSObject, @unchecked Sendable, FirebaseAnalyticsServiceProtocol {
+    public let id: String = "FirebaseAnalytics"
     
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
     public let statePublisher: AnyPublisher<ServiceState, Never>
     
     
-    private var coreService: FirebaseCoreServiceProtocol
+    private let coreService: FirebaseCoreServiceProtocol
     private var cancellables: Set<AnyCancellable> = []
     private var _canTrack = false
     required public init(coreService: FirebaseCoreServiceProtocol) {

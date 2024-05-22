@@ -10,7 +10,7 @@ import ACCCore
 import UIKit
 import ACCCoreAdMob
 import Combine
-protocol AdsViewModelProtocol: BaseViewModelProtocol {
+protocol AdsViewModelProtocol: Sendable, BaseViewModelProtocol {
     var recentBannerAdView: UIView? { get set }
     var isPrivacyOptionsRequired: Bool { get }
     var canRequestAds: Bool { get }
@@ -18,7 +18,7 @@ protocol AdsViewModelProtocol: BaseViewModelProtocol {
     func presentPrivacyOptions(from view: UIViewController)
     func getBannerAd(controller: UIViewController) async
     func removeBannerAd()
-    @MainActor func showInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
+    @MainActor func presentInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
     func reset()
 }
 
@@ -44,7 +44,12 @@ class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
 }
 
 extension AdsViewModel {
-    @MainActor func showInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
+    
+    @MainActor func presentInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
+//        let allScenes = UIApplication.shared.connectedScenes
+//        let scene = allScenes.first { $0.activationState == .foregroundActive }
+//        let windowScene = scene as? UIWindowScene
+//        let root = windowScene?.keyWindow?.rootViewController
         
         try admobService?.showInterstitialAdIfAvailable(controller: view, listener: { [weak self] state in
             switch state {

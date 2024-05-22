@@ -17,10 +17,16 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
             List {
                 NavigationLink(destination: NavigationLinkPresenter({
                     AdsView(vm: AdsViewModel())
-                        .navigationBarTitleDisplayMode(.large)
                 })) {
                     Text("ADS")
                 }
+                
+                NavigationLink {
+                    AdsView(vm: AdsViewModel())
+                } label: {
+                    Text("ADS")
+                }
+
                 
                 Button("Firebase Messaging") {
                     vm.requestNotiPermission()

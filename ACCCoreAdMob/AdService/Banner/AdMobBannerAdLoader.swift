@@ -8,7 +8,7 @@
 import ACCCore
 import UIKit
 import GoogleMobileAds
-public final class AdMobBannerAdLoader: NSObject, BannerAdLoaderProtocol {
+public final class AdMobBannerAdLoader: NSObject, @unchecked Sendable, BannerAdLoaderProtocol {
     public weak var eventDelegate: TrackableServiceDelegate?
     public var adUnitID: String = ""
     private var bannersCollection: [String: GADBannerView] = [:]

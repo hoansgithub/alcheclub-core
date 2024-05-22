@@ -23,6 +23,11 @@ struct NavigationLinkPresenter<Content: View>: View {
                 content()
             }
         }
-        .onDisappear { self.invalidated = true }
+        .onDisappear {
+            self.invalidated = true
+        }
+        .onAppear  {
+            self.invalidated = false
+        }
     }
 }

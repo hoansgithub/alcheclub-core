@@ -17,10 +17,12 @@ public enum AdmobServiceError: Error {
     case interstitialAdLoaderNotSet
 }
 
-public final class AdmobService: NSObject, AdServiceProtocol, TrackableServiceProtocol {
+public final class AdmobService: NSObject, @unchecked Sendable, AdServiceProtocol, TrackableServiceProtocol {
     public weak var eventDelegate: TrackableServiceDelegate? {
         didSet {
             self.bannerAdLoader?.eventDelegate = eventDelegate
+            self.interstitialAdLoader?.eventDelegate = eventDelegate
+            self.appOpenAdLoader?.eventDelegate = eventDelegate
         }
     }
     

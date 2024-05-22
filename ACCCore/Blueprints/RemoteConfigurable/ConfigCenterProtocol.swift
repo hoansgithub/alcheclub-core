@@ -7,7 +7,7 @@
 
 import Foundation
 import Combine
-public protocol ConfigCenterProtocol: AnyObject {
+public protocol ConfigCenterProtocol: Sendable, AnyObject {
     var configPublisher: AnyPublisher<ConfigObject, Never> { get }
 }
 

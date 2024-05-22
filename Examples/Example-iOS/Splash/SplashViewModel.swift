@@ -11,7 +11,7 @@ import ACCCoreFirebase
 import ACCCoreAdMob
 import Combine
 import UIKit
-protocol SplashViewModelProtocol: BaseViewModelProtocol {
+protocol SplashViewModelProtocol: Sendable, BaseViewModelProtocol {
     func onViewAppear() async
     func presentConsentFormIfRequired(vc: UIViewController) async
 }
@@ -20,7 +20,6 @@ class SplashViewModel: @unchecked Sendable, SplashViewModelProtocol {
     var firRCService: FirebaseRemoteConfigServiceProtocol?
     var umpService: GoogleUMPServiceProtocol?
     var adPreloaderService: AdPreloaderServiceProtocol?
-    @MainActor var fullScreenController = UIViewController()
     
     private var stateCancellable: AnyCancellable?
     private var adCancellable: AnyCancellable?
