@@ -12,9 +12,20 @@ import FirebaseCore
 import FirebaseRemoteConfig
 import ACCCoreAdMob
 import UserMessagingPlatform
+import WebKit
 class ExampleAppDelegate: ServiceProviderAppDelegate {
+    /*
+     workaround for handling webview slow initiation at first launch
+     https://stackoverflow.com/questions/74301868/wkwebview-ios-slow-on-first-launch
+     */
+    func woraroundInitialWebViewDelay() {
+        let webView = WKWebView()
+        webView.loadHTMLString("", baseURL: nil)
+    }
     
     override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        woraroundInitialWebViewDelay()
         var rcSettings: RemoteConfigSettings {
             let rc = RemoteConfigSettings()
             rc.fetchTimeout = 5

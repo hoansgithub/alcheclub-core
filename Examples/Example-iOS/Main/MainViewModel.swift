@@ -10,10 +10,10 @@ import ACCCore
 import ACCCoreFirebase
 import Combine
 import UIKit
-protocol MainViewModelProtocol: BaseViewModelProtocol {
+protocol MainViewModelProtocol: Sendable, BaseViewModelProtocol {
     func track(event: AnalyticsEvent)
-    func login()
-    func goToOnboarding()
+    func login() async
+    func goToOnboarding() async
     
     var notificationPermissionNeeded: Bool { get set }
     var notiUserInfo: [AnyHashable: Any] { get }
@@ -37,11 +37,11 @@ class MainViewModel: @unchecked Sendable, MainViewModelProtocol {
         ACCApp.track(event: event)
     }
     
-    func login() {
+    @MainActor func login() {
         AppSession.shared.login()
     }
     
-    func goToOnboarding() {
+    @MainActor func goToOnboarding() {
         AppSession.shared.reset()
     }
     

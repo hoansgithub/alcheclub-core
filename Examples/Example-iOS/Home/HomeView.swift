@@ -28,7 +28,9 @@ struct HomeView<VM: HomeViewModelProtocol>: HomeViewProtocol {
                 }
             
             Button {
-                vm.logOut()
+                Task {
+                    await vm.logOut()
+                }
             } label: {
                 Text("Log out")
             }

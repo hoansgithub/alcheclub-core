@@ -18,9 +18,7 @@ class AdPreloaderService: NSObject, @unchecked Sendable, AdPreloaderServiceProto
     let statePublisher: AnyPublisher<ServiceState, Never>
     private var adService: AdServiceProtocol?
     private var appOpenCancellable: AnyCancellable?
-    private var interstitialCancellable: AnyCancellable?
-    private var rewardedCancellable: AnyCancellable?
-    private var rewardedInterstitialCancellable: AnyCancellable?
+    private var adLoadCancellable: AnyCancellable?
     required init(adService: AdServiceProtocol?) {
         statePublisher = stateSubject
             .removeDuplicates()
@@ -39,94 +37,44 @@ extension AdPreloaderService: UIApplicationDelegate {
 
 extension AdPreloaderService: UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
-        waitAppOpen()
-        fetchInterstital()
-        fetchRewarded()
-        fetchRewardedInterstitial()
+        adLoadCancellable?.cancel() 
+        adLoadCancellable = adService?.statePublisher
+            .filter({$0 == .ready})
+            .prefix(1)
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] _ in
+                Task {
+                    try? await self?.adService?.loadAppOpenAd()
+                    self?.showAppOpen()
+                }
+            })
+        
+        preloadFullScreenAds()
+    }
+    
+    func sceneWillResignActive(_ scene: UIScene) {
+        Task {
+            try? await adService?.loadAppOpenAd()
+        }
     }
 }
 
 extension AdPreloaderService {
-    
-    func fetchRewardedInterstitial() {
-        rewardedInterstitialCancellable?.cancel()
-        rewardedInterstitialCancellable = adService?.statePublisher
-            .filter({$0 == .ready})
-            .prefix(1)
-            .sink(receiveValue: { [weak self] _ in
-                self?.awaitRewardedInterstitial()
-            })
-    }
-    
-    func awaitRewardedInterstitial() {
-        Task {
-            do {
-                try await adService?.loadRewaredInterstitialAd(options: nil)
-            } catch {
-                ACCLogger.print(error, level: .error)
-            }
-        }
-    }
-    
-    func fetchRewarded() {
-        rewardedCancellable?.cancel()
-        rewardedCancellable = adService?.statePublisher
-            .filter({$0 == .ready})
-            .prefix(1)
-            .sink(receiveValue: { [weak self] _ in
-                self?.awaitRewarded()
-            })
-    }
-    
-    func awaitRewarded() {
-        Task {
-            do {
-                try await adService?.loadRewaredAd(options: nil)
-            } catch {
-                ACCLogger.print(error, level: .error)
-            }
-        }
-    }
-    
-    func fetchInterstital() {
-        interstitialCancellable?.cancel()
-        interstitialCancellable = adService?.statePublisher
-            .filter({$0 == .ready})
-            .prefix(1)
-            .sink(receiveValue: { [weak self] _ in
-                self?.awaitFetchInterstitial()
-            })
-    }
-    
-    func awaitFetchInterstitial(){
-        Task {
-            do {
-                try await adService?.loadInterstitialAd()
-            } catch {
-                ACCLogger.print(error, level: .error)
-            }
-        }
-    }
-    
-    func waitAppOpen() {
+    func preloadFullScreenAds() {
         appOpenCancellable?.cancel()
-        appOpenCancellable = adService?.statePublisher
-            .filter({$0 == .ready})
+        appOpenCancellable = firstAppOpenClosedSubject.filter({$0})
             .prefix(1)
-            .sink(receiveValue: { [weak self] _ in
-                self?.getAppOpen()
-            })
+            .sink { [weak self] _ in
+                self?.loadFullScreenAds()
+            }
     }
     
-    private func getAppOpen() {
-        Task {
-            do {
-                try await adService?.loadAppOpenAd()
-                await showAppOpen()
-            } catch {
-                ACCLogger.print(error, level: .error)
-                firstAppOpenClosedSubject.send(true)
-            }
+    func loadFullScreenAds() {
+        ACCLogger.print(self)
+        Task.detached {[weak self] in
+            try? await self?.adService?.loadInterstitialAd()
+            try? await self?.adService?.loadRewaredInterstitialAd(options: nil)
+            try? await self?.adService?.loadRewaredAd(options: nil)
         }
     }
     

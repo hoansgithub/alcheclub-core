@@ -6,15 +6,15 @@
 //
 
 import ACCCore
-protocol OnboardingViewModelProtocol: BaseViewModelProtocol {
-    func closeOnboarding()
+protocol OnboardingViewModelProtocol: Sendable, BaseViewModelProtocol {
+    func closeOnboarding() async
 }
 
-class OnboardingViewModel: OnboardingViewModelProtocol {
+final class OnboardingViewModel: OnboardingViewModelProtocol {
     init() {
     }
     
-    func closeOnboarding() {
+    @MainActor func closeOnboarding() {
         AppSession.shared.endOnboarding()
     }
     

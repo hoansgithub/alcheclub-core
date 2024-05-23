@@ -32,7 +32,9 @@ struct OnboardingItemView: View {
             Text(item.text)
             if lastItem {
                 Button {
-                    vm.closeOnboarding()
+                    Task {
+                        await vm.closeOnboarding()
+                    }
                 } label: {
                     Text("GO ->>>")
                 }

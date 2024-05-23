@@ -82,12 +82,11 @@ private extension FirebaseRemoteConfigService {
      activate RC to get values
      */
     func activateRC() async throws -> Bool {
-        let task = Task.detached(priority: .background) { [weak self] () in
-            guard let self else { throw FirebaseRemoteConfigServiceError.unknown }
+        let task = Task {
             let rm = RemoteConfig.remoteConfig()
             let changed = try await rm.activate()
-            self.configSubject.send(rm)
-            self.stateSubject.send(.ready)
+            configSubject.send(rm)
+            stateSubject.send(.ready)
             return changed
         }
         

@@ -25,7 +25,9 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
                 }.disabled(!vm.notificationPermissionNeeded)
                 
                 Button("Login") {
-                    vm.login()
+                    Task {
+                        await vm.login()
+                    }
                 }
                 
                 Button("Track Event") {
@@ -33,7 +35,9 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
                 }
                 
                 Button("Onboarding") {
-                    vm.goToOnboarding()
+                    Task {
+                        await vm.goToOnboarding()
+                    }
                 }
                 
                 Spacer()

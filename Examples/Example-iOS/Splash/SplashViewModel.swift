@@ -61,10 +61,14 @@ private extension SplashViewModel {
             stateCancellable = Publishers.CombineLatest3(attStatePublisher, rcStatePublisher, appOpenClosed)
                 .receive(on: RunLoop.main)
                 .sink { (stt) in
-                    AppSession.shared.configurateState()
+                    Task {
+                        await AppSession.shared.configurateState()
+                    }
                 }
         } else {
-            AppSession.shared.configurateState()
+            Task {
+                await AppSession.shared.configurateState()
+            }
         }
         
     }

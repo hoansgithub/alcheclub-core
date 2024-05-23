@@ -7,11 +7,11 @@
 
 import ACCCore
 import Combine
-protocol HomeViewModelProtocol: BaseViewModelProtocol {
+protocol HomeViewModelProtocol: Sendable, BaseViewModelProtocol {
     var content: String { get }
     var loading: Bool { get }
     func onViewAppear()
-    func logOut()
+    func logOut() async
 }
 
 class HomeViewModel: @unchecked Sendable, HomeViewModelProtocol {
@@ -37,7 +37,7 @@ class HomeViewModel: @unchecked Sendable, HomeViewModelProtocol {
         
     }
     
-    func logOut() {
+    @MainActor func logOut() {
         AppSession.shared.logout()
     }
     

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-final class AppSession: @unchecked Sendable, ObservableObject {
+@MainActor final class AppSession: ObservableObject {
     private init() {}
     public static let shared = AppSession()
     struct UserDefaultKeys {
