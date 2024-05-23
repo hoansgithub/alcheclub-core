@@ -43,11 +43,13 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
         let bannerAdLoader = AdMobBannerAdLoader(adUnitID: "ca-app-pub-3940256099942544/2435281174")
         let appOpenAdLoader = AdmobAppOpenAdLoader(adUnitID: "ca-app-pub-3940256099942544/5575463023")
         let interstitialAdLoader = AdmobInterstitialAdLoader(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        let rewardedAdLoader = AdmobRewardedAdLoader(adUnitID: "ca-app-pub-3940256099942544/1712485313")
         
         let admobService = AdmobService(umpService: umpService,
                                         bannerAdLoader: bannerAdLoader,
                                         appOpenAdLoader: appOpenAdLoader,
-                                        interstitialAdLoader: interstitialAdLoader)
+                                        interstitialAdLoader: interstitialAdLoader,
+                                        rewardedAdLoader: rewardedAdLoader)
         
         let sampleService = SampleService()
         let adPreloaderService = AdPreloaderService(adService: admobService)

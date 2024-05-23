@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public struct AdVerificationOptionsCollection : Collection {
+public struct AdVerificationOptionsCollection : Sendable, Collection {
     public typealias DictionaryType = Dictionary<String, String>
     private var dictionary: DictionaryType
     

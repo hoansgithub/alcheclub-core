@@ -19,6 +19,7 @@ class AdPreloaderService: NSObject, @unchecked Sendable, AdPreloaderServiceProto
     private var adService: AdServiceProtocol?
     private var appOpenCancellable: AnyCancellable?
     private var interstitialCancellable: AnyCancellable?
+    private var rewardedCancellable: AnyCancellable?
     required init(adService: AdServiceProtocol?) {
         statePublisher = stateSubject
             .removeDuplicates()
@@ -39,10 +40,31 @@ extension AdPreloaderService: UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         waitAppOpen()
         fetchInterstital()
+        fetchRewarded()
     }
 }
 
 extension AdPreloaderService {
+    
+    func fetchRewarded() {
+        rewardedCancellable?.cancel()
+        rewardedCancellable = adService?.statePublisher
+            .filter({$0 == .ready})
+            .prefix(1)
+            .sink(receiveValue: { [weak self] _ in
+                self?.awaitRewarded()
+            })
+    }
+    
+    func awaitRewarded() {
+        Task {
+            do {
+                try await adService?.loadRewaredAd(options: nil)
+            } catch {
+                ACCLogger.print(error, level: .error)
+            }
+        }
+    }
     
     func fetchInterstital() {
         interstitialCancellable?.cancel()
@@ -88,7 +110,7 @@ extension AdPreloaderService {
     
     @MainActor private func showAppOpen() {
         do {
-            try adService?.showAppOpenAdIfAvailable(controller: nil, listener: { [weak self] state in
+            try adService?.presentAppOpenAdIfAvailable(controller: nil, listener: { [weak self] state in
                 switch state {
                 case .didDismiss:
                     self?.firstAppOpenClosedSubject.send(true)

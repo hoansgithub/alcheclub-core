@@ -19,6 +19,7 @@ protocol AdsViewModelProtocol: Sendable, BaseViewModelProtocol {
     func getBannerAd(controller: UIViewController) async
     func removeBannerAd()
     @MainActor func presentInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
+    @MainActor func presentRewarded(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
     func reset()
 }
 
@@ -51,13 +52,29 @@ extension AdsViewModel {
 //        let windowScene = scene as? UIWindowScene
 //        let root = windowScene?.keyWindow?.rootViewController
         
-        try admobService?.showInterstitialAdIfAvailable(controller: view, listener: { [weak self] state in
+        try admobService?.presentInterstitialAdIfAvailable(controller: view, listener: { [weak self] state in
             switch state {
             case .didDismiss:
                 Task {
                     try? await self?.admobService?.loadInterstitialAd()
                 }
             default: break
+            }
+            
+            listener?(state)
+        })
+    }
+    
+    @MainActor func presentRewarded(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
+        try admobService?.presentRewardedAdIfAvailable(controller: view, listener: {[weak self] state in
+            switch state {
+            case .didDismiss:
+                Task {
+                    try? await self?.admobService?.loadRewaredAd(options: nil)
+                }
+                
+            default:
+                break
             }
             
             listener?(state)

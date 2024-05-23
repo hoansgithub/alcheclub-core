@@ -9,24 +9,11 @@ import GoogleMobileAds
 import UIKit
 import ACCCore
 
-public final class AdmobRewardedAdLoader: NSObject, RewardedAdLoaderProtocol {
+public final class AdmobRewardedAdLoader: AdmobFullScreenAdLoader {
     //State
     private var rewardedAd: GADRewardedAd?
-    private var isLoadingAd = false
-    private var isShowingAd = false
-    
-    //Full screen state
-    private var presentationStateListener: FullScreenAdPresentationStateListener?
-    
-    //required properties
-    public weak var eventDelegate: TrackableServiceDelegate?
-    public var adUnitID: String = ""
-    public required init(adUnitID: String) {
-        self.adUnitID = adUnitID
-        super.init()
-    }
-    
-    internal func loadAd(optionsCollection: AdVerificationOptionsCollection? = nil) async throws {
+
+    internal func loadAd(options: AdVerificationOptionsCollection? = nil) async throws {
         if isLoadingAd {
             throw FullScreenAdLoaderError.adIsBeingLoaded
         }
@@ -40,73 +27,45 @@ public final class AdmobRewardedAdLoader: NSObject, RewardedAdLoaderProtocol {
         do {
             rewardedAd = try await GADRewardedAd.load(
                 withAdUnitID: adUnitID, request: GADRequest())
-            if let optionsCollection = optionsCollection {
+            if let optionsCollection = options {
                 let verificationOptions = GADServerSideVerificationOptions.fromCollection(optionsCollection)
                 rewardedAd?.serverSideVerificationOptions = verificationOptions
             }
             rewardedAd?.fullScreenContentDelegate = self
-            
+            isLoadingAd = false
         } catch {
             isLoadingAd = false
             throw FullScreenAdLoaderError.adFailedToLoad(projectedError: error)
         }
         
     }
-}
-
-public extension AdmobRewardedAdLoader {
-    func update(with config: any ConfigObject) {
+    
+    public override func update(with config: any ConfigObject) {
         //TODO: -Update ad config here
     }
     
-    func showAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
+    public override func presentAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
         
+        try super.presentAdIfAvailable(controller: controller, listener: listener)
+        rewardedAd?.present(fromRootViewController: controller, userDidEarnRewardHandler: { [weak self] in
+            if (self?.rewardedAd?.adReward) != nil {
+                listener?(.rewarded)
+            } else {
+                ACCLogger.print("User failed to get reward", level: .default)
+            }
+        })
     }
 }
 
-private extension AdmobRewardedAdLoader {
-    func isAdAvailable() -> Bool {
+public extension AdmobRewardedAdLoader {
+    override func isAdAvailable() -> Bool {
         // Check if ad exists and can be shown.
         return rewardedAd != nil
     }
     
-    func resetState() {
+    override func resetState() {
         rewardedAd = nil
-        isShowingAd = false
-    }
-    
-    func resetListener() {
-        presentationStateListener = nil
-    }
-}
-
-extension AdmobRewardedAdLoader: GADFullScreenContentDelegate {
-    public func adDidRecordImpression(_ ad: GADFullScreenPresentingAd) {
-        
-    }
-    
-    public func adDidRecordClick(_ ad: GADFullScreenPresentingAd) {
-        
-    }
-    
-    public func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-        resetState()
-        presentationStateListener?(.failedToPresent(error: error))
-        resetListener()
-    }
-    
-    public func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        presentationStateListener?(.willPresent)
-    }
-    
-    public func adWillDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        presentationStateListener?(.willDismiss)
-    }
-    
-    public func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        resetState()
-        presentationStateListener?(.didDismiss)
-        resetListener()
+        super.resetState()
     }
 }
 

@@ -25,6 +25,7 @@ public enum FullScreenAdPresentationState {
     case willPresent
     case willDismiss
     case didDismiss
+    case rewarded
 }
 
 public enum FullScreenAdLoaderError: Error {
@@ -38,7 +39,7 @@ public enum FullScreenAdLoaderError: Error {
 public typealias FullScreenAdPresentationStateListener = (_ state: FullScreenAdPresentationState) -> ()
 
 public protocol FullScreenAdLoaderProtocol: AdLoaderProtocol {
-    func showAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
+    @MainActor func presentAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
 }
 
 ///AppOpen

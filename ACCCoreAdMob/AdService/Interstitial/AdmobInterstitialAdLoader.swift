@@ -9,22 +9,9 @@ import ACCCore
 import UIKit
 import GoogleMobileAds
 
-public final class AdmobInterstitialAdLoader: NSObject, InterstitialAdLoaderProtocol {
+public final class AdmobInterstitialAdLoader: AdmobFullScreenAdLoader {
     //State
     private var interstitialAd: GADInterstitialAd?
-    private var isLoadingAd = false
-    private var isShowingAd = false
-    
-    //Full screen state
-    private var presentationStateListener: FullScreenAdPresentationStateListener?
-    
-    //required properties
-    public weak var eventDelegate: TrackableServiceDelegate?
-    public var adUnitID: String = ""
-    public required init(adUnitID: String) {
-        self.adUnitID = adUnitID
-        super.init()
-    }
     
     internal func loadAd() async throws {
         // Do not load ad if there is an unused ad or one is already loading.
@@ -48,71 +35,25 @@ public final class AdmobInterstitialAdLoader: NSObject, InterstitialAdLoaderProt
         isLoadingAd = false
     }
     
-}
-
-public extension AdmobInterstitialAdLoader {
-    func update(with config: ConfigObject) {
+    public override func update(with config: ConfigObject) {
         //TODO: -Update ad config here
     }
     
-    func showAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
-        guard !isShowingAd else {
-            throw FullScreenAdLoaderError.adIsBeingShown
-        }
-        
-        // If the ad is not available yet , throw an error
-        if !isAdAvailable() {
-            throw FullScreenAdLoaderError.adIsNotAvailable
-        }
-        
-        presentationStateListener = listener
-        isShowingAd = true
+    public override func presentAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
+        try super.presentAdIfAvailable(controller: controller, listener: listener)
         interstitialAd?.present(fromRootViewController: controller)
     }
 }
 
-private extension AdmobInterstitialAdLoader {
-    func isAdAvailable() -> Bool {
+public extension AdmobInterstitialAdLoader {
+    override func isAdAvailable() -> Bool {
         // Check if ad exists and can be shown.
         return interstitialAd != nil
     }
     
-    func resetState() {
+    override func resetState() {
         interstitialAd = nil
-        isShowingAd = false
-    }
-    
-    func resetListener() {
-        presentationStateListener = nil
+        super.resetState()
     }
 }
 
-extension AdmobInterstitialAdLoader: GADFullScreenContentDelegate {
-    public func adDidRecordImpression(_ ad: GADFullScreenPresentingAd) {
-        
-    }
-    
-    public func adDidRecordClick(_ ad: GADFullScreenPresentingAd) {
-        
-    }
-    
-    public func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
-        resetState()
-        presentationStateListener?(.failedToPresent(error: error))
-        resetListener()
-    }
-    
-    public func adWillPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        presentationStateListener?(.willPresent)
-    }
-    
-    public func adWillDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        presentationStateListener?(.willDismiss)
-    }
-    
-    public func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
-        resetState()
-        presentationStateListener?(.didDismiss)
-        resetListener()
-    }
-}

@@ -1,5 +1,5 @@
 //
-//  FullScreenAdLoadeProtocol+GADFullScreenContentDelegate.swift
+//  AdmobFullScreenAdLoader.swift
 //  ACCCoreAdMob
 //
 //  Created by Hoan Nguyen on 22/5/24.
@@ -8,12 +8,12 @@
 import Foundation
 import GoogleMobileAds
 import ACCCore
-public class AdmobFullScreenAdLoader: NSObject, FullScreenAdLoaderProtocol, GADFullScreenContentDelegate {
+open class AdmobFullScreenAdLoader: NSObject, FullScreenAdLoaderProtocol {
     //State
     var isLoadingAd = false
     var isShowingAd = false
     //Full screen state
-    private var presentationStateListener: FullScreenAdPresentationStateListener?
+    var presentationStateListener: FullScreenAdPresentationStateListener?
     
     //required properties
     public weak var eventDelegate: TrackableServiceDelegate?
@@ -24,36 +24,14 @@ public class AdmobFullScreenAdLoader: NSObject, FullScreenAdLoaderProtocol, GADF
         super.init()
     }
     
-    open func loadAd() async throws {
-        // Do not load ad if there is an unused ad or one is already loading.
-        if isLoadingAd {
-            throw FullScreenAdLoaderError.adIsBeingLoaded
-        }
-        
-        if isAdAvailable() {
-            throw FullScreenAdLoaderError.adIsAlreadyLoaded
-        }
-        isLoadingAd = true
-        
-    }
     
-    open func isAdAvailable() -> Bool {
-        return false
-    }
     
-    open func resetState() {
-        isShowingAd = false
-    }
     
-    open func resetListener() {
-        presentationStateListener = nil
-    }
-    
-    open func update(with config: any ConfigObject) {
+    open dynamic func update(with config: any ConfigObject) {
         //TODO: -Update ad config here
     }
     
-    open func showAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
+    open dynamic func presentAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
         guard !isShowingAd else {
             throw FullScreenAdLoaderError.adIsBeingShown
         }
@@ -66,8 +44,24 @@ public class AdmobFullScreenAdLoader: NSObject, FullScreenAdLoaderProtocol, GADF
         presentationStateListener = listener
         isShowingAd = true
     }
+}
+
+extension AdmobFullScreenAdLoader {
+    @objc open dynamic func isAdAvailable() -> Bool {
+        return false
+    }
     
+    @objc open dynamic func resetState() {
+        isShowingAd = false
+    }
     
+    @objc open dynamic func resetListener() {
+        presentationStateListener = nil
+    }
+    
+}
+
+extension AdmobFullScreenAdLoader: GADFullScreenContentDelegate {
     open func adDidRecordImpression(_ ad: GADFullScreenPresentingAd) {
         
     }

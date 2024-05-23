@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ACCCore
 protocol AdsViewProtocol: BaseViewProtocol {}
 
 struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
@@ -44,7 +45,21 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
                         interstitialDesPresented = true
                     }
                 } catch {
-                    debugPrint(error.localizedDescription)
+                    ACCLogger.print(error, level: .error)
+                }
+            }
+            
+            Button("Show Rewarded") {
+                do {
+                    try vm.presentRewarded(from: interStitialPresentable.viewController) { state in
+                        switch state {
+                        case .rewarded:
+                            ACCLogger.print("REWARDED")
+                        default: break
+                        }
+                    }
+                } catch {
+                    ACCLogger.print(error, level: .error)
                 }
             }
             
