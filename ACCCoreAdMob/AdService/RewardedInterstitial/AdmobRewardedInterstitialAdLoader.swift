@@ -1,18 +1,17 @@
 //
-//  AdmobRewardedAdLoader.swift
+//  AdmobRewardedInterstitialAdLoader.swift
 //  ACCCoreAdMob
 //
-//  Created by Hoan Nguyen on 22/5/24.
+//  Created by Hoan Nguyen on 23/5/24.
 //
 
+import Foundation
 import GoogleMobileAds
-import UIKit
 import ACCCore
 
-public final class AdmobRewardedAdLoader: AdmobFullScreenAdLoader {
-    //State
-    private var rewardedAd: GADRewardedAd?
-
+public final class AdmobRewardedInterstitialAdLoader: AdmobFullScreenAdLoader {
+    private var rewardedInterstitialAd: GADRewardedInterstitialAd?
+    
     internal func loadAd(options: AdVerificationOptionsCollection? = nil) async throws {
         if isLoadingAd {
             throw FullScreenAdLoaderError.adIsBeingLoaded
@@ -25,13 +24,13 @@ public final class AdmobRewardedAdLoader: AdmobFullScreenAdLoader {
         isLoadingAd = true
         
         do {
-            rewardedAd = try await GADRewardedAd.load(
+            rewardedInterstitialAd = try await GADRewardedInterstitialAd.load(
                 withAdUnitID: adUnitID, request: GADRequest())
             if let optionsCollection = options {
                 let verificationOptions = GADServerSideVerificationOptions.fromCollection(optionsCollection)
-                rewardedAd?.serverSideVerificationOptions = verificationOptions
+                rewardedInterstitialAd?.serverSideVerificationOptions = verificationOptions
             }
-            rewardedAd?.fullScreenContentDelegate = self
+            rewardedInterstitialAd?.fullScreenContentDelegate = self
             isLoadingAd = false
         } catch {
             isLoadingAd = false
@@ -47,24 +46,25 @@ public final class AdmobRewardedAdLoader: AdmobFullScreenAdLoader {
     public override func presentAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
         
         try super.presentAdIfAvailable(controller: controller, listener: listener)
-        rewardedAd?.present(fromRootViewController: controller, userDidEarnRewardHandler: { [weak self] in
-            if (self?.rewardedAd?.adReward) != nil {
+        rewardedInterstitialAd?.present(fromRootViewController: controller, userDidEarnRewardHandler: { [weak self] in
+            if (self?.rewardedInterstitialAd?.adReward) != nil {
                 listener?(.rewarded)
             } else {
                 ACCLogger.print("User failed to get reward", level: .default)
             }
         })
     }
+    
 }
 
-public extension AdmobRewardedAdLoader {
+public extension AdmobRewardedInterstitialAdLoader {
     override func isAdAvailable() -> Bool {
         // Check if ad exists and can be shown.
-        return rewardedAd != nil
+        return rewardedInterstitialAd != nil
     }
     
     override func resetState() {
-        rewardedAd = nil
+        rewardedInterstitialAd = nil
         super.resetState()
     }
 }

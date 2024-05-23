@@ -23,4 +23,9 @@ public protocol AdServiceProtocol: ServiceProtocol {
     //Rewarded
     func loadRewaredAd(options: AdVerificationOptionsCollection?) async throws
     @MainActor func presentRewardedAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
+    
+    //RewardedInterstitial
+    func loadRewaredInterstitialAd(options: AdVerificationOptionsCollection?) async throws
+    
+    @MainActor func presentRewaredInterstitialAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
 }

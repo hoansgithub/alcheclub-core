@@ -42,17 +42,3 @@ public protocol FullScreenAdLoaderProtocol: AdLoaderProtocol {
     @MainActor func presentAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
 }
 
-///AppOpen
-public protocol AppOpenAdLoaderProtocol: FullScreenAdLoaderProtocol {
-    
-}
-
-///Interstitial
-public protocol InterstitialAdLoaderProtocol: FullScreenAdLoaderProtocol {
-
-}
-
-//Rewarded
-public protocol RewardedAdLoaderProtocol: FullScreenAdLoaderProtocol {
-    
-}

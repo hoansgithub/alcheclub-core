@@ -90,3 +90,20 @@ extension AdmobFullScreenAdLoader: GADFullScreenContentDelegate {
         resetListener()
     }
 }
+
+extension GADServerSideVerificationOptions {
+    static let KeyGADServerSideVerificationCustomRewardString = "KeyGADServerSideVerificationCustomRewardString"
+    static let KeyGADServerSideVerificationUserIdentifier = "KeyGADServerSideVerificationUserIdentifier"
+    static func fromCollection(_ collection: AdVerificationOptionsCollection) -> GADServerSideVerificationOptions {
+        let options = GADServerSideVerificationOptions()
+        let customRewardString = collection[KeyGADServerSideVerificationCustomRewardString]
+        let userIdentifier = collection[KeyGADServerSideVerificationUserIdentifier]
+        if !customRewardString.isEmpty {
+            options.customRewardString = customRewardString
+        }
+        if !userIdentifier.isEmpty {
+            options.userIdentifier = userIdentifier
+        }
+        return options
+    }
+}

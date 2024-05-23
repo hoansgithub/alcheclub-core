@@ -16,6 +16,7 @@ public enum AdmobServiceError: Error {
     case appOpenAdLoaderNotSet
     case interstitialAdLoaderNotSet
     case rewardedAdLoaderNotSet
+    case rewaredInterstitialAdLoaderNotSet
 }
 
 public final class AdmobService: NSObject, @unchecked Sendable, AdServiceProtocol, TrackableServiceProtocol {
@@ -25,6 +26,7 @@ public final class AdmobService: NSObject, @unchecked Sendable, AdServiceProtoco
             self.interstitialAdLoader?.eventDelegate = eventDelegate
             self.appOpenAdLoader?.eventDelegate = eventDelegate
             self.rewardedAdLoader?.eventDelegate = eventDelegate
+            self.rewaredInterstitialAdLoader?.eventDelegate = eventDelegate
         }
     }
     
@@ -38,6 +40,7 @@ public final class AdmobService: NSObject, @unchecked Sendable, AdServiceProtoco
     private var appOpenAdLoader: AdmobAppOpenAdLoader?
     private var interstitialAdLoader: AdmobInterstitialAdLoader?
     private var rewardedAdLoader: AdmobRewardedAdLoader?
+    private var rewaredInterstitialAdLoader: AdmobRewardedInterstitialAdLoader?
     //dependencies
     private var umpService: GoogleUMPServiceProtocol
     private var umpServiceCancellable: AnyCancellable?
@@ -45,13 +48,15 @@ public final class AdmobService: NSObject, @unchecked Sendable, AdServiceProtoco
                          bannerAdLoader : AdMobBannerAdLoader? = nil,
                          appOpenAdLoader: AdmobAppOpenAdLoader? = nil,
                          interstitialAdLoader: AdmobInterstitialAdLoader? = nil,
-                         rewardedAdLoader: AdmobRewardedAdLoader? = nil) {
+                         rewardedAdLoader: AdmobRewardedAdLoader? = nil,
+                         rewaredInterstitialAdLoader: AdmobRewardedInterstitialAdLoader? = nil) {
         self.umpService = umpService
         self.statePublisher = stateSubject.removeDuplicates().eraseToAnyPublisher()
         self.bannerAdLoader = bannerAdLoader
         self.appOpenAdLoader = appOpenAdLoader
         self.interstitialAdLoader = interstitialAdLoader
         self.rewardedAdLoader = rewardedAdLoader
+        self.rewaredInterstitialAdLoader = rewaredInterstitialAdLoader
         super.init()
     }
     
@@ -133,6 +138,27 @@ extension AdmobService {
         
         try rewardedAdLoader.presentAdIfAvailable(controller: controller, listener: listener)
     }
+    
+    //Rewarded Interstitial
+    public func loadRewaredInterstitialAd(options: AdVerificationOptionsCollection?) async throws {
+        guard canRequestAd else {
+            throw AdmobServiceError.canNotRequestAd
+        }
+        
+        guard let rewaredInterstitialAdLoader = rewaredInterstitialAdLoader else {
+            throw AdmobServiceError.rewaredInterstitialAdLoaderNotSet
+        }
+        
+        try await rewaredInterstitialAdLoader.loadAd(options: options)
+    }
+    
+    @MainActor public func presentRewaredInterstitialAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
+        guard let rewaredInterstitialAdLoader = rewaredInterstitialAdLoader else {
+            throw AdmobServiceError.rewaredInterstitialAdLoaderNotSet
+        }
+        
+        try rewaredInterstitialAdLoader.presentAdIfAvailable(controller: controller, listener: listener)
+    }
 }
 
 extension AdmobService: UIApplicationDelegate {
@@ -154,6 +180,7 @@ extension AdmobService: ConfigurableProtocol {
         appOpenAdLoader?.update(with: config)
         interstitialAdLoader?.update(with: config)
         rewardedAdLoader?.update(with: config)
+        rewaredInterstitialAdLoader?.update(with: config)
     }
 }
 

@@ -63,6 +63,21 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
                 }
             }
             
+            Button("Show Rewarded Interstitial") {
+                do {
+                    try vm.presentRewardedInterstitial(from: interStitialPresentable.viewController) { state in
+                        switch state {
+                        case .rewarded:
+                            ACCLogger.print("REWARDED")
+                            interstitialDesPresented = true
+                        default: break
+                        }
+                    }
+                } catch {
+                    ACCLogger.print(error, level: .error)
+                }
+            }
+            
             Button("RESET") {
                 vm.reset()
             }.foregroundStyle(.blue)

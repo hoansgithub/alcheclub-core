@@ -20,6 +20,7 @@ class AdPreloaderService: NSObject, @unchecked Sendable, AdPreloaderServiceProto
     private var appOpenCancellable: AnyCancellable?
     private var interstitialCancellable: AnyCancellable?
     private var rewardedCancellable: AnyCancellable?
+    private var rewardedInterstitialCancellable: AnyCancellable?
     required init(adService: AdServiceProtocol?) {
         statePublisher = stateSubject
             .removeDuplicates()
@@ -41,10 +42,31 @@ extension AdPreloaderService: UIWindowSceneDelegate {
         waitAppOpen()
         fetchInterstital()
         fetchRewarded()
+        fetchRewardedInterstitial()
     }
 }
 
 extension AdPreloaderService {
+    
+    func fetchRewardedInterstitial() {
+        rewardedInterstitialCancellable?.cancel()
+        rewardedInterstitialCancellable = adService?.statePublisher
+            .filter({$0 == .ready})
+            .prefix(1)
+            .sink(receiveValue: { [weak self] _ in
+                self?.awaitRewardedInterstitial()
+            })
+    }
+    
+    func awaitRewardedInterstitial() {
+        Task {
+            do {
+                try await adService?.loadRewaredInterstitialAd(options: nil)
+            } catch {
+                ACCLogger.print(error, level: .error)
+            }
+        }
+    }
     
     func fetchRewarded() {
         rewardedCancellable?.cancel()

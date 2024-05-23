@@ -20,6 +20,7 @@ protocol AdsViewModelProtocol: Sendable, BaseViewModelProtocol {
     func removeBannerAd()
     @MainActor func presentInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
     @MainActor func presentRewarded(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
+    @MainActor func presentRewardedInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
     func reset()
 }
 
@@ -46,6 +47,8 @@ class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
 
 extension AdsViewModel {
     
+    
+    
     @MainActor func presentInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
 //        let allScenes = UIApplication.shared.connectedScenes
 //        let scene = allScenes.first { $0.activationState == .foregroundActive }
@@ -71,6 +74,22 @@ extension AdsViewModel {
             case .didDismiss:
                 Task {
                     try? await self?.admobService?.loadRewaredAd(options: nil)
+                }
+                
+            default:
+                break
+            }
+            
+            listener?(state)
+        })
+    }
+    
+    @MainActor func presentRewardedInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
+        try admobService?.presentRewaredInterstitialAdIfAvailable(controller: view, listener: {[weak self] state in
+            switch state {
+            case .didDismiss:
+                Task {
+                    try? await self?.admobService?.loadRewaredInterstitialAd(options: nil)
                 }
                 
             default:

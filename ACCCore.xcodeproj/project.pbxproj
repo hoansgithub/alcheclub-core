@@ -91,6 +91,7 @@
 		FC32A9AC2BFE36FF00108084 /* AdmobRewardedAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32A9AB2BFE36FF00108084 /* AdmobRewardedAdLoader.swift */; };
 		FC32A9AE2BFE3DA200108084 /* AdVerificationOptionsCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32A9AD2BFE3DA200108084 /* AdVerificationOptionsCollection.swift */; };
 		FC32A9B02BFE459F00108084 /* AdmobFullScreenAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC32A9AF2BFE459F00108084 /* AdmobFullScreenAdLoader.swift */; };
+		FCC3F37E2BFF2EEC00E6891F /* AdmobRewardedInterstitialAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC3F37D2BFF2EEC00E6891F /* AdmobRewardedInterstitialAdLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +204,7 @@
 		FC32A9AB2BFE36FF00108084 /* AdmobRewardedAdLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmobRewardedAdLoader.swift; sourceTree = "<group>"; };
 		FC32A9AD2BFE3DA200108084 /* AdVerificationOptionsCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdVerificationOptionsCollection.swift; sourceTree = "<group>"; };
 		FC32A9AF2BFE459F00108084 /* AdmobFullScreenAdLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmobFullScreenAdLoader.swift; sourceTree = "<group>"; };
+		FCC3F37D2BFF2EEC00E6891F /* AdmobRewardedInterstitialAdLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmobRewardedInterstitialAdLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +276,7 @@
 		F01573972BE9E31000FDA7D0 /* AdService */ = {
 			isa = PBXGroup;
 			children = (
+				FCC3F37C2BFF2EA000E6891F /* RewardedInterstitial */,
 				FC32A9AA2BFE356000108084 /* Rewarded */,
 				F015740D2BFC536800FDA7D0 /* Interstitial */,
 				F01573A22BF3236400FDA7D0 /* AppOpen */,
@@ -562,6 +565,14 @@
 			path = Rewarded;
 			sourceTree = "<group>";
 		};
+		FCC3F37C2BFF2EA000E6891F /* RewardedInterstitial */ = {
+			isa = PBXGroup;
+			children = (
+				FCC3F37D2BFF2EEC00E6891F /* AdmobRewardedInterstitialAdLoader.swift */,
+			);
+			path = RewardedInterstitial;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -770,6 +781,7 @@
 				F015739B2BEA10CD00FDA7D0 /* AdServiceProtocol.swift in Sources */,
 				FC32A9A92BFD8D6900108084 /* ACCCoreAdmob+SendableObjects.swift in Sources */,
 				F02C32C22BEB3794006F5F75 /* AdMobBannerAdLoader.swift in Sources */,
+				FCC3F37E2BFF2EEC00E6891F /* AdmobRewardedInterstitialAdLoader.swift in Sources */,
 				FC32A9B02BFE459F00108084 /* AdmobFullScreenAdLoader.swift in Sources */,
 				F02C32AD2BE696BC006F5F75 /* GoogleUMPService.swift in Sources */,
 				F02C32AF2BE69704006F5F75 /* GoogleUMPServiceProtocol.swift in Sources */,
