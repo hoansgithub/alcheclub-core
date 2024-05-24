@@ -13,9 +13,12 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
     @StateObject var vm: VM
     @State var interstitialDesPresented: Bool = false
     private let formViewControllerRepresentable = BaseViewControllerRepresentable()
-    private let interStitialPresentable = BaseViewControllerRepresentable()
     
     var body: some View {
+        NavigationLink(destination:
+                        HomeView(vm: HomeViewModel()), isActive: $interstitialDesPresented) {
+            EmptyView()
+        }
         List {
             Text("Can request ads: \(vm.canRequestAds ? "✅" : ".")")
             Text("Admob ready: \(vm.adMobReady ? "✅" : ".")")
@@ -41,7 +44,7 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
             
             Button("Show Interstitial") {
                 do {
-                    try vm.presentInterstitial(from: interStitialPresentable.viewController) { state in
+                    try vm.presentInterstitial(from: formViewControllerRepresentable.viewController) { state in
                         interstitialDesPresented = true
                     }
                 } catch {
@@ -51,7 +54,7 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
             
             Button("Show Rewarded") {
                 do {
-                    try vm.presentRewarded(from: interStitialPresentable.viewController) { state in
+                    try vm.presentRewarded(from: formViewControllerRepresentable.viewController) { state in
                         switch state {
                         case .rewarded:
                             ACCLogger.print("REWARDED")
@@ -65,7 +68,7 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
             
             Button("Show Rewarded Interstitial") {
                 do {
-                    try vm.presentRewardedInterstitial(from: interStitialPresentable.viewController) { state in
+                    try vm.presentRewardedInterstitial(from: formViewControllerRepresentable.viewController) { state in
                         switch state {
                         case .rewarded:
                             ACCLogger.print("REWARDED")
@@ -82,16 +85,13 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
                 vm.reset()
             }.foregroundStyle(.blue)
             
-            NavigationLink(destination:
-                            HomeView(vm: HomeViewModel()), isActive: $interstitialDesPresented) {
-                EmptyView()
-            }
+            
         }
         .background {
             formViewControllerRepresentable
-            interStitialPresentable
         }
-        
+        .navigationTitle("ADS")
+        .navigationBarTitleDisplayMode(.large)
         
         BaseUIViewRepresentable(inputUIView: $vm.recentBannerAdView)
             .frame(maxWidth: .infinity,
