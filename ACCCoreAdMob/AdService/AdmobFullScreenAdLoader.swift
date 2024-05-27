@@ -91,10 +91,16 @@ extension AdmobFullScreenAdLoader: GADFullScreenContentDelegate {
     }
 }
 
+
+/*
+ [Optional] Validate server-side verification (SSV) callbacks
+ 
+ https://developers.google.com/admob/ios/rewarded#validate-ssv
+ */
 extension GADServerSideVerificationOptions {
     static let KeyGADServerSideVerificationCustomRewardString = "KeyGADServerSideVerificationCustomRewardString"
     static let KeyGADServerSideVerificationUserIdentifier = "KeyGADServerSideVerificationUserIdentifier"
-    static func fromCollection(_ collection: AdVerificationOptionsCollection) -> GADServerSideVerificationOptions {
+    static func fromCollection(_ collection: ACCAdOptionsCollection) -> GADServerSideVerificationOptions {
         let options = GADServerSideVerificationOptions()
         let customRewardString = collection[KeyGADServerSideVerificationCustomRewardString]
         let userIdentifier = collection[KeyGADServerSideVerificationUserIdentifier]

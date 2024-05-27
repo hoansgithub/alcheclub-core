@@ -18,6 +18,11 @@ public protocol BannerAdLoaderProtocol: AdLoaderProtocol {
 
 }
 
+//Native
+public protocol NativeAdLoaderProtocol: AdLoaderProtocol {
+    
+}
+
 
 //FullScreen
 public enum FullScreenAdPresentationState {

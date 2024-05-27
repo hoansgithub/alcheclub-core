@@ -12,7 +12,7 @@ import ACCCore
 public final class AdmobRewardedInterstitialAdLoader: AdmobFullScreenAdLoader {
     private var rewardedInterstitialAd: GADRewardedInterstitialAd?
     
-    internal func loadAd(options: AdVerificationOptionsCollection? = nil) async throws {
+    internal func loadAd(options: ACCAdOptionsCollection? = nil) async throws {
         if isLoadingAd {
             throw FullScreenAdLoaderError.adIsBeingLoaded
         }
@@ -26,6 +26,12 @@ public final class AdmobRewardedInterstitialAdLoader: AdmobFullScreenAdLoader {
         do {
             rewardedInterstitialAd = try await GADRewardedInterstitialAd.load(
                 withAdUnitID: adUnitID, request: GADRequest())
+            
+            /*
+             [Optional] Validate server-side verification (SSV) callbacks
+             
+             https://developers.google.com/admob/ios/rewarded#validate-ssv
+             */
             if let optionsCollection = options {
                 let verificationOptions = GADServerSideVerificationOptions.fromCollection(optionsCollection)
                 rewardedInterstitialAd?.serverSideVerificationOptions = verificationOptions

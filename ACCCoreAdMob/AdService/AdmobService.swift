@@ -119,7 +119,7 @@ extension AdmobService {
     
     //Rewared
     
-    public func loadRewaredAd(options: AdVerificationOptionsCollection?) async throws {
+    public func loadRewaredAd(options: ACCAdOptionsCollection?) async throws {
         guard canRequestAd else {
             throw AdmobServiceError.canNotRequestAd
         }
@@ -140,7 +140,7 @@ extension AdmobService {
     }
     
     //Rewarded Interstitial
-    public func loadRewaredInterstitialAd(options: AdVerificationOptionsCollection?) async throws {
+    public func loadRewaredInterstitialAd(options: ACCAdOptionsCollection?) async throws {
         guard canRequestAd else {
             throw AdmobServiceError.canNotRequestAd
         }

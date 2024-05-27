@@ -1,12 +1,12 @@
 //
-//  AdVerificationOptionsCollection.swift
+//  ACCAdOptionsCollection.swift
 //  ACCCoreAdMob
 //
 //  Created by Hoan Nguyen on 22/5/24.
 //
 
 import Foundation
-public struct AdVerificationOptionsCollection : Sendable, Collection {
+public struct ACCAdOptionsCollection : Sendable, Collection {
     public typealias DictionaryType = Dictionary<String, String>
     private var dictionary: DictionaryType
     
