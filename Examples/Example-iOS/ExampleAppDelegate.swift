@@ -61,7 +61,7 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
                                         appOpenAdLoader: appOpenAdLoader,
                                         interstitialAdLoader: interstitialAdLoader,
                                         rewardedAdLoader: rewardedAdLoader,
-                                        rewaredInterstitialAdLoader: rewardedInterstitialAdLoader)
+                                        rewardedInterstitialAdLoader: rewardedInterstitialAdLoader)
         
         let sampleService = SampleService()
         let adPreloaderService = AdPreloaderService(adService: admobService)

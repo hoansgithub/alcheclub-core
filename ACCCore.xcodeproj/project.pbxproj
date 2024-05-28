@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F0082DE22C0447A700DF8062 /* AdmobNativeAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0082DE12C0447A700DF8062 /* AdmobNativeAdLoader.swift */; };
+		F0082ED72C05CC5000DF8062 /* NativeAdReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0082ED62C05CC5000DF8062 /* NativeAdReceiver.swift */; };
 		F01573852BE3AE7400FDA7D0 /* ATTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573842BE3AE7400FDA7D0 /* ATTServiceProtocol.swift */; };
 		F01573872BE3AE7E00FDA7D0 /* ATTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573862BE3AE7E00FDA7D0 /* ATTService.swift */; };
 		F015739B2BEA10CD00FDA7D0 /* AdServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015739A2BEA10CD00FDA7D0 /* AdServiceProtocol.swift */; };
@@ -121,6 +122,7 @@
 
 /* Begin PBXFileReference section */
 		F0082DE12C0447A700DF8062 /* AdmobNativeAdLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmobNativeAdLoader.swift; sourceTree = "<group>"; };
+		F0082ED62C05CC5000DF8062 /* NativeAdReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAdReceiver.swift; sourceTree = "<group>"; };
 		F01573842BE3AE7400FDA7D0 /* ATTServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTServiceProtocol.swift; sourceTree = "<group>"; };
 		F01573862BE3AE7E00FDA7D0 /* ATTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTService.swift; sourceTree = "<group>"; };
 		F015739A2BEA10CD00FDA7D0 /* AdServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdServiceProtocol.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				F0082DE12C0447A700DF8062 /* AdmobNativeAdLoader.swift */,
+				F0082ED62C05CC5000DF8062 /* NativeAdReceiver.swift */,
 			);
 			path = Native;
 			sourceTree = "<group>";
@@ -793,6 +796,7 @@
 				FC32A9A92BFD8D6900108084 /* ACCCoreAdmob+SendableObjects.swift in Sources */,
 				F0082DE22C0447A700DF8062 /* AdmobNativeAdLoader.swift in Sources */,
 				F02C32C22BEB3794006F5F75 /* AdMobBannerAdLoader.swift in Sources */,
+				F0082ED72C05CC5000DF8062 /* NativeAdReceiver.swift in Sources */,
 				FCC3F37E2BFF2EEC00E6891F /* AdmobRewardedInterstitialAdLoader.swift in Sources */,
 				FC32A9B02BFE459F00108084 /* AdmobFullScreenAdLoader.swift in Sources */,
 				F02C32AD2BE696BC006F5F75 /* GoogleUMPService.swift in Sources */,

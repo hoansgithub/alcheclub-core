@@ -26,7 +26,6 @@ public final class AdMobBannerAdLoader: NSObject, @unchecked Sendable, BannerAdL
             return storedBanner
         }
         
-        
         let gadAdSize = GADAdSize.from(size: size)
         let gadBannerView = GADBannerView(adSize: gadAdSize)
         gadBannerView.adUnitID = adUnitID

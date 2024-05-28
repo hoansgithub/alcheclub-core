@@ -73,8 +73,8 @@ extension AdPreloaderService {
         ACCLogger.print(self)
         Task.detached {[weak self] in
             try? await self?.adService?.loadInterstitialAd()
-            try? await self?.adService?.loadRewaredInterstitialAd(options: nil)
-            try? await self?.adService?.loadRewaredAd(options: nil)
+            try? await self?.adService?.loadRewardedInterstitialAd(options: nil)
+            try? await self?.adService?.loadRewardedAd(options: nil)
         }
     }
     

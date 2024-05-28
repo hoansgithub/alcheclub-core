@@ -73,7 +73,7 @@ extension AdsViewModel {
             switch state {
             case .didDismiss:
                 Task {
-                    try? await self?.admobService?.loadRewaredAd(options: nil)
+                    try? await self?.admobService?.loadRewardedAd(options: nil)
                 }
                 
             default:
@@ -85,11 +85,11 @@ extension AdsViewModel {
     }
     
     @MainActor func presentRewardedInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
-        try admobService?.presentRewaredInterstitialAdIfAvailable(controller: view, listener: {[weak self] state in
+        try admobService?.presentRewardedInterstitialAdIfAvailable(controller: view, listener: {[weak self] state in
             switch state {
             case .didDismiss:
                 Task {
-                    try? await self?.admobService?.loadRewaredInterstitialAd(options: nil)
+                    try? await self?.admobService?.loadRewardedInterstitialAd(options: nil)
                 }
                 
             default:
@@ -100,9 +100,11 @@ extension AdsViewModel {
         })
     }
     
-    func removeBannerAd() {
-        if admobService?.removeBannerAd(for: "AdsViewModel") == true {
-            recentBannerAdView = nil
+    @MainActor func removeBannerAd() {
+        Task {
+            if admobService?.removeBannerAd(for: "AdsViewModel") == true {
+                recentBannerAdView = nil
+            }
         }
     }
     

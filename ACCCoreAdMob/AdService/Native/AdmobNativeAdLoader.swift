@@ -24,21 +24,57 @@ public final class AdmobNativeAdLoader: NSObject, NativeAdLoaderProtocol {
         //TODO: -Update native ad config here
     }
     
-    internal func getNativeAd(root: UIViewController?, options: [ACCAdOptionsCollection]?) throws {
-        let adLoader = GADAdLoader(adUnitID: adUnitID, rootViewController: root, adTypes: [.native], options: options)
-        adLoader.delegate = self
+    internal func getNativeAd(for key: String, root: UIViewController?, adReceiver: NativeAdReceiver?) {
+
+        //TODO: - ad options mapper
+        let adLoader = GADAdLoader(adUnitID: adUnitID, rootViewController: root, adTypes: [.native], options: nil)
+        adReceiver?.adLoader = self
+        adLoader.delegate = adReceiver
     }
 }
 
 
-extension AdmobNativeAdLoader: GADAdLoaderDelegate {
+extension NativeAdReceiver: GADNativeAdLoaderDelegate {
     public func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: any Error) {
         ACCLogger.print(error.localizedDescription, level: .error)
+        errorHandler?(error)
     }
     
-    
+    public func adLoader(_ adLoader: GADAdLoader, didReceive nativeAd: GADNativeAd) {
+        nativeAd.delegate = (adLoader as? any GADNativeAdDelegate)
+        let template = templateGetter?()
+        if let template = template as? GADNativeAdView {
+            
+        }
+    }
 }
 
-public extension GADAdLoaderOptions {
+extension AdMobBannerAdLoader: GADNativeAdDelegate {
+    public func nativeAdDidRecordImpression(_ nativeAd: GADNativeAd) {
+        //TODO: -Track related events
+    }
     
+    public func nativeAdDidRecordClick(_ nativeAd: GADNativeAd) {
+        //TODO: -Track related events
+    }
+    
+    public func nativeAdDidRecordSwipeGestureClick(_ nativeAd: GADNativeAd) {
+        //TODO: -Track related events
+    }
+    
+    public func nativeAdWillPresentScreen(_ nativeAd: GADNativeAd) {
+        //TODO: -Track related events
+    }
+    
+    public func nativeAdWillDismissScreen(_ nativeAd: GADNativeAd) {
+        //TODO: -Track related events
+    }
+    
+    public func nativeAdDidDismissScreen(_ nativeAd: GADNativeAd) {
+        //TODO: -Track related events
+    }
+    
+    public func nativeAdIsMuted(_ nativeAd: GADNativeAd) {
+        //TODO: -Track related events
+    }
 }
