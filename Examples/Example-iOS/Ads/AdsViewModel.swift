@@ -50,10 +50,10 @@ extension AdsViewModel {
     
     
     @MainActor func presentInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
-//        let allScenes = UIApplication.shared.connectedScenes
-//        let scene = allScenes.first { $0.activationState == .foregroundActive }
-//        let windowScene = scene as? UIWindowScene
-//        let root = windowScene?.keyWindow?.rootViewController
+        //        let allScenes = UIApplication.shared.connectedScenes
+        //        let scene = allScenes.first { $0.activationState == .foregroundActive }
+        //        let windowScene = scene as? UIWindowScene
+        //        let root = windowScene?.keyWindow?.rootViewController
         
         try admobService?.presentInterstitialAdIfAvailable(controller: view, listener: { [weak self] state in
             switch state {
@@ -100,8 +100,8 @@ extension AdsViewModel {
         })
     }
     
-    @MainActor func removeBannerAd() {
-        Task {
+    func removeBannerAd() {
+        Task { @MainActor in
             if admobService?.removeBannerAd(for: "AdsViewModel") == true {
                 recentBannerAdView = nil
             }

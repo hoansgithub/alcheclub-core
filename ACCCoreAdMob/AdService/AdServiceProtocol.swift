@@ -29,6 +29,6 @@ public protocol AdServiceProtocol: ServiceProtocol {
     @MainActor func presentRewardedInterstitialAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
     
     //Native
-    func getNativeAds(for key: String, root: UIViewController?, receiver: NativeAdReceiver?)
+    @MainActor func getNativeAds(for key: String, root: UIViewController?, receiver: NativeAdReceiver?)
     func removeNativeAds(for key: String) -> Bool
 }

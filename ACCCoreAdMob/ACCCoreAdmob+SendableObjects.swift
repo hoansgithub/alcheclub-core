@@ -14,3 +14,4 @@ import GoogleMobileAds
 extension UMPDebugSettings: @unchecked Sendable {}
 extension UMPRequestParameters: @unchecked Sendable {}
 extension GADInitializationStatus: @unchecked Sendable {}
+extension GADNativeAd: @unchecked Sendable {}

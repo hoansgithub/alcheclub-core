@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F01510A72C1C419200158142 /* MediumNativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01510A62C1C419200158142 /* MediumNativeAdView.xib */; };
 		F015737D2BE3A09800FDA7D0 /* AdsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015737C2BE3A09800FDA7D0 /* AdsViewModel.swift */; };
 		F015737F2BE3A0A400FDA7D0 /* AdsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015737E2BE3A0A400FDA7D0 /* AdsView.swift */; };
 		F01573892BE87BF300FDA7D0 /* ACCCoreAdMob.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01573882BE87BF300FDA7D0 /* ACCCoreAdMob.framework */; };
@@ -63,6 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F01510A62C1C419200158142 /* MediumNativeAdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MediumNativeAdView.xib; sourceTree = "<group>"; };
 		F015737C2BE3A09800FDA7D0 /* AdsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsViewModel.swift; sourceTree = "<group>"; };
 		F015737E2BE3A0A400FDA7D0 /* AdsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsView.swift; sourceTree = "<group>"; };
 		F01573882BE87BF300FDA7D0 /* ACCCoreAdMob.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCoreAdMob.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +122,7 @@
 			children = (
 				F015737C2BE3A09800FDA7D0 /* AdsViewModel.swift */,
 				F015737E2BE3A0A400FDA7D0 /* AdsView.swift */,
+				F01510A62C1C419200158142 /* MediumNativeAdView.xib */,
 			);
 			path = Ads;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				F0FB215F2BA977E900ECEB56 /* Preview Assets.xcassets in Resources */,
 				F0FB215C2BA977E900ECEB56 /* Assets.xcassets in Resources */,
 				F0704C772BD67BBB0069F3CA /* GoogleService-Info.plist in Resources */,
+				F01510A72C1C419200158142 /* MediumNativeAdView.xib in Resources */,
 				F0704CE42BD7688C0069F3CA /* rc_defaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

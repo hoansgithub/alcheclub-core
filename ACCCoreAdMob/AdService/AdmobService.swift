@@ -163,7 +163,7 @@ extension AdmobService {
         try rewardedInterstitialAdLoader.presentAdIfAvailable(controller: controller, listener: listener)
     }
     
-    public func getNativeAds(for key: String, root: UIViewController?, receiver: NativeAdReceiver?) {
+    @MainActor public func getNativeAds(for key: String, root: UIViewController?, receiver: NativeAdReceiver?) {
         nativeAdLoader?.getNativeAd(for: key, root: root, adReceiver: receiver)
     }
     
