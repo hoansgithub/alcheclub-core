@@ -19,71 +19,87 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
                         HomeView(vm: HomeViewModel()), isActive: $interstitialDesPresented) {
             EmptyView()
         }
-        List {
-            Text("Can request ads: \(vm.canRequestAds ? "✅" : ".")")
-            Text("Admob ready: \(vm.adMobReady ? "✅" : ".")")
-            Button {
-                vm.presentPrivacyOptions(from: formViewControllerRepresentable.viewController)
-            } label: {
-                Text("Present privacy options").foregroundStyle(.blue)
-            }
-            .disabled(!vm.isPrivacyOptionsRequired)
-            
-            Button {
-                Task {
-                    await vm.getBannerAd(controller: formViewControllerRepresentable.viewController)
+        ScrollView {
+            VStack {
+                Text("Can request ads: \(vm.canRequestAds ? "✅" : ".")")
+                Text("Admob ready: \(vm.adMobReady ? "✅" : ".")")
+                Button {
+                    vm.presentPrivacyOptions(from: formViewControllerRepresentable.viewController)
+                } label: {
+                    Text("Present privacy options").foregroundStyle(.blue)
                 }
-            } label: {
-                Text("Get Banner").foregroundStyle(.blue)
-            }
-            .disabled(!vm.adMobReady)
-            
-            Button("Remove banner") {
-                vm.removeBannerAd()
-            }.disabled(vm.recentBannerAdView == nil)
-            
-            Button("Show Interstitial") {
-                do {
-                    try vm.presentInterstitial(from: formViewControllerRepresentable.viewController) { state in
-                        interstitialDesPresented = true
+                .disabled(!vm.isPrivacyOptionsRequired)
+                
+                Button {
+                    Task {
+                        await vm.getBannerAd(controller: formViewControllerRepresentable.viewController)
                     }
-                } catch {
-                    ACCLogger.print(error, level: .error)
+                } label: {
+                    Text("Get Banner").foregroundStyle(.blue)
                 }
-            }
-            
-            Button("Show Rewarded") {
-                do {
-                    try vm.presentRewarded(from: formViewControllerRepresentable.viewController) { state in
-                        switch state {
-                        case .rewarded:
-                            ACCLogger.print("REWARDED")
-                        default: break
-                        }
-                    }
-                } catch {
-                    ACCLogger.print(error, level: .error)
-                }
-            }
-            
-            Button("Show Rewarded Interstitial") {
-                do {
-                    try vm.presentRewardedInterstitial(from: formViewControllerRepresentable.viewController) { state in
-                        switch state {
-                        case .rewarded:
-                            ACCLogger.print("REWARDED")
+                .disabled(!vm.adMobReady)
+                
+                Button(action: {
+                    vm.getNativeAd(for: "AAA", root: formViewControllerRepresentable.viewController)
+                }, label: {
+                    Text("Get Native Ads")
+                })
+                .disabled(!vm.adMobReady)
+                
+                Button("Remove banner") {
+                    vm.removeBannerAd()
+                }.disabled(vm.recentBannerAdView == nil)
+                
+                Button("Show Interstitial") {
+                    do {
+                        try vm.presentInterstitial(from: formViewControllerRepresentable.viewController) { state in
                             interstitialDesPresented = true
-                        default: break
                         }
+                    } catch {
+                        ACCLogger.print(error, level: .error)
                     }
-                } catch {
-                    ACCLogger.print(error, level: .error)
                 }
+                
+                Button("Show Rewarded") {
+                    do {
+                        try vm.presentRewarded(from: formViewControllerRepresentable.viewController) { state in
+                            switch state {
+                            case .rewarded:
+                                ACCLogger.print("REWARDED")
+                            default: break
+                            }
+                        }
+                    } catch {
+                        ACCLogger.print(error, level: .error)
+                    }
+                }
+                
+                Button("Show Rewarded Interstitial") {
+                    do {
+                        try vm.presentRewardedInterstitial(from: formViewControllerRepresentable.viewController) { state in
+                            switch state {
+                            case .rewarded:
+                                ACCLogger.print("REWARDED")
+                                interstitialDesPresented = true
+                            default: break
+                            }
+                        }
+                    } catch {
+                        ACCLogger.print(error, level: .error)
+                    }
+                }
+                
+                Button("RESET") {
+                    vm.reset()
+                }.foregroundStyle(.blue)
+                
+                if let nativeAdView = vm.recentNativeAdView {
+                    BaseNativeAdPresentable(nativeAdView: nativeAdView)
+                        .frame( height: 250)
+                }
+                
+                    
             }
-            
-            Button("RESET") {
-                vm.reset()
-            }.foregroundStyle(.blue)
             
             
         }

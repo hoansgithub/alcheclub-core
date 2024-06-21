@@ -27,6 +27,8 @@ public final class AdmobService: NSObject, @unchecked Sendable, AdServiceProtoco
             self.appOpenAdLoader?.eventDelegate = eventDelegate
             self.rewardedAdLoader?.eventDelegate = eventDelegate
             self.rewardedInterstitialAdLoader?.eventDelegate = eventDelegate
+            self.nativeAdLoader?.eventDelegate = eventDelegate
+            
         }
     }
     

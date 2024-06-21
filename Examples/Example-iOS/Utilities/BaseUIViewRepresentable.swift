@@ -18,6 +18,7 @@ struct BaseUIViewRepresentable: UIViewRepresentable {
         uiView.subviews.forEach { v in
             v.removeFromSuperview()
         }
+        
         if let inputUIView = inputUIView {
             uiView.addSubview(inputUIView)
         }

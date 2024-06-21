@@ -14,7 +14,7 @@ public final class AdmobNativeAdLoader: NSObject, NativeAdLoaderProtocol {
     
     
     //Private properties
-    
+    private var adLoader: GADAdLoader?
     public required init(adUnitID: String) {
         self.adUnitID = adUnitID
         super.init()
@@ -25,14 +25,15 @@ public final class AdmobNativeAdLoader: NSObject, NativeAdLoaderProtocol {
     }
     
     @MainActor internal func getNativeAd(for key: String, root: UIViewController?, adReceiver: NativeAdReceiver?) {
-        
+        let multipleAdOptions = GADMultipleAdsAdLoaderOptions()
+        multipleAdOptions.numberOfAds = 1
         //TODO: - ad options mapper
-        let adLoader = GADAdLoader(adUnitID: adUnitID, rootViewController: root, adTypes: [.native], options: nil)
+        adLoader = GADAdLoader(adUnitID: adUnitID, rootViewController: root, adTypes: [.native], options: [multipleAdOptions])
         adReceiver?.adLoader = self
-        adLoader.delegate = adReceiver
+        adLoader?.delegate = adReceiver
+        adLoader?.load(GADRequest())
     }
 }
-
 
 extension NativeAdReceiver: GADNativeAdLoaderDelegate {
     public func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: any Error) {

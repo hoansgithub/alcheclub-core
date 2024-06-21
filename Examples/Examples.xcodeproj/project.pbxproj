@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F01510A72C1C419200158142 /* MediumNativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01510A62C1C419200158142 /* MediumNativeAdView.xib */; };
+		F01510A92C23C9C300158142 /* BaseGADNativeAdview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01510A82C23C9C300158142 /* BaseGADNativeAdview.swift */; };
+		F01510AB2C25914500158142 /* BaseNativeAdPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01510AA2C25914500158142 /* BaseNativeAdPresentable.swift */; };
+		F01510AD2C25975400158142 /* NativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01510AC2C25975400158142 /* NativeAdView.xib */; };
 		F015737D2BE3A09800FDA7D0 /* AdsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015737C2BE3A09800FDA7D0 /* AdsViewModel.swift */; };
 		F015737F2BE3A0A400FDA7D0 /* AdsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015737E2BE3A0A400FDA7D0 /* AdsView.swift */; };
 		F01573892BE87BF300FDA7D0 /* ACCCoreAdMob.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01573882BE87BF300FDA7D0 /* ACCCoreAdMob.framework */; };
@@ -64,7 +66,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		F01510A62C1C419200158142 /* MediumNativeAdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MediumNativeAdView.xib; sourceTree = "<group>"; };
+		F01510A82C23C9C300158142 /* BaseGADNativeAdview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGADNativeAdview.swift; sourceTree = "<group>"; };
+		F01510AA2C25914500158142 /* BaseNativeAdPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNativeAdPresentable.swift; sourceTree = "<group>"; };
+		F01510AC2C25975400158142 /* NativeAdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeAdView.xib; sourceTree = "<group>"; };
 		F015737C2BE3A09800FDA7D0 /* AdsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsViewModel.swift; sourceTree = "<group>"; };
 		F015737E2BE3A0A400FDA7D0 /* AdsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsView.swift; sourceTree = "<group>"; };
 		F01573882BE87BF300FDA7D0 /* ACCCoreAdMob.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCoreAdMob.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,7 +126,9 @@
 			children = (
 				F015737C2BE3A09800FDA7D0 /* AdsViewModel.swift */,
 				F015737E2BE3A0A400FDA7D0 /* AdsView.swift */,
-				F01510A62C1C419200158142 /* MediumNativeAdView.xib */,
+				F01510AC2C25975400158142 /* NativeAdView.xib */,
+				F01510A82C23C9C300158142 /* BaseGADNativeAdview.swift */,
+				F01510AA2C25914500158142 /* BaseNativeAdPresentable.swift */,
 			);
 			path = Ads;
 			sourceTree = "<group>";
@@ -310,7 +316,7 @@
 				F0FB215F2BA977E900ECEB56 /* Preview Assets.xcassets in Resources */,
 				F0FB215C2BA977E900ECEB56 /* Assets.xcassets in Resources */,
 				F0704C772BD67BBB0069F3CA /* GoogleService-Info.plist in Resources */,
-				F01510A72C1C419200158142 /* MediumNativeAdView.xib in Resources */,
+				F01510AD2C25975400158142 /* NativeAdView.xib in Resources */,
 				F0704CE42BD7688C0069F3CA /* rc_defaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +364,7 @@
 				F015737D2BE3A09800FDA7D0 /* AdsViewModel.swift in Sources */,
 				F0704D5C2BD7A0DE0069F3CA /* OnboardingManager.swift in Sources */,
 				F01573942BE8D14F00FDA7D0 /* BaseUIViewRepresentable.swift in Sources */,
+				F01510AB2C25914500158142 /* BaseNativeAdPresentable.swift in Sources */,
 				F0704D522BD78B510069F3CA /* OnboardingViewModel.swift in Sources */,
 				F0B2E79D2BCE7E41004BA72A /* SampleServiceProtocol.swift in Sources */,
 				F0704D4A2BD7769C0069F3CA /* AppSession.swift in Sources */,
@@ -366,6 +373,7 @@
 				F0704D592BD78B920069F3CA /* SplashView.swift in Sources */,
 				F01573962BE8DD6100FDA7D0 /* BaseViewControllerRepresentable.swift in Sources */,
 				F0B2E79B2BCE7BB6004BA72A /* BaseView.swift in Sources */,
+				F01510A92C23C9C300158142 /* BaseGADNativeAdview.swift in Sources */,
 				F0B2E7992BCE7AAA004BA72A /* HomeView.swift in Sources */,
 				F0704D502BD78B3C0069F3CA /* ContainerView.swift in Sources */,
 				F0B2E7972BCE7A9C004BA72A /* HomeViewModel.swift in Sources */,

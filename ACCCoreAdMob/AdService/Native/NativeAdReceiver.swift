@@ -11,7 +11,7 @@ public class NativeAdReceiver: NSObject, @unchecked Sendable {
     
     public typealias ErrorHandler = @Sendable (_ error: any Error) -> Void
     
-    public typealias TemplateGetter = @Sendable () -> UIView
+    public typealias TemplateGetter = @Sendable () -> UIView?
     
     public typealias AdViewReceiver = @Sendable (_ view: UIView) -> Void
     

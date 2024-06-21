@@ -12,6 +12,7 @@ import ACCCoreAdMob
 import Combine
 protocol AdsViewModelProtocol: Sendable, BaseViewModelProtocol {
     var recentBannerAdView: UIView? { get set }
+    var recentNativeAdView: UIView? { get set }
     var isPrivacyOptionsRequired: Bool { get }
     var canRequestAds: Bool { get }
     var adMobReady: Bool { get }
@@ -21,11 +22,13 @@ protocol AdsViewModelProtocol: Sendable, BaseViewModelProtocol {
     @MainActor func presentInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
     @MainActor func presentRewarded(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
     @MainActor func presentRewardedInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
+    @MainActor func getNativeAd(for key: String, root: UIViewController?)
     func reset()
 }
 
 class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
     @Published var recentBannerAdView: UIView?
+    @Published var recentNativeAdView: UIView?
     @Published var isPrivacyOptionsRequired = false
     @Published var canRequestAds: Bool = false
     @Published var adMobReady: Bool = false
@@ -33,6 +36,7 @@ class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
     var umpService: GoogleUMPServiceProtocol?
     var admobService: AdServiceProtocol?
     var cancellables = Set<AnyCancellable>()
+    private var nativeAdReceiver: NativeAdReceiver?
     public init() {
         self.umpService = ACCApp.getService(GoogleUMPServiceProtocol.self)
         self.admobService = ACCApp.getService(AdServiceProtocol.self)
@@ -47,7 +51,18 @@ class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
 
 extension AdsViewModel {
     
-    
+    @MainActor func getNativeAd(for key: String, root: UIViewController?) {
+        
+        nativeAdReceiver = NativeAdReceiver(templateGetter: {
+            let nibView = Bundle.main.loadNibNamed("NativeAdView", owner: nil, options: nil)?.first
+            return nibView as? BaseGADNativeAdview
+            
+        }, adViewReceiver: { [weak self] view in
+            self?.recentNativeAdView = view
+        })
+        
+        admobService?.getNativeAds(for: "ABC", root: root, receiver: nativeAdReceiver)
+    }
     
     @MainActor func presentInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
         //        let allScenes = UIApplication.shared.connectedScenes
