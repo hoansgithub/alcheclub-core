@@ -13,9 +13,11 @@ public class NativeAdReceiver: NSObject, @unchecked Sendable {
     
     public typealias TemplateGetter = @Sendable () -> UIView?
     
-    public typealias AdViewReceiver = @Sendable (_ view: UIView) -> Void
+    public typealias AdViewReceiver = @Sendable (_ views: [UIView]) -> Void
     
     public typealias StarRatingImage = @Sendable (_ starRating: NSDecimalNumber) -> UIImage?
+    
+    internal var adViews: [UIView] = []
     
     let errorHandler: ErrorHandler?
     let templateGetter: TemplateGetter?

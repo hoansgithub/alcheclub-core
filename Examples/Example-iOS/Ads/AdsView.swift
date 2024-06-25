@@ -46,6 +46,12 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
                 })
                 .disabled(!vm.adMobReady)
                 
+                Button(action: {
+                    vm.removeNativeAds(for: "AAA")
+                }, label: {
+                    Text("Remove Native Ads")
+                }).disabled(vm.recentNativeAdView == nil)
+                
                 Button("Remove banner") {
                     vm.removeBannerAd()
                 }.disabled(vm.recentBannerAdView == nil)

@@ -170,7 +170,7 @@ extension AdmobService {
     }
     
     public func removeNativeAds(for key: String) -> Bool {
-        return true
+        return nativeAdLoader?.removeNativeAds(for: key) ?? false
     }
 }
 

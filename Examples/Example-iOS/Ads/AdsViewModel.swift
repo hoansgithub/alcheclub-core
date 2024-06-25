@@ -23,6 +23,7 @@ protocol AdsViewModelProtocol: Sendable, BaseViewModelProtocol {
     @MainActor func presentRewarded(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
     @MainActor func presentRewardedInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
     @MainActor func getNativeAd(for key: String, root: UIViewController?)
+    func removeNativeAds(for key: String)
     func reset()
 }
 
@@ -58,10 +59,10 @@ extension AdsViewModel {
             return nibView as? BaseGADNativeAdview
             
         }, adViewReceiver: { [weak self] view in
-            self?.recentNativeAdView = view
+            self?.recentNativeAdView = view.first
         })
         
-        admobService?.getNativeAds(for: "ABC", root: root, receiver: nativeAdReceiver)
+        admobService?.getNativeAds(for: key, root: root, receiver: nativeAdReceiver)
     }
     
     @MainActor func presentInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
@@ -120,6 +121,12 @@ extension AdsViewModel {
             if admobService?.removeBannerAd(for: "AdsViewModel") == true {
                 recentBannerAdView = nil
             }
+        }
+    }
+    
+    func removeNativeAds(for key: String) {
+        if admobService?.removeNativeAds(for: key) == true {
+            recentNativeAdView = nil
         }
     }
     

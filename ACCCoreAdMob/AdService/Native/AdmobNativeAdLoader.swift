@@ -14,6 +14,7 @@ public final class AdmobNativeAdLoader: NSObject, NativeAdLoaderProtocol {
     
     
     //Private properties
+    private var receiversCollection: [String: NativeAdReceiver] = [:]
     private var adLoader: GADAdLoader?
     public required init(adUnitID: String) {
         self.adUnitID = adUnitID
@@ -25,6 +26,15 @@ public final class AdmobNativeAdLoader: NSObject, NativeAdLoaderProtocol {
     }
     
     @MainActor internal func getNativeAd(for key: String, root: UIViewController?, adReceiver: NativeAdReceiver?) {
+        
+        if let storedReceiver = receiversCollection[key] {
+            adReceiver?.adViewReceiver?(storedReceiver.adViews)
+            adReceiver?.adViews = storedReceiver.adViews
+            receiversCollection[key] = adReceiver
+            return
+        }
+        
+        receiversCollection[key] = adReceiver
         let multipleAdOptions = GADMultipleAdsAdLoaderOptions()
         multipleAdOptions.numberOfAds = 1
         //TODO: - ad options mapper
@@ -32,6 +42,11 @@ public final class AdmobNativeAdLoader: NSObject, NativeAdLoaderProtocol {
         adReceiver?.adLoader = self
         adLoader?.delegate = adReceiver
         adLoader?.load(GADRequest())
+        
+    }
+    
+    internal func removeNativeAds(for key: String) -> Bool {
+        return receiversCollection.removeValue(forKey: key) != nil
     }
 }
 
@@ -96,7 +111,8 @@ extension NativeAdReceiver: GADNativeAdLoaderDelegate {
                 // required to make the ad clickable.
                 // Note: this should always be done after populating the ad views.
                 nativeAdView.nativeAd = nativeAd
-                adViewReceiver?(nativeAdView)
+                adViews.append(nativeAdView)
+                adViewReceiver?(adViews)
             }
         }
     }
