@@ -75,7 +75,8 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
                                     firebaseMessagingService,
                                     umpService,
                                     admobService,
-                                    adPreloaderService],
+                                    adPreloaderService,
+                                    TeslaService.shared],
                          analyticsPlatforms: [firebaseAnalyticsService],
                          configCenter: firebaseRCService)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)

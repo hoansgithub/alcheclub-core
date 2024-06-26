@@ -37,8 +37,9 @@ class MainViewModel: @unchecked Sendable, MainViewModelProtocol {
         ACCApp.track(event: event)
     }
     
-    @MainActor func login() {
-        AppSession.shared.login()
+    @MainActor func login() async {
+//        AppSession.shared.login()
+        await _ = TeslaService.shared.requestOAuth()
     }
     
     @MainActor func goToOnboarding() {

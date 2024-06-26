@@ -10,6 +10,9 @@
 		F01510A92C23C9C300158142 /* BaseGADNativeAdview.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01510A82C23C9C300158142 /* BaseGADNativeAdview.swift */; };
 		F01510AB2C25914500158142 /* BaseNativeAdPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01510AA2C25914500158142 /* BaseNativeAdPresentable.swift */; };
 		F01510AD2C25975400158142 /* NativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F01510AC2C25975400158142 /* NativeAdView.xib */; };
+		F01510E92C2BC4FA00158142 /* TeslaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01510E82C2BC4FA00158142 /* TeslaService.swift */; };
+		F01510EB2C2BC54900158142 /* ACCCoreNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01510EA2C2BC54900158142 /* ACCCoreNetworking.framework */; };
+		F01510EC2C2BC54900158142 /* ACCCoreNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F01510EA2C2BC54900158142 /* ACCCoreNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F015737D2BE3A09800FDA7D0 /* AdsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015737C2BE3A09800FDA7D0 /* AdsViewModel.swift */; };
 		F015737F2BE3A0A400FDA7D0 /* AdsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015737E2BE3A0A400FDA7D0 /* AdsView.swift */; };
 		F01573892BE87BF300FDA7D0 /* ACCCoreAdMob.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F01573882BE87BF300FDA7D0 /* ACCCoreAdMob.framework */; };
@@ -59,6 +62,7 @@
 				F015738A2BE87BF300FDA7D0 /* ACCCoreAdMob.framework in Embed Frameworks */,
 				F08BCE662BD02E410067DFC5 /* ACCCore.framework in Embed Frameworks */,
 				F05C231F2BE20548003DEC6D /* ACCCoreUtilities.framework in Embed Frameworks */,
+				F01510EC2C2BC54900158142 /* ACCCoreNetworking.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,6 +73,8 @@
 		F01510A82C23C9C300158142 /* BaseGADNativeAdview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGADNativeAdview.swift; sourceTree = "<group>"; };
 		F01510AA2C25914500158142 /* BaseNativeAdPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNativeAdPresentable.swift; sourceTree = "<group>"; };
 		F01510AC2C25975400158142 /* NativeAdView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeAdView.xib; sourceTree = "<group>"; };
+		F01510E82C2BC4FA00158142 /* TeslaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeslaService.swift; sourceTree = "<group>"; };
+		F01510EA2C2BC54900158142 /* ACCCoreNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCoreNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F015737C2BE3A09800FDA7D0 /* AdsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsViewModel.swift; sourceTree = "<group>"; };
 		F015737E2BE3A0A400FDA7D0 /* AdsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsView.swift; sourceTree = "<group>"; };
 		F01573882BE87BF300FDA7D0 /* ACCCoreAdMob.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCoreAdMob.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,12 +121,21 @@
 				F01573892BE87BF300FDA7D0 /* ACCCoreAdMob.framework in Frameworks */,
 				F08BCE652BD02E410067DFC5 /* ACCCore.framework in Frameworks */,
 				F05C231E2BE20548003DEC6D /* ACCCoreUtilities.framework in Frameworks */,
+				F01510EB2C2BC54900158142 /* ACCCoreNetworking.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F01510E72C2BC4EA00158142 /* Tesla */ = {
+			isa = PBXGroup;
+			children = (
+				F01510E82C2BC4FA00158142 /* TeslaService.swift */,
+			);
+			path = Tesla;
+			sourceTree = "<group>";
+		};
 		F015737B2BE3A08700FDA7D0 /* Ads */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +160,7 @@
 		F066D92D2BCFBED7003F5690 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F01510EA2C2BC54900158142 /* ACCCoreNetworking.framework */,
 				F01573882BE87BF300FDA7D0 /* ACCCoreAdMob.framework */,
 				F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */,
 				F08BCE232BD0173A0067DFC5 /* ACCCoreFirebase.framework */,
@@ -219,6 +235,7 @@
 		F0FB21562BA977E700ECEB56 /* Example-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				F01510E72C2BC4EA00158142 /* Tesla */,
 				F01573802BE3A7FC00FDA7D0 /* Utilities */,
 				F015737B2BE3A08700FDA7D0 /* Ads */,
 				F0704D662BD7C8540069F3CA /* Example-iOSDebug.entitlements */,
@@ -367,6 +384,7 @@
 				F01510AB2C25914500158142 /* BaseNativeAdPresentable.swift in Sources */,
 				F0704D522BD78B510069F3CA /* OnboardingViewModel.swift in Sources */,
 				F0B2E79D2BCE7E41004BA72A /* SampleServiceProtocol.swift in Sources */,
+				F01510E92C2BC4FA00158142 /* TeslaService.swift in Sources */,
 				F0704D4A2BD7769C0069F3CA /* AppSession.swift in Sources */,
 				F0704D572BD78B8A0069F3CA /* SplashViewModel.swift in Sources */,
 				F0B2E7952BCE7A8F004BA72A /* BaseViewModel.swift in Sources */,
