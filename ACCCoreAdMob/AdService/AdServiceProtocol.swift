@@ -7,7 +7,7 @@
 
 import ACCCore
 import UIKit
-public protocol AdServiceProtocol: ServiceProtocol {
+public protocol AdServiceProtocol: ServiceProtocol, ServiceStateObservable {
     //Banner
     @MainActor func getBannerAd(for key: String, size: ACCAdSize, root: UIViewController?) async throws -> UIView
     func removeBannerAd(for key: String) -> Bool

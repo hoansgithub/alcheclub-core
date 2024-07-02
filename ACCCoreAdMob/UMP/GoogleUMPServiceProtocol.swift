@@ -10,7 +10,7 @@ import UserMessagingPlatform
 import ACCCore
 import Combine
 
-public protocol GoogleUMPServiceProtocol: ServiceProtocol {
+public protocol GoogleUMPServiceProtocol: ServiceProtocol, ServiceStateObservable {
     var isPrivacyOptionsRequiredPublisher: AnyPublisher<Bool, Never> { get }
     var canRequestAdsPublisher: AnyPublisher<Bool, Never> { get }
     func presentConsentFormIfRequired(from controller: UIViewController) async throws

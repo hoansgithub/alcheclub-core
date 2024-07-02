@@ -129,13 +129,13 @@ extension GoogleUMPService {
 extension GoogleUMPService: UIApplicationDelegate {
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
-        startPlugin()
+        startService()
         return true
     }
 }
 
 private extension GoogleUMPService {
-    func startPlugin() {
+    func startService() {
         Task {
             do {
                 try await UMPConsentInformation.sharedInstance.requestConsentInfoUpdate(with: requestParams)

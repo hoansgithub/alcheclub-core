@@ -35,23 +35,23 @@ public enum ContentType: String {
 ///       otherBuilder.get("/some/path?param=blah").withCachePolicy(.returnCacheDataElseLoad)
 public class URLRequestBuilder {
     internal let baseURL: URL
-
+    
     public init(baseURL: URL) {
         self.baseURL = baseURL
     }
-
+    
     public func get(_ requestPath: String, contentType: ContentType = .json) -> URLRequest {
         return URLRequest(url: baseURL).path(requestPath).method(.get).contentType(contentType)
     }
-
+    
     public func post(_ requestPath: String, contentType: ContentType = .json) -> URLRequest {
         return URLRequest(url: baseURL).path(requestPath).method(.post).contentType(contentType)
     }
-
+    
     public func put(_ requestPath: String) -> URLRequest {
         return URLRequest(url: baseURL).path(requestPath).method(.put)
     }
-
+    
     public func delete(_ requestPath: String) -> URLRequest {
         return URLRequest(url: baseURL).path(requestPath).method(.delete)
     }
@@ -63,61 +63,72 @@ public extension URLRequest {
         request.url = url?.appendingPathComponent(path)
         return request
     }
-
+    
     func method(_ method: HTTPMethod) -> URLRequest {
         var request = self
         request.httpMethod = method.rawValue
         return request
     }
-
+    
     func body(json body: Encodable, dateEncodingStrategy: JSONEncoder.DateEncodingStrategy = .iso8601) -> URLRequest {
         var request = self
         request.httpBody = try? body.serializeToJSON(dateEncodingStrategy: dateEncodingStrategy)
         return request.contentType(.json)
     }
-
+    
+    func body(params: [String: Any]) -> URLRequest {
+        var data = [String]()
+        for(key, value) in params
+        {
+            data.append(key + "=\(value)")
+        }
+        var request = self
+        request.httpBody = data.map { String($0) }.joined(separator: "&").data(using: .utf8)
+        return request.contentType(.urlencoded)
+    }
+    
     func queryItems(_ items: [String: String]) -> URLRequest {
         var request = self
         guard let url = request.url else { return request }
-
+        
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         let urlQueryItems = items.map { key, value in
             URLQueryItem(name: key, value: value)
         }
         components?.append(queryItems: urlQueryItems)
-
+        
         guard let finalURL = components?.url else { return request }
         request.url = finalURL
         return request
     }
-
+    
     func queryItems(_ queryItems: [URLQueryItem]) -> URLRequest {
         var request = self
         guard let url = request.url else { return request }
-
+        
         var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         components?.append(queryItems: queryItems)
-
+        
         guard let finalURL = components?.url else { return request }
         request.url = finalURL
         return request
     }
-
+    
     func token(_ token: String) -> URLRequest {
         let bearerRequestModifier = BearerTokenRequestModifier(authenticationToken: token)
         return bearerRequestModifier.mutate(self)
     }
-
+    
     func contentType(_ contentType: ContentType) -> URLRequest {
         return setValue(contentType.rawValue, forHeader: "Content-Type")
     }
-
+    
     func setValue(_ value: String, forHeader header: String) -> URLRequest {
         var request = self
         request.setValue(value, forHTTPHeaderField: header)
         return request
     }
-
+    
     func withCachePolicy(_ policy: URLRequest.CachePolicy) -> URLRequest {
         var request = self
         request.cachePolicy = policy
@@ -128,7 +139,7 @@ public extension URLRequest {
         let modifier = FileUploadRequestModifier(files: files, boundary: boundary)
         return modifier.mutate(self)
     }
-
+    
     private func newLine() -> Data {
         return Data("\n".utf8)
     }

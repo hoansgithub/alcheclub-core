@@ -91,5 +91,6 @@ extension MainViewModel {
             .sink(receiveValue: {[weak self] val in
                 self?.notiToken = val
             }).store(in: &cancellables)
+        
     }
 }

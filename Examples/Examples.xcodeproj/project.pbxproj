@@ -21,6 +21,10 @@
 		F01573962BE8DD6100FDA7D0 /* BaseViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573952BE8DD6100FDA7D0 /* BaseViewControllerRepresentable.swift */; };
 		F01573A62BF3651E00FDA7D0 /* AdPreloaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573A52BF3651E00FDA7D0 /* AdPreloaderService.swift */; };
 		F01573A82BF3664000FDA7D0 /* AdPreloaderServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573A72BF3664000FDA7D0 /* AdPreloaderServiceProtocol.swift */; };
+		F03971E72C32599700FC4126 /* GetTokenParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03971E62C32599700FC4126 /* GetTokenParams.swift */; };
+		F03971E92C325AFF00FC4126 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03971E82C325AFF00FC4126 /* TokenResponse.swift */; };
+		F03971EB2C32613500FC4126 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03971EA2C32613500FC4126 /* RequestError.swift */; };
+		F03971EF2C33DB9300FC4126 /* FBUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03971EE2C33DB9300FC4126 /* FBUserProfile.swift */; };
 		F05C231E2BE20548003DEC6D /* ACCCoreUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */; };
 		F05C231F2BE20548003DEC6D /* ACCCoreUtilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F066D9352BCFC050003F5690 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9342BCFC050003F5690 /* MainViewModel.swift */; };
@@ -82,6 +86,10 @@
 		F01573952BE8DD6100FDA7D0 /* BaseViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerRepresentable.swift; sourceTree = "<group>"; };
 		F01573A52BF3651E00FDA7D0 /* AdPreloaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdPreloaderService.swift; sourceTree = "<group>"; };
 		F01573A72BF3664000FDA7D0 /* AdPreloaderServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdPreloaderServiceProtocol.swift; sourceTree = "<group>"; };
+		F03971E62C32599700FC4126 /* GetTokenParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTokenParams.swift; sourceTree = "<group>"; };
+		F03971E82C325AFF00FC4126 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
+		F03971EA2C32613500FC4126 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
+		F03971EE2C33DB9300FC4126 /* FBUserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBUserProfile.swift; sourceTree = "<group>"; };
 		F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCoreUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F066D92E2BCFBED7003F5690 /* ACCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F066D9342BCFC050003F5690 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -132,6 +140,10 @@
 			isa = PBXGroup;
 			children = (
 				F01510E82C2BC4FA00158142 /* TeslaService.swift */,
+				F03971E62C32599700FC4126 /* GetTokenParams.swift */,
+				F03971E82C325AFF00FC4126 /* TokenResponse.swift */,
+				F03971EA2C32613500FC4126 /* RequestError.swift */,
+				F03971EE2C33DB9300FC4126 /* FBUserProfile.swift */,
 			);
 			path = Tesla;
 			sourceTree = "<group>";
@@ -369,10 +381,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F03971EF2C33DB9300FC4126 /* FBUserProfile.swift in Sources */,
 				F01573A82BF3664000FDA7D0 /* AdPreloaderServiceProtocol.swift in Sources */,
 				F0B2E7932BCE7A32004BA72A /* ExampleAppDelegate.swift in Sources */,
 				F0B2E79F2BCE7E4A004BA72A /* SampleService.swift in Sources */,
 				F0704D4E2BD78B310069F3CA /* ContainerViewModel.swift in Sources */,
+				F03971E72C32599700FC4126 /* GetTokenParams.swift in Sources */,
 				F015737F2BE3A0A400FDA7D0 /* AdsView.swift in Sources */,
 				F0704D542BD78B5B0069F3CA /* OnboardingView.swift in Sources */,
 				F0FB21582BA977E700ECEB56 /* Example_iOSApp.swift in Sources */,
@@ -381,6 +395,7 @@
 				F015737D2BE3A09800FDA7D0 /* AdsViewModel.swift in Sources */,
 				F0704D5C2BD7A0DE0069F3CA /* OnboardingManager.swift in Sources */,
 				F01573942BE8D14F00FDA7D0 /* BaseUIViewRepresentable.swift in Sources */,
+				F03971E92C325AFF00FC4126 /* TokenResponse.swift in Sources */,
 				F01510AB2C25914500158142 /* BaseNativeAdPresentable.swift in Sources */,
 				F0704D522BD78B510069F3CA /* OnboardingViewModel.swift in Sources */,
 				F0B2E79D2BCE7E41004BA72A /* SampleServiceProtocol.swift in Sources */,
@@ -393,6 +408,7 @@
 				F0B2E79B2BCE7BB6004BA72A /* BaseView.swift in Sources */,
 				F01510A92C23C9C300158142 /* BaseGADNativeAdview.swift in Sources */,
 				F0B2E7992BCE7AAA004BA72A /* HomeView.swift in Sources */,
+				F03971EB2C32613500FC4126 /* RequestError.swift in Sources */,
 				F0704D502BD78B3C0069F3CA /* ContainerView.swift in Sources */,
 				F0B2E7972BCE7A9C004BA72A /* HomeViewModel.swift in Sources */,
 				F066D9352BCFC050003F5690 /* MainViewModel.swift in Sources */,

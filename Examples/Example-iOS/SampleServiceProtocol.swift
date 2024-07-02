@@ -7,7 +7,7 @@
 
 import ACCCore
 import Combine
-protocol SampleServiceProtocol: ServiceProtocol, ConfigurableProtocol {
+protocol SampleServiceProtocol: ServiceProtocol, ServiceStateObservable, ConfigurableProtocol {
     func getContent() async throws
     var contentPublisher: AnyPublisher<String, Never> { get }
 }

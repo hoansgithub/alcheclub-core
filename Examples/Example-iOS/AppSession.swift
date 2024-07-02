@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import Combine
 @MainActor final class AppSession: ObservableObject {
-    private init() {}
+    private init() {
+        registerObservers()
+    }
     public static let shared = AppSession()
     struct UserDefaultKeys {
         static let hasSeenOnboarding = "AppSession.UserDefaultKeys.hasSeenOnboarding"
@@ -20,6 +23,7 @@ import Foundation
         case authenticated
     }
     
+    private var cancellables: [AnyCancellable] = []
     @Published private(set) var appState: AppState?
     
     public func endOnboarding() {
@@ -27,12 +31,12 @@ import Foundation
         configurateState()
     }
     
-    public func login() {
+    public func loggedIn() {
         UserDefaults.standard.setValue(true, forKey: UserDefaultKeys.authenticated)
         configurateState()
     }
     
-    public func logout() {
+    public func loggedOut() {
         UserDefaults.standard.setValue(false, forKey: UserDefaultKeys.authenticated)
         configurateState()
     }
@@ -51,5 +55,17 @@ import Foundation
         } else {
             appState = .onboarding
         }
+    }
+    
+    private func registerObservers() {
+        TeslaService.shared
+            .tokenPublisher
+            .sink {[weak self] res in
+                if res != nil {
+                    self?.loggedIn()
+                } else {
+                    self?.loggedOut()
+                }
+        }.store(in: &cancellables)
     }
 }

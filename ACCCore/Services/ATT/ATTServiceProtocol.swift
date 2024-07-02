@@ -7,7 +7,7 @@
 
 import Foundation
 import AppTrackingTransparency
-public protocol ATTServiceProtocol: ServiceProtocol {
+public protocol ATTServiceProtocol: ServiceProtocol, ServiceStateObservable {
     func requestTrackingAuthorization() async -> ATTrackingManager.AuthorizationStatus
     var authStatus: ATTrackingManager.AuthorizationStatus { get }
 }

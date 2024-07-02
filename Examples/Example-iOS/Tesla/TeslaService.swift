@@ -10,33 +10,61 @@ import ACCCore
 import ACCCoreNetworking
 import UIKit
 import Combine
-final class TeslaService: NSObject, ServiceProtocol {
-    var statePublisher: AnyPublisher<ServiceState, Never>
+import ACCCoreUtilities
+final class TeslaService: NSObject, @unchecked Sendable, ServiceProtocol {
     
     struct Routes {
         var authBuilder: URLRequestBuilder {
             return URLRequestBuilder(baseURL: URL(string: "https://www.fitbit.com")!)
         }
         
+        var apiBuilder: URLRequestBuilder {
+            return URLRequestBuilder(baseURL: URL(string: "https://api.fitbit.com/")!)
+        }
+        
         func requestOAuth() -> URLRequest {
             return authBuilder.get("oauth2/authorize").setValue("accept", forHeader: "application/json")
-                .setValue("authorization", forHeader: "Basic Y2xpZW50X2lkOiAzZTFmNTk3YWY0Y2U2NjE0YTYxMTNlMjlmMDNjMmI3OA==").queryItems([
+                .queryItems([
                     "client_id": "22C29R",
-                    "response_type": "token",
+                    "response_type": "code",
                     "scope": "profile",
                     "redirect_uri": "fitracker://auth",
                     "expires_in": "600"
                 ])
         }
+        
+        func exchangeForToken(code: String) -> URLRequest {
+            return apiBuilder.post("oauth2/token")
+                .setValue("Basic MjJDMjlSOjNlMWY1OTdhZjRjZTY2MTRhNjExM2UyOWYwM2MyYjc4", forHeader: "authorization")
+                .body(params: GetTokenParams(code: code).bodyParams)
+        }
+        
+        func getProfile(token: String, userID: String) -> URLRequest {
+            return apiBuilder.post(String(format: "1/user/%@/profile.json", userID))
+                .setValue("Bearer \(token)", forHeader: "authorization")
+        }
     }
     
-    var routes: Routes
-    var networkService: AsyncHTTPNetworkService
+//    @UserDefaultProp(key: (Bundle.main.bundleIdentifier ?? "") + ".TeslaService.code",
+//                     defaultValue: nil)
+//    var code: String?
+    
+    
+    @CodableUserDefaultProp(key: "", defaultValue: nil)
+    private var tokenResponse: TokenResponse? {
+        didSet {
+            tokenPublisher.send(tokenResponse)
+        }
+    }
+    
+    public lazy var tokenPublisher = CurrentValueSubject<TokenResponse?, Never>(tokenResponse)
+    
+    let routes: Routes
+    let networkService: AsyncHTTPNetworkService
     static let shared = TeslaService()
     private override init() {
         routes = Routes()
         networkService = AsyncHTTPNetworkService()
-        statePublisher = PassthroughSubject<ServiceState, Never>().eraseToAnyPublisher()
         super.init()
     }
     
@@ -47,38 +75,63 @@ final class TeslaService: NSObject, ServiceProtocol {
         }
         return nil
     }
+    
+    func exchangeForToken(code: String) async throws -> TokenResponse {
+        let req = routes.exchangeForToken(code: code)
+        return try await networkService.requestObject(req)
+    }
+    
+    func getProfile() async throws -> FBUserProfile {
+        let token = tokenResponse?.access_token ?? ""
+        let uid = tokenResponse?.user_id ?? ""
+        let req = routes.getProfile(token: token, userID: uid)
+        return try await networkService.requestObject(req)
+    }
+}
+
+private extension TeslaService {
+    
 }
 
 //URL Scheme handler
-extension TeslaService: UIApplicationDelegate {
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        
-        debugPrint(url)
-        
-        // Determine who sent the URL.
-        let sendingAppID = options[.sourceApplication]
-        print("source application = \(sendingAppID ?? "Unknown")")
-        
-        // Process the URL.
-        guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
-              let path = components.path,
-              let params = components.queryItems else {
-            print("Invalid URL or album path missing")
-            return false
-        }
-        
-        
-        
-        return true
-    }
-}
 
 extension TeslaService: UIWindowSceneDelegate {
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         guard let firstUrl = URLContexts.first?.url else {
             return
         }
+        debugPrint(firstUrl.pathComponents.first)
+        if let code = firstUrl["code"] {
+            //exchange for token
+            let task = Task {
+                return try await exchangeForToken(code: code)
+            }
+            
+            Task {
+                let result = await task.result
+                switch result {
+                case .success(let success):
+                    tokenResponse = success
+                    ACCLogger.print(tokenResponse)
+                case .failure(let failure):
+                    
+                    if let err = failure as? NetworkError {
+                        switch err {
+                        case .non200StatusCode(let stt, let data) :
+                            do {
+                                let obj = try JSONDecoder().decode(RequestErrors.self, from: data!)
+                                ACCLogger.print(obj, level: .error)
+                            } catch {
+                                ACCLogger.print(error, level: .error)
+                            }
+                            
+                        default: break
+                        }
+                    }
+                }
+            }
+        }
         
-        print(firstUrl.absoluteString)
+        
     }
 }

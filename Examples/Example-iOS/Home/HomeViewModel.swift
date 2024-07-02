@@ -10,15 +10,17 @@ import Combine
 protocol HomeViewModelProtocol: Sendable, BaseViewModelProtocol {
     var content: String { get }
     var loading: Bool { get }
-    func onViewAppear()
+    var latestError: Error? { get set }
+    var userProfile: FBUserProfile? { get }
+    func onViewAppear() async
     func logOut() async
 }
 
 class HomeViewModel: @unchecked Sendable, HomeViewModelProtocol {
     @Published var content: String = "ABC"
     @Published var loading = false
-    
-    
+    @Published var userProfile: FBUserProfile?
+    @Published var latestError: Error?
     var sampleService: SampleServiceProtocol?
     private var cancellables = Set<AnyCancellable>()
     
@@ -28,17 +30,26 @@ class HomeViewModel: @unchecked Sendable, HomeViewModelProtocol {
     }
     
     func registerObservers() {
-        sampleService?.contentPublisher.receive(on: DispatchSerialQueue.main).sink(receiveValue: { [weak self] aaa in
-            self?.content = aaa
-        }).store(in: &cancellables)
+        sampleService?.contentPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] aaa in
+                self?.content = aaa
+            }).store(in: &cancellables)
     }
     
-    func onViewAppear() {
-        
+    @MainActor func onViewAppear() {
+        Task {
+            do {
+                userProfile = try await TeslaService.shared.getProfile()
+            } catch {
+                ACCLogger.print(error, level: .error)
+                latestError = error
+            }
+        }
     }
     
     @MainActor func logOut() {
-        AppSession.shared.logout()
+        AppSession.shared.loggedOut()
     }
     
     deinit {
