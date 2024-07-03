@@ -49,7 +49,7 @@ class HomeViewModel: @unchecked Sendable, HomeViewModelProtocol {
     }
     
     @MainActor func logOut() {
-        AppSession.shared.loggedOut()
+        TeslaService.shared.logOut()
     }
     
     deinit {

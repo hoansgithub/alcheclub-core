@@ -9,7 +9,7 @@ import Foundation
 import Combine
 @MainActor final class AppSession: ObservableObject {
     private init() {
-        registerObservers()
+        //registerObservers()
     }
     public static let shared = AppSession()
     struct UserDefaultKeys {
@@ -43,7 +43,6 @@ import Combine
     
     public func reset() {
         UserDefaults.standard.setValue(false, forKey: UserDefaultKeys.hasSeenOnboarding)
-        UserDefaults.standard.setValue(false, forKey: UserDefaultKeys.authenticated)
         configurateState()
     }
     
@@ -57,7 +56,7 @@ import Combine
         }
     }
     
-    private func registerObservers() {
+    func registerObservers() {
         TeslaService.shared
             .tokenPublisher
             .sink {[weak self] res in

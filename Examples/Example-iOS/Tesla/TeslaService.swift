@@ -87,6 +87,10 @@ final class TeslaService: NSObject, @unchecked Sendable, ServiceProtocol {
         let req = routes.getProfile(token: token, userID: uid)
         return try await networkService.requestObject(req)
     }
+    
+    func logOut() {
+        tokenResponse = nil
+    }
 }
 
 private extension TeslaService {

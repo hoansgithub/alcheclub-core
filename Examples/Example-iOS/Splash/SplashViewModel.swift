@@ -62,12 +62,12 @@ private extension SplashViewModel {
                 .receive(on: RunLoop.main)
                 .sink { (stt) in
                     Task {
-                        await AppSession.shared.configurateState()
+                        await AppSession.shared.registerObservers()
                     }
                 }
         } else {
             Task {
-                await AppSession.shared.configurateState()
+                await AppSession.shared.registerObservers()
             }
         }
         
