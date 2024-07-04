@@ -15,30 +15,36 @@ struct HomeView<VM: HomeViewModelProtocol>: HomeViewProtocol {
     @StateObject var vm: VM
     @State var num: Int = 1
     var body: some View {
-        VStack(content: {
-            AsyncImage(url: URL(string: vm.userProfile?.user.avatar ?? ""), scale: 1)
-                .frame(width: 64, height: 64)
-                        .clipShape(.rect(cornerRadius: 25))
-            Button {
-                num += 1
-            } label: {
-                Text("num \(num)")
-            }
-
-            Text(vm.content)
-            
-            Button {
-                Task {
-                    await vm.logOut()
+        NavigationView(content: {
+            VStack(content: {
+                NavigationLink(destination: MainView(vm: MainViewModel())) {
+                    Text("Main")
                 }
-            } label: {
-                Text("Log out")
-            }
-        }).onAppear {
-            Task {
-                await vm.onViewAppear()
-            }
-        }.errorAlert(error: $vm.latestError)
+                
+                AsyncImage(url: URL(string: vm.userProfile?.user.avatar ?? ""), scale: 1)
+                    .frame(width: 64, height: 64)
+                    .clipShape(.rect(cornerRadius: 25))
+                Button {
+                    num += 1
+                } label: {
+                    Text("num \(num)")
+                }
+                
+                Text(vm.content)
+                
+                Button {
+                    Task {
+                        await vm.logOut()
+                    }
+                } label: {
+                    Text("Log out")
+                }
+            }).onAppear {
+                Task {
+                    await vm.onViewAppear()
+                }
+            }.errorAlert(error: $vm.latestError)
+        })
     }
     
     
@@ -65,7 +71,7 @@ struct LocalizedAlertError: LocalizedError {
     var recoverySuggestion: String? {
         underlyingError.recoverySuggestion
     }
-
+    
     init?(error: Error?) {
         guard let localizedError = error as? LocalizedError else { return nil }
         underlyingError = localizedError

@@ -30,10 +30,10 @@
 		F01510E62C2BBB2800158142 /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01510E52C2BBB2800158142 /* URLRequestBuilder.swift */; };
 		F01573852BE3AE7400FDA7D0 /* ATTServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573842BE3AE7400FDA7D0 /* ATTServiceProtocol.swift */; };
 		F01573872BE3AE7E00FDA7D0 /* ATTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573862BE3AE7E00FDA7D0 /* ATTService.swift */; };
-		F015739B2BEA10CD00FDA7D0 /* AdServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015739A2BEA10CD00FDA7D0 /* AdServiceProtocol.swift */; };
+		F015739B2BEA10CD00FDA7D0 /* AdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015739A2BEA10CD00FDA7D0 /* AdService.swift */; };
 		F015739D2BEA10DA00FDA7D0 /* AdmobService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015739C2BEA10DA00FDA7D0 /* AdmobService.swift */; };
-		F015739F2BEA147300FDA7D0 /* AdLoaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015739E2BEA147300FDA7D0 /* AdLoaderProtocol.swift */; };
-		F01573A12BEA2D8000FDA7D0 /* TrackableServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573A02BEA2D8000FDA7D0 /* TrackableServiceProtocol.swift */; };
+		F015739F2BEA147300FDA7D0 /* AdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015739E2BEA147300FDA7D0 /* AdLoader.swift */; };
+		F01573A12BEA2D8000FDA7D0 /* TrackableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573A02BEA2D8000FDA7D0 /* TrackableService.swift */; };
 		F01573A42BF3238400FDA7D0 /* AdmobAppOpenAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01573A32BF3238400FDA7D0 /* AdmobAppOpenAdLoader.swift */; };
 		F015740F2BFC53AF00FDA7D0 /* AdmobInterstitialAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015740E2BFC53AF00FDA7D0 /* AdmobInterstitialAdLoader.swift */; };
 		F02C32A22BE68A3B006F5F75 /* ACCCoreAdMob.h in Headers */ = {isa = PBXBuildFile; fileRef = F02C32A12BE68A3B006F5F75 /* ACCCoreAdMob.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,8 +63,8 @@
 		F05C232A2BE4E158003DEC6D /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05C23292BE4E158003DEC6D /* AppEnvironment.swift */; };
 		F066D91D2BCFA5E1003F5690 /* ServiceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D91C2BCFA5E1003F5690 /* ServiceState.swift */; };
 		F066D9282BCFBB85003F5690 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9272BCFBB85003F5690 /* AnalyticsEvent.swift */; };
-		F066D92A2BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9292BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift */; };
-		F066D92C2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D92B2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift */; };
+		F066D92A2BCFBBE6003F5690 /* AnalyticsPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9292BCFBBE6003F5690 /* AnalyticsPlatform.swift */; };
+		F066D92C2BCFBC4E003F5690 /* AnalyticsEventTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D92B2BCFBC4E003F5690 /* AnalyticsEventTracker.swift */; };
 		F066D9402BCFE253003F5690 /* ACCCoreFirebase.h in Headers */ = {isa = PBXBuildFile; fileRef = F066D93F2BCFE253003F5690 /* ACCCoreFirebase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F066D9452BCFE260003F5690 /* ACCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0FB210D2BA9689700ECEB56 /* ACCCore.framework */; };
 		F0704D5F2BD7B7690069F3CA /* FirebaseMessagingServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0704D5E2BD7B7690069F3CA /* FirebaseMessagingServiceProtocol.swift */; };
@@ -91,13 +91,13 @@
 		F08BCE5D2BD0276F0067DFC5 /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F08BCE5C2BD0276F0067DFC5 /* nanopb.xcframework */; };
 		F08BCE6E2BD21D970067DFC5 /* FirebaseAnalyticsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE6D2BD21D970067DFC5 /* FirebaseAnalyticsServiceProtocol.swift */; };
 		F08BCE702BD21DA30067DFC5 /* FirebaseAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE6F2BD21DA30067DFC5 /* FirebaseAnalyticsService.swift */; };
-		F08BCE742BD2408C0067DFC5 /* ConfigCenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE732BD2408C0067DFC5 /* ConfigCenterProtocol.swift */; };
-		F08BCE782BD241090067DFC5 /* ConfigurableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE772BD241090067DFC5 /* ConfigurableProtocol.swift */; };
+		F08BCE742BD2408C0067DFC5 /* ConfigCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE732BD2408C0067DFC5 /* ConfigCenter.swift */; };
+		F08BCE782BD241090067DFC5 /* ConfigurableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE772BD241090067DFC5 /* ConfigurableObject.swift */; };
 		F08BCE7B2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE7A2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift */; };
 		F08BCE7D2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE7C2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift */; };
 		F0FB21112BA9689700ECEB56 /* ACCCore.h in Headers */ = {isa = PBXBuildFile; fileRef = F0FB21102BA9689700ECEB56 /* ACCCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F0FB21662BA9853300ECEB56 /* ServiceProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21652BA9853300ECEB56 /* ServiceProviderProtocol.swift */; };
-		F0FB21682BA986BF00ECEB56 /* ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21672BA986BF00ECEB56 /* ServiceProtocol.swift */; };
+		F0FB21662BA9853300ECEB56 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21652BA9853300ECEB56 /* ServiceProvider.swift */; };
+		F0FB21682BA986BF00ECEB56 /* ACCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21672BA986BF00ECEB56 /* ACCService.swift */; };
 		F0FB21782BA9887000ECEB56 /* ServiceProviderAppDelegate+HandlingActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB216A2BA9887000ECEB56 /* ServiceProviderAppDelegate+HandlingActions.swift */; };
 		F0FB21792BA9887000ECEB56 /* ServiceProviderAppDelegate+SceneStateHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB216B2BA9887000ECEB56 /* ServiceProviderAppDelegate+SceneStateHandling.swift */; };
 		F0FB217A2BA9887000ECEB56 /* ServiceProviderAppDelegate+RemoteNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB216C2BA9887000ECEB56 /* ServiceProviderAppDelegate+RemoteNotification.swift */; };
@@ -170,10 +170,10 @@
 		F01510E52C2BBB2800158142 /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 		F01573842BE3AE7400FDA7D0 /* ATTServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTServiceProtocol.swift; sourceTree = "<group>"; };
 		F01573862BE3AE7E00FDA7D0 /* ATTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATTService.swift; sourceTree = "<group>"; };
-		F015739A2BEA10CD00FDA7D0 /* AdServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdServiceProtocol.swift; sourceTree = "<group>"; };
+		F015739A2BEA10CD00FDA7D0 /* AdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdService.swift; sourceTree = "<group>"; };
 		F015739C2BEA10DA00FDA7D0 /* AdmobService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmobService.swift; sourceTree = "<group>"; };
-		F015739E2BEA147300FDA7D0 /* AdLoaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdLoaderProtocol.swift; sourceTree = "<group>"; };
-		F01573A02BEA2D8000FDA7D0 /* TrackableServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackableServiceProtocol.swift; sourceTree = "<group>"; };
+		F015739E2BEA147300FDA7D0 /* AdLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdLoader.swift; sourceTree = "<group>"; };
+		F01573A02BEA2D8000FDA7D0 /* TrackableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackableService.swift; sourceTree = "<group>"; };
 		F01573A32BF3238400FDA7D0 /* AdmobAppOpenAdLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmobAppOpenAdLoader.swift; sourceTree = "<group>"; };
 		F015740E2BFC53AF00FDA7D0 /* AdmobInterstitialAdLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdmobInterstitialAdLoader.swift; sourceTree = "<group>"; };
 		F02C329F2BE68A3B006F5F75 /* ACCCoreAdMob.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCoreAdMob.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,8 +202,8 @@
 		F066D9202BCFAE8B003F5690 /* URLSession+nonisolated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+nonisolated.swift"; sourceTree = "<group>"; };
 		F066D9242BCFAEC6003F5690 /* ACCLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCLogger.swift; sourceTree = "<group>"; };
 		F066D9272BCFBB85003F5690 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
-		F066D9292BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPlatformProtocol.swift; sourceTree = "<group>"; };
-		F066D92B2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventTrackerProtocol.swift; sourceTree = "<group>"; };
+		F066D9292BCFBBE6003F5690 /* AnalyticsPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsPlatform.swift; sourceTree = "<group>"; };
+		F066D92B2BCFBC4E003F5690 /* AnalyticsEventTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventTracker.swift; sourceTree = "<group>"; };
 		F066D93D2BCFE253003F5690 /* ACCCoreFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCoreFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F066D93F2BCFE253003F5690 /* ACCCoreFirebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCoreFirebase.h; sourceTree = "<group>"; };
 		F066D94B2BCFE3CF003F5690 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
@@ -232,14 +232,14 @@
 		F08BCE6A2BD2197C0067DFC5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/System/Library/Frameworks/AdSupport.framework; sourceTree = DEVELOPER_DIR; };
 		F08BCE6D2BD21D970067DFC5 /* FirebaseAnalyticsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsServiceProtocol.swift; sourceTree = "<group>"; };
 		F08BCE6F2BD21DA30067DFC5 /* FirebaseAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAnalyticsService.swift; sourceTree = "<group>"; };
-		F08BCE732BD2408C0067DFC5 /* ConfigCenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCenterProtocol.swift; sourceTree = "<group>"; };
-		F08BCE772BD241090067DFC5 /* ConfigurableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableProtocol.swift; sourceTree = "<group>"; };
+		F08BCE732BD2408C0067DFC5 /* ConfigCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCenter.swift; sourceTree = "<group>"; };
+		F08BCE772BD241090067DFC5 /* ConfigurableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableObject.swift; sourceTree = "<group>"; };
 		F08BCE7A2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRemoteConfigServiceProtocol.swift; sourceTree = "<group>"; };
 		F08BCE7C2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRemoteConfigService.swift; sourceTree = "<group>"; };
 		F0FB210D2BA9689700ECEB56 /* ACCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0FB21102BA9689700ECEB56 /* ACCCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCore.h; sourceTree = "<group>"; };
-		F0FB21652BA9853300ECEB56 /* ServiceProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProviderProtocol.swift; sourceTree = "<group>"; };
-		F0FB21672BA986BF00ECEB56 /* ServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProtocol.swift; sourceTree = "<group>"; };
+		F0FB21652BA9853300ECEB56 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
+		F0FB21672BA986BF00ECEB56 /* ACCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACCService.swift; sourceTree = "<group>"; };
 		F0FB216A2BA9887000ECEB56 /* ServiceProviderAppDelegate+HandlingActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ServiceProviderAppDelegate+HandlingActions.swift"; sourceTree = "<group>"; };
 		F0FB216B2BA9887000ECEB56 /* ServiceProviderAppDelegate+SceneStateHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ServiceProviderAppDelegate+SceneStateHandling.swift"; sourceTree = "<group>"; };
 		F0FB216C2BA9887000ECEB56 /* ServiceProviderAppDelegate+RemoteNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ServiceProviderAppDelegate+RemoteNotification.swift"; sourceTree = "<group>"; };
@@ -419,8 +419,8 @@
 				F015740D2BFC536800FDA7D0 /* Interstitial */,
 				F01573A22BF3236400FDA7D0 /* AppOpen */,
 				F02C32C02BEB2E6C006F5F75 /* Banner */,
-				F015739A2BEA10CD00FDA7D0 /* AdServiceProtocol.swift */,
-				F015739E2BEA147300FDA7D0 /* AdLoaderProtocol.swift */,
+				F015739A2BEA10CD00FDA7D0 /* AdService.swift */,
+				F015739E2BEA147300FDA7D0 /* AdLoader.swift */,
 				F015739C2BEA10DA00FDA7D0 /* AdmobService.swift */,
 				F02C32C32BEB4A29006F5F75 /* ACCAdSize.swift */,
 				FC32A9AD2BFE3DA200108084 /* ACCAdOptionsCollection.swift */,
@@ -536,9 +536,9 @@
 			isa = PBXGroup;
 			children = (
 				F066D9272BCFBB85003F5690 /* AnalyticsEvent.swift */,
-				F066D9292BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift */,
-				F066D92B2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift */,
-				F01573A02BEA2D8000FDA7D0 /* TrackableServiceProtocol.swift */,
+				F066D9292BCFBBE6003F5690 /* AnalyticsPlatform.swift */,
+				F066D92B2BCFBC4E003F5690 /* AnalyticsEventTracker.swift */,
+				F01573A02BEA2D8000FDA7D0 /* TrackableService.swift */,
 			);
 			path = EventOriented;
 			sourceTree = "<group>";
@@ -614,8 +614,8 @@
 		F08BCE722BD23F920067DFC5 /* RemoteConfigurable */ = {
 			isa = PBXGroup;
 			children = (
-				F08BCE732BD2408C0067DFC5 /* ConfigCenterProtocol.swift */,
-				F08BCE772BD241090067DFC5 /* ConfigurableProtocol.swift */,
+				F08BCE732BD2408C0067DFC5 /* ConfigCenter.swift */,
+				F08BCE772BD241090067DFC5 /* ConfigurableObject.swift */,
 			);
 			path = RemoteConfigurable;
 			sourceTree = "<group>";
@@ -682,8 +682,8 @@
 			isa = PBXGroup;
 			children = (
 				F0FB21692BA9887000ECEB56 /* ServiceProviderAppDelegateExtensions */,
-				F0FB21652BA9853300ECEB56 /* ServiceProviderProtocol.swift */,
-				F0FB21672BA986BF00ECEB56 /* ServiceProtocol.swift */,
+				F0FB21652BA9853300ECEB56 /* ServiceProvider.swift */,
+				F0FB21672BA986BF00ECEB56 /* ACCService.swift */,
 				F0FB21862BA988A100ECEB56 /* ServiceProviderAppDelegate.swift */,
 				F066D91C2BCFA5E1003F5690 /* ServiceState.swift */,
 				F02C32BE2BEA6A92006F5F75 /* ACCApp.swift */,
@@ -1026,7 +1026,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F015739F2BEA147300FDA7D0 /* AdLoaderProtocol.swift in Sources */,
+				F015739F2BEA147300FDA7D0 /* AdLoader.swift in Sources */,
 				F015740F2BFC53AF00FDA7D0 /* AdmobInterstitialAdLoader.swift in Sources */,
 				F015739D2BEA10DA00FDA7D0 /* AdmobService.swift in Sources */,
 				FC32A9AC2BFE36FF00108084 /* AdmobRewardedAdLoader.swift in Sources */,
@@ -1034,7 +1034,7 @@
 				F02C32C62BEB5026006F5F75 /* GADAdSize+ACCAdSize.swift in Sources */,
 				FC32A9AE2BFE3DA200108084 /* ACCAdOptionsCollection.swift in Sources */,
 				F02C32C42BEB4A29006F5F75 /* ACCAdSize.swift in Sources */,
-				F015739B2BEA10CD00FDA7D0 /* AdServiceProtocol.swift in Sources */,
+				F015739B2BEA10CD00FDA7D0 /* AdService.swift in Sources */,
 				FC32A9A92BFD8D6900108084 /* ACCCoreAdmob+SendableObjects.swift in Sources */,
 				F0082DE22C0447A700DF8062 /* AdmobNativeAdLoader.swift in Sources */,
 				F02C32C22BEB3794006F5F75 /* AdMobBannerAdLoader.swift in Sources */,
@@ -1095,26 +1095,26 @@
 				F0FB217C2BA9887000ECEB56 /* ServiceProviderAppDelegate+AppStateRestoration.swift in Sources */,
 				F0FB217A2BA9887000ECEB56 /* ServiceProviderAppDelegate+RemoteNotification.swift in Sources */,
 				F0FB21792BA9887000ECEB56 /* ServiceProviderAppDelegate+SceneStateHandling.swift in Sources */,
-				F01573A12BEA2D8000FDA7D0 /* TrackableServiceProtocol.swift in Sources */,
+				F01573A12BEA2D8000FDA7D0 /* TrackableService.swift in Sources */,
 				F01573872BE3AE7E00FDA7D0 /* ATTService.swift in Sources */,
 				FC32A9A72BFD7A0900108084 /* ACCCore+SendableObjects.swift in Sources */,
 				F0FB217B2BA9887000ECEB56 /* ServiceProviderAppDelegate+HealthKitInteracting.swift in Sources */,
-				F066D92A2BCFBBE6003F5690 /* AnalyticsPlatformProtocol.swift in Sources */,
+				F066D92A2BCFBBE6003F5690 /* AnalyticsPlatform.swift in Sources */,
 				F0FB217D2BA9887000ECEB56 /* ServiceProviderAppDelegate+AppStateAndSystemEvents.swift in Sources */,
 				F066D91D2BCFA5E1003F5690 /* ServiceState.swift in Sources */,
-				F0FB21662BA9853300ECEB56 /* ServiceProviderProtocol.swift in Sources */,
+				F0FB21662BA9853300ECEB56 /* ServiceProvider.swift in Sources */,
 				F01573852BE3AE7400FDA7D0 /* ATTServiceProtocol.swift in Sources */,
 				F066D9282BCFBB85003F5690 /* AnalyticsEvent.swift in Sources */,
 				F05C232A2BE4E158003DEC6D /* AppEnvironment.swift in Sources */,
 				F0FB21812BA9887000ECEB56 /* ServiceProviderAppDelegate+AppInitializing.swift in Sources */,
 				F0FB21832BA9887000ECEB56 /* ServiceProviderAppDelegate+SiriKitHandling.swift in Sources */,
-				F0FB21682BA986BF00ECEB56 /* ServiceProtocol.swift in Sources */,
+				F0FB21682BA986BF00ECEB56 /* ACCService.swift in Sources */,
 				F0FB21852BA9887000ECEB56 /* ServiceProviderAppDelegate+DownloadingData.swift in Sources */,
 				F0FB21842BA9887000ECEB56 /* ServiceProviderAppDelegate+WatchKitInteracting.swift in Sources */,
-				F08BCE742BD2408C0067DFC5 /* ConfigCenterProtocol.swift in Sources */,
+				F08BCE742BD2408C0067DFC5 /* ConfigCenter.swift in Sources */,
 				F02C32BF2BEA6A92006F5F75 /* ACCApp.swift in Sources */,
-				F066D92C2BCFBC4E003F5690 /* AnalyticsEventTrackerProtocol.swift in Sources */,
-				F08BCE782BD241090067DFC5 /* ConfigurableProtocol.swift in Sources */,
+				F066D92C2BCFBC4E003F5690 /* AnalyticsEventTracker.swift in Sources */,
+				F08BCE782BD241090067DFC5 /* ConfigurableObject.swift in Sources */,
 				F0FB21872BA988A100ECEB56 /* ServiceProviderAppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

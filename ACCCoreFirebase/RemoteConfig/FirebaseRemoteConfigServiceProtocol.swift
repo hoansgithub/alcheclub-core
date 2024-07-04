@@ -7,6 +7,6 @@
 
 import Foundation
 import ACCCore
-public protocol FirebaseRemoteConfigServiceProtocol:  ServiceProtocol, ServiceStateObservable {
+public protocol FirebaseRemoteConfigServiceProtocol:  ACCService, ServiceStateObservable {
     
 }

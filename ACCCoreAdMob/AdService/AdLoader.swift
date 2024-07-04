@@ -1,5 +1,5 @@
 //
-//  AdLoaderProtocol.swift
+//  AdLoader.swift
 //  ACCCoreAdMob
 //
 //  Created by HoanNL on 07/05/2024.
@@ -9,17 +9,17 @@ import ACCCore
 import UIKit
 
 
-public protocol AdLoaderProtocol: ConfigurableProtocol, TrackableServiceProtocol {
+public protocol AdLoader: ConfigurableObject, TrackableService {
     var adUnitID: String { get }
 }
 
 //Banner
-public protocol BannerAdLoaderProtocol: AdLoaderProtocol {
+public protocol BannerAdLoader: AdLoader {
 
 }
 
 //Native
-public protocol NativeAdLoaderProtocol: AdLoaderProtocol {
+public protocol NativeAdLoader: AdLoader {
     
 }
 
@@ -43,7 +43,7 @@ public enum FullScreenAdLoaderError: Error {
 
 public typealias FullScreenAdPresentationStateListener = (_ state: FullScreenAdPresentationState) -> ()
 
-public protocol FullScreenAdLoaderProtocol: AdLoaderProtocol {
+public protocol FullScreenAdLoader: AdLoader {
     @MainActor func presentAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
 }
 

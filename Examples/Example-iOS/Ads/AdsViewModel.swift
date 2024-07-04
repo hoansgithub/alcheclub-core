@@ -35,12 +35,12 @@ class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
     @Published var adMobReady: Bool = false
     
     var umpService: GoogleUMPServiceProtocol?
-    var admobService: AdServiceProtocol?
+    var admobService: AdService?
     var cancellables = Set<AnyCancellable>()
     private var nativeAdReceiver: NativeAdReceiver?
     public init() {
         self.umpService = ACCApp.getService(GoogleUMPServiceProtocol.self)
-        self.admobService = ACCApp.getService(AdServiceProtocol.self)
+        self.admobService = ACCApp.getService(AdService.self)
         self.registerPublishers()
     }
     

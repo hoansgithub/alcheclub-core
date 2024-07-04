@@ -1,5 +1,5 @@
 //
-//  AdServiceProtocol.swift
+//  AdService.swift
 //  ACCCoreAdMob
 //
 //  Created by HoanNL on 07/05/2024.
@@ -7,7 +7,7 @@
 
 import ACCCore
 import UIKit
-public protocol AdServiceProtocol: ServiceProtocol, ServiceStateObservable {
+public protocol AdService: ACCService, ServiceStateObservable {
     //Banner
     @MainActor func getBannerAd(for key: String, size: ACCAdSize, root: UIViewController?) async throws -> UIView
     func removeBannerAd(for key: String) -> Bool

@@ -8,7 +8,7 @@
 import ACCCore
 import UIKit
 import GoogleMobileAds
-public final class AdMobBannerAdLoader: NSObject, @unchecked Sendable, BannerAdLoaderProtocol {
+public final class AdMobBannerAdLoader: NSObject, @unchecked Sendable, BannerAdLoader {
     public weak var eventDelegate: TrackableServiceDelegate?
     public var adUnitID: String = ""
     private var bannersCollection: [String: GADBannerView] = [:]
@@ -17,7 +17,7 @@ public final class AdMobBannerAdLoader: NSObject, @unchecked Sendable, BannerAdL
         super.init()
     }
     
-    public func update(with config: ConfigObject) {
+    public func update(with config: ConfigContainer) {
         //TODO: -Update banner ad config here
     }
     

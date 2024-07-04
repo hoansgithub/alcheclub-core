@@ -6,6 +6,6 @@
 //
 
 import ACCCore
-public protocol StoreServiceProtocol: ServiceProtocol, ServiceStateObservable {
+public protocol StoreServiceProtocol: ACCService, ServiceStateObservable {
     
 }

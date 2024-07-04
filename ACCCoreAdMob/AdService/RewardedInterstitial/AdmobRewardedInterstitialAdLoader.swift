@@ -45,7 +45,7 @@ public final class AdmobRewardedInterstitialAdLoader: AdmobFullScreenAdLoader {
         
     }
     
-    public override func update(with config: any ConfigObject) {
+    public override func update(with config: any ConfigContainer) {
         //TODO: -Update ad config here
     }
     

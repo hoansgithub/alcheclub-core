@@ -23,7 +23,7 @@ public class NativeAdReceiver: NSObject, @unchecked Sendable {
     let templateGetter: TemplateGetter?
     let starRatingImage: StarRatingImage?
     let adViewReceiver: AdViewReceiver?
-    weak var adLoader: (any NativeAdLoaderProtocol)? = nil
+    weak var adLoader: (any NativeAdLoader)? = nil
     
     public required init(templateGetter: TemplateGetter?, adViewReceiver: AdViewReceiver?, starRatingImage: StarRatingImage? = nil, errorHandler: ErrorHandler? = nil) {
         self.errorHandler = errorHandler

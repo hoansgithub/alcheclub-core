@@ -21,7 +21,7 @@ final class SampleService: NSObject, @unchecked Sendable, SampleServiceProtocol 
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
     let statePublisher: AnyPublisher<ServiceState, Never>
     private var timerCancellable: AnyCancellable?
-    private var adService: AdServiceProtocol?
+    private var adService: AdService?
     private var initCancellables: Set<AnyCancellable> = []
     
     override init() {
@@ -104,7 +104,7 @@ struct SampleCodableStruct: Codable {
 
 ///conforming configurable protocol
 extension SampleService {
-    func update(with config: ConfigObject) {
+    func update(with config: ConfigContainer) {
         /*
          test_key_bool
          true

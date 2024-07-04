@@ -16,10 +16,10 @@ class AdPreloaderService: NSObject, @unchecked Sendable, AdPreloaderServiceProto
     
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
     let statePublisher: AnyPublisher<ServiceState, Never>
-    private var adService: AdServiceProtocol?
+    private var adService: AdService?
     private var appOpenCancellable: AnyCancellable?
     private var adLoadCancellable: AnyCancellable?
-    required init(adService: AdServiceProtocol?) {
+    required init(adService: AdService?) {
         statePublisher = stateSubject
             .removeDuplicates()
             .eraseToAnyPublisher()

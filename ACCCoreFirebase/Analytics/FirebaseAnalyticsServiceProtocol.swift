@@ -7,6 +7,6 @@
 
 import Foundation
 import ACCCore
-public protocol FirebaseAnalyticsServiceProtocol: ServiceProtocol, AnalyticsPlatformProtocol {
+public protocol FirebaseAnalyticsServiceProtocol: ACCService, AnalyticsPlatform {
     
 }

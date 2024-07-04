@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import AppTrackingTransparency
 import UIKit
-public final class ATTService: NSObject, @unchecked Sendable, ATTServiceProtocol, TrackableServiceProtocol {
+public final class ATTService: NSObject, @unchecked Sendable, ATTServiceProtocol, TrackableService {
     public weak var eventDelegate: TrackableServiceDelegate?
     
     

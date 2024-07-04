@@ -8,7 +8,7 @@
 import ACCCore
 import GoogleMobileAds
 
-public final class AdmobNativeAdLoader: NSObject, NativeAdLoaderProtocol {
+public final class AdmobNativeAdLoader: NSObject, NativeAdLoader {
     public weak var eventDelegate: TrackableServiceDelegate?
     public var adUnitID: String = ""
     
@@ -21,7 +21,7 @@ public final class AdmobNativeAdLoader: NSObject, NativeAdLoaderProtocol {
         super.init()
     }
     
-    public func update(with config: any ConfigObject) {
+    public func update(with config: any ConfigContainer) {
         //TODO: -Update native ad config here
     }
     

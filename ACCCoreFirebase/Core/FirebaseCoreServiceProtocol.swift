@@ -8,6 +8,6 @@
 import Foundation
 import ACCCore
 import FirebaseCore
-public protocol FirebaseCoreServiceProtocol: ServiceProtocol, ServiceStateObservable {
+public protocol FirebaseCoreServiceProtocol: ACCService, ServiceStateObservable {
     init(options: FirebaseOptions?)
 }

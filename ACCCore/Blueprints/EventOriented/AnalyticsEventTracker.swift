@@ -1,16 +1,16 @@
 //
-//  AnalyticsEventTrackerProtocol.swift
+//  AnalyticsEventTracker.swift
 //  ACCCore
 //
 //  Created by HoanNL on 17/04/2024.
 //
 
 import Foundation
-public protocol AnalyticsEventTrackerProtocol: AnyObject {
-    var analyticsPlatforms: [any AnalyticsPlatformProtocol] { get }
+public protocol AnalyticsEventTracker: AnyObject {
+    var analyticsPlatforms: [any AnalyticsPlatform] { get }
 }
 
-public extension AnalyticsEventTrackerProtocol {
+public extension AnalyticsEventTracker {
     func track(event: AnalyticsEvent) {
         analyticsPlatforms.forEach { platform in
             guard platform.canTrack else { return }

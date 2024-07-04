@@ -60,8 +60,8 @@ extension StoreService: UIApplicationDelegate {
     }
 }
 
-extension StoreService: ConfigurableProtocol {
-    public func update(with config: ConfigObject) {
+extension StoreService: ConfigurableObject {
+    public func update(with config: ConfigContainer) {
         //TODO: - update product presenter here
     }
 }

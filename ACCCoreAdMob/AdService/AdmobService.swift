@@ -19,7 +19,7 @@ public enum AdmobServiceError: Error {
     case rewardedInterstitialAdLoaderNotSet
 }
 
-public final class AdmobService: NSObject, @unchecked Sendable, AdServiceProtocol, TrackableServiceProtocol {
+public final class AdmobService: NSObject, @unchecked Sendable, AdService, TrackableService {
     public weak var eventDelegate: TrackableServiceDelegate? {
         didSet {
             self.bannerAdLoader?.eventDelegate = eventDelegate
@@ -185,8 +185,8 @@ extension AdmobService: UIApplicationDelegate {
     }
 }
 
-extension AdmobService: ConfigurableProtocol {
-    public func update(with config: ConfigObject) {
+extension AdmobService: ConfigurableObject {
+    public func update(with config: ConfigContainer) {
         
         //TODO: - UPDATE CONFIG HERE
         bannerAdLoader?.update(with: config)

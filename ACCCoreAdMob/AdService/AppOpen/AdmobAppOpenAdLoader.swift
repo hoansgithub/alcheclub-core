@@ -45,7 +45,7 @@ public final class AdmobAppOpenAdLoader: AdmobFullScreenAdLoader {
         isLoadingAd = false
     }
     
-    public override func update(with config: ConfigObject) {
+    public override func update(with config: ConfigContainer) {
         //TODO: -Update ad config here
     }
     

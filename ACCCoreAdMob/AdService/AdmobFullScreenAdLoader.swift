@@ -8,7 +8,7 @@
 import Foundation
 import GoogleMobileAds
 import ACCCore
-open class AdmobFullScreenAdLoader: NSObject, FullScreenAdLoaderProtocol {
+open class AdmobFullScreenAdLoader: NSObject, FullScreenAdLoader {
     //State
     var isLoadingAd = false
     var isShowingAd = false
@@ -27,7 +27,7 @@ open class AdmobFullScreenAdLoader: NSObject, FullScreenAdLoaderProtocol {
     
     
     
-    open dynamic func update(with config: any ConfigObject) {
+    open dynamic func update(with config: any ConfigContainer) {
         //TODO: -Update ad config here
     }
     

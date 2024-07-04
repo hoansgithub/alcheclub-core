@@ -9,6 +9,6 @@ import ACCCore
 import Combine
 import UIKit
 import ACCCoreAdMob
-public protocol AdPreloaderServiceProtocol: ServiceProtocol, ServiceStateObservable {
+public protocol AdPreloaderServiceProtocol: ACCService, ServiceStateObservable {
     var firstAppOpenClosedPublisher: AnyPublisher<Bool, Never> { get }
 }

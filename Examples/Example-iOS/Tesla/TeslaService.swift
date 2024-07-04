@@ -11,7 +11,7 @@ import ACCCoreNetworking
 import UIKit
 import Combine
 import ACCCoreUtilities
-final class TeslaService: NSObject, @unchecked Sendable, ServiceProtocol {
+final class TeslaService: NSObject, @unchecked Sendable, ACCService {
     
     struct Routes {
         var authBuilder: URLRequestBuilder {
