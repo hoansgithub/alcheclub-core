@@ -6,6 +6,6 @@
 //
 
 import Foundation
-public enum ServiceState: Int {
+public enum ServiceState {
     case idle, launching, ready
 }

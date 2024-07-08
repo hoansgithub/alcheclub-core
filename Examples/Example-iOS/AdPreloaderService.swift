@@ -14,6 +14,8 @@ class AdPreloaderService: NSObject, @unchecked Sendable, AdPreloaderServiceProto
     private let firstAppOpenClosedSubject = CurrentValueSubject<Bool, Never>(false)
     let firstAppOpenClosedPublisher: AnyPublisher<Bool, Never>
     
+    private var didEnterBackground = false
+    private var firstAdLaunched = false
     private let stateSubject = CurrentValueSubject<ServiceState, Never>(.idle)
     let statePublisher: AnyPublisher<ServiceState, Never>
     private var adService: AdService?
@@ -37,19 +39,27 @@ extension AdPreloaderService: UIApplicationDelegate {
 
 extension AdPreloaderService: UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
-        adLoadCancellable?.cancel() 
-        adLoadCancellable = adService?.statePublisher
-            .filter({$0 == .ready})
-            .prefix(1)
-            .receive(on: RunLoop.main)
-            .sink(receiveValue: { [weak self] _ in
-                Task {
-                    try? await self?.adService?.loadAppOpenAd()
-                    self?.showAppOpen()
-                }
-            })
+        adLoadCancellable?.cancel()
+        if (didEnterBackground && firstAdLaunched) || !firstAdLaunched {
+            didEnterBackground = false
+            adLoadCancellable = adService?.statePublisher
+                .filter({$0 == .ready})
+                .prefix(1)
+                .receive(on: RunLoop.main)
+                .sink(receiveValue: { [weak self] _ in
+                    Task {
+                        try? await self?.adService?.loadAppOpenAd()
+                        self?.showAppOpen()
+                        self?.firstAdLaunched = true
+                    }
+                })
+        }
         
         preloadFullScreenAds()
+    }
+    
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        didEnterBackground = true
     }
     
     func sceneWillResignActive(_ scene: UIScene) {

@@ -14,7 +14,7 @@ public protocol AsyncNetworkService: Sendable, AnyObject {
     var requestModifiers: [NetworkRequestModifier] { get set }
 
     /// if this is set, all network requests returned with an error will loop through the list.
-    var errorHandlers: [AsyncNetworkErrorHandler] { get set }
+    var errorHandlers: [AsyncNetworkErrorHandler?] { get set }
     
     /// if this is set, all network reponses returned with success will call `handle` on these interceptors
     var responseInterceptors: [NetworkResponseInterceptor] { get set }
@@ -30,7 +30,7 @@ public class AsyncHTTPNetworkService: @unchecked Sendable, AsyncNetworkService {
 
     private let urlSession = URLSession(configuration: .ephemeral)
 
-    public var errorHandlers: [AsyncNetworkErrorHandler] = []
+    public var errorHandlers: [AsyncNetworkErrorHandler?] = []
 
     public init(
         requestModifiers: [NetworkRequestModifier] = [],
@@ -52,12 +52,12 @@ public class AsyncHTTPNetworkService: @unchecked Sendable, AsyncNetworkService {
         do {
             return try await requestBuilder()
         } catch {
-            guard let errorHandler = errorHandlers.filter({ $0.canHandle(error) }).first else {
+            guard let errorHandler = errorHandlers.filter({ $0?.canHandle(error) ?? false }).first else {
                 throw error
             }
 
             do {
-                try await errorHandler.handle(error)
+                try await errorHandler?.handle(error)
                 return try await requestBuilder()
             } catch {
                 throw error

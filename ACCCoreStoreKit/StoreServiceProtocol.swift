@@ -6,6 +6,10 @@
 //
 
 import ACCCore
-public protocol StoreServiceProtocol: ACCService, ServiceStateObservable {
+import Combine
+public protocol StoreServiceProtocol: ACCService {
+    var productsPublisher: AnyPublisher<[StoreViewProduct], Never> { get }
+    func getViewModel(for identifier: String, defaultConfig: StoreViewModelConfig) -> StoreViewModel
     
+    func purchase(product: StoreViewProduct, accountToken: UUID?) async throws -> StoreKitManager.ProductPurchaseResult
 }

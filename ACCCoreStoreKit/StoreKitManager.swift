@@ -1,34 +1,46 @@
 //
-//  StoreProductManager.swift
+//  StoreKitManager.swift
 //  ACCCoreStoreKit
 //
 //  Created by HoanNL on 3/7/24.
 //
 
 import StoreKit
-
-public enum StoreProductManagerError: Error {
+import ACCCore
+import Combine
+public enum StoreKitManagerError: Error {
     case failedVerification
+    case productNotFound
+    case userCancelledPurchase
 }
 
-public final class StoreProductManager: @unchecked Sendable {
+public final class StoreKitManager: @unchecked Sendable {
     public typealias Transaction = StoreKit.Transaction
     public typealias RenewalInfo = StoreKit.Product.SubscriptionInfo.RenewalInfo
     public typealias RenewalState = StoreKit.Product.SubscriptionInfo.RenewalState
     public typealias ProductPurchaseResult = (result: Product.PurchaseResult,transaction: Transaction?)
     
     /// subcribe to get all available products
-    @Published private(set) var allProducts: [Product] = []
-    
+    private var allProductsSubject = CurrentValueSubject<[Product], Never>([])
+    public private(set) var allProductsPub: AnyPublisher<[Product], Never>
     /*
      Subcribe to get purchased products or subcription status except consumable products
      The app should store consumable products persistently right after the purchase
      */
-    @Published private(set) var purchasedProducts: [Product] = []
+    private var purchasedProductsSubject = CurrentValueSubject<[Product], Never>([])
+    public private(set) var purchasedProductsPub: AnyPublisher<[Product], Never>
 
-    @Published private(set) var subscriptionGroupStatus: [String: RenewalState] = [:]
+    private var subGroupStatusSubject = CurrentValueSubject<[String: RenewalState], Never>([:])
+    public private(set) var subGroupStatusPub: AnyPublisher<[String: RenewalState], Never>
     
     var updateListenerTask: Task<Void, Error>? = nil
+    
+    
+    init() {
+        self.allProductsPub = self.allProductsSubject.eraseToAnyPublisher()
+        self.purchasedProductsPub = self.purchasedProductsSubject.eraseToAnyPublisher()
+        self.subGroupStatusPub = self.subGroupStatusSubject.eraseToAnyPublisher()
+    }
     
     deinit {
         updateListenerTask?.cancel()
@@ -44,19 +56,16 @@ public final class StoreProductManager: @unchecked Sendable {
 }
 //Product Request
 
-public extension StoreProductManager {
+public extension StoreKitManager {
     func requestProducts(identifiers: [String]) async throws {
         let products = try await Product.products(for: identifiers)
-        allProducts = products
+        allProductsSubject.send(products)
     }
     
-    func getProduct(id: String) -> Product? {
-        return allProducts.first(where: {$0.id == id})
-    }
 }
 
 //Transactions handling
-public extension StoreProductManager {
+public extension StoreKitManager {
     
     func restore() async throws {
         try await AppStore.sync()
@@ -68,7 +77,7 @@ public extension StoreProductManager {
             for await result in Transaction.updates {
                 do {
                     try Task.checkCancellation()
-                    let transaction = try StoreProductManager.checkVerified(result)
+                    let transaction = try StoreKitManager.checkVerified(result)
                     //Deliver products to the user.
                     await self.updateCustomerProductStatus()
 
@@ -76,9 +85,39 @@ public extension StoreProductManager {
                     await transaction.finish()
                 } catch {
                     //StoreKit has a transaction that fails verification. Don't deliver content to the user.
-                    debugPrint("\(self) \(#function): \(error.localizedDescription)")
+                    ACCLogger.print(error.localizedDescription, level: .error)
                 }
             }
+        }
+    }
+    
+    func purchase(productID: String, accountToken: UUID? = nil) async throws -> ProductPurchaseResult {
+        guard let product = allProductsSubject.value.first(where: {$0.id == productID}) else {
+            throw StoreKitManagerError.productNotFound
+        }
+        
+        var options: Set<Product.PurchaseOption> = []
+        if let accountToken = accountToken {
+            options.insert(.appAccountToken(accountToken))
+        }
+        let result = try await product.purchase(options: options)
+
+        switch result {
+        case .success(let verification):
+            //Check whether the transaction is verified. If it isn't,
+            //this function rethrows the verification error.
+            let transaction = try StoreKitManager.checkVerified(verification)
+            
+            //Always finish a transaction.
+            await transaction.finish()
+            
+            //The transaction is verified. Deliver content to the user.
+            await updateCustomerProductStatus()
+            return (result, transaction)
+        case .userCancelled:
+            throw StoreKitManagerError.userCancelledPurchase
+        default:
+            return (result, nil)
         }
     }
     
@@ -90,20 +129,20 @@ public extension StoreProductManager {
         for await result in Transaction.currentEntitlements {
             do {
                 //Check whether the transaction is verified. If it isn’t, catch `failedVerification` error.
-                let transaction = try StoreProductManager.checkVerified(result)
+                let transaction = try StoreKitManager.checkVerified(result)
                 if transaction.purchaseDate != transaction.originalPurchaseDate {
                     debugPrint("RENEW")
                 }
                 
-                if let storedProduct = allProducts.first(where: { $0.id == transaction.productID }) {
+                if let storedProduct = allProductsSubject.value.first(where: { $0.id == transaction.productID }) {
                     verifiedProducts.append(storedProduct)
                 }
             } catch {
-                debugPrint("\(self) \(#function): \(error.localizedDescription)")
+                ACCLogger.print(error.localizedDescription, level: .error)
             }
         }
 
-        self.purchasedProducts = verifiedProducts
+        self.purchasedProductsSubject.send(verifiedProducts)
 
         //Check the `subscriptionGroupStatus` to learn the auto-renewable subscription state to determine whether the customer
         //is new (never subscribed), active, or inactive (expired subscription).Once this app has only one subscription
@@ -115,19 +154,19 @@ public extension StoreProductManager {
                   let status = try? await prod.subscription?.status.first?.state else { return }
             verifiedSubscriptionGroupStatus[groupID] = status
         }
-        self.subscriptionGroupStatus = verifiedSubscriptionGroupStatus
+        subGroupStatusSubject.send(verifiedSubscriptionGroupStatus)
     }
 }
 
 //Verification
 @available(iOS 15.0, *)
-public extension StoreProductManager {
+public extension StoreKitManager {
     static func checkVerified<T>(_ result: VerificationResult<T>) throws -> T {
         //Check whether the JWS passes StoreKit verification.
         switch result {
         case .unverified:
             //StoreKit parses the JWS, but it fails verification.
-            throw StoreProductManagerError.failedVerification
+            throw StoreKitManagerError.failedVerification
         case .verified(let safe):
             //The result is verified. Return the unwrapped value.
             return safe

@@ -10,7 +10,8 @@ import ACCCore
 import ACCCoreFirebase
 import Combine
 import UIKit
-protocol MainViewModelProtocol: Sendable, BaseViewModelProtocol {
+import ACCCoreStoreKit
+protocol MainViewModelProtocol: Sendable, BaseViewModelProtocol, StoreEnabledViewModel {
     func track(event: AnalyticsEvent)
     func login() async
     func goToOnboarding() async
@@ -18,18 +19,28 @@ protocol MainViewModelProtocol: Sendable, BaseViewModelProtocol {
     var notificationPermissionNeeded: Bool { get set }
     var notiUserInfo: [AnyHashable: Any] { get }
     var notiToken: String { get }
+    var storeActive: Bool { get set }
     func requestNotiPermission()
 }
 
 class MainViewModel: @unchecked Sendable, MainViewModelProtocol {
+    
+    var defaultStoreConfig: StoreViewModelConfig {
+        StorePreset.shared.defaultConfig
+    }
+    
     @Published var notificationPermissionNeeded: Bool = true
     @Published var notiUserInfo: [AnyHashable: Any] = [:]
     @Published var notiToken: String = ""
+    @Published var storeViewModel: StoreViewModel?
+    @Published var storeActive: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     private var firebaseMessageService: FirebaseMessagingServiceProtocol?
+    internal var storeService: StoreServiceProtocol?
     init() {
         self.firebaseMessageService = ACCApp.getService(FirebaseMessagingServiceProtocol.self)
+        self.storeService = ACCApp.getService(StoreServiceProtocol.self)
         registerObservers()
     }
     

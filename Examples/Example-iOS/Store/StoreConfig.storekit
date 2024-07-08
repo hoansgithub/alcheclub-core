@@ -1,0 +1,158 @@
+{
+  "identifier" : "D0B1FCBD",
+  "nonRenewingSubscriptions" : [
+    {
+      "displayPrice" : "5.99",
+      "familyShareable" : false,
+      "internalID" : "6523416664",
+      "localizations" : [
+        {
+          "description" : "Một tuần",
+          "displayName" : "Một tuần",
+          "locale" : "vi"
+        }
+      ],
+      "productID" : "oneweekpremium",
+      "referenceName" : "One Week Premium",
+      "type" : "NonRenewingSubscription"
+    }
+  ],
+  "products" : [
+    {
+      "displayPrice" : "3.99",
+      "familyShareable" : false,
+      "internalID" : "6523416430",
+      "localizations" : [
+        {
+          "description" : "50 Xu",
+          "displayName" : "50 Xu",
+          "locale" : "vi"
+        }
+      ],
+      "productID" : "fiftytokens",
+      "referenceName" : "50 Tokens",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "44.99",
+      "familyShareable" : false,
+      "internalID" : "6523416282",
+      "localizations" : [
+        {
+          "description" : "Trọn đời sử dụng",
+          "displayName" : "Trọn đời",
+          "locale" : "vi"
+        }
+      ],
+      "productID" : "Lifetime",
+      "referenceName" : "Lifetime",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6498985755",
+    "_billingGracePeriodEnabled" : false,
+    "_compatibilityTimeRate" : {
+      "3" : 5
+    },
+    "_developerTeamID" : "5636JWQJGM",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 742123116.52811694,
+    "_locale" : "en_US",
+    "_renewalBillingIssuesEnabled" : false,
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ],
+    "_timeRate" : 12
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21508254",
+      "localizations" : [
+
+      ],
+      "name" : "Sub1",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "4.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6523416656",
+          "introductoryOffer" : {
+            "internalID" : "75D95054",
+            "numberOfPeriods" : 1,
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "Dùng thử gói tuần ",
+              "displayName" : "Dùng thử gói tuần ",
+              "locale" : "vi"
+            }
+          ],
+          "productID" : "freetrialweekly",
+          "recurringSubscriptionPeriod" : "P1W",
+          "referenceName" : "Free Trial Weekly",
+          "subscriptionGroupID" : "21508254",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

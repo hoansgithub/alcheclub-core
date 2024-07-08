@@ -50,11 +50,12 @@
 		F02C32C42BEB4A29006F5F75 /* ACCAdSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C32C32BEB4A29006F5F75 /* ACCAdSize.swift */; };
 		F02C32C62BEB5026006F5F75 /* GADAdSize+ACCAdSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C32C52BEB5026006F5F75 /* GADAdSize+ACCAdSize.swift */; };
 		F03971F82C3542F200FC4126 /* ACCCoreStoreKit.h in Headers */ = {isa = PBXBuildFile; fileRef = F03971F72C3542F200FC4126 /* ACCCoreStoreKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F03971FD2C354C9C00FC4126 /* StoreProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03971FC2C354C9C00FC4126 /* StoreProductManager.swift */; };
+		F03971FD2C354C9C00FC4126 /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03971FC2C354C9C00FC4126 /* StoreKitManager.swift */; };
 		F03971FF2C35506600FC4126 /* StoreServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03971FE2C35506600FC4126 /* StoreServiceProtocol.swift */; };
 		F03972012C35507A00FC4126 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03972002C35507A00FC4126 /* StoreService.swift */; };
-		F03972032C35597100FC4126 /* PresentableProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03972022C35597100FC4126 /* PresentableProduct.swift */; };
-		F03972052C355BDE00FC4126 /* PresentableStoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03972042C355BDE00FC4126 /* PresentableStoreViewModel.swift */; };
+		F03972032C35597100FC4126 /* StoreViewProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03972022C35597100FC4126 /* StoreViewProduct.swift */; };
+		F03972052C355BDE00FC4126 /* StoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03972042C355BDE00FC4126 /* StoreViewModel.swift */; };
+		F03972062C366D5600FC4126 /* ACCCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0FB210D2BA9689700ECEB56 /* ACCCore.framework */; };
 		F05C23102BE20257003DEC6D /* ACCCoreUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = F05C230F2BE20257003DEC6D /* ACCCoreUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F05C23142BE202EC003DEC6D /* URLSession+nonisolated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9202BCFAE8B003F5690 /* URLSession+nonisolated.swift */; };
 		F05C231C2BE204C8003DEC6D /* ACCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9242BCFAEC6003F5690 /* ACCLogger.swift */; };
@@ -95,6 +96,7 @@
 		F08BCE782BD241090067DFC5 /* ConfigurableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE772BD241090067DFC5 /* ConfigurableObject.swift */; };
 		F08BCE7B2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE7A2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift */; };
 		F08BCE7D2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE7C2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift */; };
+		F0C379AA2C3690CE0080E4A3 /* StoreViewModelConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C379A92C3690CE0080E4A3 /* StoreViewModelConfig.swift */; };
 		F0FB21112BA9689700ECEB56 /* ACCCore.h in Headers */ = {isa = PBXBuildFile; fileRef = F0FB21102BA9689700ECEB56 /* ACCCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F0FB21662BA9853300ECEB56 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21652BA9853300ECEB56 /* ServiceProvider.swift */; };
 		F0FB21682BA986BF00ECEB56 /* ACCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21672BA986BF00ECEB56 /* ACCService.swift */; };
@@ -123,6 +125,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		F02C32A82BE68A93006F5F75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F0FB21042BA9689700ECEB56 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F0FB210C2BA9689700ECEB56;
+			remoteInfo = ACCCore;
+		};
+		F03972082C366D5600FC4126 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F0FB21042BA9689700ECEB56 /* Project object */;
 			proxyType = 1;
@@ -189,11 +198,11 @@
 		F02C32C52BEB5026006F5F75 /* GADAdSize+ACCAdSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GADAdSize+ACCAdSize.swift"; sourceTree = "<group>"; };
 		F03971F52C3542F200FC4126 /* ACCCoreStoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCoreStoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F03971F72C3542F200FC4126 /* ACCCoreStoreKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCoreStoreKit.h; sourceTree = "<group>"; };
-		F03971FC2C354C9C00FC4126 /* StoreProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreProductManager.swift; sourceTree = "<group>"; };
+		F03971FC2C354C9C00FC4126 /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
 		F03971FE2C35506600FC4126 /* StoreServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreServiceProtocol.swift; sourceTree = "<group>"; };
 		F03972002C35507A00FC4126 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
-		F03972022C35597100FC4126 /* PresentableProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableProduct.swift; sourceTree = "<group>"; };
-		F03972042C355BDE00FC4126 /* PresentableStoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentableStoreViewModel.swift; sourceTree = "<group>"; };
+		F03972022C35597100FC4126 /* StoreViewProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewProduct.swift; sourceTree = "<group>"; };
+		F03972042C355BDE00FC4126 /* StoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewModel.swift; sourceTree = "<group>"; };
 		F05C230D2BE20257003DEC6D /* ACCCoreUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCoreUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F05C230F2BE20257003DEC6D /* ACCCoreUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCoreUtilities.h; sourceTree = "<group>"; };
 		F05C23212BE20660003DEC6D /* UserDefaults+DefaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+DefaultValue.swift"; sourceTree = "<group>"; };
@@ -236,6 +245,7 @@
 		F08BCE772BD241090067DFC5 /* ConfigurableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurableObject.swift; sourceTree = "<group>"; };
 		F08BCE7A2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRemoteConfigServiceProtocol.swift; sourceTree = "<group>"; };
 		F08BCE7C2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRemoteConfigService.swift; sourceTree = "<group>"; };
+		F0C379A92C3690CE0080E4A3 /* StoreViewModelConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewModelConfig.swift; sourceTree = "<group>"; };
 		F0FB210D2BA9689700ECEB56 /* ACCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0FB21102BA9689700ECEB56 /* ACCCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCore.h; sourceTree = "<group>"; };
 		F0FB21652BA9853300ECEB56 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
@@ -287,6 +297,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F03972062C366D5600FC4126 /* ACCCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,14 +488,23 @@
 		F03971F62C3542F200FC4126 /* ACCCoreStoreKit */ = {
 			isa = PBXGroup;
 			children = (
+				F03972102C368CA900FC4126 /* StoreView */,
 				F03971F72C3542F200FC4126 /* ACCCoreStoreKit.h */,
-				F03971FC2C354C9C00FC4126 /* StoreProductManager.swift */,
+				F03971FC2C354C9C00FC4126 /* StoreKitManager.swift */,
 				F03971FE2C35506600FC4126 /* StoreServiceProtocol.swift */,
 				F03972002C35507A00FC4126 /* StoreService.swift */,
-				F03972022C35597100FC4126 /* PresentableProduct.swift */,
-				F03972042C355BDE00FC4126 /* PresentableStoreViewModel.swift */,
 			);
 			path = ACCCoreStoreKit;
+			sourceTree = "<group>";
+		};
+		F03972102C368CA900FC4126 /* StoreView */ = {
+			isa = PBXGroup;
+			children = (
+				F03972022C35597100FC4126 /* StoreViewProduct.swift */,
+				F03972042C355BDE00FC4126 /* StoreViewModel.swift */,
+				F0C379A92C3690CE0080E4A3 /* StoreViewModelConfig.swift */,
+			);
+			path = StoreView;
 			sourceTree = "<group>";
 		};
 		F05C230E2BE20257003DEC6D /* ACCCoreUtilities */ = {
@@ -831,6 +851,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F03972092C366D5600FC4126 /* PBXTargetDependency */,
 			);
 			name = ACCCoreStoreKit;
 			productName = ACCCoreStoreKit;
@@ -1050,10 +1071,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F03971FD2C354C9C00FC4126 /* StoreProductManager.swift in Sources */,
-				F03972032C35597100FC4126 /* PresentableProduct.swift in Sources */,
+				F03971FD2C354C9C00FC4126 /* StoreKitManager.swift in Sources */,
+				F03972032C35597100FC4126 /* StoreViewProduct.swift in Sources */,
 				F03971FF2C35506600FC4126 /* StoreServiceProtocol.swift in Sources */,
-				F03972052C355BDE00FC4126 /* PresentableStoreViewModel.swift in Sources */,
+				F0C379AA2C3690CE0080E4A3 /* StoreViewModelConfig.swift in Sources */,
+				F03972052C355BDE00FC4126 /* StoreViewModel.swift in Sources */,
 				F03972012C35507A00FC4126 /* StoreService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1126,6 +1148,11 @@
 			isa = PBXTargetDependency;
 			target = F0FB210C2BA9689700ECEB56 /* ACCCore */;
 			targetProxy = F02C32A82BE68A93006F5F75 /* PBXContainerItemProxy */;
+		};
+		F03972092C366D5600FC4126 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F0FB210C2BA9689700ECEB56 /* ACCCore */;
+			targetProxy = F03972082C366D5600FC4126 /* PBXContainerItemProxy */;
 		};
 		F05C23262BE20AE7003DEC6D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

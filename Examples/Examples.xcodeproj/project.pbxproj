@@ -25,6 +25,8 @@
 		F03971E92C325AFF00FC4126 /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03971E82C325AFF00FC4126 /* TokenResponse.swift */; };
 		F03971EB2C32613500FC4126 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03971EA2C32613500FC4126 /* RequestError.swift */; };
 		F03971EF2C33DB9300FC4126 /* FBUserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03971EE2C33DB9300FC4126 /* FBUserProfile.swift */; };
+		F039720C2C366D7A00FC4126 /* ACCCoreStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F039720B2C366D7A00FC4126 /* ACCCoreStoreKit.framework */; };
+		F039720D2C366D7A00FC4126 /* ACCCoreStoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F039720B2C366D7A00FC4126 /* ACCCoreStoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F05C231E2BE20548003DEC6D /* ACCCoreUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */; };
 		F05C231F2BE20548003DEC6D /* ACCCoreUtilities.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F066D9352BCFC050003F5690 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F066D9342BCFC050003F5690 /* MainViewModel.swift */; };
@@ -50,6 +52,12 @@
 		F0B2E79B2BCE7BB6004BA72A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B2E79A2BCE7BB6004BA72A /* BaseView.swift */; };
 		F0B2E79D2BCE7E41004BA72A /* SampleServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B2E79C2BCE7E41004BA72A /* SampleServiceProtocol.swift */; };
 		F0B2E79F2BCE7E4A004BA72A /* SampleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B2E79E2BCE7E4A004BA72A /* SampleService.swift */; };
+		F0C379AD2C36AE4C0080E4A3 /* StoreOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C379AC2C36AE4C0080E4A3 /* StoreOneView.swift */; };
+		F0C379B12C3B98110080E4A3 /* StoreContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C379B02C3B98110080E4A3 /* StoreContainerView.swift */; };
+		F0C379B32C3BA65D0080E4A3 /* StoreEnabledViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C379B22C3BA65D0080E4A3 /* StoreEnabledViewModel.swift */; };
+		F0C379B52C3BA7A30080E4A3 /* StoreTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C379B42C3BA7A30080E4A3 /* StoreTwoView.swift */; };
+		F0C379B72C3BB3010080E4A3 /* StorePreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C379B62C3BB3010080E4A3 /* StorePreset.swift */; };
+		F0C379BB2C3BD7310080E4A3 /* RefreshTokenParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C379BA2C3BD7310080E4A3 /* RefreshTokenParams.swift */; };
 		F0FB21582BA977E700ECEB56 /* Example_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21572BA977E700ECEB56 /* Example_iOSApp.swift */; };
 		F0FB215C2BA977E900ECEB56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0FB215B2BA977E900ECEB56 /* Assets.xcassets */; };
 		F0FB215F2BA977E900ECEB56 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0FB215E2BA977E900ECEB56 /* Preview Assets.xcassets */; };
@@ -62,6 +70,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F039720D2C366D7A00FC4126 /* ACCCoreStoreKit.framework in Embed Frameworks */,
 				F08BCE692BD02E430067DFC5 /* ACCCoreFirebase.framework in Embed Frameworks */,
 				F015738A2BE87BF300FDA7D0 /* ACCCoreAdMob.framework in Embed Frameworks */,
 				F08BCE662BD02E410067DFC5 /* ACCCore.framework in Embed Frameworks */,
@@ -90,6 +99,7 @@
 		F03971E82C325AFF00FC4126 /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 		F03971EA2C32613500FC4126 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		F03971EE2C33DB9300FC4126 /* FBUserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBUserProfile.swift; sourceTree = "<group>"; };
+		F039720B2C366D7A00FC4126 /* ACCCoreStoreKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCoreStoreKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCoreUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F066D92E2BCFBED7003F5690 /* ACCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ACCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F066D9342BCFC050003F5690 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -114,6 +124,13 @@
 		F0B2E79A2BCE7BB6004BA72A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		F0B2E79C2BCE7E41004BA72A /* SampleServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleServiceProtocol.swift; sourceTree = "<group>"; };
 		F0B2E79E2BCE7E4A004BA72A /* SampleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleService.swift; sourceTree = "<group>"; };
+		F0C379AC2C36AE4C0080E4A3 /* StoreOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreOneView.swift; sourceTree = "<group>"; };
+		F0C379B02C3B98110080E4A3 /* StoreContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreContainerView.swift; sourceTree = "<group>"; };
+		F0C379B22C3BA65D0080E4A3 /* StoreEnabledViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreEnabledViewModel.swift; sourceTree = "<group>"; };
+		F0C379B42C3BA7A30080E4A3 /* StoreTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTwoView.swift; sourceTree = "<group>"; };
+		F0C379B62C3BB3010080E4A3 /* StorePreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorePreset.swift; sourceTree = "<group>"; };
+		F0C379BA2C3BD7310080E4A3 /* RefreshTokenParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenParams.swift; sourceTree = "<group>"; };
+		F0C379BC2C3BE47D0080E4A3 /* StoreConfig.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreConfig.storekit; sourceTree = "<group>"; };
 		F0FB21552BA977E700ECEB56 /* Example-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0FB21572BA977E700ECEB56 /* Example_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example_iOSApp.swift; sourceTree = "<group>"; };
 		F0FB215B2BA977E900ECEB56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -125,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F039720C2C366D7A00FC4126 /* ACCCoreStoreKit.framework in Frameworks */,
 				F08BCE682BD02E430067DFC5 /* ACCCoreFirebase.framework in Frameworks */,
 				F01573892BE87BF300FDA7D0 /* ACCCoreAdMob.framework in Frameworks */,
 				F08BCE652BD02E410067DFC5 /* ACCCore.framework in Frameworks */,
@@ -144,6 +162,7 @@
 				F03971E82C325AFF00FC4126 /* TokenResponse.swift */,
 				F03971EA2C32613500FC4126 /* RequestError.swift */,
 				F03971EE2C33DB9300FC4126 /* FBUserProfile.swift */,
+				F0C379BA2C3BD7310080E4A3 /* RefreshTokenParams.swift */,
 			);
 			path = Tesla;
 			sourceTree = "<group>";
@@ -172,6 +191,7 @@
 		F066D92D2BCFBED7003F5690 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F039720B2C366D7A00FC4126 /* ACCCoreStoreKit.framework */,
 				F01510EA2C2BC54900158142 /* ACCCoreNetworking.framework */,
 				F01573882BE87BF300FDA7D0 /* ACCCoreAdMob.framework */,
 				F05C231D2BE20548003DEC6D /* ACCCoreUtilities.framework */,
@@ -227,6 +247,19 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
+		F0C379AB2C36AE250080E4A3 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				F0C379B42C3BA7A30080E4A3 /* StoreTwoView.swift */,
+				F0C379AC2C36AE4C0080E4A3 /* StoreOneView.swift */,
+				F0C379B02C3B98110080E4A3 /* StoreContainerView.swift */,
+				F0C379B22C3BA65D0080E4A3 /* StoreEnabledViewModel.swift */,
+				F0C379B62C3BB3010080E4A3 /* StorePreset.swift */,
+				F0C379BC2C3BE47D0080E4A3 /* StoreConfig.storekit */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
 		F0FB212B2BA9767300ECEB56 = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +280,7 @@
 		F0FB21562BA977E700ECEB56 /* Example-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				F0C379AB2C36AE250080E4A3 /* Store */,
 				F01510E72C2BC4EA00158142 /* Tesla */,
 				F01573802BE3A7FC00FDA7D0 /* Utilities */,
 				F015737B2BE3A08700FDA7D0 /* Ads */,
@@ -381,15 +415,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0C379B32C3BA65D0080E4A3 /* StoreEnabledViewModel.swift in Sources */,
 				F03971EF2C33DB9300FC4126 /* FBUserProfile.swift in Sources */,
 				F01573A82BF3664000FDA7D0 /* AdPreloaderServiceProtocol.swift in Sources */,
 				F0B2E7932BCE7A32004BA72A /* ExampleAppDelegate.swift in Sources */,
 				F0B2E79F2BCE7E4A004BA72A /* SampleService.swift in Sources */,
 				F0704D4E2BD78B310069F3CA /* ContainerViewModel.swift in Sources */,
+				F0C379BB2C3BD7310080E4A3 /* RefreshTokenParams.swift in Sources */,
 				F03971E72C32599700FC4126 /* GetTokenParams.swift in Sources */,
 				F015737F2BE3A0A400FDA7D0 /* AdsView.swift in Sources */,
 				F0704D542BD78B5B0069F3CA /* OnboardingView.swift in Sources */,
 				F0FB21582BA977E700ECEB56 /* Example_iOSApp.swift in Sources */,
+				F0C379B52C3BA7A30080E4A3 /* StoreTwoView.swift in Sources */,
 				F066D9372BCFC05C003F5690 /* MainView.swift in Sources */,
 				F01573A62BF3651E00FDA7D0 /* AdPreloaderService.swift in Sources */,
 				F015737D2BE3A09800FDA7D0 /* AdsViewModel.swift in Sources */,
@@ -402,9 +439,12 @@
 				F01510E92C2BC4FA00158142 /* TeslaService.swift in Sources */,
 				F0704D4A2BD7769C0069F3CA /* AppSession.swift in Sources */,
 				F0704D572BD78B8A0069F3CA /* SplashViewModel.swift in Sources */,
+				F0C379B12C3B98110080E4A3 /* StoreContainerView.swift in Sources */,
 				F0B2E7952BCE7A8F004BA72A /* BaseViewModel.swift in Sources */,
 				F0704D592BD78B920069F3CA /* SplashView.swift in Sources */,
+				F0C379AD2C36AE4C0080E4A3 /* StoreOneView.swift in Sources */,
 				F01573962BE8DD6100FDA7D0 /* BaseViewControllerRepresentable.swift in Sources */,
+				F0C379B72C3BB3010080E4A3 /* StorePreset.swift in Sources */,
 				F0B2E79B2BCE7BB6004BA72A /* BaseView.swift in Sources */,
 				F01510A92C23C9C300158142 /* BaseGADNativeAdview.swift in Sources */,
 				F0B2E7992BCE7AAA004BA72A /* HomeView.swift in Sources */,

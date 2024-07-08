@@ -9,7 +9,11 @@ import SwiftUI
 import ACCCore
 
 protocol MainViewProtocol: BaseViewProtocol {}
-
+extension Binding {
+    func map<NewValue>(_ transform: @escaping (Value) -> NewValue) -> Binding<NewValue> {
+        Binding<NewValue>(get: { transform(wrappedValue) }, set: { _ in })
+    }
+}
 struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
     @StateObject var vm: VM
     var body: some View {
@@ -18,7 +22,15 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
                 NavigationLink(destination: AdsView(vm: AdsViewModel())) {
                     Text("ADS")
                 }
+                Button("Push store") {
+                    vm.toggleStoreViewModel(identifier: "StoreOneView")
+                }
 
+                
+                NavigationLink(destination:
+                                StoreContainerView(storeViewModel: $vm.storeViewModel), isActive: $vm.storeViewModel.map({$0 != nil})) {
+                    EmptyView()
+                }
                 
                 Button("Firebase Messaging") {
                     vm.requestNotiPermission()

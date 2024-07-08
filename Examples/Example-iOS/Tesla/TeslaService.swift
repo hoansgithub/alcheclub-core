@@ -33,6 +33,12 @@ final class TeslaService: NSObject, @unchecked Sendable, ACCService {
                 ])
         }
         
+        func refresh(refreshToken: String, clientID: String) -> URLRequest {
+            return apiBuilder.post("oauth2/token")
+                .setValue("Basic MjJDMjlSOjNlMWY1OTdhZjRjZTY2MTRhNjExM2UyOWYwM2MyYjc4", forHeader: "authorization")
+                .body(params: RefreshTokenParams(grant_type: "refresh_token", refresh_token: refreshToken, client_id: clientID).bodyParams)
+        }
+        
         func exchangeForToken(code: String) -> URLRequest {
             return apiBuilder.post("oauth2/token")
                 .setValue("Basic MjJDMjlSOjNlMWY1OTdhZjRjZTY2MTRhNjExM2UyOWYwM2MyYjc4", forHeader: "authorization")
@@ -66,6 +72,11 @@ final class TeslaService: NSObject, @unchecked Sendable, ACCService {
         routes = Routes()
         networkService = AsyncHTTPNetworkService()
         super.init()
+        let wSelf = { [weak self] in
+            return self
+        }
+        
+        networkService.errorHandlers = [wSelf()]
     }
     
     @MainActor func requestOAuth() async -> URL? {
@@ -88,13 +99,42 @@ final class TeslaService: NSObject, @unchecked Sendable, ACCService {
         return try await networkService.requestObject(req)
     }
     
+    func refresh(refreshToken: String, clientID: String) async throws -> TokenResponse {
+        let req = routes.refresh(refreshToken: refreshToken, clientID: clientID)
+        return try await networkService.requestObject(req)
+    }
+    
     func logOut() {
         tokenResponse = nil
     }
 }
 
 private extension TeslaService {
-    
+    func handleTokenTask(result: Result<TokenResponse, Error>) {
+        //exchange for token
+        
+            switch result {
+            case .success(let success):
+                tokenResponse = success
+                ACCLogger.print(tokenResponse)
+            case .failure(let failure):
+                
+                if let err = failure as? NetworkError {
+                    switch err {
+                    case .non200StatusCode(let stt, let data) :
+                        do {
+                            let obj = try JSONDecoder().decode(RequestErrors.self, from: data!)
+                            ACCLogger.print(obj, level: .error)
+                        } catch {
+                            ACCLogger.print(error, level: .error)
+                        }
+                        
+                    default: break
+                    }
+                }
+            }
+        
+    }
 }
 
 //URL Scheme handler
@@ -106,36 +146,42 @@ extension TeslaService: UIWindowSceneDelegate {
         }
         debugPrint(firstUrl.pathComponents.first)
         if let code = firstUrl["code"] {
-            //exchange for token
             let task = Task {
                 return try await exchangeForToken(code: code)
             }
             
             Task {
                 let result = await task.result
-                switch result {
-                case .success(let success):
-                    tokenResponse = success
-                    ACCLogger.print(tokenResponse)
-                case .failure(let failure):
-                    
-                    if let err = failure as? NetworkError {
-                        switch err {
-                        case .non200StatusCode(let stt, let data) :
-                            do {
-                                let obj = try JSONDecoder().decode(RequestErrors.self, from: data!)
-                                ACCLogger.print(obj, level: .error)
-                            } catch {
-                                ACCLogger.print(error, level: .error)
-                            }
-                            
-                        default: break
-                        }
-                    }
-                }
+                handleTokenTask(result: result)
             }
+            
         }
         
         
     }
+}
+
+extension TeslaService: AsyncNetworkErrorHandler {
+    func canHandle(_ error: Error) -> Bool {
+        if let err = error as? NetworkError, case .non200StatusCode(let sttCode,let data) = err, sttCode == 401 {
+            return true
+        }
+        return false
+    }
+    
+    func handle(_ error: Error) async throws {
+        if let err = error as? NetworkError, case .non200StatusCode(let sttCode,let data) = err, sttCode == 401, let refreshToken = tokenResponse?.refresh_token {
+            let refreshTask = Task {
+                return try await refresh(refreshToken: refreshToken, clientID: "22C29R")
+            }
+            Task {
+                let refreshResult = await refreshTask.result
+                handleTokenTask(result: refreshResult)
+            }
+        }
+        
+        throw error
+    }
+    
+    
 }

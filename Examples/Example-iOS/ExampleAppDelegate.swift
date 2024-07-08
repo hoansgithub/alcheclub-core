@@ -13,6 +13,7 @@ import FirebaseRemoteConfig
 import ACCCoreAdMob
 import UserMessagingPlatform
 import WebKit
+import ACCCoreStoreKit
 class ExampleAppDelegate: ServiceProviderAppDelegate {
     /*
      workaround for handling webview slow initiation at first launch
@@ -67,6 +68,7 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
         
         let sampleService = SampleService()
         let adPreloaderService = AdPreloaderService(adService: admobService)
+        let storeService = StoreService(productIdentifiers: StorePreset.shared.productIdentifiers)
         ACCApp.configure(services: [ATTService.shared,
                                     sampleService,
                                     firebaseCoreService,
@@ -76,7 +78,8 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
                                     umpService,
                                     admobService,
                                     adPreloaderService,
-                                    TeslaService.shared],
+                                    TeslaService.shared,
+                                    storeService],
                          analyticsPlatforms: [firebaseAnalyticsService],
                          configCenter: firebaseRCService)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
