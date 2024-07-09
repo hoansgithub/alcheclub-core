@@ -36,6 +36,14 @@ public extension StoreViewModel {
             ACCLogger.print(error, level: .fault)
         }
     }
+    
+    func restore() async {
+        do {
+            try await storeService?.restore()
+        } catch {
+            ACCLogger.print(error, level: .error)
+        }
+    }
 }
 
 private extension StoreViewModel {

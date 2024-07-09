@@ -25,12 +25,21 @@ struct StoreOneView<VM: StoreViewModel>: View {
                     Text("\(product.displayName) - \(product.displayPrice)")
                 }
             }).disabled(product.purchased)
+            
+
         }
         .navigationTitle("Store One")
         .overlay {
             if loading {
                 ProgressView().progressViewStyle(CircularProgressViewStyle())
             }
+        }
+        Button {
+            Task {
+                await vm?.restore()
+            }
+        } label: {
+            Text("Restore")
         }
     }
 }

@@ -12,4 +12,6 @@ public protocol StoreServiceProtocol: ACCService {
     func getViewModel(for identifier: String, defaultConfig: StoreViewModelConfig) -> StoreViewModel
     
     func purchase(product: StoreViewProduct, accountToken: UUID?) async throws -> StoreKitManager.ProductPurchaseResult
+    
+    func restore() async throws
 }

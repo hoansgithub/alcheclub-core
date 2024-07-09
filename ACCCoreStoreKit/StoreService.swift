@@ -63,6 +63,7 @@ open class StoreService: NSObject, @unchecked Sendable,
     open func purchase(product: StoreViewProduct, accountToken: UUID? = nil) async throws -> StoreKitManager.ProductPurchaseResult {
         try await manager.purchase(productID: product.id, accountToken: accountToken)
     }
+    
 }
 
 private extension StoreService {
