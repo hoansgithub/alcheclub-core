@@ -9,16 +9,20 @@ import StoreKit
 import ACCCore
 import Combine
 public enum StoreKitManagerError: Error {
-    case failedVerification
     case productNotFound
     case userCancelledPurchase
+    case transactionIsPending
+    case canNotRestore
+    case failedVerification
+    case unknown
 }
+
 
 public final class StoreKitManager: @unchecked Sendable {
     public typealias Transaction = StoreKit.Transaction
     public typealias RenewalInfo = StoreKit.Product.SubscriptionInfo.RenewalInfo
     public typealias RenewalState = StoreKit.Product.SubscriptionInfo.RenewalState
-    public typealias ProductPurchaseResult = (result: Product.PurchaseResult,transaction: Transaction?)
+    public typealias ProductPurchaseResult = Result<Transaction, StoreKitManagerError>
     
     /// subcribe to get all available products
     private var allProductsSubject = CurrentValueSubject<[Product], Never>([])
@@ -68,7 +72,12 @@ public extension StoreKitManager {
 public extension StoreKitManager {
     
     func restore() async throws {
-        try await AppStore.sync()
+        do {
+            try await AppStore.sync()
+        } catch {
+            ACCLogger.print(error, level: .error)
+            throw StoreKitManagerError.canNotRestore
+        }
     }
     
     func listenForTransactions() -> Task<Void, Error> {
@@ -93,7 +102,7 @@ public extension StoreKitManager {
     
     func purchase(productID: String, accountToken: UUID? = nil) async throws -> ProductPurchaseResult {
         guard let product = allProductsSubject.value.first(where: {$0.id == productID}) else {
-            throw StoreKitManagerError.productNotFound
+            return .failure(.productNotFound)
         }
         
         var options: Set<Product.PurchaseOption> = []
@@ -113,11 +122,13 @@ public extension StoreKitManager {
             
             //The transaction is verified. Deliver content to the user.
             await updateCustomerProductStatus()
-            return (result, transaction)
+            return .success(transaction)
         case .userCancelled:
-            throw StoreKitManagerError.userCancelledPurchase
+            return .failure(.userCancelledPurchase)
+        case .pending:
+            return .failure(.transactionIsPending)
         default:
-            return (result, nil)
+            return .failure(.unknown)
         }
     }
     

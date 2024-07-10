@@ -8,38 +8,63 @@
 import SwiftUI
 import ACCCoreStoreKit
 struct StoreOneView<VM: StoreViewModel>: View {
-    @Binding var vm: VM?
-    @State var loading: Bool = false
+    @Binding var vm: VM
+    
     var body: some View {
-        List(vm?.products ?? []) { product in
-            Button(action: {
-                Task {
-                    loading = true
-                    await vm?.purchase(product: product)
-                    loading = false
-                }
-            }, label: {
-                if product.purchased {
-                    Text("\(product.displayName) - \(product.displayPrice) ✅")
-                } else {
-                    Text("\(product.displayName) - \(product.displayPrice)")
-                }
-            }).disabled(product.purchased)
-            
+        ZStack(content: {
+            List(vm.products) { product in
+                Button(action: {
+                    Task {
+                        
+                        await vm.purchase(product: product)
+                        
+                    }
+                }, label: {
+                    if product.purchased {
+                        Text("\(product.displayName) - \(product.displayPrice) ✅")
+                    } else {
+                        Text("\(product.displayName) - \(product.displayPrice)")
+                    }
+                }).disabled(product.purchased)
+                
 
-        }
-        .navigationTitle("Store One")
-        .overlay {
-            if loading {
-                ProgressView().progressViewStyle(CircularProgressViewStyle())
             }
-        }
-        Button {
-            Task {
-                await vm?.restore()
+            .navigationTitle("Store One")
+            
+            Button {
+                Task {
+                    await vm.restore()
+                }
+            } label: {
+                Text("Restore")
             }
-        } label: {
-            Text("Restore")
+        }).alert("Store Error", isPresented: $vm.state.map({ state in
+            switch state {
+            case .error(err: let err): return true
+            default: return false
+            }
+        })) {
+            
+        }
+        
+    }
+}
+
+extension StoreKitManagerError {
+    var message: String {
+        switch self {
+        case .productNotFound:
+            "Product not found"
+        case .userCancelledPurchase:
+            "User cancelled purchase"
+        case .transactionIsPending:
+            "Payment is pending"
+        case .canNotRestore:
+            "Failed to restore your purchase"
+        case .failedVerification:
+            "Something went wrong"
+        case .unknown:
+            "Something went wrong"
         }
     }
 }

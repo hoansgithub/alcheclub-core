@@ -10,7 +10,8 @@ import ACCCore
 import UIKit
 import ACCCoreAdMob
 import Combine
-protocol AdsViewModelProtocol: Sendable, BaseViewModelProtocol {
+import ACCCoreStoreKit
+protocol AdsViewModelProtocol: Sendable, BaseViewModelProtocol, StoreEnabledViewModel {
     var recentBannerAdView: UIView? { get set }
     var recentNativeAdView: UIView? { get set }
     var isPrivacyOptionsRequired: Bool { get }
@@ -28,6 +29,14 @@ protocol AdsViewModelProtocol: Sendable, BaseViewModelProtocol {
 }
 
 class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
+    var defaultStoreConfig: ACCCoreStoreKit.StoreViewModelConfig {
+        StorePreset.shared.defaultConfig
+    }
+    
+    var storeViewModel: ACCCoreStoreKit.StoreViewModel?
+    
+    var storeService: ACCCoreStoreKit.StoreServiceProtocol?
+    
     @Published var recentBannerAdView: UIView?
     @Published var recentNativeAdView: UIView?
     @Published var isPrivacyOptionsRequired = false

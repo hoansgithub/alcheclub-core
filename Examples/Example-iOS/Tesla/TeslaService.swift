@@ -178,9 +178,11 @@ extension TeslaService: AsyncNetworkErrorHandler {
                 let refreshResult = await refreshTask.result
                 handleTokenTask(result: refreshResult)
             }
+        } else {
+            throw error
         }
         
-        throw error
+        
     }
     
     

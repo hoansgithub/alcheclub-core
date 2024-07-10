@@ -18,8 +18,8 @@ open class StoreService: NSObject, @unchecked Sendable,
     }
     
     //publishers
-    public let productsPublisher: AnyPublisher<[StoreViewProduct], Never>
-    private let productsSubject = CurrentValueSubject<[StoreViewProduct], Never>([])
+    public let productsPublisher: AnyPublisher<[StoreViewProduct], StoreKitManagerError>
+    private let productsSubject = CurrentValueSubject<[StoreViewProduct], StoreKitManagerError>([])
     
     
     //RC keys

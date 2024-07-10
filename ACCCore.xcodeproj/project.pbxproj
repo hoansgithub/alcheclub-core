@@ -97,6 +97,9 @@
 		F08BCE7B2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE7A2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift */; };
 		F08BCE7D2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08BCE7C2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift */; };
 		F0C379AA2C3690CE0080E4A3 /* StoreViewModelConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C379A92C3690CE0080E4A3 /* StoreViewModelConfig.swift */; };
+		F0C379BE2C3E3EEE0080E4A3 /* ACCCoreUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05C230D2BE20257003DEC6D /* ACCCoreUtilities.framework */; };
+		F0C379C32C3E3F390080E4A3 /* ACCCoreUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05C230D2BE20257003DEC6D /* ACCCoreUtilities.framework */; };
+		F0C379CA2C3E64410080E4A3 /* Binding+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C379C92C3E64410080E4A3 /* Binding+Ext.swift */; };
 		F0FB21112BA9689700ECEB56 /* ACCCore.h in Headers */ = {isa = PBXBuildFile; fileRef = F0FB21102BA9689700ECEB56 /* ACCCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F0FB21662BA9853300ECEB56 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21652BA9853300ECEB56 /* ServiceProvider.swift */; };
 		F0FB21682BA986BF00ECEB56 /* ACCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21672BA986BF00ECEB56 /* ACCService.swift */; };
@@ -151,6 +154,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = F0FB210C2BA9689700ECEB56;
 			remoteInfo = ACCCore;
+		};
+		F0C379C02C3E3EEE0080E4A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F0FB21042BA9689700ECEB56 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F05C230C2BE20257003DEC6D;
+			remoteInfo = ACCCoreUtilities;
+		};
+		F0C379C52C3E3F390080E4A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F0FB21042BA9689700ECEB56 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F05C230C2BE20257003DEC6D;
+			remoteInfo = ACCCoreUtilities;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -246,6 +263,7 @@
 		F08BCE7A2BD2682C0067DFC5 /* FirebaseRemoteConfigServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRemoteConfigServiceProtocol.swift; sourceTree = "<group>"; };
 		F08BCE7C2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRemoteConfigService.swift; sourceTree = "<group>"; };
 		F0C379A92C3690CE0080E4A3 /* StoreViewModelConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewModelConfig.swift; sourceTree = "<group>"; };
+		F0C379C92C3E64410080E4A3 /* Binding+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Ext.swift"; sourceTree = "<group>"; };
 		F0FB210D2BA9689700ECEB56 /* ACCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0FB21102BA9689700ECEB56 /* ACCCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCore.h; sourceTree = "<group>"; };
 		F0FB21652BA9853300ECEB56 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
@@ -287,6 +305,7 @@
 			files = (
 				F02C32BA2BE79B2F006F5F75 /* JavaScriptCore.framework in Frameworks */,
 				F02C32BB2BE79B51006F5F75 /* AdSupport.framework in Frameworks */,
+				F0C379C32C3E3F390080E4A3 /* ACCCoreUtilities.framework in Frameworks */,
 				F02C32A62BE68A93006F5F75 /* ACCCore.framework in Frameworks */,
 				F02C32B42BE6977F006F5F75 /* UserMessagingPlatform.xcframework in Frameworks */,
 				F02C32B22BE6977F006F5F75 /* GoogleMobileAds.xcframework in Frameworks */,
@@ -297,6 +316,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0C379BE2C3E3EEE0080E4A3 /* ACCCoreUtilities.framework in Frameworks */,
 				F03972062C366D5600FC4126 /* ACCCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,6 +530,7 @@
 		F05C230E2BE20257003DEC6D /* ACCCoreUtilities */ = {
 			isa = PBXGroup;
 			children = (
+				F0C379C82C3E642C0080E4A3 /* SwiftUI */,
 				F05C23202BE205FE003DEC6D /* UserDefaults */,
 				F066D91F2BCFAE8B003F5690 /* CommonExtensions */,
 				F05C230F2BE20257003DEC6D /* ACCCoreUtilities.h */,
@@ -647,6 +668,14 @@
 				F08BCE7C2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift */,
 			);
 			path = RemoteConfig;
+			sourceTree = "<group>";
+		};
+		F0C379C82C3E642C0080E4A3 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				F0C379C92C3E64410080E4A3 /* Binding+Ext.swift */,
+			);
+			path = SwiftUI;
 			sourceTree = "<group>";
 		};
 		F0FB21032BA9689700ECEB56 = {
@@ -833,6 +862,7 @@
 			);
 			dependencies = (
 				F02C32A92BE68A93006F5F75 /* PBXTargetDependency */,
+				F0C379C62C3E3F390080E4A3 /* PBXTargetDependency */,
 			);
 			name = ACCCoreAdMob;
 			productName = ACCCoreAdMob;
@@ -852,6 +882,7 @@
 			);
 			dependencies = (
 				F03972092C366D5600FC4126 /* PBXTargetDependency */,
+				F0C379C12C3E3EEE0080E4A3 /* PBXTargetDependency */,
 			);
 			name = ACCCoreStoreKit;
 			productName = ACCCoreStoreKit;
@@ -1086,6 +1117,7 @@
 			files = (
 				F05C23142BE202EC003DEC6D /* URLSession+nonisolated.swift in Sources */,
 				F05C23222BE20660003DEC6D /* UserDefaults+DefaultValue.swift in Sources */,
+				F0C379CA2C3E64410080E4A3 /* Binding+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1163,6 +1195,16 @@
 			isa = PBXTargetDependency;
 			target = F0FB210C2BA9689700ECEB56 /* ACCCore */;
 			targetProxy = F066D9472BCFE260003F5690 /* PBXContainerItemProxy */;
+		};
+		F0C379C12C3E3EEE0080E4A3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F05C230C2BE20257003DEC6D /* ACCCoreUtilities */;
+			targetProxy = F0C379C02C3E3EEE0080E4A3 /* PBXContainerItemProxy */;
+		};
+		F0C379C62C3E3F390080E4A3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F05C230C2BE20257003DEC6D /* ACCCoreUtilities */;
+			targetProxy = F0C379C52C3E3F390080E4A3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

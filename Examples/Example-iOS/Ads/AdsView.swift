@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ACCCore
+import ACCCoreStoreKit
 protocol AdsViewProtocol: BaseViewProtocol {}
 
 struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
@@ -16,7 +17,13 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
     
     var body: some View {
         NavigationLink(destination:
-                        HomeView(vm: HomeViewModel()), isActive: $interstitialDesPresented) {
+                        StoreContainerView(storeViewModel: $vm.storeViewModel.map({ storeVM in
+            if let storeVM = storeVM {
+                return storeVM
+            } else {
+                return StoreViewModel(config: StorePreset.shared.defaultConfig)
+            }
+        })), isActive: $interstitialDesPresented) {
             EmptyView()
         }
         ScrollView {

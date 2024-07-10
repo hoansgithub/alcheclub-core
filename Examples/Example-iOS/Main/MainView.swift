@@ -7,13 +7,10 @@
 
 import SwiftUI
 import ACCCore
-
+import ACCCoreUtilities
+import ACCCoreStoreKit
 protocol MainViewProtocol: BaseViewProtocol {}
-extension Binding {
-    func map<NewValue>(_ transform: @escaping (Value) -> NewValue) -> Binding<NewValue> {
-        Binding<NewValue>(get: { transform(wrappedValue) }, set: { _ in })
-    }
-}
+
 struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
     @StateObject var vm: VM
     var body: some View {
@@ -25,10 +22,16 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
                 Button("Push store") {
                     vm.toggleStoreViewModel(identifier: "StoreOneView")
                 }
-
+                
                 
                 NavigationLink(destination:
-                                StoreContainerView(storeViewModel: $vm.storeViewModel), isActive: $vm.storeViewModel.map({$0 != nil})) {
+                                StoreContainerView(storeViewModel: $vm.storeViewModel.map({ storeVM in
+                    if let storeVM = storeVM {
+                        return storeVM
+                    } else {
+                        return StoreViewModel(config: StorePreset.shared.defaultConfig)
+                    }
+                })), isActive: $vm.storeViewModel.map({$0 != nil})) {
                     EmptyView()
                 }
                 

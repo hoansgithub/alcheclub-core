@@ -8,7 +8,7 @@
 import ACCCore
 import Combine
 public protocol StoreServiceProtocol: ACCService {
-    var productsPublisher: AnyPublisher<[StoreViewProduct], Never> { get }
+    var productsPublisher: AnyPublisher<[StoreViewProduct], StoreKitManagerError> { get }
     func getViewModel(for identifier: String, defaultConfig: StoreViewModelConfig) -> StoreViewModel
     
     func purchase(product: StoreViewProduct, accountToken: UUID?) async throws -> StoreKitManager.ProductPurchaseResult

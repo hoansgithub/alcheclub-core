@@ -9,9 +9,9 @@ import SwiftUI
 import ACCCoreStoreKit
 
 struct StoreContainerView: View {
-    @Binding var storeViewModel: StoreViewModel?
+    @Binding var storeViewModel: StoreViewModel
     var body: some View {
-        switch storeViewModel?.config.id {
+        switch storeViewModel.config.id {
         case "StoreOneView":
             StoreOneView(vm: $storeViewModel)
         default:

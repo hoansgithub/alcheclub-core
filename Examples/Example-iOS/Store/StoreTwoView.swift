@@ -8,9 +8,9 @@
 import SwiftUI
 import ACCCoreStoreKit
 struct StoreTwoView<VM: StoreViewModel>: View {
-    @Binding var vm: VM?
+    @Binding var vm: VM
     var body: some View {
-        List(vm?.products ?? []) { product in
+        List(vm.products) { product in
             Button(action: {
                 
             }, label: {
