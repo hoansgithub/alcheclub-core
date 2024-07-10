@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F0FB21542BA977E700ECEB56"
-               BuildableName = "Example-iOS.app"
-               BlueprintName = "Example-iOS"
-               ReferencedContainer = "container:Examples.xcodeproj">
+               BlueprintIdentifier = "F03971F42C3542F200FC4126"
+               BuildableName = "ACCCoreStoreKit.framework"
+               BlueprintName = "ACCCoreStoreKit"
+               ReferencedContainer = "container:ACCCore.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -39,16 +39,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F0FB21542BA977E700ECEB56"
-            BuildableName = "Example-iOS.app"
-            BlueprintName = "Example-iOS"
-            ReferencedContainer = "container:Examples.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -56,16 +46,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F0FB21542BA977E700ECEB56"
-            BuildableName = "Example-iOS.app"
-            BlueprintName = "Example-iOS"
-            ReferencedContainer = "container:Examples.xcodeproj">
+            BlueprintIdentifier = "F03971F42C3542F200FC4126"
+            BuildableName = "ACCCoreStoreKit.framework"
+            BlueprintName = "ACCCoreStoreKit"
+            ReferencedContainer = "container:ACCCore.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
