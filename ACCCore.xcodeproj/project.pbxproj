@@ -42,9 +42,6 @@
 		F02C32AF2BE69704006F5F75 /* GoogleUMPServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C32AE2BE69704006F5F75 /* GoogleUMPServiceProtocol.swift */; };
 		F02C32B22BE6977F006F5F75 /* GoogleMobileAds.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02C32B02BE6977E006F5F75 /* GoogleMobileAds.xcframework */; };
 		F02C32B42BE6977F006F5F75 /* UserMessagingPlatform.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02C32B12BE6977F006F5F75 /* UserMessagingPlatform.xcframework */; };
-		F02C32B82BE7989A006F5F75 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F08BCE6A2BD2197C0067DFC5 /* AdSupport.framework */; };
-		F02C32BA2BE79B2F006F5F75 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02C32B92BE79B2F006F5F75 /* JavaScriptCore.framework */; };
-		F02C32BB2BE79B51006F5F75 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F08BCE6A2BD2197C0067DFC5 /* AdSupport.framework */; };
 		F02C32BF2BEA6A92006F5F75 /* ACCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C32BE2BEA6A92006F5F75 /* ACCApp.swift */; };
 		F02C32C22BEB3794006F5F75 /* AdMobBannerAdLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C32C12BEB3794006F5F75 /* AdMobBannerAdLoader.swift */; };
 		F02C32C42BEB4A29006F5F75 /* ACCAdSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02C32C32BEB4A29006F5F75 /* ACCAdSize.swift */; };
@@ -100,6 +97,9 @@
 		F0C379BE2C3E3EEE0080E4A3 /* ACCCoreUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05C230D2BE20257003DEC6D /* ACCCoreUtilities.framework */; };
 		F0C379C32C3E3F390080E4A3 /* ACCCoreUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F05C230D2BE20257003DEC6D /* ACCCoreUtilities.framework */; };
 		F0C379CA2C3E64410080E4A3 /* Binding+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C379C92C3E64410080E4A3 /* Binding+Ext.swift */; };
+		F0C830B12C4420B9005AD8FC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0C830B02C4420B9005AD8FC /* AdSupport.framework */; };
+		F0C830B32C4420BD005AD8FC /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0C830B22C4420BD005AD8FC /* JavaScriptCore.framework */; };
+		F0C830B42C4420D3005AD8FC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0C830B02C4420B9005AD8FC /* AdSupport.framework */; };
 		F0FB21112BA9689700ECEB56 /* ACCCore.h in Headers */ = {isa = PBXBuildFile; fileRef = F0FB21102BA9689700ECEB56 /* ACCCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F0FB21662BA9853300ECEB56 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21652BA9853300ECEB56 /* ServiceProvider.swift */; };
 		F0FB21682BA986BF00ECEB56 /* ACCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FB21672BA986BF00ECEB56 /* ACCService.swift */; };
@@ -264,6 +264,8 @@
 		F08BCE7C2BD2683A0067DFC5 /* FirebaseRemoteConfigService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRemoteConfigService.swift; sourceTree = "<group>"; };
 		F0C379A92C3690CE0080E4A3 /* StoreViewModelConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewModelConfig.swift; sourceTree = "<group>"; };
 		F0C379C92C3E64410080E4A3 /* Binding+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding+Ext.swift"; sourceTree = "<group>"; };
+		F0C830B02C4420B9005AD8FC /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/System/Library/Frameworks/AdSupport.framework; sourceTree = DEVELOPER_DIR; };
+		F0C830B22C4420BD005AD8FC /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/System/iOSSupport/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F0FB210D2BA9689700ECEB56 /* ACCCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACCCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0FB21102BA9689700ECEB56 /* ACCCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACCCore.h; sourceTree = "<group>"; };
 		F0FB21652BA9853300ECEB56 /* ServiceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
@@ -303,9 +305,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F02C32BA2BE79B2F006F5F75 /* JavaScriptCore.framework in Frameworks */,
-				F02C32BB2BE79B51006F5F75 /* AdSupport.framework in Frameworks */,
 				F0C379C32C3E3F390080E4A3 /* ACCCoreUtilities.framework in Frameworks */,
+				F0C830B12C4420B9005AD8FC /* AdSupport.framework in Frameworks */,
+				F0C830B32C4420BD005AD8FC /* JavaScriptCore.framework in Frameworks */,
 				F02C32A62BE68A93006F5F75 /* ACCCore.framework in Frameworks */,
 				F02C32B42BE6977F006F5F75 /* UserMessagingPlatform.xcframework in Frameworks */,
 				F02C32B22BE6977F006F5F75 /* GoogleMobileAds.xcframework in Frameworks */,
@@ -352,7 +354,7 @@
 				F08BCE182BD013110067DFC5 /* FirebaseCore.xcframework in Frameworks */,
 				F08BCE1C2BD015160067DFC5 /* GoogleUtilities.xcframework in Frameworks */,
 				F0704D632BD7BA3E0069F3CA /* FirebaseMessaging.xcframework in Frameworks */,
-				F02C32B82BE7989A006F5F75 /* AdSupport.framework in Frameworks */,
+				F0C830B42C4420D3005AD8FC /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,6 +601,8 @@
 		F066D9442BCFE260003F5690 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F0C830B22C4420BD005AD8FC /* JavaScriptCore.framework */,
+				F0C830B02C4420B9005AD8FC /* AdSupport.framework */,
 				F02C32B92BE79B2F006F5F75 /* JavaScriptCore.framework */,
 				F02C32B02BE6977E006F5F75 /* GoogleMobileAds.xcframework */,
 				F02C32B12BE6977F006F5F75 /* UserMessagingPlatform.xcframework */,
