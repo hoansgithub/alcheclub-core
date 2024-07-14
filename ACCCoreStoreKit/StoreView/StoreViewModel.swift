@@ -13,7 +13,7 @@ public enum StoreViewModelState {
     case loading, idle, purchasing, error(err: StoreKitManagerError)
 }
 
-open class StoreViewModel: ObservableObject {
+open class StoreViewModel: @unchecked Sendable, ObservableObject {
     @Published public private(set) var products: [StoreViewProduct] = []
     @Published public var state: StoreViewModelState = .idle
     public let config: StoreViewModelConfig
