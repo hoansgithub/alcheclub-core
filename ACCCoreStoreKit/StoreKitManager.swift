@@ -22,7 +22,7 @@ public final class StoreKitManager: @unchecked Sendable {
     public typealias Transaction = StoreKit.Transaction
     public typealias RenewalInfo = StoreKit.Product.SubscriptionInfo.RenewalInfo
     public typealias RenewalState = StoreKit.Product.SubscriptionInfo.RenewalState
-    public typealias ProductPurchaseResult = Result<Transaction, StoreKitManagerError>
+    
     
     /// subcribe to get all available products
     private var allProductsSubject = CurrentValueSubject<[Product], Never>([])
@@ -122,7 +122,7 @@ public extension StoreKitManager {
             
             //The transaction is verified. Deliver content to the user.
             await updateCustomerProductStatus()
-            return .success(transaction)
+            return .success(String("\(transaction.id)"))
         case .userCancelled:
             return .failure(.userCancelledPurchase)
         case .pending:
