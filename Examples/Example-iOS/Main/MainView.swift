@@ -27,7 +27,7 @@ struct MainView<VM: MainViewModelProtocol>: MainViewProtocol {
                 NavigationLink(destination:
                                 StoreContainerView(storeViewModel: $vm.storeViewModel.map({ storeVM in
                     if let storeVM = storeVM {
-                        return storeVM
+                        return storeVM as! StoreViewModel
                     } else {
                         return StoreViewModel(config: StorePreset.shared.defaultConfig)
                     }

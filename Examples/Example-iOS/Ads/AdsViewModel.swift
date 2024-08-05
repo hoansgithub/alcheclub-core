@@ -33,9 +33,9 @@ class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
         StorePreset.shared.defaultConfig
     }
     
-    var storeViewModel: ACCCoreStoreKit.StoreViewModel?
+    var storeViewModel: StoreViewModelProtocol?
     
-    var storeService: ACCCoreStoreKit.StoreServiceProtocol?
+    var storeService: StoreServiceProtocol?
     
     @Published var recentBannerAdView: UIView?
     @Published var recentNativeAdView: UIView?

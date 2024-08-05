@@ -10,7 +10,7 @@ import ACCCoreStoreKit
 import Combine
 protocol StoreEnabledViewModel where Self: ObservableObject {
     var defaultStoreConfig: StoreViewModelConfig { get }
-    var storeViewModel: StoreViewModel? { get set }
+    var storeViewModel: StoreViewModelProtocol? { get set }
     var storeService: StoreServiceProtocol? { get }
 }
 

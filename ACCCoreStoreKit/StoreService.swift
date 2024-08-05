@@ -55,7 +55,7 @@ open class StoreService: NSObject, @unchecked Sendable,
         storeViewProductLabelsSubject.send(config[storeViewProductLabelsKey] ?? [:])
     }
     
-    open func getViewModel(for identifier: String, defaultConfig: StoreViewModelConfig) -> StoreViewModel {
+    open func getViewModel(for identifier: String, defaultConfig: StoreViewModelConfig) -> StoreViewModelProtocol {
         let config = storeViewModelConfigs?.first(where: {$0.id == identifier}) ?? defaultConfig
         return StoreViewModel(config: config)
     }

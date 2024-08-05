@@ -7,7 +7,7 @@
 
 import SwiftUI
 import ACCCoreStoreKit
-struct StoreOneView<VM: StoreViewModel>: View {
+struct StoreOneView<VM: StoreViewModelProtocol>: View {
     @Binding var vm: VM
     
     var body: some View {
@@ -16,7 +16,7 @@ struct StoreOneView<VM: StoreViewModel>: View {
                 Button(action: {
                     Task {
                         
-                        await vm.purchase(product: product)
+                        await vm.purchase(product: product, accountToken: nil)
                         
                     }
                 }, label: {

@@ -13,10 +13,20 @@ public enum StoreViewModelState {
     case loading, idle, purchasing, error(err: StoreKitManagerError)
 }
 
-open class StoreViewModel: @unchecked Sendable, ObservableObject {
-    @Published public private(set) var products: [StoreViewProduct] = []
+public protocol StoreViewModelProtocol: Sendable, AnyObject {
+    var products: [StoreViewProduct] { get set }
+    var state: StoreViewModelState { get set }
+    var config: StoreViewModelConfig { get set }
+    init(config: StoreViewModelConfig)
+    
+    func purchase(product: StoreViewProduct, accountToken: UUID?) async
+    func restore() async
+}
+
+open class StoreViewModel: StoreViewModelProtocol, @unchecked Sendable, ObservableObject {
+    @Published public var products: [StoreViewProduct] = []
     @Published public var state: StoreViewModelState = .idle
-    public let config: StoreViewModelConfig
+    public var config: StoreViewModelConfig
     private let storeService: StoreServiceProtocol?
     private var productsCancellable: AnyCancellable?
     required public init(config: StoreViewModelConfig) {

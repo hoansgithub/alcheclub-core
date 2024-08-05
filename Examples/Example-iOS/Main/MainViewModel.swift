@@ -32,7 +32,7 @@ class MainViewModel: @unchecked Sendable, MainViewModelProtocol {
     @Published var notificationPermissionNeeded: Bool = true
     @Published var notiUserInfo: [AnyHashable: Any] = [:]
     @Published var notiToken: String = ""
-    @Published var storeViewModel: StoreViewModel?
+    @Published var storeViewModel: StoreViewModelProtocol?
     @Published var storeActive: Bool = false
     
     private var cancellables = Set<AnyCancellable>()

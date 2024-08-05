@@ -7,7 +7,7 @@
 
 import SwiftUI
 import ACCCoreStoreKit
-struct StoreTwoView<VM: StoreViewModel>: View {
+struct StoreTwoView<VM: StoreViewModelProtocol>: View {
     @Binding var vm: VM
     var body: some View {
         List(vm.products) { product in
