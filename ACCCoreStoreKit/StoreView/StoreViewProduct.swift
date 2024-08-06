@@ -13,6 +13,14 @@ public struct StoreViewProduct: Sendable, Codable, Identifiable {
     public var purchased: Bool = false
     public let displayPrice: String
     public let displayName: String
+    
+    public init(id: String, labels: [String : String], purchased: Bool = false, displayPrice: String, displayName: String) {
+        self.id = id
+        self.labels = labels
+        self.purchased = purchased
+        self.displayPrice = displayPrice
+        self.displayName = displayName
+    }
 }
 
 extension StoreViewProduct {
