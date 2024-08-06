@@ -19,21 +19,23 @@ public enum StoreViewProductPaymentMode: Int, Sendable, Codable {
 
 }
 
-public struct StoreViewProduct: Sendable, Codable, Identifiable {
+public struct StoreViewProduct: Sendable, Identifiable {
     public let id: String
     public var labels: [String: String]
     public var purchased: Bool = false
     public let displayPrice: String
     public let displayName: String
     public let paymentMode: StoreViewProductPaymentMode?
+    public let priceLocale: Locale?
     
-    public init(id: String, labels: [String : String], purchased: Bool = false, displayPrice: String, displayName: String, paymentMode: StoreViewProductPaymentMode? = nil) {
+    public init(id: String, labels: [String : String], purchased: Bool = false, displayPrice: String, displayName: String, paymentMode: StoreViewProductPaymentMode? = nil, priceLocale: Locale?) {
         self.id = id
         self.labels = labels
         self.purchased = purchased
         self.displayPrice = displayPrice
         self.displayName = displayName
         self.paymentMode = paymentMode
+        self.priceLocale = priceLocale
     }
 }
 
@@ -42,7 +44,7 @@ extension StoreViewProduct {
         return StoreViewProduct(id: product.id, 
                                   labels: labels,
                                   displayPrice: product.displayPrice,
-                                  displayName: product.displayName)
+                                displayName: product.displayName, priceLocale: product.priceFormatStyle.locale)
     }
     
     public func label(for key: String, defaultValue: String = "") -> String {
