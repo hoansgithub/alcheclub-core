@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public struct StoreViewModelConfig: Codable, Identifiable {
+public struct StoreViewModelConfig:Sendable, Codable, Identifiable {
     public let id: String
     public let itemIdentifiers: [String]
     public init(id: String, itemIdentifiers: [String]) {
