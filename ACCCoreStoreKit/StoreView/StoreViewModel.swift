@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import ACCCore
 
-public enum StoreViewModelState {
+public enum StoreViewModelState: Equatable {
     case loading, idle, purchasing, error(err: StoreKitManagerError)
 }
 
