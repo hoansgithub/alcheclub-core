@@ -19,7 +19,7 @@ public protocol StoreViewModelProtocol: Sendable, AnyObject {
     var config: StoreViewModelConfig { get set }
     init(config: StoreViewModelConfig)
     
-    func purchase(product: StoreViewProduct, accountToken: UUID?) async
+    func purchase(product: StoreViewProduct, accountToken: UUID?) async -> ProductPurchaseResult
     func restore() async
 }
 
@@ -43,7 +43,7 @@ open class StoreViewModel: StoreViewModelProtocol, @unchecked Sendable, Observab
 }
 
 public extension StoreViewModel {
-    func purchase(product: StoreViewProduct, accountToken: UUID? = nil) async {
+    func purchase(product: StoreViewProduct, accountToken: UUID? = nil) async -> ProductPurchaseResult {
         state = .purchasing
         do {
             let res = try await storeService?.purchase(product: product, accountToken: accountToken)
@@ -59,9 +59,12 @@ public extension StoreViewModel {
                 state = .error(err: error)
             }
             
+            return res ?? .failure(.unknown)
+            
         } catch {
             //TODO: - show store error
             state = .error(err: .unknown)
+            return .failure(.unknown)
         }
         
     }
