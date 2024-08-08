@@ -42,7 +42,7 @@ public enum FullScreenAdLoaderError: Error {
     case adUnitNotFound
 }
 
-public typealias FullScreenAdPresentationStateListener = (_ state: FullScreenAdPresentationState) -> ()
+public typealias FullScreenAdPresentationStateListener = @Sendable (_ state: FullScreenAdPresentationState) -> ()
 
 public protocol FullScreenAdLoader: AdLoader {
     @MainActor func presentAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws
