@@ -25,7 +25,7 @@ public protocol NativeAdLoader: AdLoader {
 
 
 //FullScreen
-public enum FullScreenAdPresentationState {
+public enum FullScreenAdPresentationState: Sendable {
     case failedToPresent(error: Error)
     case willPresent
     case willDismiss
