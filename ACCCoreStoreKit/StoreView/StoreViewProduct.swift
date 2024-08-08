@@ -19,7 +19,7 @@ public enum StoreViewProductPaymentMode: Int, Sendable, Codable {
     
 }
 
-public struct StoreViewProduct: Sendable, Identifiable {
+public struct StoreViewProduct: Sendable, Identifiable, Equatable {
     public let id: String
     public var price: Decimal
     public var labels: [String: String]
