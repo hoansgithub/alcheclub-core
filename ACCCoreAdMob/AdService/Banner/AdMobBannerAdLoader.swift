@@ -10,10 +10,10 @@ import UIKit
 import GoogleMobileAds
 public final class AdMobBannerAdLoader: NSObject, @unchecked Sendable, BannerAdLoader {
     public weak var eventDelegate: TrackableServiceDelegate?
-    public var adUnitID: String = ""
+    public var adUnitIDs: [String] = []
     private var bannersCollection: [String: GADBannerView] = [:]
-    public required init(adUnitID: String) {
-        self.adUnitID = adUnitID
+    public required init(adUnitIDs: [String]) {
+        self.adUnitIDs = adUnitIDs
         super.init()
     }
     
@@ -21,9 +21,14 @@ public final class AdMobBannerAdLoader: NSObject, @unchecked Sendable, BannerAdL
         //TODO: -Update banner ad config here
     }
     
-    @MainActor internal func getBanner(for key: String, size: ACCAdSize, root: UIViewController?) throws -> UIView {
+    @MainActor internal func getBanner(for key: String,unitID: String , size: ACCAdSize, root: UIViewController?) throws -> UIView {
         if let storedBanner = bannersCollection[key] {
             return storedBanner
+        }
+        
+        guard let adUnitID = adUnitIDs.first(where: {$0 == unitID}) else {
+            ACCLogger.print("Banner AdUnit not found \(unitID)")
+            throw AdmobServiceError.adUnitNotFound
         }
         
         let gadAdSize = GADAdSize.from(size: size)

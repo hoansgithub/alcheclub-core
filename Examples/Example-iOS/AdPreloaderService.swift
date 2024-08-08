@@ -48,7 +48,7 @@ extension AdPreloaderService: UIWindowSceneDelegate {
                 .receive(on: RunLoop.main)
                 .sink(receiveValue: { [weak self] _ in
                     Task {
-                        try? await self?.adService?.loadAppOpenAd()
+                        try? await self?.adService?.loadAppOpenAd(unitID: AdmobIDs.AppOpen.normal)
                         self?.showAppOpen()
                         self?.firstAdLaunched = true
                     }
@@ -64,7 +64,7 @@ extension AdPreloaderService: UIWindowSceneDelegate {
     
     func sceneWillResignActive(_ scene: UIScene) {
         Task {
-            try? await adService?.loadAppOpenAd()
+            try? await adService?.loadAppOpenAd(unitID: AdmobIDs.AppOpen.normal)
         }
     }
 }
@@ -82,9 +82,9 @@ extension AdPreloaderService {
     func loadFullScreenAds() {
         ACCLogger.print(self)
         Task.detached {[weak self] in
-            try? await self?.adService?.loadInterstitialAd()
-            try? await self?.adService?.loadRewardedInterstitialAd(options: nil)
-            try? await self?.adService?.loadRewardedAd(options: nil)
+            try? await self?.adService?.loadInterstitialAd(unitID: AdmobIDs.Inter.normal)
+            try? await self?.adService?.loadRewardedInterstitialAd(unitID: AdmobIDs.RwdInter.normal, options: nil)
+            try? await self?.adService?.loadRewardedAd(unitID: AdmobIDs.Reward.normal, options: nil)
         }
     }
     

@@ -17,10 +17,10 @@ open class AdmobFullScreenAdLoader: NSObject, FullScreenAdLoader {
     
     //required properties
     public weak var eventDelegate: TrackableServiceDelegate?
-    public private(set) var adUnitID: String = ""
+    public private(set) var adUnitIDs: [String] = []
     
-    public required init(adUnitID: String) {
-        self.adUnitID = adUnitID
+    public required init(adUnitIDs: [String]) {
+        self.adUnitIDs = adUnitIDs
         super.init()
     }
     

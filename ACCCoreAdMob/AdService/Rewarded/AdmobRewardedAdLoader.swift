@@ -13,13 +13,17 @@ public final class AdmobRewardedAdLoader: AdmobFullScreenAdLoader {
     //State
     private var rewardedAd: GADRewardedAd?
 
-    internal func loadAd(options: ACCAdOptionsCollection? = nil) async throws {
+    internal func loadAd(unitID: String, options: ACCAdOptionsCollection? = nil) async throws {
         if isLoadingAd {
             throw FullScreenAdLoaderError.adIsBeingLoaded
         }
         
         if isAdAvailable() {
             throw FullScreenAdLoaderError.adIsAlreadyLoaded
+        }
+        
+        guard let adUnitID = adUnitIDs.first(where: {$0 == unitID}) else {
+            throw FullScreenAdLoaderError.adUnitNotFound
         }
         
         isLoadingAd = true

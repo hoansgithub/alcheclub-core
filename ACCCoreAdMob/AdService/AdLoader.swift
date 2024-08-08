@@ -10,7 +10,7 @@ import UIKit
 
 
 public protocol AdLoader: ConfigurableObject, TrackableService {
-    var adUnitID: String { get }
+    var adUnitIDs: [String] { get }
 }
 
 //Banner
@@ -39,6 +39,7 @@ public enum FullScreenAdLoaderError: Error {
     case adIsBeingShown
     case adIsNotAvailable
     case adFailedToLoad(projectedError: Error)
+    case adUnitNotFound
 }
 
 public typealias FullScreenAdPresentationStateListener = (_ state: FullScreenAdPresentationState) -> ()

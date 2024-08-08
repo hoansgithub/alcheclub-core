@@ -13,7 +13,7 @@ public final class AdmobInterstitialAdLoader: AdmobFullScreenAdLoader {
     //State
     private var interstitialAd: GADInterstitialAd?
     
-    internal func loadAd() async throws {
+    internal func loadAd(unitID: String) async throws {
         // Do not load ad if there is an unused ad or one is already loading.
         if isLoadingAd {
             throw FullScreenAdLoaderError.adIsBeingLoaded
@@ -22,6 +22,11 @@ public final class AdmobInterstitialAdLoader: AdmobFullScreenAdLoader {
         if isAdAvailable() {
             throw FullScreenAdLoaderError.adIsAlreadyLoaded
         }
+        
+        guard let adUnitID = adUnitIDs.first(where: {$0 == unitID}) else {
+            throw FullScreenAdLoaderError.adUnitNotFound
+        }
+        
         isLoadingAd = true
         
         do {

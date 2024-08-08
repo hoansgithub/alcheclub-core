@@ -10,14 +10,14 @@ import GoogleMobileAds
 
 public final class AdmobNativeAdLoader: NSObject, NativeAdLoader {
     public weak var eventDelegate: TrackableServiceDelegate?
-    public var adUnitID: String = ""
+    public var adUnitIDs: [String] = []
     
     
     //Private properties
     private var receiversCollection: [String: NativeAdReceiver] = [:]
     private var adLoader: GADAdLoader?
-    public required init(adUnitID: String) {
-        self.adUnitID = adUnitID
+    public required init(adUnitIDs: [String]) {
+        self.adUnitIDs = adUnitIDs
         super.init()
     }
     
@@ -25,12 +25,17 @@ public final class AdmobNativeAdLoader: NSObject, NativeAdLoader {
         //TODO: -Update native ad config here
     }
     
-    @MainActor internal func getNativeAd(for key: String, root: UIViewController?, adReceiver: NativeAdReceiver?) {
+    @MainActor internal func getNativeAd(for key: String, unitID: String , root: UIViewController?, adReceiver: NativeAdReceiver?) {
         
         if let storedReceiver = receiversCollection[key] {
             adReceiver?.adViewReceiver?(storedReceiver.adViews)
             adReceiver?.adViews = storedReceiver.adViews
             receiversCollection[key] = adReceiver
+            return
+        }
+        
+        guard let adUnitID = adUnitIDs.first(where: {$0 == unitID}) else {
+            ACCLogger.print("Native AdUnit not found \(unitID)")
             return
         }
         

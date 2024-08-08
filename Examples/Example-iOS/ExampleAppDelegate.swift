@@ -52,12 +52,12 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
         }()
         let umpService = GoogleUMPService(debugSettings: umpDebugSettings)
         
-        let bannerAdLoader = AdMobBannerAdLoader(adUnitID: "ca-app-pub-3940256099942544/2435281174")
-        let appOpenAdLoader = AdmobAppOpenAdLoader(adUnitID: "ca-app-pub-3940256099942544/5575463023")
-        let interstitialAdLoader = AdmobInterstitialAdLoader(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-        let rewardedAdLoader = AdmobRewardedAdLoader(adUnitID: "ca-app-pub-3940256099942544/1712485313")
-        let rewardedInterstitialAdLoader = AdmobRewardedInterstitialAdLoader(adUnitID: "ca-app-pub-3940256099942544/6978759866")
-        let nativeAdLoader = AdmobNativeAdLoader(adUnitID: "ca-app-pub-3940256099942544/3986624511")
+        let bannerAdLoader = AdMobBannerAdLoader(adUnitIDs: [AdmobIDs.Banner.normal])
+        let appOpenAdLoader = AdmobAppOpenAdLoader(adUnitIDs: [AdmobIDs.AppOpen.normal])
+        let interstitialAdLoader = AdmobInterstitialAdLoader(adUnitIDs: [AdmobIDs.Inter.normal])
+        let rewardedAdLoader = AdmobRewardedAdLoader(adUnitIDs: [AdmobIDs.Reward.normal])
+        let rewardedInterstitialAdLoader = AdmobRewardedInterstitialAdLoader(adUnitIDs: [AdmobIDs.RwdInter.normal])
+        let nativeAdLoader = AdmobNativeAdLoader(adUnitIDs: [AdmobIDs.Nat.normal])
         let admobService = AdmobService(umpService: umpService,
                                         bannerAdLoader: bannerAdLoader,
                                         appOpenAdLoader: appOpenAdLoader,
@@ -83,5 +83,31 @@ class ExampleAppDelegate: ServiceProviderAppDelegate {
                          analyticsPlatforms: [firebaseAnalyticsService],
                          configCenter: firebaseRCService)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+}
+
+
+struct AdmobIDs {
+    struct Banner {
+        static let normal = "ca-app-pub-3940256099942544/2435281174"
+    }
+    struct AppOpen {
+        static let normal = "ca-app-pub-3940256099942544/5575463023"
+    }
+    
+    struct Inter {
+        static let normal = "ca-app-pub-3940256099942544/4411468910"
+    }
+    
+    struct Reward {
+        static let normal = "ca-app-pub-3940256099942544/1712485313"
+    }
+    
+    struct RwdInter {
+        static let normal = "ca-app-pub-3940256099942544/6978759866"
+    }
+    
+    struct Nat {
+        static let normal = "ca-app-pub-3940256099942544/3986624511"
     }
 }

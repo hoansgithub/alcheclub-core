@@ -28,6 +28,8 @@ protocol AdsViewModelProtocol: Sendable, BaseViewModelProtocol, StoreEnabledView
     func reset()
 }
 
+
+
 class AdsViewModel: @unchecked Sendable, AdsViewModelProtocol {
     var defaultStoreConfig: ACCCoreStoreKit.StoreViewModelConfig {
         StorePreset.shared.defaultConfig
@@ -71,7 +73,7 @@ extension AdsViewModel {
             self?.recentNativeAdView = view.first
         })
         
-        admobService?.getNativeAds(for: key, root: root, receiver: nativeAdReceiver)
+        admobService?.getNativeAds(for: key, unitID: AdmobIDs.Nat.normal, root: root, receiver: nativeAdReceiver)
     }
     
     @MainActor func presentInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
@@ -84,7 +86,7 @@ extension AdsViewModel {
             switch state {
             case .didDismiss:
                 Task {
-                    try? await self?.admobService?.loadInterstitialAd()
+                    try? await self?.admobService?.loadInterstitialAd(unitID: AdmobIDs.Inter.normal)
                 }
             default: break
             }
@@ -98,7 +100,7 @@ extension AdsViewModel {
             switch state {
             case .didDismiss:
                 Task {
-                    try? await self?.admobService?.loadRewardedAd(options: nil)
+                    try? await self?.admobService?.loadRewardedAd(unitID: AdmobIDs.Reward.normal, options: nil)
                 }
                 
             default:
@@ -114,7 +116,7 @@ extension AdsViewModel {
             switch state {
             case .didDismiss:
                 Task {
-                    try? await self?.admobService?.loadRewardedInterstitialAd(options: nil)
+                    try? await self?.admobService?.loadRewardedInterstitialAd(unitID: AdmobIDs.RwdInter.normal, options: nil)
                 }
                 
             default:
@@ -147,7 +149,7 @@ extension AdsViewModel {
                 let window = windowScene?.windows.first
                 let sceneWidth = window?.frame.width ?? 0
                 
-                let banner = try await admobService?.getBannerAd(for: "AdsViewModel", size: .currentAnchoredAdaptiveBanner(width: sceneWidth), root: controller)
+                let banner = try await admobService?.getBannerAd(for: "AdsViewModel", unitID: AdmobIDs.Banner.normal, size: .currentAnchoredAdaptiveBanner(width: sceneWidth), root: controller)
                 recentBannerAdView = banner
             }
             catch {

@@ -17,6 +17,7 @@ public enum AdmobServiceError: Error {
     case interstitialAdLoaderNotSet
     case rewardedAdLoaderNotSet
     case rewardedInterstitialAdLoaderNotSet
+    case adUnitNotFound
 }
 
 public final class AdmobService: NSObject, @unchecked Sendable, AdService, TrackableService {
@@ -69,14 +70,14 @@ public final class AdmobService: NSObject, @unchecked Sendable, AdService, Track
 
 extension AdmobService {
     //Banner
-    public func getBannerAd(for key: String, size: ACCAdSize, root: UIViewController?) async throws -> UIView {
+    public func getBannerAd(for key: String, unitID: String, size: ACCAdSize, root: UIViewController?) async throws -> UIView {
         guard canRequestAd else {
             throw AdmobServiceError.canNotRequestAd
         }
         guard let bannerAdLoader = bannerAdLoader else {
             throw AdmobServiceError.bannerAdLoaderNotSet
         }
-        return try await bannerAdLoader.getBanner(for: key, size: size, root: root)
+        return try await bannerAdLoader.getBanner(for: key, unitID: unitID, size: size, root: root)
     }
     
     public func removeBannerAd(for key: String) -> Bool {
@@ -84,7 +85,7 @@ extension AdmobService {
     }
     
     //AppOpen
-    public func loadAppOpenAd() async throws {
+    public func loadAppOpenAd(unitID: String) async throws {
         guard canRequestAd else {
             throw AdmobServiceError.canNotRequestAd
         }
@@ -92,7 +93,7 @@ extension AdmobService {
             throw AdmobServiceError.appOpenAdLoaderNotSet
         }
         
-        try await appOpenAdLoader.loadAd()
+        try await appOpenAdLoader.loadAd(unitID: unitID)
     }
     
     @MainActor public func presentAppOpenAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
@@ -103,7 +104,7 @@ extension AdmobService {
     }
     
     //Interstitial
-    public func loadInterstitialAd() async throws {
+    public func loadInterstitialAd(unitID: String) async throws {
         guard canRequestAd else {
             throw AdmobServiceError.canNotRequestAd
         }
@@ -111,7 +112,7 @@ extension AdmobService {
             throw AdmobServiceError.interstitialAdLoaderNotSet
         }
         
-        try await interstitialAdLoader.loadAd()
+        try await interstitialAdLoader.loadAd(unitID: unitID)
     }
     
     @MainActor public func presentInterstitialAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
@@ -124,7 +125,7 @@ extension AdmobService {
     
     //Rewared
     
-    public func loadRewardedAd(options: ACCAdOptionsCollection?) async throws {
+    public func loadRewardedAd(unitID: String ,options: ACCAdOptionsCollection?) async throws {
         guard canRequestAd else {
             throw AdmobServiceError.canNotRequestAd
         }
@@ -133,7 +134,7 @@ extension AdmobService {
             throw AdmobServiceError.rewardedAdLoaderNotSet
         }
         
-        try await rewardedAdLoader.loadAd(options: options)
+        try await rewardedAdLoader.loadAd(unitID: unitID ,options: options)
     }
     
     @MainActor public func presentRewardedAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
@@ -145,7 +146,7 @@ extension AdmobService {
     }
     
     //Rewarded Interstitial
-    public func loadRewardedInterstitialAd(options: ACCAdOptionsCollection?) async throws {
+    public func loadRewardedInterstitialAd(unitID: String ,options: ACCAdOptionsCollection?) async throws {
         guard canRequestAd else {
             throw AdmobServiceError.canNotRequestAd
         }
@@ -154,7 +155,7 @@ extension AdmobService {
             throw AdmobServiceError.rewardedInterstitialAdLoaderNotSet
         }
         
-        try await rewardedInterstitialAdLoader.loadAd(options: options)
+        try await rewardedInterstitialAdLoader.loadAd(unitID: unitID,options: options)
     }
     
     @MainActor public func presentRewardedInterstitialAdIfAvailable(controller: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
@@ -165,8 +166,8 @@ extension AdmobService {
         try rewardedInterstitialAdLoader.presentAdIfAvailable(controller: controller, listener: listener)
     }
     
-    @MainActor public func getNativeAds(for key: String, root: UIViewController?, receiver: NativeAdReceiver?) {
-        nativeAdLoader?.getNativeAd(for: key, root: root, adReceiver: receiver)
+    @MainActor public func getNativeAds(for key: String,unitID: String , root: UIViewController?, receiver: NativeAdReceiver?) {
+        nativeAdLoader?.getNativeAd(for: key, unitID: unitID, root: root, adReceiver: receiver)
     }
     
     public func removeNativeAds(for key: String) -> Bool {
