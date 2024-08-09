@@ -83,10 +83,11 @@ extension AdsViewModel {
         //        let root = windowScene?.keyWindow?.rootViewController
         
         try admobService?.presentInterstitialAdIfAvailable(controller: view, listener: { [weak self] state in
+            guard let self else { return }
             switch state {
             case .didDismiss:
                 Task {
-                    try? await self?.admobService?.loadInterstitialAd(unitID: AdmobIDs.Inter.normal)
+                    try? await self.admobService?.loadInterstitialAd(unitID: AdmobIDs.Inter.normal)
                 }
             default: break
             }
@@ -97,10 +98,11 @@ extension AdsViewModel {
     
     @MainActor func presentRewarded(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
         try admobService?.presentRewardedAdIfAvailable(controller: view, listener: {[weak self] state in
+            guard let self else { return }
             switch state {
             case .didDismiss:
                 Task {
-                    try? await self?.admobService?.loadRewardedAd(unitID: AdmobIDs.Reward.normal, options: nil)
+                    try? await self.admobService?.loadRewardedAd(unitID: AdmobIDs.Reward.normal, options: nil)
                 }
                 
             default:
@@ -113,10 +115,11 @@ extension AdsViewModel {
     
     @MainActor func presentRewardedInterstitial(from view: UIViewController?, listener: FullScreenAdPresentationStateListener?) throws {
         try admobService?.presentRewardedInterstitialAdIfAvailable(controller: view, listener: {[weak self] state in
+            guard let self else { return }
             switch state {
             case .didDismiss:
                 Task {
-                    try? await self?.admobService?.loadRewardedInterstitialAd(unitID: AdmobIDs.RwdInter.normal, options: nil)
+                    try? await self.admobService?.loadRewardedInterstitialAd(unitID: AdmobIDs.RwdInter.normal, options: nil)
                 }
                 
             default:
@@ -149,7 +152,9 @@ extension AdsViewModel {
                 let window = windowScene?.windows.first
                 let sceneWidth = window?.frame.width ?? 0
                 
-                let banner = try await admobService?.getBannerAd(for: "AdsViewModel", unitID: AdmobIDs.Banner.normal, size: .currentAnchoredAdaptiveBanner(width: sceneWidth), root: controller)
+                let banner = try await admobService?.getBannerAd(for: "AdsViewModel", unitID: AdmobIDs.Banner.normal, size: .currentAnchoredAdaptiveBanner(width: sceneWidth), root: controller, errorHandler: { error in
+                    
+                })
                 recentBannerAdView = banner
             }
             catch {

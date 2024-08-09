@@ -9,9 +9,12 @@ import ACCCore
 import UIKit
 import GoogleMobileAds
 public final class AdMobBannerAdLoader: NSObject, @unchecked Sendable, BannerAdLoader {
+    
+    public typealias BannerAdLoaderErrorHandler = (@Sendable (_ error: Error) -> Void)
     public weak var eventDelegate: TrackableServiceDelegate?
     public var adUnitIDs: [String] = []
     private var bannersCollection: [String: GADBannerView] = [:]
+    private var errorHandler: BannerAdLoaderErrorHandler?
     public required init(adUnitIDs: [String]) {
         self.adUnitIDs = adUnitIDs
         super.init()
@@ -21,7 +24,8 @@ public final class AdMobBannerAdLoader: NSObject, @unchecked Sendable, BannerAdL
         //TODO: -Update banner ad config here
     }
     
-    @MainActor internal func getBanner(for key: String,unitID: String , size: ACCAdSize, root: UIViewController?) throws -> UIView {
+    @MainActor internal func getBanner(for key: String,unitID: String , size: ACCAdSize, root: UIViewController?, errorHandler:  BannerAdLoaderErrorHandler?) throws -> UIView {
+        self.errorHandler = nil
         if let storedBanner = bannersCollection[key] {
             return storedBanner
         }
@@ -30,7 +34,7 @@ public final class AdMobBannerAdLoader: NSObject, @unchecked Sendable, BannerAdL
             ACCLogger.print("Banner AdUnit not found \(unitID)")
             throw AdmobServiceError.adUnitNotFound
         }
-        
+        self.errorHandler = errorHandler
         let gadAdSize = GADAdSize.from(size: size)
         let gadBannerView = GADBannerView(adSize: gadAdSize)
         gadBannerView.adUnitID = adUnitID
@@ -57,6 +61,7 @@ extension AdMobBannerAdLoader: GADBannerViewDelegate {
         if let bannerElement = bannersCollection.first (where: { $0.value == bannerView }) {
             bannersCollection.removeValue(forKey: bannerElement.key)
         }
+        errorHandler?(error)
     }
     
     public func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {

@@ -70,14 +70,14 @@ public final class AdmobService: NSObject, @unchecked Sendable, AdService, Track
 
 extension AdmobService {
     //Banner
-    public func getBannerAd(for key: String, unitID: String, size: ACCAdSize, root: UIViewController?) async throws -> UIView {
+    public func getBannerAd(for key: String, unitID: String, size: ACCAdSize, root: UIViewController?, errorHandler: AdMobBannerAdLoader.BannerAdLoaderErrorHandler?) async throws -> UIView {
         guard canRequestAd else {
             throw AdmobServiceError.canNotRequestAd
         }
         guard let bannerAdLoader = bannerAdLoader else {
             throw AdmobServiceError.bannerAdLoaderNotSet
         }
-        return try await bannerAdLoader.getBanner(for: key, unitID: unitID, size: size, root: root)
+        return try await bannerAdLoader.getBanner(for: key, unitID: unitID, size: size, root: root, errorHandler: errorHandler)
     }
     
     public func removeBannerAd(for key: String) -> Bool {

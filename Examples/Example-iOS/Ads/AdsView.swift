@@ -10,7 +10,7 @@ import ACCCore
 import ACCCoreStoreKit
 protocol AdsViewProtocol: BaseViewProtocol {}
 
-struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
+struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol, Sendable {
     @StateObject var vm: VM
     @State var interstitialDesPresented: Bool = false
     private let formViewControllerRepresentable = BaseViewControllerRepresentable()
@@ -66,7 +66,10 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
                 Button("Show Interstitial") {
                     do {
                         try vm.presentInterstitial(from: formViewControllerRepresentable.viewController) { state in
-                            interstitialDesPresented = true
+                            Task {
+                                @MainActor in
+                                interstitialDesPresented = true
+                            }
                         }
                     } catch {
                         ACCLogger.print(error, level: .error)
@@ -93,7 +96,10 @@ struct AdsView<VM: AdsViewModelProtocol>: AdsViewProtocol {
                             switch state {
                             case .rewarded:
                                 ACCLogger.print("REWARDED")
-                                interstitialDesPresented = true
+                                Task {
+                                    @MainActor in
+                                    interstitialDesPresented = true
+                                }
                             default: break
                             }
                         }
